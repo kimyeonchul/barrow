@@ -28,7 +28,7 @@ PRODUCT_CATEGORIES = (
 
 )
 
-class product(models.Model):
+class Product(models.Model):
     image = models.ImageField(upload_to="product",null = True)
     title = models.CharField(max_length=120)
     area = models.CharField(max_length=100, verbose_name='거래 장소', null = False, default = "")
