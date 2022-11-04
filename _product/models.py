@@ -40,4 +40,5 @@ class Product(models.Model):
     category = models.CharField(null = False, max_length=20, choices = PRODUCT_CATEGORIES)
     memo = models.TextField(null = True, default = "", max_length = 200)
     views = models.IntegerField(null = False, default = 0)
+    created = models.DateTimeField(null = False, auto_now_add = True)
 
