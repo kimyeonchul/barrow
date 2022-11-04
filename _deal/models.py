@@ -9,8 +9,8 @@ DEAL_STATES = (
 )
 class Deal(models.Model):
     #foreignkye field
-    user_cons = models.ForeignKey(User, on_delete=models.CASCADE)
-    user_prod = models.ForeignKey(User, on_delete=models)
+    user_cons = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "cons")
+    user_prod = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "prod")
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     start_date = models.DateTimeField(null = False)

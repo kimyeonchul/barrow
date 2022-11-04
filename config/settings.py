@@ -130,12 +130,14 @@ USE_I18N = True
 
 USE_TZ = True
 
+DATETIME_FORMAT = '%Y-%m-%d'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#AUTH_USER_MODEL = '_account.user'
+AUTH_USER_MODEL = '_account.User'
 
 #LOGIN_REDIRECT_URL = ''
 
