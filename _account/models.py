@@ -16,6 +16,7 @@ class User(AbstractUser):
     phoneNum = PhoneNumberField()          #setting.py에 installedappsdp  'phonenumber_field',이거추가
     favorite = models.ManyToManyField("_product.Product", related_name='favor')
     keyword = models.ManyToManyField("_search.Keyword", related_name='search')
+    search_save = models.BooleanField(null = True, default = True)
 
     def view(self, prd):
         check = User_view.objects.filter(user = self, product = prd)
