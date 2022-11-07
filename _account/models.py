@@ -17,6 +17,7 @@ class User(AbstractUser):
     favorite = models.ManyToManyField("_product.Product", related_name='favor')
     keyword = models.ManyToManyField("_search.Keyword", related_name='search')
     search_save = models.BooleanField(null = True, default = True)
+    image = models.ImageField(default='static/img/account_default.png', upload_to='account', blank=True, null=True)
 
     def view(self, prd):
         check = User_view.objects.filter(user = self, product = prd)
