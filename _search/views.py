@@ -4,6 +4,7 @@ from .models import Keyword
 from _account.models import User
 from _product.models import Product
 from _barrow.views import base, side
+from django.db.models import Count
 
 from django.http import JsonResponse
 import json
@@ -75,10 +76,33 @@ def search(request, key, ctgr = "전체", srt = "최신순"):
 
     categories = {"의류":"CLOTHES", "신발":"SHOES", "여행용품":"TRAVELS", "가방":"BAGS", "캐리어":"CARRIERS", "스포츠":"SPORTS", "레저":"LEISURES", "가전":"HOMES", "가구":"FURNITURES", "전자제품":"ELECTROMICS", "캐주얼":"CASUALS", "기타":"OTHERS"}
     sorts = {"최신순":"-created","높은가격순":"price","낮은가격순":"-price","조회순":"-views"}
+
     if ctgr == "전체":
-        products = Product.objects.filter(title__icontains = key).order_by(sorts[srt])
-    else:    
-        products = Product.objects.filter(title__icontains = key,category = categories[ctgr]).order_by(sorts[srt])
+        if srt == "추천순":
+            products = Product.objects.filter(title__icontains = key).annotate(
+                likes = Count("favor")
+            ).order_by("-likes")
+            
+        
+        elif srt == "신청순":
+            products = Product.objects.filter(title__icontains = key).annotate(
+                deals = Count("deal")
+            ).order_by("-deals")
+        else:
+            products = Product.objects.filter(title__icontains = key).order_by(sorts[srt])
+    else:
+        if srt == "추천순":
+            products = Product.objects.filter(title__icontains = key,category = categories[ctgr]).annotate(
+                likes = Count("favor")
+            ).order_by("-likes")
+            
+        
+        elif srt == "신청순":
+            products = Product.objects.filter(title__icontains = key,category = categories[ctgr]).annotate(
+                deals = Count("deal")
+            ).order_by("-deals")
+        else:    
+            products = Product.objects.filter(title__icontains = key,category = categories[ctgr]).order_by(sorts[srt])
     
     base_context = base(request)
     side_context = side(request)

@@ -1,3 +1,87 @@
 from django.shortcuts import render
+from .forms import DealForm
+from .models import Deal
+from _product.models import Product, Product_image
+from _barrow.views import base, side
 
-# Create your views here.
+from django.http import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
+
+def new(request, product_id):
+    item = Product.objects.get(id = product_id)
+    if request.method == "GET":
+        
+        item_image = Product_image.objects.filter(product = item)[0]
+        reserveds = Deal.objects.filter(product = item)
+        context = {
+            "item" : item,
+            "item_image" : item_image,
+            "reserveds" : reserveds,
+        }
+        context.update(base(request))
+        context.update(side(request))
+        return render(request, "test.html", context)
+
+    elif request.method == "POST":
+        form = DealForm(request.POST)
+        if form.is_valid():
+            new = form.save(commit=False)
+            new.state = "WAIT"
+            new.user_cons = request.user
+            new.user_prod = item.productor
+            new.product = item
+            new.save()
+        else:
+            print(form.errors)
+        return render(request, "test.html")
+
+@csrf_exempt    
+def accept(request, product_id):
+    item = Product.objects.get(id = product_id)
+    if request.method == "GET":
+        
+        item_image = Product_image.objects.filter(product = item)[0]
+
+        deals = Deal.objects.filter(product = item, user_prod = request.user)
+        context = {
+            "item" : item,
+            "item_image" : item_image,
+            "deals" : deals,
+        }
+        context.update(base(request))
+        context.update(side(request))
+        return render(request, "test.html", context)
+    elif request.method == "POST":
+        data = json.loads(request.body)
+
+        deal = Deal.objects.get(id = data["id"])
+        deal.state = "LEND"
+        deal.save()
+
+        return JsonResponse({"is_accepted" : True})
+    
+@csrf_exempt    
+def accept(request, product_id):
+    item = Product.objects.get(id = product_id)
+    if request.method == "GET":
+        
+        item_image = Product_image.objects.filter(product = item)[0]
+
+        deals = Deal.objects.filter(product = item, user_prod = request.user)
+        context = {
+            "item" : item,
+            "item_image" : item_image,
+            "deals" : deals,
+        }
+        context.update(base(request))
+        context.update(side(request))
+        return render(request, "test.html", context)
+    elif request.method == "POST":
+        data = json.loads(request.body)
+
+        deal = Deal.objects.get(id = data["id"])
+        deal.state = "ACCEPT"
+        deal.save()
+
+        return JsonResponse({"is_accepted" : True})
