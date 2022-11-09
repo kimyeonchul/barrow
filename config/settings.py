@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
 
     '_account',
+    '_barrow',
     '_chatting',
     '_deal',
     '_payment',
