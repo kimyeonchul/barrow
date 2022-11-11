@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+    <title>Document</title>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            margin: 0%;
+            padding: 0%;
+            height: 200vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+
+        a {
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .signup_bg_1 {
+            width: 1000px;
+            height: 700px;
+            object-fit: contain;
+            position: absolute;
+            top: -100px;
+            right: 0px;
+            background-image: url("/static/img/signup_bg_1.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .signup_bg_2 {
+            width: 1000px;
+            height: 700px;
+            object-fit: cover;
+            position: absolute;
+            top: 700px;
+            left: 0px;
+            background-image: url("/static/img/signup_bg_2.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        main {
+            background-color: #F5F5F5;
+            width: 400px;
+            height: min-content;
+            z-index: 1;
+            padding: 20px;
+            margin: 0px;
+            border-radius: 7px;
+        }
+
+        .main_header {
+            width: 360px;
+            height: 50px;
+            margin-bottom: 100px;
+        }
+
+        .main_header_logo {
+            height: inherit;
+            object-fit: cover;
+        }
+
+        .signup_input_form {
+            margin-bottom: 100px;
+        }
+
+        .input_outer {
+            width: 380px;
+            height: 35px;
+            border-radius: 10px;
+
+        }
+
+        .input_brithdate_wrap {
+            display: flex;
+            justify-content: space-between;
+            height: 40px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .input_birthdate {
+            width: 120px;
+            height: 35px;
+            border-radius: 10px;
+        }
+
+        .search_address_input {
+            width: 150px;
+            height: 35px;
+            border-radius: 10px;
+        }
+
+        #submit_address {
+            width: 120px;
+            height: 35px;
+            border-radius: 10px;
+            border: none;
+            background-color: #3D8361;
+            color: white;
+        }
+
+        .submit_wrap {
+            text-align: center;
+        }
+
+        .submit_btn {
+            background-color: #3D8361;
+            border: none;
+            color: white;
+            width: 200px;
+            height: 35px;
+            border-radius: 10px;
+            margin: 0 auto;
+        }
+
+        .form_join_title {
+            width: 100%;
+            border-bottom: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+        }
+
+        .check_title {
+            width: 200px;
+        }
+
+        .check_detail {
+            width: 50px;
+        }
+
+        .check_all>.clearfix {
+            display: flex;
+            justify-content: end;
+        }
+
+        .clearfix {
+            width: 100%;
+            display: flex;
+            font-size: 10px;
+            justify-content: space-between;
+        }
+
+        input[class="check"] {
+            position: relative;
+            top: -2px;
+        }
+
+        input[class="check_all_btn"] {
+            position: relative;
+            top: 7px;
+        }
+
+        label[for="check_all_btn_wrap"] {
+            position: relative;
+            top: 5px;
+        }
+
+        label[for='check'] {
+            position: relative;
+            top: -5px;
+        }
+
+        .checkbox1 {
+            margin-top: 10px;
+        }
+
+        .check_detail1,
+        .check_detail2 {
+            color: #967B37;
+            font-weight: bold;
+            border: none;
+            font-size: 10px;
+            width: fit-content;
+        }
+
+        .main_footer {
+            height: 35px;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .main_footer_logo {
+            object-fit: contain;
+            width: 100%;
+        }
+
+        .id_dup_msg,
+        .id_err_msg,
+        .pwd_err_msg,
+        .repwd_err_msg,
+        .name_err_msg,
+        .check_err_msg,
+        .address_err_msg {
+            font-size: 10px;
+            color: red;
+            line-height: 5px;
+            visibility: hidden;
+        }
+
+        .id_err_msg {
+            margin-bottom: 30px;
+        }
+
+        .pwd_err_msg,
+        .repwd_err_msg,
+        .name_err_msg {
+            margin-bottom: 40px;
+        }
+
+
+
+        .input_detail_address {
+            margin-bottom: 30px;
+        }
+
+        .address_api {
+            margin-bottom: 30px;
+        }
+
+        .check_textarea1,
+        .check_textarea2 {
+            width: 100%;
+            display: none;
+            height: 100px;
+        }
+
+        .input_pwd_wrap {
+            position: relative;
+            height: 62px;
+        }
+
+        .input_pwd_icon {
+            position: absolute;
+            right: 20px;
+            top: 25px;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="signup_bg_1"></div>
+    <div class="signup_bg_2"></div>
+    <main>
+        <div class="main_header">
+            <img class="main_header_logo" src="/static/img/logo.png" alt="">
+        </div>
+        <div class="main_main_sec">
+            <form action="" class="signup_input_form" name="from_input_id_pwd">
+                <ul>
+                    <li>
+                        <label for="input_id">아이디</label><br>
+                        <input type="text" placeholder="5~20자의 영문 소문자, 숫자와 특수기호(_),(-) 사용 가능" class="input_outer" id="input_id">
+                        <p class="id_dup_msg">이미 사용중인 아이디입니다.</p>
+                        <p class="id_err_msg">5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.</p>
+                    </li>
+                    <li>
+                        <div class="input_pwd_wrap">
+                            <img src="/static/img/Lock.png" alt="" class="input_pwd_icon">
+                            <label for="input_pwd">비밀번호</label><br>
+                            <input type="password" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자 사용 가능" class="input_outer" id="input_pwd">
+                        </div>
+                        <p class="pwd_err_msg">8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</p>
+                    </li>
+                    <li>
+                        <label for="input_repwd">비밀번호 재확인</label><br>
+                        <input type="password" class="input_outer" id="input_repwd">
+                        <p class="repwd_err_msg">비밀번호가 일치하지 않습니다.</p>
+                    </li>
+                    <li>
+                        <label for="input_name">이름</label><br>
+                        <input type="text" placeholder="한글만 사용 가능" class="input_outer" id="input_name">
+                        <p class="name_err_msg">한글만 사용 가능합니다.</p>
+                    </li>
+                    <li>
+                        <label for="input_birthdate">생년월일</label><br>
+                        <div class="input_brithdate_wrap">
+                            <select name="" id="select_year" class="input_birthdate"></select>
+                            <select name="" id="select_month" class="input_birthdate"></select>
+                            <select name="" id="select_date" class="input_birthdate"></select>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="member_post">주소</label>
+                        <input id="member_post" type="text" placeholder="우편번호" class="input_detail_address input_outer" readonly
+                            onclick="findAddr()">
+                        <input id="member_addr" type="text" placeholder="주소" class="input_detail_address input_outer" readonly>
+                        <br>
+                        <input id ="member_detail" type="text" class='input_detail_address input_outer' placeholder="상세주소">
+                        <p class="address_err_msg">필수항목 입니다.</p>
+                    </li>
+                    <li class="submit_wrap">
+                        <button class="submit_btn">본인인증하기</button>
+                    </li>
+                </ul>
+
+                <form action="" name="form_input_join">
+                    <ul class="join_box">
+                        <div class="form_join_title">정보동의
+                            <li class="check_all">
+                                <ul class="clearfix">
+                                    <li class="check_all_btn_wrap">
+                                        <label for="check_all_btn_wrap">모두 동의합니다</label>
+                                        <input type="checkbox" name="checkall" class="check_all_btn">
+                                    </li>
+                                </ul>
+                        </div>
+                        </li>
+                        <li class="checkbox1">
+                            <ul class="clearfix">
+                                <li class="check_title">(필수) 개인정보 제공 및 접근 동의</li>
+                                <li><button type="button" class="check_detail1">자세히보기>></button></li>
+                                <li class="checkbtn">
+                                    <label for="check">동의합니다</label>
+                                    <input type="checkbox" name="check" class="check">
+                                </li>
+                            </ul>
+                        <li class="acodian">
+                            <textarea name="" id="" readonly class='check_textarea1'></textarea>
+                        </li>
+                        </li>
+                        <li class="checkbox2">
+                            <ul class="clearfix">
+                                <li class="check_title">(필수) 위치정보 제공 동의</li>
+                                <li><button type="button" class="check_detail2">자세히보기>></button></li>
+                                <li class="checkbtn">
+                                    <label for="check">동의합니다</label>
+                                    <input type="checkbox" name="check" class="check">
+                                </li>
+                            </ul>
+                        <li class="acodian1">
+                            <textarea name="" id="" readonly class="check_textarea2"></textarea>
+                        </li>
+                        </li>
+                        <p class="check_err_msg">필수항목 입니다.</p>
+                    </ul>
+                </form>
+                <div class="submit_wrap">
+                    <input type="submit" class="submit_btn" value="가입하기">
+                </div>
+            </form>
+        </div>
+        <div class="main_footer">
+            <img src="/static/img/footer_logo.png" alt="" class="main_footer_logo">
+        </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //* setting 
+            setSelect();
+            setAcodian();
+            setCheckbox();
+            setAllInput();
+            setTextArea();
+        });
+
+        function setAllInput() {
+            setInput($('#input_id'), $('.id_err_msg'));
+            setInput($('#input_pwd'), $('.pwd_err_msg'));
+            setInput($('#input_pwd'), $('.input_pwd_icon'));
+            setInput($('#input_repwd'), $('.repwd_err_msg'));
+
+        }
+
+        function setInput($input, $target) {
+            $($input).keyup(function () {
+                $($target).css('visibility', 'hidden');
+            });
+        }
+
+        function setCheckbox() {
+            $('.check_all_btn').click(function () {
+                var checked = $('.check_all_btn').is(':checked');
+                if (checked) {
+                    $('.check').prop('checked', true);
+                    $('.check_err_msg').css('visibility', 'hidden');
+                }
+                else
+                    $('.check').prop('checked', false);
+            });
+            $('.check').click(function () {
+                var all_checkbox = $('.check').length;
+                var checked_checkbox = $("input:checkbox[name='check']:checked").length;
+                if (all_checkbox == checked_checkbox) {
+                    $('.check_all_btn').prop('checked', true);
+                } else {
+                    $('.check_all_btn').prop('checked', false);
+                }
+            });
+        }
+
+        function setAcodian() {
+            $('.check_detail1').click(function () {
+                $('.check_textarea1').slideDown();
+                $('.check_textarea2').slideUp();
+            });
+            $('.check_detail2').click(function () {
+                $('.check_textarea2').slideDown();
+                $('.check_textarea1').slideUp();
+            });
+
+        }
+
+        function setSelect() {
+            var now = new Date();
+            var year = now.getFullYear();
+            console.log(year);
+            for (var i = 1; i <= 12; i++) {
+                $('#select_month').append("<option value='" + i + "'>" + i + "월</option>");
+            }
+            for (var i = 1; i <= 31; i++) {
+                $('#select_date').append("<option value='" + i + "'>" + i + "일</option>");
+            }
+            for (var i = year - 50; i <= year; i++) {
+                $('#select_year').append("<option value='" + i + "'>" + i + "년</option>");
+            }
+        }
+
+        function setTextArea() {
+            var t1 = "개인정보 1"
+            var t2 = "위치정보 1"
+            $('.check_textarea1').val(t1);
+            $('.check_textarea2').val(t2);
+        }
+
+        //* sign up checking
+        $('.submit_btn').click(function () {
+            checkID();
+            checkPwd();
+            checkRePwd();
+            checkName();
+            checkAddress();
+            checkCheckbox();
+        });
+
+        function checkID() {
+            var checkid = $('#input_id').val();
+            var regExp = /^[a-z]+[a-z0-9]{4,19}$/g;
+            if (!regExp.test(checkid)) {
+                $('.id_err_msg').css('visibility', 'visible');
+                $('#input_id').focus();
+                return false;
+            }
+        }
+
+        function checkPwd() {
+            var checkpwd = $('#input_pwd').val();
+            var regExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+            if (!regExp.test(checkpwd)) {
+                $('.pwd_err_msg').css('visibility', 'visible');
+                $('.input_pwd_icon').css('visibility', 'visible');
+                $('#input_pwd').focus();
+                return false;
+            }
+        }
+
+        function checkRePwd() {
+            var checkpwd = $('#input_pwd').val();
+            var checkrepwd = $('#input_repwd').val();
+            if (checkpwd != checkrepwd) {
+                $('.repwd_err_msg').css('visibility', 'visible');
+                $('#input_repwd').focus();
+                return false;
+            }
+        }
+
+        function checkName() {
+            var checkname = $('#input_name').val();
+            var regExp = /[ㄱ-힣]/;
+            if (!regExp.test(checkname)) {
+                $('.name_err_msg').css('visibility', 'visible');
+                $('#input_name').focus();
+                return false;
+            }
+        }
+
+        function checkAddress(){
+            var checkpost = $('#member_post').val();
+            var checkaddress = $('#member_addr').val();
+            var checkdetailaddress = $('#member_detail').val();
+            if(!checkpost || !checkaddress || !checkdetailaddress){
+                $('.address_err_msg').css('visibility', 'visible');
+                $('#member_detail').focus();
+                return false
+            }
+        }
+
+        function checkCheckbox() {
+            var checked = $('.check_all_btn').is(':checked');
+            if (!checked) {
+                $('.check_err_msg').css('visibility', 'visible');
+                return false;
+            }
+        }
+        /* 주소정보 api*/
+        function findAddr() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+
+                    console.log(data);
+
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                    var jibunAddr = data.jibunAddress; // 지번 주소 변수
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('member_post').value = data.zonecode;
+                    if (roadAddr !== '') {
+                        document.getElementById("member_addr").value = roadAddr;
+                    }
+                    else if (jibunAddr !== '') {
+                        document.getElementById("member_addr").value = jibunAddr;
+                    }
+                }
+            }).open();
+        }
+    </script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+
+</html>
