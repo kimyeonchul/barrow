@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            margin: 0%;
+            padding: 0%;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("/static/img/login_bg.png");
+            background-size: cover;
+        }
+
+        a {
+            text-decoration: none;
+            color: red;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        input {
+            border-radius: 10px;
+            height: 35px;
+            border: 1px solid black;
+            width: 100%;
+        }
+
+        main {
+            background-color: #F5F5F5;
+            width: 400px;
+            height: 550px;
+            z-index: 1;
+            padding: 20px;
+            margin: 0px;
+        }
+
+        .main_header {
+            height: 30%;
+            width: 100%;
+        }
+
+        .main_header .main_header_text {
+            line-height: 8px;
+            font-size: 16px;
+        }
+
+        .main_header .main_header_text p:nth-child(3) {
+            font-size: 8px;
+            display: inline;
+        }
+
+        .signup_btn {
+            font-size: 8px;
+        }
+
+        .main_header_logo {
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .main_main_sec {
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .find_idpwd_a {
+            font-size: 8px;
+        }
+
+        .login_btn {
+            background-color: #3D8361;
+            border: none;
+            height: 35px;
+            border-radius: 10px;
+            width: 200px;
+            margin: auto;
+            color: white;
+            font-weight: bold;
+        }
+
+        .main_footer {
+            height: 10%;
+            width: 100%;
+        }
+
+        .main_footer_logo {
+            object-fit: contain;
+            width: 100%;
+        }
+
+        .form_IdPwd {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .id_error_msg,
+        .pwd_error_msg {
+            font-size: 10px;
+            position: relative;
+            color: red;
+            font-weight: bold;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="under_bg"></div>
+    <main>
+        <div class="main_header">
+            <img class="main_header_logo" src="/static/img/logo.png" alt="">
+            <div class="main_header_text">
+                <p><b>환영합니다!</b></p>
+                <p>물품대여 플랫폼 <b>'바로우'</b> 입니다.</p>
+                <p>처음이신가요?</p>
+                <a class="signup_btn" href=""><b>계정을 만들어주세요.</b></a>
+            </div>
+        </div>
+        <div class="main_main_sec">
+            <form action="" class="form_IdPwd">
+                <label for="input_id">ID</label><br>
+                <div>
+                    <input type="text" class="input_id"><br>
+                    <p class="id_error_msg">아이디를 확인해주세요.</p>
+                </div>
+                <label for="input_pwd">password</label><br>
+                <div>
+                    <input type="password" class="input_pwd">
+                    <p class="pwd_error_msg">비밀번호를 확인해주세요.</p>
+                </div>
+                <a class="find_idpwd_a" href=""><b>아이디나 비밀번호를 잊어버렸나요?</b></a>
+            </form>
+            <button class="login_btn">로그인 하기</button>
+        </div>
+        <div class="main_footer">
+            <img src="/static/img/footer_logo.png" alt="" class="main_footer_logo">
+        </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        $('.login_btn').click(function () {
+            console.log("2");
+            $('.id_error_msg').css('visibility', 'visible');
+            $('.pwd_error_msg').css('visibility', 'visible');
+        });
+    </script>
+</body>
+
+</html>
