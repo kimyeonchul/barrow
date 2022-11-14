@@ -8,116 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="\static\css\login\login.css">
     <title>Document</title>
-    <style>
-        * {
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            margin: 0%;
-            padding: 0%;
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url("/static/img/login_bg.png");
-            background-size: cover;
-        }
-
-        a {
-            text-decoration: none;
-            color: red;
-            font-family: 'Heebo', sans-serif;
-        }
-
-        input {
-            border-radius: 10px;
-            height: 35px;
-            border: 1px solid black;
-            width: 100%;
-        }
-
-        main {
-            background-color: #F5F5F5;
-            width: 400px;
-            height: 550px;
-            z-index: 1;
-            padding: 20px;
-            margin: 0px;
-        }
-
-        .main_header {
-            height: 30%;
-            width: 100%;
-        }
-
-        .main_header .main_header_text {
-            line-height: 8px;
-            font-size: 16px;
-        }
-
-        .main_header .main_header_text p:nth-child(3) {
-            font-size: 8px;
-            display: inline;
-        }
-
-        .signup_btn {
-            font-size: 8px;
-        }
-
-        .main_header_logo {
-            height: 50px;
-            object-fit: contain;
-        }
-
-        .main_main_sec {
-            height: 60%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .find_idpwd_a {
-            font-size: 8px;
-        }
-
-        .login_btn {
-            background-color: #3D8361;
-            border: none;
-            height: 35px;
-            border-radius: 10px;
-            width: 200px;
-            margin: auto;
-            color: white;
-            font-weight: bold;
-        }
-
-        .main_footer {
-            height: 10%;
-            width: 100%;
-        }
-
-        .main_footer_logo {
-            object-fit: contain;
-            width: 100%;
-        }
-
-        .form_IdPwd {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .id_error_msg,
-        .pwd_error_msg {
-            font-size: 10px;
-            position: relative;
-            color: red;
-            font-weight: bold;
-            visibility: hidden;
-        }
-    </style>
 </head>
 
 <body>
@@ -155,12 +47,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script>
-        $('.login_btn').click(function () {
-            $('.id_error_msg').css('visibility', 'visible');
-            $('.pwd_error_msg').css('visibility', 'visible');
-        });
-    </script>
+    <script src="\static\js\login\login.js"></script>
 </body>
 
 </html>
