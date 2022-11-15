@@ -77,8 +77,22 @@ function setFindIdInput() {
 function setFindIdBtn() {
     //아이디 페이지에서 조회하기 버튼 클릭 시
     $('.inquire_btn_id').click(function () {
-        checkName();
-        checkPhoneNum();
+        if(checkName() && checkPhoneNum()){
+             /*
+    $.ajax({
+        url:'', //request 보낼 서버의 경로
+        type:'post', // 메소드(get, post, put 등)
+        data:{'id':'admin'}, //보낼 데이터
+        success: function(data) {
+            //서버로부터 정상적으로 응답이 왔을 때 실행
+        },
+        error: function(err) {
+            //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+        }
+    });
+    */
+        }
+        
         //*뭐 뭐 뭐 하면 정보 없음 페이지
         var bool = true;
         if (bool)
@@ -190,7 +204,21 @@ function setFindPwdInput() {
 function setFindPwdBtn() {
     //아이디 페이지에서 조회하기 버튼 클릭 시
     $('.inquire_btn_pwd').click(function () {
-        checkName();
+        if(checkName()){
+            /*
+    $.ajax({
+        url:'', //request 보낼 서버의 경로
+        type:'post', // 메소드(get, post, put 등)
+        data:{'id':'admin'}, //보낼 데이터
+        success: function(data) {
+            //서버로부터 정상적으로 응답이 왔을 때 실행
+        },
+        error: function(err) {
+            //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+        }
+    });
+    */
+        }
         //*뭐 뭐 뭐 하면 정보 없음 페이지
         var bool = false;
         if (bool)
