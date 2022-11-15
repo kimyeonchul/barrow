@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'phonenumber_field',
 
+
     '_account',
     '_barrow',
     '_chatting',
@@ -87,6 +88,7 @@ TEMPLATES = [
         },
     },
 ]
+
 #media files(Imagefield, Filefield)
 MEDIA_URL = "/media/"
 
