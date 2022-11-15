@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import *
 
+app_name = 'barrow'
+
 urlpatterns = [
    path("",home,name = "home"),
    path("best/",best,name = "best"),

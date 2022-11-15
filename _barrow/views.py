@@ -33,8 +33,7 @@ def base(request):
         return base_context
 
 def side(request):
-    # user = request.user
-    user = User.objects.get(id = "1")
+    user = request.user
 
     favorite_num = 0
     recent_view = None
@@ -98,22 +97,21 @@ def get_category_num():
     return result
 
 def home(request):
-    # if request.user.is_authenticated:
+    if request.user.is_authenticated:
 
-        # user = request.user
-        user = User.objects.get(id = "1")
+        user = request.user
 
-        best_products = get_best()
-        best_products = best_products[:4]
+    best_products = get_best()
+    best_products = best_products[:4]
 
-        context = {
-            "best_products" : best_products,
-        }
-        context.update(base(request))
-        context.update(side(request))
+    context = {
+        "best_products" : best_products,
+    }
+    context.update(base(request))
+    context.update(side(request))
 
         
-        return render(request, "test.html", context)
+    return render(request, "main/main.html", context)
 
 def best(request):
     products = get_best()
@@ -122,7 +120,7 @@ def best(request):
     }
     context.update(base(request))
     context.update(side(request))
-    return render(request,"test.html",context)
+    return render(request,"best.html",context)
 
 def category_view(request, category, sort):
     categories = {"의류":"CLOTHES", "신발":"SHOES", "여행용품":"TRAVELS", "가방":"BAGS", "캐리어":"CARRIERS", "스포츠":"SPORTS", "레저":"LEISURES", "가전":"HOMES", "가구":"FURNITURES", "전자제품":"ELECTROMICS", "캐주얼":"CASUALS", "기타":"OTHERS"}
@@ -149,7 +147,7 @@ def category_view(request, category, sort):
     context.update(base(request))
     context.update(side(request))
 
-    return render(request, "test.html", context)
+    return render(request, "main/category.html", context)
 
 def near_products(request):
-    return render(request, "test.hmtl")
+    return render(request, "near.html")
