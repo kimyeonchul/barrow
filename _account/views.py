@@ -1,7 +1,13 @@
-from django.contrib import auth
-from django.shortcuts import render, redirect
+from datetime import datetime
 
+from django.contrib import auth
+from django.core.serializers import serialize
+from django.shortcuts import render, redirect
+import json
+from django.http import HttpResponse, JsonResponse
 # Create your views here.
+from django.views.decorators.csrf import csrf_exempt
+
 from _account.models import User
 
 
@@ -20,20 +26,76 @@ def login(request):
         return render(request, "login.html")
 
 
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         try:
             user = User()
-            user.username = request.POST['username']
-            user.password = request.POST['password']
-            user.name = request.POST['name']
-            user.birth = request.POST['birth']
-            user.address = int(request.POST['address'])
-            user.phoneNum = request.POST['phoneNum']
-            user.image = request.POST['image']
+            data = json.loads(request.body)
+            user.username = request.POST.get('username')
+            user.password = request.POST.get("password", '')
+            user.name = request.POST.get("name", '')
+            user.birth = request.POST.get("birth", '')
+            user.address = request.POST.get("address", '')
+            user.phoneNum = request.POST.get("phoneNum", '')
             user.save()
-            return redirect('login')
+
+            # return redirect('login')
+            context = {
+                "username": user.username
+            }
+            return JsonResponse(context)
         except Exception as e:
             print(e)
-            return render(request, 'signup.html')
+            error = {
+                "error": e
+            }
+            # return render(request, 'signup.html')
+            return JsonResponse(error)
     return render(request, 'signup.html')
+
+
+
+##마이페이지 개인정보 수정하기 passowrd랑 주소찾기
+def changeUserInfo(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        try:
+            user = User.objects.get(id=int(data["user_id"]))
+            user.password = data["password"]
+            user.address = data["address"]
+            user.save()
+            is_changed = True
+        except:
+            is_changed = False
+    context = {
+        "is_changed": is_changed,
+    }
+    return JsonResponse(context)
+
+##마이페이지 유저정보가져오기
+def getUserInfo(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        try:
+            user = User.objects.get(id=int(data["user_id"]))
+            password = user.password
+            username = user.username
+            name = user.name
+            birth = user.birth
+            address = user.address
+            phonenum = user.phoneNum
+        except Exception as e:
+            print(e)
+    context = {
+        "username": username,
+        "password": password,
+        "name": name,
+        "birth": birth,
+        "address": address,
+        "phoneNum": phonenum,
+    }
+    return JsonResponse(context)
+
+
+
