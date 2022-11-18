@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,6 +53,8 @@ INSTALLED_APPS = [
     '_product',
     '_search',
 ]
+#Channels
+ASGI_APPLICATION = 'barrow.routing.application'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
