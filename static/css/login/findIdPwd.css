@@ -1,0 +1,269 @@
+/* all */
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    margin: 0%;
+    padding: 0%;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/static/img/login_bg.png");
+    background-size: cover;
+}
+
+input {
+    border-radius: 12px;
+    height: 35px;
+    border: 0.1px solid black;
+}
+
+main {
+    background-color: #F5F5F5;
+    width: 400px;
+    height: fit-content;
+    z-index: 1;
+    padding: 20px;
+    margin: auto;
+}
+
+.main_header {
+    height: fit-content;
+    width: 100%;
+}
+
+.main_header_text_wrap {
+    line-height: 8px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.main_header_logo {
+    height: 50px;
+    object-fit: contain;
+}
+
+.toggleIdPwd {
+    display: flex;
+    margin-top: 15px;
+    height: 35px;
+}
+
+.selectId,
+.selctPwd {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    border: 1px solid gray;
+    height: inherit;
+    align-items: center;
+}
+
+.selectId {
+    background-color: #3D8361;
+    color: white;
+}
+
+.main_main_sec {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_IdPwd {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-top: 5px solid lightgray;
+    border-bottom: 5px solid lightgray;
+    padding-top: 10px;
+    height: 50%;
+}
+
+.main_footer {
+    height: fit-content;
+    width: 100%;
+}
+
+.main_footer_logo {
+    object-fit: contain;
+    width: 100%;
+}
+
+/* find id main page */
+ /* find pwd page */
+.inquire_btn_id,
+.inquire_btn_pwd {
+    background-color: #3D8361;
+    border: none;
+    height: 35px;
+    border-radius: 20px;
+    width: 200px;
+    margin: auto;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.input_phone_num_wrap,
+.input_name_wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.phone_num_err_msg,
+.name_err_msg {
+    font-size: 10px;
+    position: relative;
+    color: red;
+    font-weight: bold;
+    visibility: hidden;
+}
+
+/* 아이디 일치하는 정보 있거나
+아이디 일치하는 정보 없거나
+비밀번호 일치하는 정보 없을 때 페이지 */
+/* nomatchingpage */
+/* matchingpage */
+.noMatchingPage,
+.matchingPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 5px solid lightgray;
+    border-bottom: 5px solid lightgray;
+}
+
+.buttonWrap {
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.noMatchingPageText,
+.matchingPageText {
+    font-weight: bold;
+}
+
+.goSignupBtn,
+.goFindIdBtn,
+.goLoginBtn {
+    height: 35px;
+    width: 100px;
+    border-radius: 12px;
+    border: none;
+    color: white;
+}
+
+.goFindIdBtn {
+    background-color: #959190;
+}
+
+.goSignupBtn {
+    background-color: #3D8361;
+}
+
+.goLoginBtn {
+    background-color: #3D8361;
+    width: 200px;
+}
+
+/* find pwd main page */
+.input_brithdate_wrap {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.input_birthdate {
+    width: 120px;
+    height: 35px;
+    border-radius: 10px;
+}
+
+.submit_btn {
+    background-color: #3D8361;
+    border: none;
+    color: white;
+    width: 200px;
+    height: 35px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+/* 비밀번호 찾기 성공시 새 비밀번호 페이지 */
+.newpasswordpage {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 5px solid lightgray;
+    border-bottom: 5px solid lightgray;
+    padding-bottom: 30px;
+}
+
+.input_new_pwd_wrap,
+.input_new_re_pwd_wrap {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100px;
+}
+
+.input_new_pwd_wrap {
+    position: relative;
+}
+
+.input_new_re_pwd_wrap {
+    border-bottom: 5px solid lightgray;
+}
+
+.input_new_pwd,
+.input_new_re_pwd {
+    width: 380px;
+    height: 35px;
+    border-radius: 10px;
+}
+
+.input_new_pwd_icon {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    visibility: hidden;
+}
+
+.input_new_pwd_err,
+.input_new_re_pwd_err {
+    font-size: 10px;
+    color: red;
+    line-height: 5px;
+    visibility: hidden;
+}
+
+.input_new_pwd_change_btn {
+    margin: auto;
+    width: 200px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    background-color: #3D8361;
+    color: white;
+}
