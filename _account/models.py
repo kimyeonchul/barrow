@@ -1,23 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
-# from _product.models import Product
+from _product.models import Product
 
 from datetime import datetime
 #phonenumberfield사용하려면 pip install django-phonenumber-field[phonenumbers], pip install django-phonenumber-field[phonenumberslite]이거설치해야함
 
 
 
+
 class User(AbstractUser):
     password = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
-    birth = models.DateField()
-    address = models.TextField()
-    phoneNum = PhoneNumberField()          #setting.py에 installedappsdp  'phonenumber_field',이거추가
-    # favorite = models.ManyToManyField("_product.Product", related_name='favor')
-    # keyword = models.ManyToManyField("_search.Keyword", related_name='search')
+    birth = models.CharField(max_length=20)
+    address = models.TextField(max_length=20)
+    phoneNum = models.CharField(max_length=20)
+    # phoneNum = PhoneNumberField()          #setting.py에 installedappsdp  'phonenumber_field',이거추가
+    favorite = models.ManyToManyField("_product.Product", related_name='favor')
+    keyword = models.ManyToManyField("_search.Keyword", related_name='search')
     search_save = models.BooleanField(null = True, default = True)
     image = models.ImageField(default='static/img/account_default.png', upload_to='account', blank=True, null=True)
+
 
     def view(self, prd):
         check = User_view.objects.filter(user = self, product = prd)
@@ -42,7 +45,7 @@ class User(AbstractUser):
 
 class User_view(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    # product = models.ForeignKey("_product.Product",on_delete=models.CASCADE)
+    product = models.ForeignKey("_product.Product",on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add = True)
 
     
