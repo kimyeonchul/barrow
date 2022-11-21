@@ -26,10 +26,10 @@ def new(request):
                 i+=1
         else:
             print(form.errors)
-        context = {}
-        context.update(base(request))
-        context.update(side(request))
-    return render(request, 'test.html',context)
+    context = {}
+    context.update(base(request))
+    context.update(side(request))
+    return render(request, 'itemRegister.html',context)
 
 def modify(request, product_id):
     context = {}
@@ -95,15 +95,16 @@ def itempage(request, product_id):
             "item" : item,
             "item_images" : item_images,
             "productor" : productor,
-            "msg" : "현재 신청 수락을 기다리고 있는 상품입니다."
+            "state" : "WAIT"
             }
-        elif Deal.objects.filter(user_cons = request.user, product = item, state = "LEND", start_date__lte = time, end_date__gte = time):
+        elif Deal.objects.filter(user_cons = request.user, product = item, state = "LEND", start_date__lte = time, end_date__gte = time).exists():
             deal = Deal.objects.filter(user_cons = request.user, product = item, state = "LEND", start_date__lte = time, end_date__gte = time)
             context = {
             "item" : item,
             "item_images" : item_images,
             "productor" : productor,
-            "msg" : "현재 대여중인 상품입니다.\n반납 예정일은 "+ str(deal.end_date)+"입니다."
+            "deal_end_date" : str(deal.end_date),
+            "state" : "LEND"
             }
         else:
             context = {
@@ -111,10 +112,11 @@ def itempage(request, product_id):
                 "item_images" : item_images,
                 "productor" : productor,
                 "favorite" : item.favor.count(),
+                "state" : "TERMINATE"
             }
     context.update(base(request))
     context.update(side(request))
-    return render(request,"test.html", context)
+    return render(request,"itemPage.html", context)
 
 @csrf_exempt
 def set_favorite(request):

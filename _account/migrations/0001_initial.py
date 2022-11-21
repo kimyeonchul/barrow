@@ -40,7 +40,6 @@ class Migration(migrations.Migration):
                 ('search_save', models.BooleanField(default=True, null=True)),
                 ('image', models.ImageField(blank=True, default='static/img/account_default.png', null=True, upload_to='account')),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')),
-                ('keyword', models.ManyToManyField(related_name='search', to='_search.keyword')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.permission', verbose_name='user permissions')),
             ],
             options={
