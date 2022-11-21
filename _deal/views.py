@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .forms import DealForm
 from .models import Deal
 from _product.models import Product, Product_image
@@ -14,16 +14,14 @@ def new(request, product_id):
     item = Product.objects.get(id = product_id)
     if request.method == "GET":
         
-        item_image = Product_image.objects.filter(product = item)[0]
         reserveds = Deal.objects.filter(product = item)
         context = {
             "item" : item,
-            "item_image" : item_image,
             "reserveds" : reserveds,
         }
         context.update(base(request))
         context.update(side(request))
-        return render(request, "test.html", context)
+        return render(request, "lentApply.html", context)
 
     elif request.method == "POST":
         form = DealForm(request.POST)
@@ -36,7 +34,7 @@ def new(request, product_id):
             new.save()
         else:
             print(form.errors)
-        return render(request, "test.html")
+        return redirect("products:itempage",product_id)
 
 @csrf_exempt    
 def accept(request, product_id):
@@ -46,6 +44,7 @@ def accept(request, product_id):
         item_image = Product_image.objects.filter(product = item)[0]
 
         deals = Deal.objects.filter(product = item, user_prod = request.user)
+        
         context = {
             "item" : item,
             "item_image" : item_image,
@@ -53,7 +52,7 @@ def accept(request, product_id):
         }
         context.update(base(request))
         context.update(side(request))
-        return render(request, "test.html", context)
+        return render(request, "lentAccept.html", context)
     elif request.method == "POST":
         data = json.loads(request.body)
 

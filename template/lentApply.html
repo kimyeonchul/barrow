@@ -1,3 +1,7 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,267 +9,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="lentApply.css" />
-    <script type="text/javascript" src="./lentApply.js" defer></script>
+    <link rel="stylesheet" href="{% static 'css/item/lentApply.css' %}" />
+    <script type="text/javascript" src="{% static 'js/item/lentApply.js' %}" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <script src="https://kit.fontawesome.com/04d19e7b2e.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Barrow</title>
 </head>
 
 <body>
-    <section class="recentSearchContainer">
-        <div class="recentSearchBox">
-            <p class="text">최근 검색어</p>
-            <div class="searchBrTags"></div>
-            <ul class="recentSearch">
-                <li>여행용 텐트</li>
-                <li>09.21</li>
-            </ul>
-            <div class="searchBrTags"></div>
-            <ul class="autoSave">
-                <li>자동저장</li>
-                <li class="recenticon">
-                    <img class="backgroundCircle" src="./img/searchimg/backgroundCircle.png">
-                    <img class="circle" src="./img/searchimg/circle.png" onclick="circleMove()">
-                </li>
-            </ul>
-        </div>
-    </section>
-    <aside class="sidebar">
-        <div class="dibs">
-            <p class="p-text">찜한 상품</p>
-            <div class="dibs-wrap">
-                <div class="dibs-image"><img src="./img/steamed.png" alt=""></div>
-                <div class="dibs-text">
-                    <p>0</p>
-                </div>
-            </div>
-        </div>
-        <div class="recently">
-            <p class="p-text">최근 본 상품</p>
-            <div class="br_tags"></div>
-            <div>
-                <img src="./img/tent_icon.png">
-                <img src="./img/tent_icon.png">
-            </div>
-            <div>&lt; 1 / 5 &gt;</div>
-        </div>
-    </aside>
-    <div class="allpage">
-        <div class="header">
-            <section class="header_top">
-                <div class="header_top_icon">
-                    <img class="borrow_logo" src="./img/borrow_logo.png">
-                    <input class="input_search" type="text" name="search" onclick="searchViewVisible()">
-                </div>
-                <div class="header_top_menu">
-                    <p class="mypage">마이페이지</p>
-                    <div class="br"></div>
-                    <p class="username"><strong>김지영</strong> 님</p>
-                    <div class="br"></div>
-                    <button class="logoutBtn active">
-                        <p>로그아웃</p>
-                    </button>
-                </div>
-            </section>
-
-            <section class="header_bottom">
-                <nav class="header_bottom_nav">
-                    <ul class="bottom_items">
-                        <li class="nav_home"><a href="#">홈</a></li>
-                        <li class="nav_category"><a href="#">카테고리 선택</a></li>
-                        <li class="nav_best"><a href="#">베스트</a></li>
-                        <li class="nav_gido"><a href="#">주변 지도로 찾기</a></li>
-                        <li class="nav_land"><a href="#">빌려주기</a></li>
-                        <li class="nav_newitem"><a href="#">신상품</a></li>
-                        <li class="nav_realmenu_box">
-                            <span class="nav_realmenu_left">
-                                <p class="nav_realmenu_t1">1.</p>
-                                <p class="nav_realmenu_t2" class="rankingWord ">캐리어</p>
-                                <img class="ploygon" src="./img/Polygon 2.png">
-                            </span>
-                            <span class="nav_realmenu_right">
-                                <img class="bottomVector" src="./img/bottomVector.png" onclick="viewvisible()">
-                            </span>
-                        </li>
-                    </ul>
-                    <div class="nav_realtimesearch">
-                        <div class="realtime_text">실시간 검색어</div>
-                        <div class="realtime">
-                            <section class="realtimeLeft">
-                                <div class="ranking_text">1~10위</div>
-                                <div class="real_br_tags"></div>
-                                <dl>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                </dl>
-                            </section>
-                            <section class="realtimeRight">
-                                <div class="ranking_text">10~20</div>
-                                <div class="real_br_tags"></div>
-                                <dl>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                </dl>
-                            </section>
-                        </div>
-                    </div>
-                </nav>
-            </section>
-        </div>
+    
         <div class="container">
             <div class="item_box">
-                <div class="item_pic"></div>
+                <div class="item_pic">
+                    <img class="pics" src="{{item.get_first_image.image}}">
+                </div>
                 <div class="item_info">
 
                     <div class="item_title">
-                        <h1>디올 스몰 레이디백 앤틱 핑크 대여해 드려요 상태 짱 조음!!!!</h1>
+                        <h1>{{item.title}}</h1>
                     </div>
                     <div class="item_price">
-                        <p><span id="price_font">55,000</span></p>
+                        <p><span id="price_font">{{item.price}}</span></p>
                         <p>원 /  </p>
-                        <p>WEEK</p>
+                        <p>{{item.get_per_price_display}}</p>
                     </div>
                     <div class="item_details">
-                        <li> 대여기간 <span class="item_details_date"><i class="fa-solid fa-calendar"></i>  10/1 ~ 11/5</span></li>
-                        <li> 거래지역 <span class="item_details_text">인천광역시 부평구 삼산2동</span> </li>
-                        <li> 거래방법 <span class="item_details_text">직거래만</spap> </li>
+                        <li> 대여기간 <span class="item_details_date"><i class="fa-solid fa-calendar"></i>  {{item.get_start_date}} ~ {{item.get_end_date}}</span></li>
+                        <li> 거래지역 <span class="item_details_text">{{item.area}}</span> </li>
+                        <li> 거래방법 <span class="item_details_text">{{item.get_type_display}}</spap> </li>
                     </div>
                 </div>
             </div>
@@ -276,7 +47,7 @@
                     <hr class="hr-light">
                 </div>
                 <div class="lent_apply_detail">
-                    <form name="lent_apply" id="lent_apply_form">
+                    <form name="lent_apply" id="lent_apply_form" type = "POST" action = "{% url 'deal:new' item.id %}">
                         <div class="lent_inform">
                             <div class="lent_days">
                                 <li><p>대여기간</p></li>
@@ -287,15 +58,15 @@
                             </div>
                             <div class="lent_type">
                                 <li><p>수령선택</p></li>
-                                <label><input type="checkbox" name="type_direct" value="type_direct" checked>직접수령</label>
-                                <label><input type="checkbox" name="type_direct" value="type_direct">택배수령(+1,350원)</label>
+                                <label><input type="checkbox" name="type" value="1" checked>직접수령</label>
+                                <label><input type="checkbox" name="type" value="10">택배수령(+1,350원)</label>
                             </div>
                         </div>
                         <div class="lent_total_price">
                             <span>12,000</span>
-                            <img src="./img/itemPage/plus_icon.png">
+                            <img src="{% static 'img/plus_icon.png' %}">
                             <span>1,350</span>
-                            <img src="./img/itemPage/equal_icon.png">
+                            <img src="{% static 'img/equal_icon.png' %}">
                             <span>13,350</span>
                         </div>
                         <div class="lent_inform_text">
@@ -317,3 +88,4 @@
 </body>
 
 </html>
+{% endblock %}

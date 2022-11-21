@@ -24,7 +24,7 @@ PRODUCT_CATEGORIES = (
     ("LEISURES","레저"),
     ("HOMES","가전제품"),
     ("FURNITURES","가구"),
-    ("ELECTROMICS","전자제품"),
+    ("ELECTRONICS","전자제품"),
     ("CASUALS","캐주얼"),
     ("OTHERS","기타")
 
@@ -55,7 +55,10 @@ class Product(models.Model):
             return str(created.days // 30)+"달 전"
         else:
             return str(created.years // 365)+"년 전"
-    
+    def get_start_date(self):
+        return str(self.start_date.month)+" / " + str(self.start_date.day)
+    def get_end_date(self):
+        return str(self.end_date.month)+" / " + str(self.end_date.day)    
     def get_first_image(self):
         return self.images.all()[0]
     def get_images(self):
