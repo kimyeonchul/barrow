@@ -155,7 +155,7 @@ let intervalz = getIntervals(); // interval 등록
 const header_top_menu = document.querySelector(".header_top_menu");
 const logoutBtn = document.querySelector(".logoutBtn");
 let loginstatus = "loginUser";
-userLoginoutStatus();
+//userLoginoutStatus();
 
 function userLoginoutStatus(){
 if(loginstatus === "loginUser"){
