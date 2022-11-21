@@ -55,10 +55,15 @@ class Product(models.Model):
             return str(created.days // 30)+"달 전"
         else:
             return str(created.years // 365)+"년 전"
+    
+    def get_first_image(self):
+        return self.images.all()[0]
+    def get_images(self):
+        return self.images.all()
 
 class Product_image(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name = "images")
-    image = models.ImageField(default='static/img/product_default.png', upload_to='product',
+    image = models.ImageField(default='/media/product/product_dafault.png', upload_to='product',
                               blank=True, null=True)
     index  = models.IntegerField(null = False)
 

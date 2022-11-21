@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import KeywordForm
-from .models import Keyword
+from .models import Keyword, CurMostSearch
 from _account.models import User
 from _product.models import Product
 from _barrow.views import base, side
@@ -118,7 +118,6 @@ def search(request, key, ctgr = "전체", srt = "최신순"):
 
     return render(request, 'test.html',context)
 
-@csrf_exempt
 def search_save(request):
     if request.method == "POST":
         data = json.loads(request.body)
@@ -135,3 +134,5 @@ def search_save(request):
     }
 
     return JsonResponse(context)
+
+
