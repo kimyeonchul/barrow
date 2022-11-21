@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +21,7 @@
         <div class="main_header">
             <img class="main_header_logo" src="/static/img/logo.png" alt="">
         </div>
+        {% csrf_token %}
         <div class="main_main_sec">
             <form action="" class="signup_input_form" name="from_input_id_pwd">
                 <ul>
@@ -33,7 +35,7 @@
                         <div class="input_pwd_wrap">
                             <img src="/static/img/Lock.png" alt="" class="input_pwd_icon">
                             <label for="input_pwd">비밀번호</label><br>
-                            <input type="password" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자 사용 가능" class="input_outer" id="input_pwd">
+                            <input type="password" name="password" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자 사용 가능" class="input_outer" id="input_pwd">
                         </div>
                         <p class="pwd_err_msg">8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</p>
                     </li>
@@ -44,24 +46,24 @@
                     </li>
                     <li>
                         <label for="input_name">이름</label><br>
-                        <input type="text" placeholder="한글만 사용 가능" class="input_outer" id="input_name">
+                        <input type="text" name="name" placeholder="한글만 사용 가능" class="input_outer" id="input_name">
                         <p class="name_err_msg">한글만 사용 가능합니다.</p>
                     </li>
                     <li>
                         <label for="input_birthdate">생년월일</label><br>
                         <div class="input_brithdate_wrap">
-                            <select name="" id="select_year" class="input_birthdate"></select>
-                            <select name="" id="select_month" class="input_birthdate"></select>
-                            <select name="" id="select_date" class="input_birthdate"></select>
+                            <select name="birth1" id="select_year" class="input_birthdate"></select>
+                            <select name="birth2" id="select_month" class="input_birthdate"></select>
+                            <select name="birth3" id="select_date" class="input_birthdate"></select>
                         </div>
                     </li>
                     <li>
                         <label for="member_post">주소</label>
-                        <input id="member_post" type="text" placeholder="우편번호" class="input_detail_address input_outer" readonly
+                        <input id="member_post" type="text" name="address1" placeholder="우편번호" class="input_detail_address input_outer" readonly
                             onclick="findAddr()">
-                        <input id="member_addr" type="text" placeholder="주소" class="input_detail_address input_outer" readonly>
+                        <input id="member_addr" type="text" name="address2" placeholder="주소" class="input_detail_address input_outer" readonly>
                         <br>
-                        <input id ="member_detail" type="text" class='input_detail_address input_outer' placeholder="상세주소">
+                        <input id ="member_detail" type="text" name="address3" class='input_detail_address input_outer' placeholder="상세주소">
                         <p class="address_err_msg">필수항목 입니다.</p>
                     </li>
                     <li class="submit_wrap">
@@ -76,7 +78,7 @@
                                 <ul class="clearfix">
                                     <li class="check_all_btn_wrap">
                                         <label for="check_all_btn_wrap">모두 동의합니다</label>
-                                        <input type="checkbox" name="checkall" class="check_all_btn">
+                                        <input type="checkbox"  class="check_all_btn">
                                     </li>
                                 </ul>
                         </div>
@@ -87,7 +89,7 @@
                                 <li><button type="button" class="check_detail1">자세히보기>></button></li>
                                 <li class="checkbtn">
                                     <label for="check">동의합니다</label>
-                                    <input type="checkbox" name="check" class="check">
+                                    <input type="checkbox" name="" class="check">
                                 </li>
                             </ul>
                         <li class="acodian">
@@ -100,7 +102,7 @@
                                 <li><button type="button" class="check_detail2">자세히보기>></button></li>
                                 <li class="checkbtn">
                                     <label for="check">동의합니다</label>
-                                    <input type="checkbox" name="check" class="check">
+                                    <input type="checkbox" name="" class="check">
                                 </li>
                             </ul>
                         <li class="acodian1">
@@ -111,7 +113,7 @@
                     </ul>
                 </form>
                 <div class="submit_wrap">
-                    <input type="submit" class="submit_btn" value="가입하기">
+                    <button type="submit" class="submit_btn" value="가입하기" onclick="register()">가입하기</button>
                 </div>
             </form>
         </div>

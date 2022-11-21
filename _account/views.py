@@ -11,17 +11,30 @@ from django.views.decorators.csrf import csrf_exempt
 from _account.models import User
 
 
+@csrf_exempt
 def login(request):
     if request.method == 'POST':
-        user = User.objects.filter(username=request.POST["username"])
+        data = json.loads(request.body)
+        user = User.objects.filter(username=data.get("username"))
         if user.exists():
+            password = data.get("password")
             user = user[0]
-
-            if user.password == request.POST["password"]:
+            if user.password == password:
                 auth.login(request, user)
-                return redirect("home")
+                context={
+                    "hi" : "hello"
+                }
+                return JsonResponse(context)
 
         return render(request, "login.html")
+        # password1=data.get("password")
+        # password2=user.password
+        # context1={
+        #     "hello" : "hi",
+        #     "password" : password1,
+        #     "password2":password2
+        # }
+        # return JsonResponse(context1)
     else:
         return render(request, "login.html")
 
@@ -32,26 +45,20 @@ def register(request):
         try:
             user = User()
             data = json.loads(request.body)
-            user.username = request.POST.get('username')
-            user.password = request.POST.get("password", '')
-            user.name = request.POST.get("name", '')
-            user.birth = request.POST.get("birth", '')
-            user.address = request.POST.get("address", '')
-            user.phoneNum = request.POST.get("phoneNum", '')
+            user.username = data.get("username")
+            user.password = data.get("password")
+            user.name = data.get("name")
+            user.birth = data.get("birth1")+data.get("birth2")+data.get("birth3")
+            user.address = data.get("address1")+data.get("address2")+data.get("address3")
+            user.phoneNum = data.get("phoneNum", "")
             user.save()
 
-            # return redirect('login')
-            context = {
-                "username": user.username
-            }
-            return JsonResponse(context)
+            return redirect('login')
+
         except Exception as e:
             print(e)
-            error = {
-                "error": e
-            }
-            # return render(request, 'signup.html')
-            return JsonResponse(error)
+            return render(request, 'signup.html')
+
     return render(request, 'signup.html')
 
 
@@ -98,4 +105,11 @@ def getUserInfo(request):
     return JsonResponse(context)
 
 
+def home(request):
+    if request.user.is_authenticated:
+        user = User.objects.get(id=request.user.id)
+        id=user.id
+        return render(request, "main/main.html",{"userid":id})
+    else:
+        return render(request, "login.html")
 
