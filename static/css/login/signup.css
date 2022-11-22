@@ -220,10 +220,29 @@ label[for='check'] {
     margin-bottom: 40px;
 }
 
-
+.input_address_wrap{
+    display: flex;
+    justify-content: flex-start;
+}
 
 .input_detail_address {
     margin-bottom: 30px;
+}
+
+.input_member_post{
+    margin-right: 20px;
+    width: 200px;
+    height: 35px;
+    border-radius: 10px;
+}
+
+.member_post_btn{
+    width: 100px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #3D8361;
 }
 
 .address_api {

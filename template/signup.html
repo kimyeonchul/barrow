@@ -59,8 +59,11 @@
                     </li>
                     <li>
                         <label for="member_post">주소</label>
-                        <input id="member_post" type="text" name="address1" placeholder="우편번호" class="input_detail_address input_outer" readonly
+                        <div class="input_address_wrap">
+                            <input id="member_post" type="text" name="address1" placeholder="우편번호" class="input_detail_address input_member_post" readonly
                             onclick="findAddr()">
+                            <button type ="button" class="member_post_btn" onclick="findAddr()">우편번호 검색</button>
+                        </div>
                         <input id="member_addr" type="text" name="address2" placeholder="주소" class="input_detail_address input_outer" readonly>
                         <br>
                         <input id ="member_detail" type="text" name="address3" class='input_detail_address input_outer' placeholder="상세주소">
