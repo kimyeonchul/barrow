@@ -2,8 +2,7 @@
   우편번호 api 적용 함수
 */
 function findAddr(){
-console.log("ㅎㅇ");
-daum.postcode.load(function() {
+  daum.postcode.load(function() {
   new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -28,6 +27,16 @@ daum.postcode.load(function() {
 /*
 폼 유효성 검사
 */
+$(function(){
+  var now_utc = Date.now()
+  var timeOff = new Date().getTimezoneOffset()*60000;
+  var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+  document.getElementById("start_date").setAttribute("min", today);
+  document.getElementById("end_date").setAttribute("min", today);
+  //오늘 이후로만 선택
+});
+
+
 function checkForm() {
   console.log("submit");
   checkTitle(item_register.title.value);
@@ -108,7 +117,7 @@ function checkMemo(memo){
 /*
 이미지 업로드 기능
 */
-/*
+
 function getImgFiles(e){
   const uploadFiles = [];
   const files = e.currentTarget.files;
@@ -155,4 +164,3 @@ function img_click() {
   document.querySelector('.img_upload').click();
 }
 realUpload.addEventListener('change', getImgFiles);
-*/

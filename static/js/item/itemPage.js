@@ -1,6 +1,7 @@
 $(function(){
   create_picBtn();
   img_slide();
+  getPrice();
 });
 
 /*
@@ -9,7 +10,7 @@ $(function(){
 //불러온 이미지 개수에 맞춰서 동그라미 버튼 생성하기
 function create_picBtn() {
   var pics_count = $('.pics').length;
-  console.log(pics_count);
+  //console.log(pics_count);
   for (var i=0; i<pics_count; i++){
     $('.pic_btns').append('<div class="pic_btn"></div>');
   }
@@ -39,4 +40,8 @@ function img_slide() {
     });
   }
   
+}
+
+function getPrice() {
+  $("#price_font").text(itemPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
 }
