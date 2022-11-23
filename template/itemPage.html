@@ -10,7 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/item/itemPage.css' %}" />
-    <script type="text/javascript" src="{% static 'js/item/itemPage.js' %}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="{% static 'js/item/itemPage.js' %}"></script>
     <script src="https://kit.fontawesome.com/04d19e7b2e.js" crossorigin="anonymous"></script>
     <title>Barrow</title>
 </head>
@@ -33,6 +34,7 @@
                         {% for img in item_images %}
                             <img class="pics" src="{{img.image}}">
                         {% endfor%}
+                        
                     </div>
                     <div class="pic_btns">
                         
@@ -64,17 +66,40 @@
                         <li> 거래방법 <span class="item_details_text">{{item.get_type_display}}</spap> </li>
                     </div>
 
+                    <!--타인의 아이템-->
                     <div class="item_buttons">
                         <button class="mid_btn" id="love"> ♥ 찜 {{favorite}}</button>
                         <button class="mid_btn" id="chat">채팅 보내기</button>
                         <button class="mid_btn" id="apply" onclick = "location.href = '{% url 'deal:new' item.id %}'">대여 신청하기</button>
                     </div>
+
+                    <!-- 내 아이템
+                    <div class="item_buttons">
+                        <button class="mid_btn" id="love"> 수정하기 </button>
+                        <button class="mid_btn" id="chat"> 삭제하기 </button>
+                        <button class="mid_btn" id="apply">대여 수락하기</button>
+                    </div>
+                    -->
+                    
+                    <!-- 대여중 아이템
+                    <div class="item_requested">
+                        <p>현재 대여중인 상품입니다.</p>
+                        <p>반납 예정일은 <span id="returnDay">22.12.01</span> 입니다.</p>
+                    </div>
+                    -->
+
+                    <!-- 수락 대기
+                    <div class="item_requested">
+                        <p id="wait">현재 신청 수락을 기다리고 있는 상품입니다.</p>
+                    </div>
+                    -->
+
                 </div>
 
             </div>
             <div class="lender_info">
-                <div class="lender_portrait">
-                    <img src = "{{item.productor.image}}">
+                <div>
+                    <img class="lender_portrait" src = "{{item.productor.image}}">
                 </div>
                 <p>{{item.productor.name}}님의 대여 상품입니다</p>
             </div>
@@ -93,12 +118,18 @@
                 </div>
                 <hr class="hr-light">
             </div>
+            <!--수락 대기중일 때
+            <div class="reject_button">
+                <button class="mid_btn" id="love"> 신청 취소하기 </button>
+            </div>
+            -->
 
         </div>
     </section>
-
-    
 </body>
+<script type="text/javascript">
+    var itemPrice = "{{item.price}}";
+</script>
 
 </html>
 {% endblock %}

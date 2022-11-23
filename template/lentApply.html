@@ -10,8 +10,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/item/lentApply.css' %}" />
-    <script type="text/javascript" src="{% static 'js/item/lentApply.js' %}" defer></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="{% static 'js/asset/jquery-ui.js' %}"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <script type="text/javascript" src="{% static 'js/item/lentApply.js' %}"></script>
     <script src="https://kit.fontawesome.com/04d19e7b2e.js" crossorigin="anonymous"></script>
     <title>Barrow</title>
 </head>
@@ -51,23 +54,23 @@
                         <div class="lent_inform">
                             <div class="lent_days">
                                 <li><p>대여기간</p></li>
-                                <input type="date" name="start_date" id="start_date">
+                                <input class="datepicker" name="start_date" id="start_date">
                                 <span class="word"> 부터 </span>
-                                <input type="date" name="end_date" id="end_date">
+                                <input class="datepicker" name="end_date" id="end_date">
                                 <span class="word"> 까지 </span>
                             </div>
                             <div class="lent_type">
                                 <li><p>수령선택</p></li>
-                                <label><input type="checkbox" name="type" value="1" checked>직접수령</label>
-                                <label><input type="checkbox" name="type" value="10">택배수령(+1,350원)</label>
+                                <label><input type="checkbox" name="type" value="1" checked onclick='checkOnlyOne(this)'>직접수령</label>
+                                <label><input type="checkbox" name="type" value="10" onclick='checkOnlyOne(this)'>택배수령(+1,350원)</label>
                             </div>
                         </div>
                         <div class="lent_total_price">
-                            <span>12,000</span>
-                            <img src="{% static 'img/plus_icon.png' %}">
-                            <span>1,350</span>
-                            <img src="{% static 'img/equal_icon.png' %}">
-                            <span>13,350</span>
+                            <span id="lent_price"></span>
+                            <img src="{% static '/img/img/plus_icon.png' %}">
+                            <span id="delivery_charge">1,350</span>
+                            <img src="{% static '/img/img/equal_icon.png' %}">
+                            <span id="total_price"></span>
                         </div>
                         <div class="lent_inform_text">
                             <p class="word">개설자가 신청을 수락하면 자동으로 금액이 이체됩니다. 그대로 신청하시겠습니까?</p>
@@ -85,7 +88,16 @@
 
     </div>
     </section>
+
+    <script>
+        var price = "{{ item.price }}";
+        //var price_per = "{{ item.price_per }}"
+        //var delivery_charge = ""
+        var lentStartDay = "{{item.get_start_date}}";
+        var lentEndDay = "{{item.get_end_date}}";
+    </script>
 </body>
+
 
 </html>
 {% endblock %}
