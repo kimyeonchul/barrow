@@ -43,13 +43,32 @@ function setCheckbox() {
 }
 
 function setAcodian() {
+    var detail1 = true;
+    var detail2 = true;
     $('.check_detail1').click(function () {
-        $('.check_textarea1').slideDown();
-        $('.check_textarea2').slideUp();
+        if(detail1){
+            $('.check_textarea1').slideDown();
+            $('.check_textarea2').slideUp();
+            detail1 = false;
+            detail2 = true;
+        }
+        else{
+            $('.check_textarea1').slideUp();
+            detail1 = true;
+        }
     });
+
     $('.check_detail2').click(function () {
-        $('.check_textarea2').slideDown();
-        $('.check_textarea1').slideUp();
+        if(detail2){
+            $('.check_textarea2').slideDown();
+            $('.check_textarea1').slideUp();
+            detail2 = false;
+            detail1 = true;
+        }
+        else{
+            $('.check_textarea2').slideUp();
+            detail2 = true;
+        }
     });
 
 }
@@ -78,7 +97,6 @@ function setTextArea() {
 
 //* sign up checking
 $('.submit_btn').click(function () {
-    
     if(checkID() && checkPwd() && checkRePwd() && checkName() && checkAddress() && checkCheckbox()){
         /*
     $.ajax({
