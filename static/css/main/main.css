@@ -236,7 +236,7 @@ a:hover {
 .nav_realtimesearch {
   visibility: hidden;
   position: absolute;
-  left: calc(50%-10px);
+  left: calc(50% - 10px);
   transform: translate(154%, 0);
   top: 205px;
   padding: 0px 0px 30px 30px;
