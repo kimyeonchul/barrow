@@ -67,32 +67,35 @@
                     </div>
 
                     <!--타인의 아이템-->
-                    <div class="item_buttons">
-                        <button class="mid_btn" id="love"> ♥ 찜 {{favorite}}</button>
-                        <button class="mid_btn" id="chat">채팅 보내기</button>
-                        <button class="mid_btn" id="apply" onclick = "location.href = '{% url 'deal:new' item.id %}'">대여 신청하기</button>
-                    </div>
-
-                    <!-- 내 아이템
-                    <div class="item_buttons">
-                        <button class="mid_btn" id="love"> 수정하기 </button>
-                        <button class="mid_btn" id="chat"> 삭제하기 </button>
-                        <button class="mid_btn" id="apply">대여 수락하기</button>
-                    </div>
-                    -->
+                    {% if productor.is_mine %}
+                        
+                        <div class="item_buttons">
+                            <button class="mid_btn" id="love" onclick = "location.href = '{% url 'products:modify' item.id %}'"> 수정하기 </button>
+                            <button class="mid_btn" id="chat" > 삭제하기 </button>
+                            <!-- onclick = "location.href = '{% url 'products:delete' item.id %}'" -->
+                            <button class="mid_btn" id="apply" onclick = "location.href = '{% url 'deal:accept' item.id %}'">대여 수락하기</button>
+                        </div>
+                    <!-- 내 아이템 -->
                     
-                    <!-- 대여중 아이템
-                    <div class="item_requested">
-                        <p>현재 대여중인 상품입니다.</p>
-                        <p>반납 예정일은 <span id="returnDay">22.12.01</span> 입니다.</p>
-                    </div>
-                    -->
-
-                    <!-- 수락 대기
-                    <div class="item_requested">
-                        <p id="wait">현재 신청 수락을 기다리고 있는 상품입니다.</p>
-                    </div>
-                    -->
+                    {% else %}
+                        {% if state == "TERMINATE" %}
+                            <div class="item_buttons">
+                                <button class="mid_btn" id="love"> ♥ 찜 {{favorite}}</button>
+                                <button class="mid_btn" id="chat">채팅 보내기</button>
+                                <button class="mid_btn" id="apply" onclick = "location.href = '{% url 'deal:new' item.id %}'">대여 신청하기</button>
+                            </div>
+                        
+                        {% elif state == "WAIT" %}
+                            <div class="item_requested">
+                                <p id="wait">현재 신청 수락을 기다리고 있는 상품입니다.</p>
+                            </div>
+                        {% elif state == "LEND" %}
+                            <div class="item_requested">
+                                <p>현재 대여중인 상품입니다.</p>
+                                <p>반납 예정일은 <span id="returnDay">22.12.01</span> 입니다.</p>
+                            </div>
+                        {% endif %}
+                    {% endif %}
 
                 </div>
 
@@ -101,28 +104,29 @@
                 <div>
                     <img class="lender_portrait" src = "{{item.productor.image}}">
                 </div>
-                <p>{{item.productor.name}}님의 대여 상품입니다</p>
+                <p>{{productor.name}}님의 대여 상품입니다</p>
             </div>
             <div class="item_memo">
                 <h2>상세 설명</h2>
                 <hr class="hr-light">
                 <div class="item_memo_text">
                     <p>
-                        {{item.memo}}
-                        숨 을 곳도 찾지 못해 나는 피하려고 애써봐도<br>
-                        거부조차 할 수 없는 네개 갇혀버린 나<br>
-                        사랑이었다면 정말 사랑했던 거라면 내개 이러지는 말아<br>
-                        Her whisper is the Lucifer-fer-fer<br>
-                        The Lucifer<br>
+                        {% for c in item.memo %}
+                            {{c}}
+                            {% if forloop.counter|divisibleby:100%}
+                                <br>
+                            {% endif %}
+                        {% endfor %}
                     </p>
                 </div>
                 <hr class="hr-light">
             </div>
-            <!--수락 대기중일 때
-            <div class="reject_button">
-                <button class="mid_btn" id="love"> 신청 취소하기 </button>
-            </div>
-            -->
+            {% if state == "WAIT" %}
+                <div class="reject_button">
+                    <button class="mid_btn" id="love"> 신청 취소하기 </button>
+                    <!--onclick = "location.href = '{% url 'deal:delete' item.id %}'"-->
+                </div>
+            {% endif %}
 
         </div>
     </section>

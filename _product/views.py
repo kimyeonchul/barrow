@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import ProductForm
 from .models import Product, Product_image
 from _barrow.views import base, side
@@ -29,6 +29,7 @@ def new(request):
     context = {}
     context.update(base(request))
     context.update(side(request))
+    context["product_id"] = 0
     return render(request, 'itemRegister.html',context)
 
 def modify(request, product_id):
@@ -61,10 +62,22 @@ def modify(request, product_id):
 
         else:
             print(form.errors)
-        return render(request, 'test.html',context)
+        return redirect("products:itempage",product_id)
     else:
+        item = Product.objects.get(id = product_id)
+        types = []
+        type = list(item.type)
+        type = list(map(int, type))
+        types.append(type)
         context["product_id"] = product_id
-        return render(request, "test.html", context)
+        context["item"] = Product.objects.get(id = product_id)
+        context["type"] = type
+        return render(request, "itemRegister.html", context)
+
+def delete(request,product_id):
+    item = Product.objects.get(id = product_id)
+    item.delete()
+    return redirect("barrow:home")
 
 def itempage(request, product_id):
     item = Product.objects.get(id = product_id)
@@ -79,6 +92,11 @@ def itempage(request, product_id):
             "name" : "나",
             "image" : request.user.image,
             "is_mine" : True,
+        }
+        context = {
+                "item" : item,
+                "item_images" : item_images,
+                "productor" : productor,
         }
 
     else:
@@ -98,7 +116,7 @@ def itempage(request, product_id):
             "state" : "WAIT"
             }
         elif Deal.objects.filter(user_cons = request.user, product = item, state = "LEND", start_date__lte = time, end_date__gte = time).exists():
-            deal = Deal.objects.filter(user_cons = request.user, product = item, state = "LEND", start_date__lte = time, end_date__gte = time)
+            deal = Deal.objects.filter(user_cons = request.user, product = item, state = "LEND", start_date__lte = time, end_date__gte = time)[0]
             context = {
             "item" : item,
             "item_images" : item_images,
