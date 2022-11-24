@@ -42,6 +42,36 @@ function img_slide() {
   
 }
 
+//세자리수마다 콤마찍기
 function getPrice() {
   $("#price_font").text(itemPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+}
+
+/*
+  모달 창 관련
+*/
+function modal(id) {
+  var zIndex = 9999;
+  var modal = $('#' + id);
+
+  modal
+      .css({
+          position: 'fixed',
+          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+          zIndex: zIndex,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          msTransform: 'translate(-50%, -50%)',
+          webkitTransform: 'translate(-50%, -50%)'
+      })
+      .show()
+      .find('.modal_close_btn')
+      .on('click', function() {
+          modal.hide();
+      });
+}
+
+function test() {
+  console.log("하이욤");
 }

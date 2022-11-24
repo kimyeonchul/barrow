@@ -71,8 +71,7 @@
                         
                         <div class="item_buttons">
                             <button class="mid_btn" id="love" onclick = "location.href = '{% url 'products:modify' item.id %}'"> 수정하기 </button>
-                            <button class="mid_btn" id="chat" > 삭제하기 </button>
-                            <!-- onclick = "location.href = '{% url 'products:delete' item.id %}'" -->
+                            <button class="mid_btn" id="chat" onclick="modal('delete_check_modal')" > 삭제하기 </button>
                             <button class="mid_btn" id="apply" onclick = "location.href = '{% url 'deal:accept' item.id %}'">대여 수락하기</button>
                         </div>
                     <!-- 내 아이템 -->
@@ -123,13 +122,28 @@
             </div>
             {% if state == "WAIT" %}
                 <div class="reject_button">
-                    <button class="mid_btn" id="love"> 신청 취소하기 </button>
-                    <!--onclick = "location.href = '{% url 'deal:delete' item.id %}'"-->
+                    <button class="mid_btn" id="love" onclick="modal('cancel_check_modal')"> 신청 취소하기 </button>
                 </div>
             {% endif %}
 
         </div>
     </section>
+    <div class="modal" id="delete_check_modal">
+        <p>상품을 삭제 하시겠습니까?</p>
+        <p>해당 상품의 등록이 삭제됩니다.</p>
+        <div class="modal_btn">
+            <button class="modal_ok_btn" onclick = "location.href = '{% url 'products:delete' item.id %}'">삭제하기</button>
+            <button class="modal_close_btn">돌아가기</button>
+        </div>
+    </div>
+    <div class="modal" id="cancel_check_modal">
+        <p>신청을 취소 하시겠습니까?</p>
+        <p>해당 상품에 대한 대여신청이 취소됩니다.</p>
+        <div class="modal_btn">
+            <button class="modal_ok_btn" onclick = "location.href = '{% url 'deal:delete' item.id %}'">취소하기</button>
+            <button class="modal_close_btn">돌아가기</button>
+        </div>
+    </div>
 </body>
 <script type="text/javascript">
     var itemPrice = "{{item.price}}";
