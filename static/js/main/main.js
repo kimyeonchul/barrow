@@ -64,7 +64,7 @@ function circleMove(item) {
   console.log(item);
     if (view === "visible") {
       circle.style="animation-name:circleleft";
-      circle.style=`transform:translate(-18px,0)`;
+      circle.style=`transform:translate(-18px,40%)`;
         view = "hidden";
     }
     else{
