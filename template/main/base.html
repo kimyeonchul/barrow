@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main/main.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    <script type="text/javascript" src="{% static 'js/main/main.js' %}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <section class="categoryClick">
+        <dl class="categoryBox">
+            <dt>
+                의류
+            </dt>
+            <dt>
+                신발
+            </dt>
+            <dt>
+                여행용품
+            </dt>
+            <dt>
+                가방
+            </dt>
+            <dt>
+                캐리어
+            </dt>
+            <dt>
+                스포츠
+            </dt>
+            <dt>
+                레저
+            </dt>
+            <dt>
+                가전
+            </dt>
+            <dt>
+                가구
+            </dt>
+            <dt>
+                전자제품
+            </dt>
+            <dt>
+                캐주얼
+            </dt>
+            <dt>
+                기타
+            </dt>
+        </dl>
+    </section>
+    <section class="recentSearchContainer">
+        <div class="recentSearchBox">
+            <p class="text">최근 검색어</p>
+            <div class="searchBrTags"></div>
+            {% for e in recent_search %}
+                <ul class="recentSearch">
+                    <li>{{e.content}}</li>
+                    <li>{{e.get_date}}</li>
+                </ul>
+            {% endfor %}
+            <div class="searchBrTags"></div>
+            <ul class="autoSave">
+                <li>자동저장</li>
+                <li class="recenticon">
+                    <img class="backgroundCircle" src="{% static 'img/img/searchimg/backgroundCircle.png' %}" onclick="circleMove(class{})">
+                    <img class="circle" src="{% static 'img/img/searchimg/circle.png' %}">
+                </li>
+            </ul>
+        </div>
+    </section>
+    {% include "main/side.html" %}
+    <div class="allpage">
+        <div class="header">
+            <section class="header_top">
+                <div class="header_top_icon">
+                    <a href="{% url 'barrow:home' %}"><img class="borrow_logo" src="{% static 'img/img/borrow_logo.png' %}"></a>
+                    <form class="input_transfer" action="/search/result/검색한값/카테고리/정렬기준/" method="GET">
+                        <input class="input_search" type="text" name="search">
+                        <button class="searchBtn" type="submit" name="click" value="">
+                            <img src="{% static 'img/img/search_logo.png' %}">
+                        </button>
+                    </form>
+                </div>
+                <div class="header_top_menu">
+                    <div class = "loginbox" style = "display: flex; align-items: center;">
+                        {% if user.is_authenticated %}
+                            <p class="mypage">마이페이지</p>
+                            <div class="br"></div>
+                            <p class="username"><strong>{{user.username}}</strong> 님</p>
+                            <div class="br"></div>
+                            
+                            <button class="logoutBtn active" >
+                                <p class="loginOutText">로그아웃</p>
+                            </button>
+                        {% else %}
+                            <button class="logoutBtn active" >
+                                <p class="loginOutText">로그인</p>
+                            </button>
+                            <button class="regiBtn active" >
+                                <p class="loginOutText">회원가입</p>
+                            </button>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+            </section>
+
+            <section class="header_bottom">
+                <nav class="header_bottom_nav">
+                    <ul class="bottom_items">
+                        <li class="nav_home"><a href="{% url 'barrow:home' %}">홈</a></li>
+                        <li class="nav_category" onclick="categorybox()">카테고리 선택</li>
+                        <li class="nav_best"><a href="{% url 'barrow:best' '1' %}">베스트</a></li>
+                        <li class="nav_gido"><a href="{% url 'barrow:near_products' %}">주변 지도로 찾기</a></li>
+                        <li class="nav_land"><a href="{% url 'products:new' %}">빌려주기</a></li>
+                        
+                        <li class="nav_realmenu_box">
+                            <div class="nav_realmenu_left">
+                                
+                                {% for keyword in most_search %}
+                                    <div class="nav_inner">
+                                        <div class="inner_item">
+                                            <p class="nav_realmenu_t1">{{forloop.counter}}</p>
+                                            <p class="nav_realmenu_t2">{{keyword.keyword}}</p>
+                                            {% if 0 > keyword.vector %}                                                
+                                                <img class="ploygon" src="{% static 'img/img/heart.png' %}">
+                                            {% elif 0 < keyword.vector %}
+                                                <img class="ploygon" src="{% static 'img/img/Polygon 2.png' %}">
+                                            {% endif %}
+                                        </div>
+                                        <span class="nav_realmenu_right">
+                                            <img class="bottomVector" src="{% static 'img/img/bottomVector.png' %}"
+                                                onclick="realtimeViewVisible()">
+                                        </span>
+                                    </div>
+                                {% endfor %}
+                                
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="nav_realtimesearch">
+                        <div class="realtime_text">실시간 검색어</div>
+                        <div class="realtime">
+                            <section class="realtimeLeft">
+                                <div class="ranking_text">1~10위</div>
+                                <div class="real_br_tags"></div>
+                                <dl>
+                                    {% for keyword in most_search %}
+                                        {% if 10 > forloop.counter0 %}
+                                            <div class="real_time_ranking">
+                                                <dt class="ranking_left"><strong>{{forloop.counter}}</strong></dt>
+                                                <span class="ranking_right">
+                                                    <dt class="rankingWord ">{{keyword.keyword}}</dt>
+                                                    {% if 0 > keyword.vector %}                                                
+                                                        <img class="ploygon" src="{% static 'img/img/heart.png' %}">
+                                                    {% elif 0 < keyword.vector %}
+                                                        <img class="ploygon" src="{% static 'img/img/Polygon 2.png' %}">
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </dl>
+                            </section>
+                            <section class="realtimeRight">
+                                <div class="ranking_text">10~20</div>
+                                <div class="real_br_tags"></div>
+                                <dl>
+                                    {% for keyword in most_search %}
+                                        {% if 9 < forloop.counter0 %}
+                                            <div class="real_time_ranking">
+                                                <dt class="ranking_left"><strong>{{forloop.counter}}</strong></dt>
+                                                <span class="ranking_right">
+                                                    <dt class="rankingWord ">{{keyword.keyword}}</dt>
+                                                    {% if 0 > keyword.vector %}                                                
+                                                        <img class="ploygon" src="{% static 'img/img/heart.png' %}">
+                                                    {% elif 0 < keyword.vector %}
+                                                        <img class="ploygon" src="{% static 'img/img/Polygon 2.png' %}">
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                </dl>
+                            </section>
+                        </div>
+                    </div>
+                </nav>
+            </section>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

@@ -6,9 +6,6 @@ from _product.models import Product
 from datetime import datetime
 #phonenumberfield사용하려면 pip install django-phonenumber-field[phonenumbers], pip install django-phonenumber-field[phonenumberslite]이거설치해야함
 
-
-
-
 class User(AbstractUser):
     password = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
@@ -19,7 +16,7 @@ class User(AbstractUser):
     favorite = models.ManyToManyField("_product.Product", related_name='favor')
     keyword = models.ManyToManyField("_search.Keyword", related_name='search')
     search_save = models.BooleanField(null = True, default = True)
-    image = models.ImageField(default='static/img/account_default.png', upload_to='account', blank=True, null=True)
+    image = models.ImageField(default='/media/account/account_default.png', upload_to='account', blank=True, null=True)
 
 
     def view(self, prd):

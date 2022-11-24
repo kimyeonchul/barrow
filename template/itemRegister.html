@@ -1,3 +1,7 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,258 +9,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="itemRegister.css" />
-    <script type="text/javascript" src="./itemRegister.js" defer></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="{% static 'js/asset/jquery-ui.js' %}"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{% static 'css/item/itemRegister.css' %}" />
+    <script type="text/javascript" src="{% static 'js/item/itemRegister.js' %}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-    <title>Document</title>
+    <title>Barrow</title>
 </head>
 
 <body>
-    <section class="recentSearchContainer">
-        <div class="recentSearchBox">
-            <p class="text">최근 검색어</p>
-            <div class="searchBrTags"></div>
-            <ul class="recentSearch">
-                <li>여행용 텐트</li>
-                <li>09.21</li>
-            </ul>
-            <div class="searchBrTags"></div>
-            <ul class="autoSave">
-                <li>자동저장</li>
-                <li class="recenticon">
-                    <img class="backgroundCircle" src="./img/searchimg/backgroundCircle.png">
-                    <img class="circle" src="./img/searchimg/circle.png" onclick="circleMove()">
-                </li>
-            </ul>
-        </div>
-    </section>
-    <aside class="sidebar">
-        <div class="dibs">
-            <p class="p-text">찜한 상품</p>
-            <div class="dibs-wrap">
-                <div class="dibs-image"><img src="./img/steamed.png" alt=""></div>
-                <div class="dibs-text">
-                    <p>0</p>
-                </div>
-            </div>
-        </div>
-        <div class="recently">
-            <p class="p-text">최근 본 상품</p>
-            <div class="br_tags"></div>
-            <div>
-                <img src="./img/tent_icon.png">
-                <img src="./img/tent_icon.png">
-            </div>
-            <div>&lt; 1 / 5 &gt;</div>
-        </div>
-    </aside>
-    <div class="allpage">
-        <div class="header">
-            <section class="header_top">
-                <div class="header_top_icon">
-                    <img class="borrow_logo" src="./img/borrow_logo.png">
-                    <input class="input_search" type="text" name="search" onclick="searchViewVisible()">
-                </div>
-                <div class="header_top_menu">
-                    <p class="mypage">마이페이지</p>
-                    <div class="br"></div>
-                    <p class="username"><strong>김지영</strong> 님</p>
-                    <div class="br"></div>
-                    <button class="logoutBtn active">
-                        <p>로그아웃</p>
-                    </button>
-                </div>
-            </section>
-
-            <section class="header_bottom">
-                <nav class="header_bottom_nav">
-                    <ul class="bottom_items">
-                        <li class="nav_home"><a href="#">홈</a></li>
-                        <li class="nav_category"><a href="#">카테고리 선택</a></li>
-                        <li class="nav_best"><a href="#">베스트</a></li>
-                        <li class="nav_gido"><a href="#">주변 지도로 찾기</a></li>
-                        <li class="nav_land"><a href="#">빌려주기</a></li>
-                        <li class="nav_newitem"><a href="#">신상품</a></li>
-                        <li class="nav_realmenu_box">
-                            <span class="nav_realmenu_left">
-                                <p class="nav_realmenu_t1">1.</p>
-                                <p class="nav_realmenu_t2" class="rankingWord ">캐리어</p>
-                                <img class="ploygon" src="./img/Polygon 2.png">
-                            </span>
-                            <span class="nav_realmenu_right">
-                                <img class="bottomVector" src="./img/bottomVector.png" onclick="viewvisible()">
-                            </span>
-                        </li>
-                    </ul>
-                    <div class="nav_realtimesearch">
-                        <div class="realtime_text">실시간 검색어</div>
-                        <div class="realtime">
-                            <section class="realtimeLeft">
-                                <div class="ranking_text">1~10위</div>
-                                <div class="real_br_tags"></div>
-                                <dl>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                </dl>
-                            </section>
-                            <section class="realtimeRight">
-                                <div class="ranking_text">10~20</div>
-                                <div class="real_br_tags"></div>
-                                <dl>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                </dl>
-                            </section>
-                        </div>
-                    </div>
-                </nav>
-            </section>
-        </div>
+    
         <div class="container">
 
             <div class="item_body">
                 <div class="item_body_title">
-                    <img class="barrow_clipboard" src="./img/itemPage/fluent-emoji_clipboard.png">
+                    <img class="barrow_clipboard" src="{% static 'img/img/fluent-emoji_clipboard.png' %}">
                     <h1>빌려주기</h1>
                 </div>
                 <hr class="hr-normal">
-                <form name="item_register" id="item_register" method="post">
+                
+                {% if product_id %}
+                    <form name="item_register" id="item_register" method="post" action = "{% url 'products:new' %}">
+                {% else %}
+                    <form name="item_register" id="item_register" method="post" action = "{% url 'products:modify' product_id %}">
+                {% endif %}    
                     <div class="pic_body">
                         <div class="pic_box"></div> 
                         <input type="file" class="img_upload" accept="image/*" required multiple style="display: none;">
@@ -267,15 +44,15 @@
 
                         <div class="item_register_flex">
                             <li><label for="title">제목</label></li>
-                            <input type="text" name="title" id="title" maxlength="120" placeholder="120자 이내로 입력해주세요">
+                            <input type="text" name="title" id="title" maxlength="120" placeholder="120자 이내로 입력해주세요" value = {{item.title}}>
                         </div>
                         <hr class="hr-light">
                         <div class="item_register_flex">
                             <li>
                                 <label for="area">거래지역</label></li>
-                                <input type="text" name="area" id="area">
-                                <button type="button" id="area_btn" onclick="findAddr()">주소찾기</button>
-                                <input type="text" name="area_detail" id="area_detail">
+                                <input type="text" name="area" id="area" value = {{item.area}}>
+                                <button type="button" id="area_btn" onclick="findAddr()">주소<br>찾기</button>
+                                <input type="text" name="area_detail" id="area_detail" placeholder="상세주소 입력" value = {{item.area}}>
                         
                         </div>
                         <hr class="hr-light">
@@ -283,14 +60,27 @@
                             <li><label>거래방법</label></li>
                             <div class="radio_types">
                                 <li>
-                                    <input type="radio" name="type" id="type_1" value="parcel" checked>
+                                    {% if type.0 and not type.1 %}
+                                        <input type="radio" name="type" id="type_1" value="10" checked>
+                                    {% else %}
+                                        <input type="radio" name="type" id="type_1" value="10">
+                                    {% endif %}
                                     <label for="type_1">택배만</label>
 
-                                    <input type="radio" name="type" id="type_2" value="direct">
+                                    {% if not type.0 and type.1 %}
+                                        <input type="radio" name="type" id="type_2" value="01" checked>
+                                    {% else %}
+                                        <input type="radio" name="type" id="type_2" value="01">
+                                    {% endif %}
                                     <label for="type_2">직거래만</label>
                                 
-                                    <input type="radio" name="type" id="type_3" value="both">
+                                    {% if type.0 and type.1 %}
+                                        <input type="radio" name="type" id="type_3" value="11" checked>
+                                    {% else %}
+                                        <input type="radio" name="type" id="type_3" value="11">
+                                    {% endif %}
                                     <label for="type_3">둘 다</label>
+                                    
                                 </li>
                             </div>
                         </div>
@@ -301,50 +91,111 @@
 
                             <div class="radio_types">
                                 
-                                <input type="text" name="price" id="price" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                                <input type="text" name="price" id="price" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" value = "{{item.price}}">
                                 <span class="word"> 원 </span>
-                                <input type="radio" name="price_per" id="price_per1" value="day" checked>
+                                {% if item.per_day == DAY %}
+                                    <input type="radio" name="price_per" id="price_per1" value="PER_DAY" checked>
+                                {% else %}
+                                    <input type="radio" name="price_per" id="price_per1" value="PER_DAY">
+                                {% endif %}
                                 <label for="price_per1">DAY</label>
                         
-                                <input type="radio" name="price_per" id="price_per2" value="week">
+                                {% if item.per_day == WEEK %}
+                                    <input type="radio" name="price_per" id="price_per2" value="PER_WEEK" checked>
+                                {% else %}
+                                    <input type="radio" name="price_per" id="price_per2" value="PER_WEEK">
+                                {% endif %}
                                 <label for="price_per2">WEEK</label>
                       
-                                <input type="radio" name="price_per" id="price_per3" value="month">
+                                {% if item.per_day == MONTH %}
+                                    <input type="radio" name="price_per" id="price_per3" value="PER_MONTH">
+                                {% else %}
+                                    <input type="radio" name="price_per" id="price_per3" value="PER_MONTH">
+                                {% endif %}
+                                
                                 <label for="price_per3">MONTH</label>
                             </div>
                         </div>
                         <hr class="hr-light">
                         <div class="item_register_flex">
-                            <li>
-                                <label>대여기간</label></li>
-                                <input type="date" name="start_date" id="start_date">
-                                <span class="word"> 부터 </span>
-                                <input type="date" name="end_date" id="end_date">
-                                <span class="word"> 까지 </span>
+                            <li><label>대여기간</label></li>
+                            <input type="date" name="start_date" value = "{{item.start_date.year}}-{{item.start_date.month}}-{{item.start_date.day}}">
+                            <span class="word"> 부터 </span>
+                            <input type="date" name="end_date" value = "{{item.start_date.year}}-{{item.start_date.month}}-{{item.start_date.day}}">
+                            <span class="word"> 까지 </span>
                         </div>
                         <hr class="hr-light">
                         <div class="item_register_flex">
                             <li><label>카테고리</label></li>
                                 <select name="category" id="category">
-                                    <option selected disabled>선택</option>
-                                    <option value="1" >의류</option>
-                                    <option value="2">신발</option>
-                                    <option value="3">여행용품</option>
-                                    <option value="4">가방</option>
-                                    <option value="5">캐리어</option>
-                                    <option value="6">스포츠</option>
-                                    <option value="7">레저</option>
-                                    <option value="8">가전</option>
-                                    <option value="9">가구</option>
-                                    <option value="10">전자제품</option>
-                                    <option value="11">캐주얼</option>
-                                    <option value="12">기타</option>
+                                    <option disabled>선택</option>
+                                    {% if item.category == CLOTHES %}
+                                        <option value="CLOTHES" selected>의류</option>
+                                    {% else %}
+                                        <option value="CLOTHES" >의류</option>
+                                    {% endif %}
+                                    {% if item.category == SHOES %}
+                                        <option value="SHOES" selected>신발</option>
+                                    {% else %}
+                                        <option value="SHOES">신발</option>
+                                    {% endif %}
+                                    {% if item.category == TRAVELS %}
+                                        <option value="TRAVELS" selected>여행용품</option>
+                                    {% else %}
+                                        <option value="TRAVELS">여행용품</option>
+                                    {% endif %}
+                                    {% if item.category == BAGS %}
+                                        <option value="BAGS" selected>가방</option>
+                                    {% else %}
+                                        <option value="BAGS">가방</option>
+                                    {% endif %}
+                                    {% if item.category == CARRIERS %}
+                                        <option value="CARRIERS" selected>캐리어</option>
+                                    {% else %}
+                                        <option value="CARRIERS">캐리어</option>
+                                    {% endif %}
+                                    {% if item.category == SPORTS %}
+                                        <option value="SPORTS" selected>스포츠</option>
+                                    {% else %}
+                                        <option value="SPORTS">스포츠</option>
+                                    {% endif %}
+                                    {% if item.category == LEISURES %}
+                                        <option value="LEISURES" selected>레저</option>
+                                    {% else %}
+                                        <option value="LEISURES">레저</option>
+                                    {% endif %}
+                                    {% if item.category == HOMES %}
+                                        <option value="HOMES" selected>가전</option>
+                                    {% else %}
+                                        <option value="HOMES">가전</option>
+                                    {% endif %}
+                                    {% if item.category == FURNITURES %}
+                                    <option value="FURNITURES" selected>가구</option>
+                                    {% else %}
+                                    <option value="FURNITURES">가구</option>
+                                    {% endif %}
+                                    {% if item.category == ELECTRONICS %}
+                                        <option value="ELECTRONICS" selected>전자제품</option>
+                                    {% else %}
+                                        <option value="ELECTRONICS">전자제품</option>
+                                    {% endif %}
+                                    {% if item.category == CASUALS %}
+                                        <option value="CASUALS" selected>캐주얼</option>
+                                    {% else %}
+                                        <option value="CASUALS">캐주얼</option>
+                                    {% endif %}
+                                    {% if item.category == OTHERS %}
+                                        <option value="OTHERS" selected>기타</option>
+                                    {% else %}
+                                        <option value="OTHERS">기타</option>
+                                    {% endif %}
+                                    
                                 </select>
                         </div>
                         <hr class="hr-light">
                         <div class="memo">
                             <li><label for="memo">상세설명</label></li>
-                            <textarea name="memo" id="memo" cols="20" rows="10"  maxlength="1000" placeholder="1000자 이내로 입력해주세요" ></textarea>
+                            <textarea name="memo" id="memo" cols="20" rows="10"  maxlength="1000" placeholder="1000자 이내로 입력해주세요" >{{item.memo}}</textarea>
                         </div>
                         <div></div>
                         
@@ -363,9 +214,7 @@
         </div>
     </section>
 
-    </div>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-
 </html>
+{% endblock %}

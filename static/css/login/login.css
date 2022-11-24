@@ -105,3 +105,19 @@ main {
     font-weight: bold;
     visibility: hidden;
 }
+
+@media screen and (max-width: 375px){
+    main {
+        width: 280px;
+    }
+}
+
+@media screen and (min-width:376px) and (max-width: 576px) {
+    main {
+        width: 350px;
+    }
+}
+
+@media screen and (min-width:577px) and (max-width: 768px) {
+
+}

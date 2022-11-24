@@ -1,371 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="main.css" />
-    <script src="https://cdn.jsdelivr.net/npm/less"></script>
-    <script type="text/javascript" src="./main.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-    <title>Document</title>
-</head>
-
-
-<body>
-
-    <section class="categoryClick">
-        <dl class="categoryBox">
-            <dt>
-                의류
-            </dt>
-            <dt>
-                신발
-            </dt>
-            <dt>
-                여행용품
-            </dt>
-            <dt>
-                가방
-            </dt>
-            <dt>
-                캐리어
-            </dt>
-            <dt>
-                스포츠
-            </dt>
-            <dt>
-                레저
-            </dt>
-            <dt>
-                가전
-            </dt>
-            <dt>
-                가구
-            </dt>
-            <dt>
-                전자제품
-            </dt>
-            <dt>
-                캐주얼
-            </dt>
-            <dt>
-                기타
-            </dt>
-        </dl>
-    </section>
-    <section class="recentSearchContainer">
-        <div class="recentSearchBox">
-            <p class="text">최근 검색어</p>
-            <div class="searchBrTags"></div>
-            <ul class="recentSearch">
-                <li>여행용 텐트</li>
-                <li>09.21</li>
-            </ul>
-            <div class="searchBrTags"></div>
-            <ul class="autoSave">
-                <li>자동저장</li>
-                <li class="recenticon">
-                    <img class="backgroundCircle" src="../img/searchimg/backgroundCircle.png">
-                    <img class="circle" src="../img/searchimg/circle.png" onclick="circleMove(class{})">
-                </li>
-            </ul>
-        </div>
-    </section>
-    <aside class="sidebar">
-        <div class="dibs">
-            <p class="p-text">찜한 상품</p>
-            <div class="dibs-wrap">
-                <div class="dibs-image"><img src="../img/steamed.png" alt=""></div>
-                <div class="dibs-text">
-                    <p>0</p>
-                </div>
-            </div>
-        </div>
-        <div class="recently">
-            <p class="p-text">최근 본 상품</p>
-            <div class="br_tags"></div>
-            <div>
-                <img src="../img/tent_icon.png">
-                <img src="../img/tent_icon.png">
-            </div>
-            <div>&lt; 1 / 5 &gt;</div>
-        </div>
-    </aside>
-    <div class="allpage">
-        <div class="header">
-            <section class="header_top">
-                <div class="header_top_icon">
-                    <a href="./main.html"><img class="borrow_logo" src="../img/borrow_logo.png"></a>
-                    <input class="input_search" type="text" name="search">
-                    <img class="search_logo" src="../img/search_logo.png">
-                </div>
-                <div class="header_top_menu">
-                    <!-- <p class="mypage">마이페이지</p>
-                    <div class="br"></div>
-                    <p class="username"><strong>김지영</strong> 님</p>
-                    <div class="br"></div>
-                    <button class="logoutBtn active">
-                        <p class="loginOutText">로그아웃</p>
-                    </button> -->
-                </div>
-            </section>
-
-            <section class="header_bottom">
-                <nav class="header_bottom_nav">
-                    <ul class="bottom_items">
-                        <li class="nav_home"><a href="http://127.0.0.1:5500/main/main.html">홈</a></li>
-                        <li class="nav_category" onclick="categoryBox()"><a
-                                href="http://127.0.0.1:5500/category/category.html">카테고리 선택</a></li>
-                        <li class="nav_best"><a href="http://127.0.0.1:5500/best/best.html">베스트</a></li>
-                        <li class="nav_gido"><a href="http://127.0.0.1:5500/map/map.html">주변 지도로 찾기</a></li>
-                        <li class="nav_land"><a href="#">빌려주기</a></li>
-                        <!-- <li class="nav_newitem"><a href="#">신상품</a></li> -->
-                        <!-- <li class="outer">
-                            <div class="inner-list">
-                                <div class="inner">
-                                    <img src="./slidebanner2.PNG">
-                                </div>
-                                <div class="inner">
-                                    <img src="./slidebanner3.PNG">
-                                </div>
-                                <div class="inner">
-                                    <img src="./slidebanner4.png">
-                                </div>
-                            </div>
-                        </li> -->
-                        <li class="nav_realmenu_box">
-                            <div class="nav_realmenu_left">
-                                <div class="nav_inner">
-                                    <div class="inner_item">
-                                        <p class="nav_realmenu_t1">1.</p>
-                                        <p class="nav_realmenu_t2">프언</p>
-                                        <img class="ploygon" src="../img/Polygon 2.png">
-                                    </div>
-                                    <span class="nav_realmenu_right">
-                                        <img class="bottomVector" src="../img/bottomVector.png"
-                                            onclick="realtimeViewVisible()">
-                                    </span>
-                                </div>
-                                <div class="nav_inner">
-                                    <div class="inner_item">
-                                        <p class="nav_realmenu_t1">2.</p>
-                                        <p class="nav_realmenu_t2">시소</p>
-                                        <img class="ploygon" src="../img/Polygon 2.png">
-                                    </div>
-                                    <span class="nav_realmenu_right">
-                                        <img class="bottomVector" src="../img/bottomVector.png"
-                                            onclick="realtimeViewVisible()">
-                                    </span>
-                                </div>
-                                <div class="nav_inner">
-                                    <div class="inner_item">
-                                        <p class="nav_realmenu_t1">3.</p>
-                                        <p class="nav_realmenu_t2">데베</p>
-                                        <img class="ploygon" src="../img/Polygon 2.png">
-                                    </div>
-                                    <span class="nav_realmenu_right">
-                                        <img class="bottomVector" src="../img/bottomVector.png"
-                                            onclick="realtimeViewVisible()">
-                                    </span>
-                                </div>
-                                <div class="nav_inner">
-                                    <div class="inner_item">
-                                        <p class="nav_realmenu_t1">4.</p>
-                                        <p class="nav_realmenu_t2">결사</p>
-                                        <img class="ploygon" src="../img/Polygon 2.png">
-                                    </div>
-                                    <span class="nav_realmenu_right">
-                                        <img class="bottomVector" src="../img/bottomVector.png"
-                                            onclick="realtimeViewVisible()">
-                                    </span>
-                                </div>
-                                <div class="nav_inner">
-                                    <div class="inner_item">
-                                        <p class="nav_realmenu_t1">5.</p>
-                                        <p class="nav_realmenu_t2">기억안남</p>
-                                        <img class="ploygon" src="../img/Polygon 2.png">
-                                    </div>
-                                    <span class="nav_realmenu_right">
-                                        <img class="bottomVector" src="../img/bottomVector.png"
-                                            onclick="realtimeViewVisible()">
-                                    </span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="nav_realtimesearch">
-                        <div class="realtime_text">실시간 검색어</div>
-                        <div class="realtime">
-                            <section class="realtimeLeft">
-                                <div class="ranking_text">1~10위</div>
-                                <div class="real_br_tags"></div>
-                                <dl>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>1</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">캐리어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>2</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">여행용 텐트</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>3</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">에어프라이어</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>4</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">여행가방</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>5</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">낚시대</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>6</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">야구모자</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>7</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">전등</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>8</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">보조배터리</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>9</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">스케쳐스</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>10</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">미니오븐</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                </dl>
-                            </section>
-                            <section class="realtimeRight">
-                                <div class="ranking_text">10~20</div>
-                                <div class="real_br_tags"></div>
-                                <dl>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>11</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">후드티</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>12</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">나이키</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>13</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">농구화</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>14</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">가을점퍼</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>15</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">안전헬멧</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>16</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">손전등</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>17</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">의자</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>18</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">가습기</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>19</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">샌들</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                    <div class="real_time_ranking">
-                                        <dt class="ranking_left"><strong>20</strong></dt>
-                                        <span class="ranking_right">
-                                            <dt class="rankingWord ">청바지</dt>
-                                            <img src="/img/Polygon 2.png">
-                                        </span>
-                                    </div>
-                                </dl>
-                            </section>
-                        </div>
-                    </div>
-                </nav>
-            </section>
-        </div>
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
         <section class="mid">
             <div class="outer">
                 <div class="inner-list">
                     <div class="inner">
-                        <img class="slideimg" src="../slideBanner/slidebanner2.PNG">
+                        <img class="slideimg" src="{% static 'img/img/slidebanner/slidebanner2.PNG' %}">
                     </div>
                     <div class="inner">
-                        <img class="slideimg" src="../slideBanner/slidebanner3.PNG">
+                        <img class="slideimg" src="{% static 'img/img/slidebanner/slidebanner3.PNG' %}">
                     </div>
                     <div class="inner">
-                        <img class="slideimg" src="../slideBanner/slidebanner4.PNG">
+                        <img class="slideimg" src="{% static 'img/img/slidebanner/slidebanner4.PNG' %}">
                     </div>
                 </div>
                 <div class="button_list">
@@ -388,7 +34,7 @@
         <section class="bottom">
             <div class="bestitem_text">
                 <div class="text_top">
-                    <img class="heartImg" src="../img/heart.png">
+                    <img class="heartImg" src="{% static 'img/img/heart.png' %}">
                     <span>
                         베스트 상품
                     </span>
@@ -400,115 +46,48 @@
             </div>
             <!--전체 width가   -->
             <section class="bestitems">
-                <div class="bestitem">
-                    <img class="bestitemImg" src="../img/itemimg/itemimg1.png">
-                    <div class="bestitemdescription">
-                        <ul>
-                            <li>[사용감 X] 컴퓨터 대여해드려</li>
-                        </ul>
-                        <ul>
-                            <div class="TransMethodImg">
-                                <li class="besong"><img src="../img/itemimg/besong.png"></li>
-                                <li class="check"><img src="../img/itemimg/check.png"></li>
+                {% for product, type in best_products %}
+                    {% if product %}
+                        <div class="bestitem">
+                            <img class="bestitemImg" src="{{product.get_first_image.image}}">
+                            <div class="bestitemdescription">
+                                <ul>
+                                    <li>{{product.title}}</li>
+                                </ul>
+                                <ul>
+                                    <div class="TransMethodImg">
+                                        {% if type.0 %}
+                                            <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>                                        
+                                        {% endif %}
+                                        {% if type.1%}
+                                            <li class="check"><img src="{% static 'img/img/itemimg/check.png' %}"></li>
+                                        {% endif %}
+                                    </div>
+                                    <ul class="priceAndDay">
+                                        <li>
+                                            <h1 class="bestitemPrice">{{product.price}}</h1>
+                                        </li>
+                                        <li>
+                                            <p>원 /</p>
+                                            <p class="bestitemday">{{product.get_price_per_display}}</p>
+                                        </li>
+                                        <li>
+                                            <p class="">{{product.get_created}}</p>
+                                        </li>
+                                    </ul>
+                                </ul>
                             </div>
-                            <ul class="priceAndDay">
-                                <li>
-                                    <h1 class="bestitemPrice">20,000</h1>
-                                </li>
-                                <li>
-                                    <p>원 /</p>
-                                    <p class="bestitemday">day</p>
-                                </li>
-                                <li>
-                                    <p class="">3일 전</p>
-                                </li>
-                            </ul>
-                        </ul>
+                        </div>
+                    {% else %}
+                    <div class="bestitem">
+                        <img class="bestitemImg" src="/media/product/product_dafault.png">
+                        <div class="bestitemdescription">
+                        </div>
                     </div>
-                </div>
-                <div class="bestitem">
-                    <img class="bestitemImg" src="../img/itemimg/itemimg2.png">
-                    <div class="bestitemdescription">
-                        <ul>
-                            <li>[사용감 X] 컴퓨터 대여해드려</li>
-                        </ul>
-                        <ul>
-                            <div class="TransMethodImg">
-                                <li class="besong"><img src="../img/itemimg/besong.png"></li>
-                                <li class="check"><img src="../img/itemimg/check.png"></li>
-                            </div>
-                            <ul class="priceAndDay">
-                                <li>
-                                    <h1 class="bestitemPrice">20,000</h1>
-                                </li>
-                                <li>
-                                    <p>원 /</p>
-                                    <p class="bestitemday">day</p>
-                                </li>
-                                <li>
-                                    <p class="">3일 전</p>
-                                </li>
-                            </ul>
-                        </ul>
-                    </div>
-                </div>
-                <div class="bestitem">
-                    <img class="bestitemImg" src="../img/itemimg/itemimg3.png">
-                    <div class="bestitemdescription">
-                        <ul>
-                            <li>[사용감 X] 컴퓨터 대여해드려</li>
-                        </ul>
-                        <ul>
-                            <div class="TransMethodImg">
-                                <li class="besong"><img src="../img/itemimg/besong.png"></li>
-                                <li class="check"><img src="../img/itemimg/check.png"></li>
-                            </div>
-                            <ul class="priceAndDay">
-                                <li>
-                                    <h1 class="bestitemPrice">20,000</h1>
-                                </li>
-                                <li>
-                                    <p>원 /</p>
-                                    <p class="bestitemday">day</p>
-                                </li>
-                                <li>
-                                    <p class="">3일 전</p>
-                                </li>
-                            </ul>
-                        </ul>
-                    </div>
-                </div>
-                <div class="bestitem">
-                    <img class="bestitemImg" src="../img/itemimg/itemimg4.png">
-                    <div class="bestitemdescription">
-                        <ul>
-                            <li>[사용감 X] 컴퓨터 대여해드려</li>
-                        </ul>
-                        <ul>
-                            <div class="TransMethodImg">
-                                <li class="besong"><img src="../img/itemimg/besong.png"></li>
-                                <li class="check"><img src="../img/itemimg/check.png"></li>
-                            </div>
-                            <ul class="priceAndDay">
-                                <li>
-                                    <h1 class="bestitemPrice">20,000</h1>
-                                </li>
-                                <li>
-                                    <p>원 /</p>
-                                    <p class="bestitemday">day</p>
-                                </li>
-                                <li>
-                                    <p class="">3일 전</p>
-                                </li>
-                            </ul>
-                        </ul>
-                    </div>
-                </div>
+                    {% endif %}
+                    
+                {% endfor %}
+                
             </section>
         </section>
-
-
-    </div>
-</body>
-
-</html>
+{% endblock %}

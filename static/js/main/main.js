@@ -64,7 +64,7 @@ function circleMove(item) {
   console.log(item);
     if (view === "visible") {
       circle.style="animation-name:circleleft";
-      circle.style=`transform:translate(-18px,0)`;
+      circle.style=`transform:translate(-18px,40%)`;
         view = "hidden";
     }
     else{
@@ -155,7 +155,7 @@ let intervalz = getIntervals(); // interval 등록
 const header_top_menu = document.querySelector(".header_top_menu");
 const logoutBtn = document.querySelector(".logoutBtn");
 let loginstatus = "loginUser";
-userLoginoutStatus();
+//userLoginoutStatus();
 
 function userLoginoutStatus(){
 if(loginstatus === "loginUser"){

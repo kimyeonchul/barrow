@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from _search.models import Keyword
+from _search.models import Keyword, CurMostSearch
 from _account.models import User
 from _product.models import Product
+
 from django.db.models import Sum, Count
 
 import datetime
@@ -19,15 +20,24 @@ def base(request):
         today = datetime.datetime.now()
         most_search_date = str(today.year) + '-' + str(today.month).zfill(2) + "-" + str(today.day).zfill(2) +" " + str(today.hour).zfill(2) + ":00"
 
-        most_search_query = Keyword.objects.all().values("content").annotate(
-            content_count = Sum("count")
-        ).order_by("-content_count")
-        most_search_query = most_search_query[:20]
+        if CurMostSearch.objects.all().exists():
+
+            last_mosts = CurMostSearch.objects.all()
+
+            if last_mosts[0].time.hour != today.hour:
+                create_most_search()
+        else:
+            
+            create_most_search()
+        
+        most_search = list(CurMostSearch.objects.all().order_by("rank"))
+        for i in range(20 - len(most_search)):
+            most_search.append(None)
 
         base_context = {
             "recent_search" : recent_search_query,
             "most_search_date" : most_search_date,
-            "most_search" : most_search_query,
+            "most_search" : most_search,
         }
 
         return base_context
@@ -41,7 +51,7 @@ def side(request):
     if request.user.is_authenticated:
         favorite = user.favorite
         favorite_num = favorite.count()
-
+    
         recent_view = user.get_recent_view()
 
     side_context = {
@@ -51,9 +61,23 @@ def side(request):
     return side_context
 
 def get_best():
-    products = Product.objects.all().order_by("-views")
+    best = Product.objects.all().order_by("-views")
+    type_queries = list(best.values("type"))
+    types = []
+
+    for type in type_queries:
+        type = list(type["type"])
+        type = list(map(int, type))
+        types.append(type)
+    best_products = list(zip(list(best),types))
     
-    return products
+    if len(best_products)%20!=0:
+        for i in range(20 - len(best_products)%20):
+            best_products.append((None,None))
+    context = {
+        "best_products" : best_products,
+    }
+    return context
 
 def get_category_num():
     result = []
@@ -101,26 +125,22 @@ def home(request):
 
         user = request.user
 
-    best_products = get_best()
-    best_products = best_products[:4]
-
-    context = {
-        "best_products" : best_products,
-    }
+    context = get_best()
+    context["best_products"] = context["best_products"][:4]
     context.update(base(request))
     context.update(side(request))
 
         
     return render(request, "main/main.html", context)
 
-def best(request):
-    products = get_best()
-    context = {
-        "products" : products,
-    }
+def best(request, page_num):
+    context = get_best()
+    context["total_page_num"] = len(context["best_products"])
+    context["best_products"] = context["best_products"][20*(page_num - 1):20*(page_num)]
+
     context.update(base(request))
     context.update(side(request))
-    return render(request,"best.html",context)
+    return render(request,"main/best.html",context)
 
 def category_view(request, category, sort):
     categories = {"의류":"CLOTHES", "신발":"SHOES", "여행용품":"TRAVELS", "가방":"BAGS", "캐리어":"CARRIERS", "스포츠":"SPORTS", "레저":"LEISURES", "가전":"HOMES", "가구":"FURNITURES", "전자제품":"ELECTROMICS", "캐주얼":"CASUALS", "기타":"OTHERS"}
@@ -150,4 +170,30 @@ def category_view(request, category, sort):
     return render(request, "main/category.html", context)
 
 def near_products(request):
-    return render(request, "near.html")
+    return render(request, "main/map.html")
+
+def create_most_search():
+    most_search_queries = Keyword.objects.all().values("content").annotate(
+            content_count = Sum("count")
+    ).order_by("-content_count")
+    most_search_queries = most_search_queries[:20]
+    
+    last_most_quries = CurMostSearch.objects.all()
+    last_mosts = {}
+    for last_most_query in last_most_quries:
+        last_mosts[last_most_query.keyword] = last_most_query.rank
+
+    last_most_contents = list(last_mosts.keys())
+    
+    for last_most in last_most_quries:
+        last_most.delete()
+    
+    for i in range(len(most_search_queries)):
+        if most_search_queries[i]["content"] in last_most_contents:
+            vector = int(last_mosts[most_search_queries[i]["content"]])-i
+        else:
+            vector = 0
+        
+        CurMostSearch.objects.create(keyword = most_search_queries[i]["content"], rank = i, vector = vector)
+                
+    
