@@ -9,8 +9,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="{% static 'js/asset/jquery-ui.js' %}"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'css/item/itemRegister.css' %}" />
-    <script type="text/javascript" src="{% static 'js/item/itemRegister.js' %}" defer></script>
+    <script type="text/javascript" src="{% static 'js/item/itemRegister.js' %}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <title>Barrow</title>
 </head>
@@ -43,8 +46,8 @@
                             <li>
                                 <label for="area">거래지역</label></li>
                                 <input type="text" name="area" id="area">
-                                <button type="button" id="area_btn" onclick="findAddr()">주소찾기</button>
-                                <input type="text" name="area_detail" id="area_detail">
+                                <button type="button" id="area_btn" onclick="findAddr()">주소<br>찾기</button>
+                                <input type="text" name="area_detail" id="area_detail" placeholder="상세주소 입력">
                         
                         </div>
                         <hr class="hr-light">
@@ -84,12 +87,11 @@
                         </div>
                         <hr class="hr-light">
                         <div class="item_register_flex">
-                            <li>
-                                <label>대여기간</label></li>
-                                <input type="date" name="start_date" id="start_date">
-                                <span class="word"> 부터 </span>
-                                <input type="date" name="end_date" id="end_date">
-                                <span class="word"> 까지 </span>
+                            <li><label>대여기간</label></li>
+                            <input type="date" name="start_date">
+                            <span class="word"> 부터 </span>
+                            <input type="date" name="end_date">
+                            <span class="word"> 까지 </span>
                         </div>
                         <hr class="hr-light">
                         <div class="item_register_flex">
@@ -132,10 +134,7 @@
         </div>
     </section>
 
-    
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-
 </html>
 {% endblock %}

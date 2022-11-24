@@ -1,104 +1,85 @@
-const bottomVector = document.querySelector(".bottomVector");
-const nav_realtimesearch = document.querySelector(".nav_realtimesearch");
-const input_search = document.querySelector(".input_search");
-const recentSearchContainer = document.querySelector(".recentSearchContainer");
-
-let view = "visible"
-function viewvisible(e) {
-  console.log(e);
-    if (view === "visible") {
-        nav_realtimesearch.style="visibility:visible"
-        view = "hidden";
-    }
-    else{
-        nav_realtimesearch.style = "visibility:hidden"
-        view = "visible";
-    }   
-}
-
-function searchViewVisible(e) {
-  console.log(e);
-    if (view === "visible") {
-      recentSearchContainer.style="visibility:visible"
-        view = "hidden";
-    }
-    else{
-      recentSearchContainer.style = "visibility:hidden"
-        view = "visible";
-    }   
-}
 /*
-  div사이즈 동적으로 구하기
+  datepicker 사용
 */
-const index_now = document.querySelector('.index_now');
-const index_all = document.querySelector('.index_all');
-const outer = document.querySelector('.outer');
-const innerList = document.querySelector('.inner-list');
-const inners = document.querySelectorAll('.inner');
-const imgs = document.querySelectorAll('.slideimg');
-const circle = document.querySelector(".circle");
-let currentIndex = 0; // 현재 슬라이드 화면 인덱스
-
-function circleMove(e) {
-    if (view === "visible") {
-      circle.style="animation-name:circleleft";
-      circle.style=`transform:translate(-18px,0)`;
-        view = "hidden";
-    }
-    else{
-      circle.style="animation-name:circleright"
-        view = "visible";
-
-    }   
-}
-
-inners.forEach((inner) => {
-  inner.style.width = `${outer.clientWidth}px`; // inner의 width를 모두 outer의 width로 만들기
-})
-
-imgs.forEach((img) => {
-    img.style.width = `${outer.clientWidth}px`;
-    img.style.height = `${outer.clientHeight}px`;
-})
-innerList.style.width = `${outer.clientWidth * inners.length}px`; // innerList의 width를 inner의 width * inner의 개수로 만들기
-
-/*
-  버튼에 이벤트 등록하기
-*/
-const buttonLeft = document.querySelector('.button-left');
-const buttonRight = document.querySelector('.button-right');
-
-buttonLeft.addEventListener('click', () => {
-  currentIndex--;
-  currentIndex = currentIndex < 0 ? 0 : currentIndex; // index값이 0보다 작아질 경우 0으로 변경
-  Indexvalue();
-  innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
-  clearInterval(interval); // 기존 동작되던 interval 제거
-  interval = getInterval(); // 새로운 interval 등록
+$.datepicker.setDefaults({
+  dateFormat: 'yy-mm-dd',
+  prevText: '이전 달',
+  nextText: '다음 달',
+  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+  showMonthAfterYear: true,
+  yearSuffix: '년',
 });
 
-buttonRight.addEventListener('click', () => {  
-  currentIndex++;
-  currentIndex = currentIndex >= inners.length ? inners.length - 1 : currentIndex; // index값이 inner의 총 개수보다 많아질 경우 마지막 인덱스값으로 변경
-  Indexvalue();
-  innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
-  clearInterval(interval); // 기존 동작되던 interval 제거
-  interval = getInterval(); // 새로운 interval 등록
+$(function(){
+  $('.datepicker').datepicker({
+    beforeShowDay: disableDates,
+  });
 });
-function Indexvalue(){
-    index_now.innerHTML = `${currentIndex}`;
-    index_all.innerHTML = `${inners.length}`;
+
+function getDates() { //시작일과 마감일 사이 날짜 배열에 넣기
+	const dateRange = [];
+	let startDate = new Date("2022-11-22");
+  let endDate = new Date("2022-12-5");
+  //11.22 부터 12.4까지 선택 못함!
+  
+	while(startDate <= endDate) {
+		dateRange.push(startDate.toISOString().split('T')[0]);
+		startDate.setDate(startDate.getDate() + 1);
+	}
+	return dateRange;
+}
+
+function disableDates(date){ //배열 내 날짜 disable
+  var dateRange = getDates();
+
+  var m = date.getMonth() + 1;
+  var d = date.getDate();
+  var y = date.getFullYear();
+  for (i = 0; i < dateRange.length; i++) {
+    if ($.inArray(y + '-' + m.toString().padStart(2,'0') + '-' + d.toString().padStart(2,'0'), dateRange) != -1) {
+      return [false];
+      }
   }
-/*
-  주기적으로 화면 넘기기
-*/
-const getInterval = () => {
-  return setInterval(() => {
-    currentIndex++;
-    Indexvalue();
-    currentIndex = currentIndex >= inners.length ? 0 : currentIndex;
-    innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`;
-  }, 2000);
+    return [true];
 }
 
-let interval = getInterval(); // interval 등록
+/*
+  체크박스 하나만 선택
+*/
+function checkOnlyOne(element) {
+  const checkboxes = document.getElementsByName("type");
+
+  checkboxes.forEach((cb) => {
+    cb.checked = false;
+  })
+  element.checked = true;
+}
+
+/*
+  가격 계산
+*/
+function getDateDiff(d1, d2) {
+  const date1 = new Date(d1);
+  const date2 = new Date(d2);
+  
+  const diffDate = date1.getTime() - date2.getTime();
+  
+  return Math.abs(diffDate / (1000 * 60 * 60 * 24)); // 밀리세컨 * 초 * 분 * 시 = 일
+}
+
+$(function(){
+  var price_per = 7; //week이라고 치자
+  var delivery_charge = 1350; //배달료 천삼백오십원이라고 치자
+  var price_unit = parseInt(price / price_per); //1일당 대여비
+  var lentDays = getDateDiff(lentStartDay, lentEndDay) + 1; //대여일 수
+  var lent_price = price_unit * lentDays;
+
+  $("#lent_price").text(lent_price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+  $('#total_price').text((lent_price + delivery_charge).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+
+});
+
