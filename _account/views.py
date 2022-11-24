@@ -21,20 +21,10 @@ def login(request):
             user = user[0]
             if user.password == password:
                 auth.login(request, user)
-                context={
-                    "hi" : "hello"
-                }
-                return JsonResponse(context)
 
+                return redirect("home")
         return render(request, "login.html")
-        # password1=data.get("password")
-        # password2=user.password
-        # context1={
-        #     "hello" : "hi",
-        #     "password" : password1,
-        #     "password2":password2
-        # }
-        # return JsonResponse(context1)
+
     else:
         return render(request, "login.html")
 
@@ -109,7 +99,7 @@ def home(request):
     if request.user.is_authenticated:
         user = User.objects.get(id=request.user.id)
         id=user.id
-        return render(request, "main/main.html",{"userid":id})
+        return render(request, "login.html",{"userid":id})
     else:
         return render(request, "login.html")
 
