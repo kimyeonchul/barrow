@@ -61,7 +61,8 @@
                 {% for product, type in best_products %}
                     {% if product %}
                         <div class="bestitem">
-                            <img class="bestitemImg" src="{{product.get_first_image.image}}">
+                            <img class="bestitemImg" >
+<!--                            여기다가 추가하면되 src-->
                             <div class="bestitemdescription">
                                 <ul>
                                     <li>{{product.title}}</li>

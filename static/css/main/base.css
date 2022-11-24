@@ -24,11 +24,37 @@ body {
   border: 50px 46.73px 44.82px 46.73px;
   height: inherit;
   /* height: 100vh; */
-  border: 1px solid black;
   z-index: 100;
   background-color: white;
+
+/* White */
+
+background: #F5F5F5;
+/* Shawdow */
+
+box-shadow: 0px 4px 20px 10px rgba(0, 0, 0, 0.04);
+border-radius: 10px;
+}
+@media screen and (max-width: 375px){
+  .allpage {
+
+      width:280px;
+  }
 }
 
+@media screen and (min-width:376px) and (max-width: 576px) {
+  .allpage {
+    width:350px;
+
+  }
+}
+
+@media screen and (min-width:577px) and (max-width: 768px) {
+  .allpage {
+    width:500px;
+
+  }
+}
 .header {
   width: 100%;
   height: 180px;
@@ -59,11 +85,9 @@ body {
 .input_search {
   width: 600px;
   height: 56px;
+  padding:0px;
   margin-left: 28px;
-  /* background-image: url('../img/search_logo.png');
-  background-repeat: no-repeat;
-  background-size: 40px;
-  background-position: 95%; */
+  background: #F5F5F5;
   border: 2px solid #3D8361;
   border-radius: 20px;
 }
@@ -76,8 +100,8 @@ body {
   height: 50px;
   outline: none;
   border:none;
-  background-color: white;
   transform:translate(-80px,0px);
+  background: #F5F5F5;
 }
 .searchBtn > img {
   width:40px;
@@ -178,6 +202,7 @@ ul {
   background: #EEEBEA;
   border-radius: 10px;
   overflow: hidden;
+  padding:0px;
 }
 
 .nav_realmenu_left {
@@ -379,7 +404,6 @@ a:hover {
   top: 115px;
   width: 500px;
   height: 196px;
-  background: white;
   /* Gray/Light */
   border: 1px solid Black;
   /* Shawdow */
@@ -387,6 +411,9 @@ a:hover {
   border-radius: 20px;
   z-index: 101;
   visibility: hidden;
+  background: #F5F5F5;
+/* Shawdow */
+
 }
 
 .recentSearchBox>.text {
@@ -451,67 +478,7 @@ a:hover {
 }
 
 /* //찜하기 & 최근 본 상품--------------------------------------------------------------------------------------- */
-.dibs-wrap img {
-  vertical-align: middle;
-  width: 40px;
-  height: 35px;
-}
 
-.dibs-text>p {
-  text-align: center;
-  transform: translate(0%, -200%);
-}
-
-.dibs {
-  border: 1px solid black;
-  text-align: center;
-  width: 132px;
-  height: 85px;
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: white;
-}
-
-.recently {
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 10px;
-  width: 132px;
-  height: 267px;
-  background-color: white;
-}
-
-.real_br_tags {
-  width: 100%;
-  height: 1px;
-  margin-bottom: 16px;
-  background-color: #00000033;
-}
-
-.br_tags {
-  width: 80%;
-  height: 1px;
-  margin-bottom: 16px;
-  background-color: black;
-}
-
-.sidebar {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  right: calc(50% - 917px);
-  top: 30%;
-  height: 100%;
-}
-
-.p-text {
-  margin: 0px;
-  padding: 6px 0px 10px 0px;
-}
 
 /* //slide banner------------------------------------------------------------------ */
 
@@ -607,34 +574,6 @@ a:hover {
 }
 
 /* //best item-------------------------------------------------------------------------- */
-.bottom {
-  display: flex;
-  flex-direction: column;
-  margin-top: 54px;
-  padding: 0px 150px 0px 150px;
-  height: 100%;
-}
-
-.bestitem_text {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 36px;
-
-}
-
-.bestitemdescription>ul {
-  display: flex;
-  flex-direction: column;
-  padding: 0px;
-  margin: 0px;
-  width: 224px;
-  height: 37.4px;
-}
-
-.bestitemdescription {
-  width: 221px;
-  padding: 7px;
-}
 
 .text_top {
   display: flex;
@@ -649,7 +588,12 @@ a:hover {
   color: #000000;
   margin-left: 17px;
 }
-
+.today_realtime{
+  display: flex;
+  text-align: center;
+  justify-content: flex-end;
+  margin:0px 50px 0px 0px;
+}
 .text_bottom {
   display: flex;
   justify-content: space-between;
@@ -683,57 +627,6 @@ a:hover {
   font-style: normal;
   font-weight: 500;
   color: black;
-}
-
-.bestitems {
-  display: flex;
-  height: 100%;
-}
-
-.bestitem {
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  width: 443px;
-  height: 299px;
-  border-radius: 17px;
-  border: 0.849398px solid #959190;
-  margin-right: 39px;
-}
-
-.TransMethodImg {
-  display: flex;
-}
-
-.besong {
-  padding: 0px 5px 0px 5px;
-}
-
-.bestitemImg {
-  /* width: 221px; */
-  height: 186px;
-}
-
-.priceAndDay {
-  display: flex;
-  padding: 0px;
-  text-align: center;
-}
-
-.bestitemday {
-  color: #F00E0E;
-  padding: 0px 30px 0px 5px;
-}
-
-.priceAndDay>li {
-  display: flex;
-  align-items: center;
-  margin-right: 5px;
-}
-
-.heartImg {
-  width: 41px;
-  height: 41px;
 }
 
 /* // 카테고리 box  */

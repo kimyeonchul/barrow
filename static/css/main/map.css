@@ -3,67 +3,7 @@
   }
 
 /* //찜하기 & 최근 본 상품--------------------------------------------------------------------------------------- */
-.jb-wrap img {
-  vertical-align: middle;
-  width: 30.83px;
-  height: 26.75px;
-}
 
-.dibs-text>p {
-  text-align: center;
-  transform: translate(0%, -200%);
-}
-
-.dibs {
-  border: 1px solid black;
-  text-align: center;
-  width: 132px;
-  height: 85px;
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: white;
-}
-
-.recently {
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 10px;
-  width: 132px;
-  height: 267px;
-  background-color: white;
-}
-
-.real_br_tags {
-  width: 100%;
-  height: 1px;
-  margin-bottom: 16px;
-  background-color: #00000033;
-}
-
-.br_tags {
-  width: 80%;
-  height: 1px;
-  margin-bottom: 16px;
-  background-color: black;
-}
-
-.sidebar {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  right: calc(50% - 917px);
-  top: 30%;
-  height: 100%;
-}
-
-.p-text {
-  margin: 0px;
-  padding: 6px 0px 10px 0px;
-}
 
 
 /* //best item-------------------------------------------------------------------------- */

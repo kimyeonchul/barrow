@@ -83,7 +83,7 @@
                 <div class="header_top_icon">
                     <a href="{% url 'barrow:home' %}"><img class="borrow_logo" src="{% static 'img/img/borrow_logo.png' %}"></a>
                     <form class="input_transfer" action="/search/result/검색한값/카테고리/정렬기준/" method="GET">
-                        <input class="input_search" type="text" name="search">
+                        <input class="input_search" type="text" name="search" value="석현">
                         <button class="searchBtn" type="submit" name="click" value="">
                             <img src="{% static 'img/img/search_logo.png' %}">
                         </button>
@@ -195,6 +195,7 @@
                                 </dl>
                             </section>
                         </div>
+                        <div class="today_realtime">2022-09-22 12:00</div>
                     </div>
                 </nav>
             </section>

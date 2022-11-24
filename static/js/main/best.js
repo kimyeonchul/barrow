@@ -7,8 +7,8 @@ const rowsCount = rows.length; //100/8  12.9 -> 13
 const pageCount = Math.ceil(100/rowsPerPage);
 const numbers = document.querySelector('#numbers');
 
-const prevPageBtn = document.querySelector('.prevPageBtn');
-const nextPageBtn = document.querySelector('.nextPageBtn');
+const prevPageBtn = document.querySelector('.prevPageBtns');
+const nextPageBtn = document.querySelector('.nextPageBtns');
 console.log(prevPageBtn);
 let pageActiveIdx = 0; //현재 보고 있는 페이지 그룹 번호
 let currentPageNum = 0; //현재 보고 있는 페이지 번호
@@ -88,16 +88,28 @@ function displayPage(num){
   }
 }
 displayPage(0);
-
-nextPageBtn.addEventListener('click', ()=>{
+const dLeftVector = document.querySelector(".dLeftVector");
+const dRightVector = document.querySelector(".dRightVector");
+dRightVector.addEventListener('click', ()=>{
   let nextPageNum = pageActiveIdx*maxPageNum+maxPageNum;
   displayRow(nextPageNum);
   ++pageActiveIdx;
   displayPage(pageActiveIdx);
 });
-prevPageBtn.addEventListener('click', ()=>{
+dLeftVector.addEventListener('click', ()=>{
   let nextPageNum = pageActiveIdx*maxPageNum-maxPageNum;
   displayRow(nextPageNum);
   --pageActiveIdx;
   displayPage(pageActiveIdx);
 });
+
+// nextPageBtn.addEventListener('click',() => {
+//   let nextPageNum = pageActiveIdx;
+//   displayRow(nextPageNum);
+//   ++pageActiveIdx;
+// });
+// prevPageBtn.addEventListener('click',() => {
+//   let nextPageNum = pageActiveIdx;
+//   displayRow(nextPageNum);
+//   --pageActiveIdx;
+// });

@@ -2,26 +2,7 @@
     color:red;
   }
 /* //찜하기 & 최근 본 상품--------------------------------------------------------------------------------------- */
-.jb-wrap img {
-    vertical-align: middle;
-    width: 30.83px;
-    height: 26.75px;
-}
 
-.dibs-text>p {
-    text-align: center;
-    transform: translate(0%, -200%);
-}
-
-.dibs {
-    /* border: 1px solid black; */
-    text-align: center;
-    width: 132px;
-    height: 85px;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: white;
-}
 
 .recently {
     /* border: 1px solid black; */
