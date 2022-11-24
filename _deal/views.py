@@ -61,7 +61,13 @@ def accept(request, product_id):
         deal.save()
 
         return JsonResponse({"is_accepted" : True})
-    
+
+def delete(request, product_id):
+    item = Product.objects.get(id = product_id)
+    deal = Deal.objects.get(product = item, user_cons = request.user)
+    if deal.user_cons.id == request.user.id:
+        deal.delete()
+        return redirect("products:itempage",product_id)
 @csrf_exempt    
 def set_state(request):
     now = datetime.datetime.now()

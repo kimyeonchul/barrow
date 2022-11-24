@@ -70,8 +70,8 @@
             <ul class="autoSave">
                 <li>자동저장</li>
                 <li class="recenticon">
-                    <img class="backgroundCircle" src="{% static 'img/img/searchimg/backgroundCircle.png' %}">
-                    <img class="circle" src="{% static 'img/img/searchimg/circle.png' %}" onclick="circleMove(class{})">
+                    <img class="backgroundCircle" src="{% static 'img/img/searchimg/backgroundCircle.png' %}" onclick="circleMove(class{})">
+                    <img class="circle" src="{% static 'img/img/searchimg/circle.png' %}">
                 </li>
             </ul>
         </div>
@@ -82,8 +82,12 @@
             <section class="header_top">
                 <div class="header_top_icon">
                     <a href="{% url 'barrow:home' %}"><img class="borrow_logo" src="{% static 'img/img/borrow_logo.png' %}"></a>
-                    <input class="input_search" type="text" name="search">
-                    <img class="search_logo" src="{% static 'img/img/search_logo.png' %}">
+                    <form class="input_transfer" action="/search/result/검색한값/카테고리/정렬기준/" method="GET">
+                        <input class="input_search" type="text" name="search">
+                        <button class="searchBtn" type="submit" name="click" value="">
+                            <img src="{% static 'img/img/search_logo.png' %}">
+                        </button>
+                    </form>
                 </div>
                 <div class="header_top_menu">
                     <div class = "loginbox" style = "display: flex; align-items: center;">
