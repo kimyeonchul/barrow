@@ -1,38 +1,38 @@
-const bottomVector = document.querySelector(".bottomVector");
-const nav_realtimesearch = document.querySelector(".nav_realtimesearch");
-const input_search = document.querySelector(".input_search");
-const recentSearchContainer = document.querySelector(".recentSearchContainer");
-let view = "visible"
-function realtimeViewVisible(e) {
-  console.log(e);
-    if (view === "visible") {
-        nav_realtimesearch.style="visibility:visible"
-        view = "hidden";
-    }
-    else{
-        nav_realtimesearch.style = "visibility:hidden"
-        view = "visible";
-    }   
-}
-//외부영역 클릭시 최근검색창 닫기===========================================================
-input_search.addEventListener('click', (e) => {
-  // console.log(e.target.parentNode);
-    if(viewstatus === 'show'){
-      recentSearchContainer.style = "visibility:visible";
-      viewstatus = "hide";
-    }
-})
-document.addEventListener('mouseup', (e) => {
-  // let e.target.closest('.recentSearchContainer').className
-  let tgE1 = e.target;
-  let recent = tgE1.closest('.recentSearchContainer');
-    if(!recent){
-      recentSearchContainer.style = "visibility:hidden";
-       viewstatus = "show";
-      
-    }
-    
-})
+// const bottomVector = document.querySelector(".bottomVector");
+// const nav_realtimesearch = document.querySelector(".nav_realtimesearch");
+// const input_search = document.querySelector(".input_search");
+// const recentSearchContainer = document.querySelector(".recentSearchContainer");
+// let view = "visible"
+// function realtimeViewVisible(e) {
+//   console.log(e);
+//     if (view === "visible") {
+//         nav_realtimesearch.style="visibility:visible"
+//         view = "hidden";
+//     }
+//     else{
+//         nav_realtimesearch.style = "visibility:hidden"
+//         view = "visible";
+//     }
+// }
+// //외부영역 클릭시 최근검색창 닫기===========================================================
+// input_search.addEventListener('click', (e) => {
+//   // console.log(e.target.parentNode);
+//     if(viewstatus === 'show'){
+//       recentSearchContainer.style = "visibility:visible";
+//       viewstatus = "hide";
+//     }
+// })
+// document.addEventListener('mouseup', (e) => {
+//   // let e.target.closest('.recentSearchContainer').className
+//   let tgE1 = e.target;
+//   let recent = tgE1.closest('.recentSearchContainer');
+//     if(!recent){
+//       recentSearchContainer.style = "visibility:hidden";
+//        viewstatus = "show";
+//
+//     }
+//
+// })
 //현재 클릭한 요소의 타겟의 조상 .closest('.recentSearchContainer')이 없다면 null return ========================
 const index_now = document.querySelector('.index_now');
 const index_all = document.querySelector('.index_all');

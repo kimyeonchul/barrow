@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main/base.css' %}" />
     <script src="https://cdn.jsdelivr.net/npm/less"></script>
-    <script type="text/javascript" src="{% static 'js/main/main.js' %}" defer></script>
+    <script type="text/javascript" src="{% static 'js/main/base.js' %}" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <title>Document</title>
 </head>
@@ -117,7 +117,9 @@
                 <nav class="header_bottom_nav">
                     <ul class="bottom_items">
                         <li class="nav_home"><a href="{% url 'barrow:home' %}">홈</a></li>
-                        <li class="nav_category" onclick="categorybox()">카테고리 선택</li>
+                        <li class="nav_category" onclick="categoryBox()" style="cursor:pointer">
+                            <a>카테고리 선택</a>
+                        </li>
                         <li class="nav_best"><a href="{% url 'barrow:best' '1' %}">베스트</a></li>
                         <li class="nav_gido"><a href="{% url 'barrow:near_products' %}">주변 지도로 찾기</a></li>
                         <li class="nav_land"><a href="{% url 'products:new' %}">빌려주기</a></li>
