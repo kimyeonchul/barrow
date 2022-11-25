@@ -26,19 +26,19 @@
         </div>
         <div class="main_main_sec">
             <form action="" class="form_IdPwd">
-                <label for="input_id" name="username">ID</label><br>
+                <label for="input_id" >ID</label><br>
                 <div>
-                    <input type="text" class="input_id"><br>
+                    <input type="text" class="input_id" name="username"><br>
                     <p class="id_error_msg">아이디를 확인해주세요.</p>
                 </div>
-                <label for="input_pwd" name="password">password</label><br>
+                <label for="input_pwd">password</label><br>
                 <div>
-                    <input type="password" class="input_pwd">
+                    <input type="password" class="input_pwd" name="password">
                     <p class="pwd_error_msg">비밀번호를 확인해주세요.</p>
                 </div>
                 <a class="find_idpwd_a" href=""><b>아이디나 비밀번호를 잊어버렸나요?</b></a>
             </form>
-            <button class="login_btn">로그인 하기</button>
+            <button class="login_btn" onclick="login()">로그인 하기</button>
         </div>
         <div class="main_footer">
             <img src="/static/img/footer_logo.png" alt="" class="main_footer_logo">
