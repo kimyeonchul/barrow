@@ -134,10 +134,38 @@
   .pic_box{
     background-color: #EEEBEA;
     width : 230px;
-    height: 230px;
+    min-height: 200px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 17px;
-    margin : 30px;
+    margin : 30px 30px 10px 30px;
+    padding : 10px;
+  }
+
+  .pic_box > li {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+  }
+
+  .pic_box .uploadimage {
+    width : 40px;
+    height : 40px;
+    margin-right : 10px;
+  }
+
+  .pic_box .img_remove {
+    margin-left: auto;
+    margin-right : 10px;
+    padding : 0px;
+    border : none;
+    color: #FFFFFF;
+    background-color: #959190;
+    border-radius: 60px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
   }
 
   .pic_body {
@@ -252,4 +280,8 @@
   height : 40px;
   cursor: pointer;
   width : 50px;
+}
+
+.uploadimage{
+  display: flex;
 }

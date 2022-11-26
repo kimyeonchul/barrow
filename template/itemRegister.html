@@ -13,7 +13,6 @@
     <script src="{% static 'js/asset/jquery-ui.js' %}"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'css/item/itemRegister.css' %}" />
-    <script type="text/javascript" src="{% static 'js/item/itemRegister.js' %}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <title>Barrow</title>
 </head>
@@ -36,10 +35,9 @@
                 {% endif %}    
                     <div class="pic_body">
                         <div class="pic_box"></div> 
-                        <input type="file" class="img_upload" accept="image/*" required multiple style="display: none;">
-                        <button class="small_btn" type="button" onclick="img_click()">파일 선택</button>
+                        <input type="file" id="img_upload" class="img_upload" accept="image/*" required multiple style="display: none;">
+                        <button class="small_btn" id="upload_btn" type="button" onclick="img_click()">파일 선택</button>
                     </div>
-    
                     <div class="item_register_box1">
 
                         <div class="item_register_flex">
@@ -63,7 +61,7 @@
                                     {% if type.0 and not type.1 %}
                                         <input type="radio" name="type" id="type_1" value="10" checked>
                                     {% else %}
-                                        <input type="radio" name="type" id="type_1" value="10">
+                                        <input type="radio" name="type" id="type_1" value="10" checked>
                                     {% endif %}
                                     <label for="type_1">택배만</label>
 
@@ -108,20 +106,19 @@
                                 <label for="price_per2">WEEK</label>
                       
                                 {% if item.per_day == MONTH %}
-                                    <input type="radio" name="price_per" id="price_per3" value="PER_MONTH">
+                                    <input type="radio" name="price_per" id="price_per3" value="PER_MONTH" checked>
                                 {% else %}
                                     <input type="radio" name="price_per" id="price_per3" value="PER_MONTH">
                                 {% endif %}
-                                
                                 <label for="price_per3">MONTH</label>
                             </div>
                         </div>
                         <hr class="hr-light">
                         <div class="item_register_flex">
                             <li><label>대여기간</label></li>
-                            <input type="date" name="start_date" value = "{{item.start_date.year}}-{{item.start_date.month}}-{{item.start_date.day}}">
+                            <input type="date" id="start_date" name="start_date" value = "{{item.start_date.year}}-{{item.start_date.month}}-{{item.start_date.day}}">
                             <span class="word"> 부터 </span>
-                            <input type="date" name="end_date" value = "{{item.start_date.year}}-{{item.start_date.month}}-{{item.start_date.day}}">
+                            <input type="date" id="end_date" name="end_date" value = "{{item.start_date.year}}-{{item.start_date.month}}-{{item.start_date.day}}">
                             <span class="word"> 까지 </span>
                         </div>
                         <hr class="hr-light">
@@ -213,8 +210,8 @@
 
         </div>
     </section>
-
+    <script type="text/javascript" src="{% static 'js/item/itemRegister.js' %}"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>
 {% endblock %}
