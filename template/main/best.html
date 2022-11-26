@@ -18,8 +18,8 @@
 </head>
 
 <body>
-    
-    
+
+
 
 
         <section class="bottom">
@@ -32,7 +32,6 @@
                 </div>
                 <div class="text_bottom">
                     <p class="Explane">일주일 내에 가장 많은 관심을 받은 상품을 소개해 드려요</p>
-                    <p class="ViewMoreBtn">더보기</p>
                 </div>
             </div>
             <!--전체 width가   -->
@@ -41,6 +40,7 @@
                     <section class="bestitems">
                     {% endif %}
                     {% if product %}
+                        <a href="#" class="bestitemlink">
                         <div class="bestitem">
                             <img class="bestitemImg" src="{% static 'img/img/itemimg/itemimg1.png' %}">
                             <div class="bestitemdescription">
@@ -65,18 +65,19 @@
                                             <p class="bestitemday">{{product.get_price_per_display}}</p>
                                         </li>
                                         <li>
-                                            <p class="">{{product.get_created}}</p>
+                                            <p class="itembeforedate">{{product.get_created}}</p>
                                         </li>
                                     </ul>
                                 </ul>
                             </div>
                         </div>
+                        </a>
                     {% else %}
+                        <a href="#" class="bestitemlink">
                         <div class="bestitem">
-                            <img class="bestitemImg" src="/media/product/product_dafault.png">
-                            <div class="bestitemdescription">
-                            </div>
+                            <img class="bestitemImg" src="/media/product/product_dafault.png" style="height: 325px; width:234px;">
                         </div>
+                        </a>
                     {% endif %}
                     
                     {% if forloop.counter|divisibleby:4 %}
@@ -87,11 +88,11 @@
         </section>
         <section class="pagination">
             <span class="dLeftVector">&laquo;</span>
-            <span class="prevPageBtn">&lt;</span>
+            <span class="prevPageBtns">&lt;</span>
             <ol id="numbers">
                 <!-- <li class="numbers"><a href="">1</a></li> -->
             </ol>
-            <span class="nextPageBtn">&gt;</span>
+            <span class="nextPageBtns">&gt;</span>
             <span class="dRightVector">&raquo;</span>
         </section>
         <!-- <nav aria-label="pagination">
