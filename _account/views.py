@@ -22,8 +22,18 @@ def login(request):
             if user.password == password:
                 auth.login(request, user)
 
-                return redirect("home")
-        return render(request, "login.html")
+                return redirect("barrow:home")
+            else:
+                context = {
+                    "err" : "PWD"
+                }
+                return JsonResponse(context)
+        else:
+            context = {
+                "err" : "ID"
+            }
+            return JsonResponse(context)
+        
 
     else:
         return render(request, "login.html")
@@ -120,4 +130,3 @@ def findId(request):
                 "user_id" : None
             }
         return JsonResponse(context)
-
