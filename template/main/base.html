@@ -102,14 +102,14 @@
                             <div class="br"></div>
                             
                             <button class="logoutBtn active" >
-                                <p class="loginOutText">로그아웃</p>
+                                <p class="loginOutText"><a href = "{% url 'account:logout' %}">로그아웃</a></p>
                             </button>
                         {% else %}
                             <button class="logoutBtn active" >
-                                <p class="loginOutText">로그인</p>
+                                <p class="loginOutText"><a href = "{% url 'account:login' %}">로그인</a></p>
                             </button>
                             <button class="regiBtn active" >
-                                <p class="loginOutText">회원가입</p>
+                                <p class="loginOutText"><a href = "{% url 'account:register' %}">회원가입</a></p>
                             </button>
                         {% endif %}
                     </div>

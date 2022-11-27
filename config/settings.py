@@ -147,4 +147,4 @@ AUTH_USER_MODEL = '_account.User'
 
 #LOGIN_REDIRECT_URL = ''
 
-#LOGOUT_REDIRECT_URL = '_account/login'
+LOGOUT_REDIRECT_URL = 'barrow:home'
