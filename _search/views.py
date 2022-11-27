@@ -11,53 +11,52 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 
 def get_category_num(key):
-    result = []
+    result = {}
     products = Product.objects.filter(title__contains = key)
-    result.append(products.count())
+    result['전체'] = (products.count())
 
     products = Product.objects.filter(title__contains = key, category = "CLOTHES")
-    result.append(products.count())
+    result['의류']=(products.count())
 
     products = Product.objects.filter(title__contains = key, category = "SHOES")
-    result.append(products.count())
+    result['신발']=(products.count())
 
     products = Product.objects.filter(title__contains = key, category = "TRAVELS")
-    result.append(products.count())
+    result['여행용품']=(products.count())
 
     products = Product.objects.filter(title__contains = key, category = "BAGS")
-    result.append(products.count())
+    result['가방']=(products.count())
 
     products = Product.objects.filter(title__contains = key, category = "CARRIERS")
-    result.append(products.count())
+    result['캐리어']=(products.count())
 
     products = Product.objects.filter(title__contains = key, category = "SPORTS")
-    result.append(products.count())
+    result['스포츠']=(products.count())
 
     products = Product.objects.filter(title__contains = key, category = "LEISURES")
-    result.append(products.count())
+    result['레저']=(products.count())
 
     products = Product.objects.filter(title__contains = key, category = "HOMES")
-    result.append(products.count())
+    result['가전제품']=(products.count())
 
     products = Product.objects.filter(title__contains = key, category = "FURNITURES")
-    result.append(products.count())
+    result['가구']=(products.count())
 
     products = Product.objects.filter(title__contains = key, category = "ELECTROMICS")
-    result.append(products.count())
+    result['전자제품']=(products.count())
 
     products = Product.objects.filter(title__contains = key, category = "CASUALS")
-    result.append(products.count())
+    result['캐주얼']=(products.count())
     
     products = Product.objects.filter(title__contains = key, category = "OTHERS")
-    result.append(products.count())
+    result['기타']=(products.count())
 
     return result
 
-def search(request, key, ctgr = "전체", srt = "최신순"):
-    # if request.user.is_authenticated:
-        # user = request.user
-    user = User.objects.get(id = 2)
-
+def search(request, ctgr = "전체", srt = "최신순"):
+    if request.user.is_authenticated:
+        user = request.user
+    key = request.GET["content"]
     keyword = Keyword.objects.filter(content = key)
     if keyword:
         keyword[0].searched()
@@ -66,7 +65,7 @@ def search(request, key, ctgr = "전체", srt = "최신순"):
 
         keyword[0].save()
     else:
-        form = KeywordForm(content = key)
+        form = KeywordForm(request.GET)
         if form.is_valid():
             new = form.save(commit = False)
             new.searched()
@@ -107,16 +106,34 @@ def search(request, key, ctgr = "전체", srt = "최신순"):
     base_context = base(request)
     side_context = side(request)
 
+    total_category_num = get_category_num(key)
+
+    type_queries = list(products.values("type"))
+    types = []
+
+    for type in type_queries:
+        type = list(type["type"])
+        type = list(map(int, type))
+        types.append(type)
+    products = list(zip(list(products),types))
+    
+    if len(products)%20!=0:
+        for i in range(20 - len(products)%20):
+            products.append((None,None))
     context = {
         "keyword" : key,
         "products" : products,
-        "category_num" : get_category_num(),
+        "category_num" : total_category_num,
+        "cur_category_num" : total_category_num[ctgr],
+        "is_key" : True,
+        "category" : ctgr,
+        "sort" : srt,
 
     }
     context.update(base_context)
     context.update(side_context)
 
-    return render(request, 'test.html',context)
+    return render(request, 'main/category.html',context)
 
 def search_save(request):
     if request.method == "POST":

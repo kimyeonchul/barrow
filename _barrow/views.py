@@ -25,6 +25,7 @@ def base(request):
             last_mosts = CurMostSearch.objects.all()
 
             if last_mosts[0].time.hour != today.hour:
+                print(1)
                 create_most_search()
         else:
             
@@ -80,43 +81,45 @@ def get_best():
     return context
 
 def get_category_num():
-    result = []
+    result = {}
+    products = Product.objects.all()
+    result['전체'] = (products.count())
 
     products = Product.objects.filter(category = "CLOTHES")
-    result.append(products.count())
+    result['의류']=(products.count())
 
     products = Product.objects.filter(category = "SHOES")
-    result.append(products.count())
+    result['신발']=(products.count())
 
     products = Product.objects.filter(category = "TRAVELS")
-    result.append(products.count())
+    result['여행용품']=(products.count())
 
     products = Product.objects.filter(category = "BAGS")
-    result.append(products.count())
+    result['가방']=(products.count())
 
     products = Product.objects.filter(category = "CARRIERS")
-    result.append(products.count())
+    result['캐리어']=(products.count())
 
     products = Product.objects.filter(category = "SPORTS")
-    result.append(products.count())
+    result['스포츠']=(products.count())
 
     products = Product.objects.filter(category = "LEISURES")
-    result.append(products.count())
+    result['레저']=(products.count())
 
     products = Product.objects.filter(category = "HOMES")
-    result.append(products.count())
+    result['가전제품']=(products.count())
 
     products = Product.objects.filter(category = "FURNITURES")
-    result.append(products.count())
+    result['가구']=(products.count())
 
     products = Product.objects.filter(category = "ELECTROMICS")
-    result.append(products.count())
+    result['전자제품']=(products.count())
 
     products = Product.objects.filter(category = "CASUALS")
-    result.append(products.count())
+    result['캐주얼']=(products.count())
     
     products = Product.objects.filter(category = "OTHERS")
-    result.append(products.count())
+    result['기타']=(products.count())
 
     return result
 
@@ -160,9 +163,27 @@ def category_view(request, category, sort):
     else:
         products = Product.objects.filter(category = categories[category]).order_by(sorts[sort])
 
+    total_category_num = get_category_num()
+
+    type_queries = list(products.values("type"))
+    types = []
+
+    for type in type_queries:
+        type = list(type["type"])
+        type = list(map(int, type))
+        types.append(type)
+    products = list(zip(list(products),types))
+    
+    if len(products)%20!=0:
+        for i in range(20 - len(products)%20):
+            products.append((None,None))
     context = {
-        "category_num" : get_category_num(),
+        "category_num" : total_category_num,
+        "cur_category_num" : total_category_num[category],
         "products" : products,
+        "is_key" : False,
+        "category" : category,
+        "sort" : sort,
     }
     context.update(base(request))
     context.update(side(request))
