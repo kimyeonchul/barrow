@@ -91,7 +91,7 @@
                         {% elif state == "LEND" %}
                             <div class="item_requested">
                                 <p>현재 대여중인 상품입니다.</p>
-                                <p>반납 예정일은 <span id="returnDay">22.12.01</span> 입니다.</p>
+                                <p>반납 예정일은 <span id="returnDay">{{deal_end_date}}</span> 입니다.</p>
                             </div>
                         {% endif %}
                     {% endif %}
