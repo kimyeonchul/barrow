@@ -16,6 +16,7 @@ def new(request):
         
         if form.is_valid():
             new = form.save(commit = False)
+            new.area = request.POST.get("area")+request.POST.get("area_detail")
             new.productor = request.user
             new.views = 0
             new.save()
