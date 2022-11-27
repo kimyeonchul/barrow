@@ -103,3 +103,21 @@ def home(request):
     else:
         return render(request, "login.html")
 
+def findIdPwd(request):
+    return render(request, "findIdPwd.html")
+
+@csrf_exempt
+def findId(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        
+        if User.objects.filter(name = data["name"],  phoneNum= data["phoneNum"]).exists():
+            context = {
+                "user_id" : User.objects.get(name = data["name"], phoneNum = data["phoneNum"]).username
+            }
+        else :
+            context = {
+                "user_id" : None
+            }
+        return JsonResponse(context)
+
