@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,15 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="\static\css\login\findIdPwd.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/login/findIdPwd.css' %}">
+    <title>Barrow</title>
 </head>
 
 <body>
     <div class="under_bg"></div>
     <main>
         <div class="main_header">
-            <img class="main_header_logo" src="/static/img/logo.png" alt="">
+            <img class="main_header_logo" src="{% static 'img/logo.png' %}" alt="">
             <div class="main_header_text_wrap">
                 <p>아이디/비밀번호 찾기</p>
             </div>
@@ -27,13 +28,13 @@
         </div>
         <div class="main_main_sec"></div>
         <div class="main_footer">
-            <img src="/static/img/footer_logo.png" alt="" class="main_footer_logo">
+            <img src="{% static 'img/footer_logo.png' %}" alt="" class="main_footer_logo">
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="\static\js\login\findIdPwd.js"></script>
+    <script src="{% static 'js\login\findIdPwd.js' %}"></script>
 </body>
 
 </html>

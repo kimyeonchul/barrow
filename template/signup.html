@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="\static\css\login\signup.css">
+    <link rel="stylesheet" href="{% static 'css/login/signup.css' %}">
 
-    <title>Document</title>
+    <title>Barrow</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
     <div class="signup_bg_2"></div>
     <main>
         <div class="main_header">
-            <img class="main_header_logo" src="/static/img/logo.png" alt="">
+            <img class="main_header_logo" src="{% static 'img/logo.png' %}" alt="">
         </div>
         {% csrf_token %}
         <div class="main_main_sec">
@@ -33,7 +33,7 @@
                     </li>
                     <li>
                         <div class="input_pwd_wrap">
-                            <img src="/static/img/Lock.png" alt="" class="input_pwd_icon">
+                            <img src="{% static 'img/Lock.png' %}" alt="" class="input_pwd_icon">
                             <label for="input_pwd">비밀번호</label><br>
                             <input type="password" name="password" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자 사용 가능" class="input_outer" id="input_pwd">
                         </div>
@@ -121,14 +121,14 @@
             </form>
         </div>
         <div class="main_footer">
-            <img src="/static/img/footer_logo.png" alt="" class="main_footer_logo">
+            <img src="{% static 'img/footer_logo.png' %}" alt="" class="main_footer_logo">
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="\static\js\login\signup.js"></script>
+    <script src="{% static 'js\login\signup.js' %}"></script>
 </body>
 
 </html>

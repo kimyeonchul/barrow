@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,20 +9,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="\static\css\login\login.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/login/login.css' %}">
+    <title>Barrow</title>
 </head>
 
 <body>
     <div class="under_bg"></div>
     <main>
         <div class="main_header">
-            <img class="main_header_logo" src="/static/img/logo.png" alt="">
+            <img class="main_header_logo" src="{% static 'img/logo.png' %}" alt="">
             <div class="main_header_text">
                 <p><b>환영합니다!</b></p>
                 <p>물품대여 플랫폼 <b>'바로우'</b> 입니다.</p>
                 <p>처음이신가요?</p>
-                <a class="signup_btn" href=""><b>계정을 만들어주세요.</b></a>
+                <a class="signup_btn" href="{% url 'account:register' %}"><b>계정을 만들어주세요.</b></a>
             </div>
         </div>
         <div class="main_main_sec">
@@ -36,12 +37,12 @@
                     <input type="password" class="input_pwd" name="password">
                     <p class="pwd_error_msg">비밀번호를 확인해주세요.</p>
                 </div>
-                <a class="find_idpwd_a" href=""><b>아이디나 비밀번호를 잊어버렸나요?</b></a>
+                <a class="find_idpwd_a" href="{% url 'account:findIdPwd' %}"><b>아이디나 비밀번호를 잊어버렸나요?</b></a>
             </form>
             <button class="login_btn" onclick="login()">로그인 하기</button>
         </div>
         <div class="main_footer">
-            <img src="/static/img/footer_logo.png" alt="" class="main_footer_logo">
+            <img src="{% static 'img/footer_logo.png' %}" alt="" class="main_footer_logo">
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
