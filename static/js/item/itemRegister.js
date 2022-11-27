@@ -2,8 +2,7 @@
   우편번호 api 적용 함수
 */
 function findAddr(){
-console.log("ㅎㅇ");
-daum.postcode.load(function() {
+  daum.postcode.load(function() {
   new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -28,6 +27,16 @@ daum.postcode.load(function() {
 /*
 폼 유효성 검사
 */
+$(function(){
+  var now_utc = Date.now()
+  var timeOff = new Date().getTimezoneOffset()*60000;
+  var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+  document.getElementById("start_date").setAttribute("min", today);
+  document.getElementById("end_date").setAttribute("min", today);
+  //오늘 이후로만 선택
+});
+
+
 function checkForm() {
   console.log("submit");
   checkTitle(item_register.title.value);
@@ -103,56 +112,84 @@ function checkMemo(memo){
   }
 }
 
-
+//사진 개수 확인
+function checkImgNum(){
+  if ($('#img_upload')[0].files.length > 6){
+    return false;
+  }
+}
 
 /*
 이미지 업로드 기능
 */
-/*
-function getImgFiles(e){
-  const uploadFiles = [];
-  const files = e.currentTarget.files;
-  const imagePreview = document.querySelector('.pic_box');
-  const docFrag = new DocumentFragment();
-  console(typeof files, files); //check
-
-  if ([...files].lenth >= 6){
-    alert("이미지는 최대 5개까지 업로드 할 수 있습니다.");
-    return;
-  }
-
-  [...files].forEach(file => {
-    if (!file.type.match("image/.*")) {
-      alert("이미지 파일만 업로드할 수 있습니다.");
-      return;
-    }
-
-    if ([...files].length < 6) {
-      uploadFiles.push(file);
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const preview = creatPreview(e,file);
-        imagePreview.appendChild(preview);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-}
-
-function creatPreview(e, file) {
-  const li = document.createElement('li');
-  const img = document.createElement('img');
-  img.setAttribute('src', e.target.result);
-  img.setAttribute('data-file', file.name);
-  li.appendChild(img);
-
-  return li;
-}
-
-const realUpload = document.querySelector('.img_upload');
-
+//label 클릭시 input클릭으로 
 function img_click() {
-  document.querySelector('.img_upload').click();
+  document.querySelector('.img_upload').click();  
 }
-realUpload.addEventListener('change', getImgFiles);
-*/
+
+//파일선택했을 때
+const imageTag = document.getElementById('img_upload');
+const pic_box = document.querySelector('.pic_box');
+
+imageTag.addEventListener('change', function () {
+    rmChilderen();
+    console.log('파일선택');
+    loadImg(this);
+});
+
+//썸네일, 리스트 생성
+function loadImg(img){
+  if (img.files.length > 5) {
+    alert("이미지는 최대 5개까지 업로드 가능합니다.");
+    return;
+  } else {
+    for (let i=0; i<img.files.length; i++){
+      console.log("업로드");
+      let reader = new FileReader();
+      var name = document.getElementById('img_upload').files[i].name;
+      console.log(name);
+
+      var node = document.createElement('li');
+      var tmp = `
+          <img src="" class="uploadimage">
+          <p>${name}</p>
+          <input type="button" class="img_remove" value="X">
+
+      `
+      node.innerHTML = tmp;
+      document.querySelector('.pic_box').appendChild(node);
+      
+      var liArr = $('.pic_box li').get();
+      reader.onload = function(e) {
+        liArr[i].querySelector('img').setAttribute('src', e.target.result);
+      }
+      reader.readAsDataURL(img.files[i]);
+
+      liArr[i].querySelector('.img_remove').addEventListener("click", (e)=>{
+        liArr[i].remove();
+        removeImg(i);
+      });
+    }
+  }
+}
+
+//리스트 삭제기능
+function removeImg(fileNum){
+  const dataTransfer = new DataTransfer();
+  let files = $('#img_upload')[0].files;	
+  let fileArray = Array.from(files);	//변수에 할당된 파일을 배열로 변환(FileList -> Array)
+
+  fileArray.splice(fileNum, 1);	//해당하는 index의 파일을 배열에서 제거
+  fileArray.forEach(file => { 
+    dataTransfer.items.add(file); 
+  });
+  $('#img_upload')[0].files = dataTransfer.files;	//제거 처리된 FileList를 돌려줌
+}
+
+//다시 업로드하면 리스트 초기화
+function rmChilderen(){
+  const parent = document.querySelector('.pic_box');
+  while(parent.firstChild)  {
+    parent.firstChild.remove()
+  }
+}

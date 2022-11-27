@@ -277,3 +277,54 @@ h1 {
 .reject_button {
   text-align: center;
 }
+
+.modal {
+  display: none;
+  padding: 70px 100px;
+  width: 568px;
+  height: 374px;  
+  background: #F5F5F5;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.modal_btn > button {
+  width: 90px;
+  height: 65px;
+  border-radius: 20px;
+  border: none;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  margin-top : 60px;
+  cursor: pointer;
+}
+
+.modal_ok_btn {
+  background: #F00E0E;
+  margin: 10px;
+}
+
+.modal_close_btn {
+  background: #959190;
+}
+
+
+.modal > p:nth-child(1) {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+  color: #000000;
+  margin-bottom: 0px;
+}
+
+.modal > p:nth-child(2) {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 19px;
+  color: #959190;
+  margin-top : 10px;
+}
