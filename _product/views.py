@@ -122,7 +122,7 @@ def itempage(request, product_id):
             "item" : item,
             "item_images" : item_images,
             "productor" : productor,
-            "deal_end_date" : str(deal.end_date),
+            "deal_end_date" : deal.end_date.strftime("%Y. %m. %d"),
             "state" : "LEND"
             }
         else:
