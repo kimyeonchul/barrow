@@ -17,8 +17,47 @@
 </head>
 
 <body>
-    
         <section class="bottom">
+            <aside class="leftSidebar">
+        <dl class="categoryBox">
+            <dt>
+                <a href = "{% url 'barrow:category' '의류' '최신순' %}">의류</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '신발' '최신순' %}">신발</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '여행용품' '최신순' %}">여행용품</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '가방' '최신순' %}">가방</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '캐리어' '최신순' %}">캐리어</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '스포츠' '최신순' %}">스포츠</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '레저' '최신순' %}">레저</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '가전' '최신순' %}">가전</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '가구' '최신순' %}">가구</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '전자제품' '최신순' %}">전자제품</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '캐주얼' '최신순' %}">캐주얼</a>
+            </dt>
+            <dt>
+                <a href = "{% url 'barrow:category' '기타' '최신순' %}">기타</a>
+            </dt>
+        </dl>
+    </aside>
             <section class="categoryMainField">
                 <div class="categoryBox">
                 <ul class="categoryInfo">
@@ -50,11 +89,16 @@
             </div>
             </section>
             <!--전체 width가   -->
-            <section class="bestitems">
                 {% for product, type in products %}
+                    {% if forloop.counter0|divisibleby:4 %}
+                    <section class="bestitems">
+                    {% endif %}
                     {% if product %}
+                         <a href="#" class="bestitemlink">
                         <div class="bestitem">
-                            <img class="bestitemImg" src="{{product.get_first_image.image}}">
+                            <img class="bestitemImg" src="{% static 'img/img/itemimg/itemimg1.png' %}"
+                                 style="  border-bottom-left-radius: 0px;
+                                 border-bottom-right-radius: 0px;">
                             <div class="bestitemdescription">
                                 <ul>
                                     <li>{{product.title}}</li>
@@ -62,9 +106,9 @@
                                 <ul>
                                     <div class="TransMethodImg">
                                         {% if type.0 %}
-                                            <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>                                        
+                                            <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
                                         {% endif %}
-                                        {% if type.1%}
+                                        {% if type.1 %}
                                             <li class="check"><img src="{% static 'img/img/itemimg/check.png' %}"></li>
                                         {% endif %}
                                     </div>
@@ -73,24 +117,25 @@
                                             <h1 class="bestitemPrice">{{product.price}}</h1>
                                         </li>
                                         <li>
-                                            <p>원 /</p>
+                                            <p>원/</p>
                                             <p class="bestitemday">{{product.get_price_per_display}}</p>
                                         </li>
                                         <li>
-                                            <p class="">{{product.get_created}}</p>
+                                            <p class="itembeforedate">{{product.get_created}}</p>
                                         </li>
                                     </ul>
                                 </ul>
                             </div>
                         </div>
+                        </a>
                     {% else %}
+                 <a href="#" class="bestitemlink">
                     <div class="bestitem">
-                        <img class="bestitemImg" src="/media/product/product_dafault.png">
-                        <div class="bestitemdescription">
-                        </div>
+                        <img class="bestitemImg" src="/media/product/product_dafault.png" style="height: 325px; width:234px;">
                     </div>
+                 </a>
                     {% endif %}
-                    
+
                 {% endfor %}
                 
             </section>
@@ -98,11 +143,11 @@
         </section>
         <section class="pagination">
             <span class="dLeftVector">&laquo;</span>
-            <span class="prevPageBtn">&lt;</span>
+            <span class="prevPageBtns">&lt;</span>
             <ol id="numbers">
                 <!-- <li class="numbers"><a href="">1</a></li> -->
             </ol>
-            <span class="nextPageBtn">&gt;</span>
+            <span class="nextPageBtns">&gt;</span>
             <span class="dRightVector">&raquo;</span>
         </section>
         <!-- <nav aria-label="pagination">

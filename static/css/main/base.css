@@ -633,7 +633,7 @@ a:hover {
 .categoryClick {
   position: absolute;
   width: 169px;
-  height: 500px;
+  height: 550px;
   background: #F5F5F5;
   visibility: hidden;
   z-index: 110;
@@ -656,4 +656,7 @@ a:hover {
     transform: scale( 1.1, 1.1 );
     transition: all 0.2s ease-in-out;
 
+  }
+  dt > a:hover{
+     color : #3D8361;
   }

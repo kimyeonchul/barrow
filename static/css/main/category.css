@@ -13,7 +13,7 @@
     padding: 10px;
     width: 132px;
     height: 267px;
-    background-color: white;
+    background-color: #F5F5F5;
 }
 
 .real_br_tags {
@@ -110,7 +110,6 @@
 .bottom {
     display: flex;
     flex-direction: column;
-    margin-top: 54px;
     padding: 0px 70px 0px 70px;
     height: 100%;
 }
@@ -121,14 +120,30 @@
     margin-bottom: 36px;
 
 }
+.leftSidebar{
+     position:absolute;
+    z-index: 200;
+    width: 139.26px;
+    height: 550px;
+    left: calc(50% - 50px);
+    transform:translate(-850px,0);
+    top: 30%;
 
+    /* Shawdow */
+
+    box-shadow: 0px 4px 20px 10px rgba(0, 0, 0, 0.04);
+
+  /* Gray/Light */
+
+  border: 1px solid #EEEBEA;
+  border-radius: 10px;
+}
 .bestitemdescription>ul {
     display: flex;
     flex-direction: column;
     padding: 0px;
     margin: 0px;
     width: 224px;
-    height: 37.4;
 }
 
 .bestitemdescription {
@@ -185,61 +200,80 @@
     color: black;
 }
 
-.bestitems {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    height: 100%;
-    flex-wrap: wrap;
-    width: 100%;
+.bestitems{
+  display: flex;
+  height: 100%;
+  margin:0px 0px 40px 0px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-
+.bestitemlink {
+  display: flex;
+  flex-direction: column;
+  width: 237px;
+  height: 321px;
+  border-radius: 17px;
+  border: 0.849398px solid #959190;
+    margin: 0px 39px 40px 0px;
+}
 .bestitem {
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    width: 443px;
-    height: 299px;
-    border-radius: 17px;
-    border: 0.849398px solid #959190;
-    margin: 0px 39px 39px 0px;
-    flex-basis: 15%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
+  width: 240px;
+  height: 323px;
+  border-radius: 17px;
+  border: 0.849398px solid #959190;
+  /* margin-right: 39px; */
 }
 
 .TransMethodImg {
-    display: flex;
+  display: flex;
 }
 
 .besong {
-    padding: 0px 5px 0px 5px;
+  padding: 0px 5px 0px 5px;
 }
 
 .bestitemImg {
-    /* width: 221px; */
-    height: 186px;
+  /* width: 221px; */
+  height: 210px;
+  border-top-left-radius: 17px;
+  border-top-right-radius: 17px;
+  border-bottom-left-radius: 17px;
+  border-bottom-right-radius: 17px;
 }
 
 .priceAndDay {
-    display: flex;
-    padding: 0px;
-    text-align: center;
+  display: flex;
+  width:260px;
+  padding: 0px;
+  text-align: center;
 }
 
 .bestitemday {
-    color: #F00E0E;
-    padding: 0px 30px 0px 5px;
+  color: #F00E0E;
+  padding: 0px 30px 0px 5px;
 }
 
 .priceAndDay>li {
-    display: flex;
-    align-items: center;
-    margin-right: 5px;
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+.itembeforedate{
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 15.5904px;
+line-height: 16px;
+margin:0px 10px 0px 0px;
+}
+.heartImg {
+  width: 41px;
+  height: 41px;
 }
 
-.heartImg {
-    width: 41px;
-    height: 41px;
-}
 
 /* //페이지네이션------------------------------------------------------------------------- */
 .visuallyhidden {
