@@ -1,8 +1,14 @@
+import json
+
+from channels.generic.websocket import WebsocketConsumer
 from django.db import models
 
 # Create your models here.
 from _account.models import User
 from _product.models import Product
+
+
+
 
 
 class Room(models.Model):
