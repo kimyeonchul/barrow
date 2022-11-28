@@ -42,7 +42,9 @@
                     {% if product %}
                         <a href="#" class="bestitemlink">
                         <div class="bestitem">
-                            <img class="bestitemImg" src="{% static 'img/img/itemimg/itemimg1.png' %}">
+                            <img class="bestitemImg" src="{% static 'img/img/itemimg/itemimg1.png' %}"
+                                 style="  border-bottom-left-radius: 0px;
+                                 border-bottom-right-radius: 0px;">
                             <div class="bestitemdescription">
                                 <ul>
                                     <li>{{product.title}}</li>
@@ -61,7 +63,7 @@
                                             <h1 class="bestitemPrice">{{product.price}}</h1>
                                         </li>
                                         <li>
-                                            <p>원 /</p>
+                                            <p>원/</p>
                                             <p class="bestitemday">{{product.get_price_per_display}}</p>
                                         </li>
                                         <li>
@@ -79,7 +81,7 @@
                         </div>
                         </a>
                     {% endif %}
-                    
+
                     {% if forloop.counter|divisibleby:4 %}
                         </section>
                     {% endif %}

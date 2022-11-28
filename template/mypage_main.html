@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/mypage.css">
+    <link rel="stylesheet" href="/css/mypage_main.css">
+    <title>마이페이지</title>
+</head>
+<body>
+    <div id="container">
+        <div id="headerWrap">
+            <div id="headerLogo">
+                <img src="img/logo.png" style="width: 140px; height: 52px;">
+                <div id="pageName">마이페이지</div>
+            </div>
+            <div id="headerUser">
+                <div id="userName"><div>김지영</div>님</div>
+                <button type="button">로그아웃</button>
+            </div>
+        </div>
+        <div id="bodyWrap">
+            <div id="navWrap">
+                <div id="navBox">
+                    <div><img src="img/dashboard.png" style="width: 70px; height: 50px;" onclick="location.href='/mypage_main.html'"></div>
+                    <div><img src="img/allim.png" style="width: 50px; height: 55px;" onclick="location.href='/mypage_main.html'"></div>
+                    <div><img src="img/editInfo.png" style="width: 50px; height: 55px;" onclick="location.href='/mypage_main.html'"></div>
+                    <div><img src="img/zzim.png" style="width: 45px; height: 55px;" onclick="location.href='/mypage_main.html'"></div>
+                    <div><img src="img/chat.png" style="width: 50px; height: 50px;" onclick="location.href='/mypage_main.html'"></div>
+                    <div><img src="img/money.png" style="width: 50px; height: 55px;" onclick="location.href='/mypage_main.html'"></div>
+                    <div><img src="img/useList.png" style="width: 50px; height: 55px;" onclick="location.href='/mypage_main.html'"></div>
+                </div>
+            </div>
+            <div id="contentBox">
+                <div id="contentTopWrap">
+                    <div id="contentLeftWrap">
+                        <div id="myInfoWrap">
+                            <div id="myInfoBox">
+                                <div id="myInfoImg">
+                                    <img src="img/userImg.jpg" style="width: 70px; height: 70px;">
+                                    <button type="button">수정하기</button>
+                                </div>
+                                <div id="myInfoName">
+                                    <div id="helloName">안녕하세요,<div style="padding: 0px 5px; color: #3d8361">이혜린</div>님</div>
+                                    <div id="helloEmail" style="color: #545454;">rinlee2001@naver.com</div>
+                                    <div id="helloAddress">상명대학교 제 1공학관 어딘지 알아서 뭐하실건데요 ㅋ</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="borrowWrap">
+                            <div id="borrowedWrap">
+                                <div id="borrowedBox">
+                                    <div id="borrowedTitle">
+                                        <div id="borrowedName">
+                                            <img src="img/빌린상품로고.png">
+                                            <p>빌린 상품</p>
+                                        </div>
+                                        <div id="plusLook">더보기</div>
+                                    </div>
+                                    <div id="underBar"></div>
+                                    <div id="borrowedNumberBox">
+                                        <div id="firstNum">
+                                            <p id="objName">전체</p>
+                                            <p id="objNum" style="color: red;">3</p>
+                                        </div>
+                                        <div id="secondNum">
+                                            <p id="objName">대기 중</p>
+                                            <p id="objNum">3</p>
+                                        </div>
+                                        <div id="thirdNum">
+                                            <p id="objName">대여 중</p>
+                                            <p id="objNum">3</p>
+                                        </div>
+                                        <div id="fourthNum">
+                                            <p id="objName">종료</p>
+                                            <p id="objNum">3</p>
+                                        </div>
+                                    </div>
+                                    <div id="borrowingObjectDetail">
+                                        <div id="borrowingDetailImg">
+                                            <img src="img/object.png">
+                                        </div>
+                                        <div id="borrowingDetailText">
+                                            <div id="borrowingDetailTitle">작고 귀여운 텐트 대여해드려요</div>
+                                            <div id="borrowingDetailState">대기중</div>
+                                            <div id="borrowingDetailNumber">
+                                                <div id="borrowingDetailMoney"><div>8,000</div>원/DAY</div>
+                                                <div id="borrowingDetailTime">2시간 전</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="borrowingObjectDetail">
+                                        <div id="borrowingDetailImg">
+                                            <img src="img/object.png">
+                                        </div>
+                                        <div id="borrowingDetailText">
+                                            <div id="borrowingDetailTitle">작고 귀여운 텐트 대여해드려요</div>
+                                            <div id="borrowingDetailState">대기중</div>
+                                            <div id="borrowingDetailNumber">
+                                                <div id="borrowingDetailMoney"><div>8,000</div>원/DAY</div>
+                                                <div id="borrowingDetailTime">2시간 전</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="borrowingWrap">
+                                <div id="borrowingBox">
+                                    <div id="borrowingTitle">
+                                        <div id="borrowingName">
+                                            <img src="img/빌려준상품로고.png">
+                                            <p>빌려준 상품</p>
+                                        </div>
+                                        <div id="plusLook">더보기</div>
+                                    </div>
+                                    <div id="underBar"></div>
+                                    <div id="borrowingNumberBox">
+                                        <div id="firstNum">
+                                            <p id="objName">전체</p>
+                                            <p id="objNum" style="color: red;">3</p>
+                                        </div>
+                                        <div id="secondNum">
+                                            <p id="objName">대기 중</p>
+                                            <p id="objNum">3</p>
+                                        </div>
+                                        <div id="thirdNum">
+                                            <p id="objName">대여 중</p>
+                                            <p id="objNum">3</p>
+                                        </div>
+                                        <div id="fourthNum">
+                                            <p id="objName">종료</p>
+                                            <p id="objNum">3</p>
+                                        </div>
+                                    </div>
+                                    <div id="borrowingObjectDetail">
+                                        <div id="borrowingDetailImg">
+                                            <img src="img/object.png">
+                                        </div>
+                                        <div id="borrowingDetailText">
+                                            <div id="borrowingDetailTitle">작고 귀여운 텐트 대여해드려요</div>
+                                            <div id="borrowingDetailState">대기중</div>
+                                            <div id="borrowingDetailNumber">
+                                                <div id="borrowingDetailMoney"><div>8,000</div>원/DAY</div>
+                                                <div id="borrowingDetailTime">2시간 전</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="borrowingObjectDetail">
+                                        <div id="borrowingDetailImg">
+                                            <img src="img/object.png">
+                                        </div>
+                                        <div id="borrowingDetailText">
+                                            <div id="borrowingDetailTitle">작고 귀여운 텐트 대여해드려요</div>
+                                            <div id="borrowingDetailState">대기중</div>
+                                            <div id="borrowingDetailNumber">
+                                                <div id="borrowingDetailMoney"><div>8,000</div>원/DAY</div>
+                                                <div id="borrowingDetailTime">2시간 전</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="notifyWrap">
+                        <div id="notifyBox">
+                            <div id="notifyTitle">
+                                <div id="notifyName">
+                                    <img src="img/알림목록로고.png">
+                                    <p>알림목록</p>
+                                </div>
+                                <div id="plusLook">더보기</div>
+                            </div>
+                            <div id="underBar"></div>
+                            <div id="notCheckNum">
+                                <div id="notCheckNumText">읽지 않은 알림이 <div>1개</div> 있어요.</div>
+                            </div>
+                            <div id="notifyList">
+                                <ul>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="contentBottomWrap">
+                    <div id="favBox">
+                        <div id="firstFavObject">
+                            <div id="favTitle">
+                                <div id="favName">
+                                    <img src="img/찜한상품로고.png">
+                                    <p>찜한 상품</p>
+                                </div>
+                                <div id="plusLook">더보기</div>
+                            </div>
+                            <div id="underBar"></div>
+                            <div id="borrowingObjectDetail">
+                                <div id="borrowingDetailImg">
+                                    <img src="img/object.png">
+                                </div>
+                                <div id="borrowingDetailText">
+                                    <div id="borrowingDetailTitle">작고 귀여운 텐트 대여해드려요</div>
+                                    <div id="borrowingDetailState">대기중</div>
+                                    <div id="borrowingDetailNumber">
+                                        <div id="borrowingDetailMoney"><div>8,000</div>원/DAY</div>
+                                        <div id="borrowingDetailTime">2시간 전</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="secondFavObject">
+                            <div id="borrowingObjectDetail">
+                                <div id="borrowingDetailImg">
+                                    <img src="img/object.png">
+                                </div>
+                                <div id="borrowingDetailText">
+                                    <div id="borrowingDetailTitle">작고 귀여운 텐트 대여해드려요</div>
+                                    <div id="borrowingDetailState">대기중</div>
+                                    <div id="borrowingDetailNumber">
+                                        <div id="borrowingDetailMoney"><div>8,000</div>원/DAY</div>
+                                        <div id="borrowingDetailTime">2시간 전</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="thirdFavObject">
+                            <div id="borrowingObjectDetail">
+                                <div id="borrowingDetailImg">
+                                    <img src="img/object.png">
+                                </div>
+                                <div id="borrowingDetailText">
+                                    <div id="borrowingDetailTitle">작고 귀여운 텐트 대여해드려요</div>
+                                    <div id="borrowingDetailState">대기중</div>
+                                    <div id="borrowingDetailNumber">
+                                        <div id="borrowingDetailMoney"><div>8,000</div>원/DAY</div>
+                                        <div id="borrowingDetailTime">2시간 전</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+#contentWrap{
+    padding-left: 10px;
+    height: 90vh;
+}
+
+#contentBox{
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+#contentTitle{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#contentRealTitle{
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;;
+}
+
+#titleUnderBar{
+    width: 100%;
+    height: 1px;
+    background-color: rgb(154, 154, 154);
+    margin-top: 10px;
+}
+
+#contentBody{
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+#content_body_1{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    width: 90%;
+    padding: 10px 0px;
+
+}
+
+#content_body_1 input{
+    width: 100%;
+    height: 35px;
+    border: 0;
+    border-radius: 2px;
+    background-color: rgb(235, 235, 235);
+}
+
+#contentName{
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+#contentAddressBox{
+    display: flex;
+    flex-direction: row;
+}
+
+#contentPwBt{
+    height: 35px;
+    padding: 0px 40px;
+    border: 0;
+    border-radius: 3px;
+    background-color: #3D8361;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 2px;
+}
+
+#contentAddressBt{
+    height: 35px;
+    padding: 0px 20px;
+    border: 0;
+    border-radius: 3px;
+    background-color: #3D8361;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 2px;
+    margin-left: 15px;
+}
+
+#content_body_2{
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+#content_body_2 button{
+    padding: 7px 18px;
+    border: 0;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+}
