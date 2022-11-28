@@ -1,0 +1,91 @@
+/* 공통 CSS */
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#container{
+    background-color: #F5F5F5;
+    width: 100vw;
+    height: 100vh;
+    padding: 15px;
+    display: grid;
+    grid-template-rows: 7% 93%;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+#headerWrap{
+    padding: 10px 0px 0px 30px;
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+}
+
+#headerLogo{
+    display: flex;
+    flex-direction: row;
+}
+
+#headerUser{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+    color: rgb(88, 88, 88);
+}
+
+#userName{
+    display: flex;
+    flex-direction: row;
+    border-right: 2px solid rgb(139, 139, 139);
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+#userName div{
+    font-weight: 800;
+    padding: 0px 10px;
+    color: rgb(88, 88, 88);
+}
+
+#headerUser button{
+    padding: 8px 18px;
+    color: white;
+    background-color: #3d8361;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#pageName{
+    font-size: 25px;
+    font-weight: 800;
+    margin-bottom : 5px;
+    margin-left: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+#bodyWrap{
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: 10% 90%;
+}
+
+#navBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 550px;
+    background-color: #3d8361;
+    border-radius: 10px;
+}
+
+#navBox img{
+    margin: 7px 0;
+    cursor: pointer;
+}

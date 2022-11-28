@@ -1,0 +1,331 @@
+#contentBox{
+    display: grid;
+    grid-template-rows: 80% 20%;
+    margin-bottom: 15px;
+}
+
+#contentTopWrap{
+    display: grid;
+    grid-template-columns: 75% 25%;
+}
+
+#contentLeftWrap{
+    display: grid;
+    grid-template-rows: 22% 78%;
+} 
+
+#myInfoWrap{
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+#myInfoBox{
+    padding: 10px 20px 10px 20px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+#myInfoImg{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#myInfoImg img{
+    border-radius: 55px;
+}
+
+#myInfoImg button{
+    background-color: #F00E0E;
+    border: 0px;
+    width: 50px;
+    padding: 4px 0px;
+    border-radius: 10px;
+    color: white;
+    font-size: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+#myInfoName{
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#helloName{
+    display: flex;
+    flex-direction: row;
+    font-weight: bolder;
+    font-size: 23px;
+}
+
+#helloAddress{
+    font-size: 20px;
+    padding-top: 8px;
+}
+
+#borrowWrap{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 10px;
+}
+
+#borrowedWrap{
+    width: 100%;
+    height: 100%;
+}
+
+#borrowedBox{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+#borrowingWrap{
+    width: 100%;
+    height: 100%;
+    padding: 0px 10px;
+}
+
+#borrowingBox{
+    height: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#borrowingTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 20px 0px 20px;
+}
+
+#borrowedTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 20px 0px 20px;
+}
+
+#borrowedName, #borrowingName, #plusLook{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#borrowedName img{
+    width: 20px;
+}
+
+#borrowingName img{
+    width: 30px;
+}
+
+#borrowedName p, #borrowingName p{
+    padding-left: 5px;
+}
+
+#underBar{
+    margin: 0 auto;
+    width: 90%;
+    margin-top: 7px;
+    height: 1px;
+    background-color: rgb(150, 149, 149);
+}
+
+#borrowedNumberBox, #borrowingNumberBox{
+    width: 90%;
+    margin: 15px auto 0px auto;
+    padding: 10px 0px;
+    border-radius: 5px;
+    background-color: #EEEBEA;
+    display: grid;
+    grid-template-columns: 20% 30% 30% 20%;
+}
+
+#firstNum, #secondNum, #thirdNum{
+    cursor: pointer;
+    border-right: 0.1px solid black;
+    padding: 0px 20px;
+    line-height: 30px;
+    text-align: center;
+}
+
+#fourthNum{
+    cursor: pointer;
+    padding: 0px 20px;
+    line-height: 30px;
+    text-align: center;
+}
+
+#objName{
+    color: rgb(150, 149, 149);
+}
+
+#objNum{
+    font-size: 25px;
+    font-weight: 700;
+}
+
+#borrowingObjectDetail{
+    display: grid;
+    grid-template-columns: 25% 75%;
+    width: 85%;
+    margin: 20px auto;
+    border: 1px solid rgb(205, 205, 205);
+}
+
+#borrowingDetailImg{
+    height: 100%;
+    padding: 0;
+}
+
+#borrowingDetailImg img{
+    height: 100%;
+    width: 80%;
+}
+
+#borrowingDetailText{
+    display: grid;
+    grid-template-rows: 25% 50% 25%;
+    padding: 10px 10px 10px 0px;
+}
+
+#borrowingDetailState{
+    display: flex;
+    align-items: flex-end;
+}
+#borrowingDetailNumber{
+    display: flex;
+    justify-content: space-between;
+}
+#borrowingDetailMoney{
+    display: flex;
+    flex-direction: row;
+}
+
+#borrowingDetailMoney div{
+    font-weight: 700;
+    font-size: larger;
+    padding-right: 3px;
+}
+#notifyWrap{
+    width: 100%;
+    height: 100%;
+    padding: 0px 0px 10px 10px;
+    box-sizing: border-box;
+}
+
+#notifyBox{
+   background-color: white;
+   border-radius: 10px;
+   height: 100%;
+}
+
+#notifyTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 20px 0px 20px;
+}
+
+#notifyTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 20px 0px 20px;
+}
+
+#notifyName, #plusLook{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#notifyName img{
+    width: 20px;
+}
+
+#notifyName p{
+    padding-left: 5px;
+}
+
+#notCheckNum{
+    background-color: #EEEBEA;
+    margin: 10px 15px;
+    padding: 8px 18px;
+    border-radius: 15px;
+}
+
+#notCheckNumText{
+    display: flex;
+    flex-direction: row;
+}
+
+#notCheckNumText div{
+    padding: 0px 5px;
+    color: green;
+    font-weight: 10;
+}
+
+#notifyList{
+    padding: 10px 30px;
+    height: 100%;
+    line-height: 43px;
+    box-sizing: border-box;
+}
+
+#contentBottomWrap{
+    padding-left: 10px;
+    padding-bottom: 15px;
+    box-sizing: border-box;
+}
+
+#favBox{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+}
+
+#firstFavObject{
+    height: 100%;
+}
+
+#favTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 30px 0px 30px;
+    box-sizing: border-box;
+}
+
+#favName, #plusLook{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#favName img{
+    width: 20px;
+}
+
+#favName p{
+    padding-left: 7px;
+}
+
+#secondFavObject, #thirdFavObject{
+    padding-top: 40px;
+}

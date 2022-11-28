@@ -17,79 +17,83 @@
 </head>
 
 <body>
-        <section class="bottom">
-            <aside class="leftSidebar">
-        <dl class="categoryBox">
-            <dt>
-                <a href = "{% url 'barrow:category' '전체' '최신순' %}">전체</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '의류' '최신순' %}">의류</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '신발' '최신순' %}">신발</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '여행용품' '최신순' %}">여행용품</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '가방' '최신순' %}">가방</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '캐리어' '최신순' %}">캐리어</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '스포츠' '최신순' %}">스포츠</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '레저' '최신순' %}">레저</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '가전' '최신순' %}">가전</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '가구' '최신순' %}">가구</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '전자제품' '최신순' %}">전자제품</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '캐주얼' '최신순' %}">캐주얼</a>
-            </dt>
-            <dt>
-                <a href = "{% url 'barrow:category' '기타' '최신순' %}">기타</a>
-            </dt>
-        </dl>
-    </aside>
-            <section class="categoryMainField">
-                <div class="categoryBox">
+
+    <section class="bottom">
+        <aside class="leftSidebar">
+            <dl class="categoryBox">
+                <dt>
+                    <a href="{% url 'barrow:category' '의류' '최신순' %}">의류</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '신발' '최신순' %}">신발</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '여행용품' '최신순' %}">여행용품</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '가방' '최신순' %}">가방</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '캐리어' '최신순' %}">캐리어</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '스포츠' '최신순' %}">스포츠</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '레저' '최신순' %}">레저</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '가전' '최신순' %}">가전</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '가구' '최신순' %}">가구</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '전자제품' '최신순' %}">전자제품</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '캐주얼' '최신순' %}">캐주얼</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '기타' '최신순' %}">기타</a>
+                </dt>
+            </dl>
+        </aside>
+        <section class="categoryMainField">
+            <div class="categoryBox">
+
                 <ul class="categoryInfo">
                     {% if is_key %}
-                        <li class="categoryName">검색결과 : {{keyword}}</li>
+                    <li class="categoryName">검색결과 : {{keyword}}</li>
                     {% else %}
-                        <li class="categoryName">여행용품</li>
+                    <li class="categoryName">여행용품</li>
                     {% endif %}
                     <li>총 {{cur_category_num}}개</li>
                 </ul>
                 <div class="categoryBrTags"></div>
                 <ul class="categorySort">
                     {% if is_key %}
-                        <li class="latestOrder"><a href = "/search/result/{{category}}/최신순/?content={{keyword}}">최신순</a></li>
-                        <li class="highPriceOrder"><a href = "/search/result/{{category}}/높은가격순/?content={{keyword}}">높은가격순</a></li>
-                        <li class="lowPriceOrder"><a href = "/search/result/{{category}}/낮은가격순/?content={{keyword}}">낮은가격순</a></li>
-                        <li class="viewOrder"><a href = "/search/result/{{category}}/조회순/?content={{keyword}}">조회순</a></li>
-                        <li class="recommendOrder"><a href = "/search/result/{{category}}/추천순/?content={{keyword}}">추천순</a></li>
-                        <li class="applicationOrder"><a href = "/search/result/{{category}}/신청순/?content={{keyword}}">신청순</a></li>
+                    <li class="latestOrder"><a href="/search/result/{{category}}/최신순/?content={{keyword}}">최신순</a></li>
+                    <li class="highPriceOrder"><a
+                            href="/search/result/{{category}}/높은가격순/?content={{keyword}}">높은가격순</a></li>
+                    <li class="lowPriceOrder"><a href="/search/result/{{category}}/낮은가격순/?content={{keyword}}">낮은가격순</a>
+                    </li>
+                    <li class="viewOrder"><a href="/search/result/{{category}}/조회순/?content={{keyword}}">조회순</a></li>
+                    <li class="recommendOrder"><a href="/search/result/{{category}}/추천순/?content={{keyword}}">추천순</a>
+                    </li>
+                    <li class="applicationOrder"><a href="/search/result/{{category}}/신청순/?content={{keyword}}">신청순</a>
+                    </li>
                     {% else %}
-                        <li class="latestOrder"><a href = "{% url 'barrow:category' category '최신순' %}">최신순</a></li>
-                        <li class="highPriceOrder"><a href = "{% url 'barrow:category' category '높은가격순' %}">높은가격순</a></li>
-                        <li class="lowPriceOrder"><a href = "{% url 'barrow:category' category '낮은가격순' %}">낮은가격순</a></li>
-                        <li class="viewOrder"><a href = "{% url 'barrow:category' category '조회순' %}">조회순</a></li>
-                        <li class="recommendOrder"><a href = "{% url 'barrow:category' category '추천순' %}">추천순</a></li>
-                        <li class="applicationOrder"><a href = "{% url 'barrow:category' category '신청순' %}">신청순</a></li>
+                    <li class="latestOrder"><a href="{% url 'barrow:category' category '최신순' %}">최신순</a></li>
+                    <li class="highPriceOrder"><a href="{% url 'barrow:category' category '높은가격순' %}">높은가격순</a></li>
+                    <li class="lowPriceOrder"><a href="{% url 'barrow:category' category '낮은가격순' %}">낮은가격순</a></li>
+                    <li class="viewOrder"><a href="{% url 'barrow:category' category '조회순' %}">조회순</a></li>
+                    <li class="recommendOrder"><a href="{% url 'barrow:category' category '추천순' %}">추천순</a></li>
+                    <li class="applicationOrder"><a href="{% url 'barrow:category' category '신청순' %}">신청순</a></li>
                     {% endif %}
-                </ul>   
+                </ul>
             </div>
+
             </section>
             <!--전체 width가   -->
                 {% for product, type in products %}
@@ -135,11 +139,6 @@
                             </a>
                         </div>
 
-<!--                    <div class="bestitem">-->
-<!--                         <a href="#" class="bestitemlink">-->
-<!--                        <img class="bestitemImg" src="/media/product/product_dafault.png" style="height: 100%; width:100%;">-->
-<!--                         </a>-->
-<!--                    </div>-->
                     {% endif %}
                 {% if forloop.counter|divisibleby:4 %}
                         </section>
@@ -147,18 +146,20 @@
                 {% endfor %}
                 
             </section>
-            
+           
         </section>
-        <section class="pagination">
-            <span class="dLeftVector">&laquo;</span>
-            <span class="prevPageBtns">&lt;</span>
-            <ol id="numbers">
-                <!-- <li class="numbers"><a href="">1</a></li> -->
-            </ol>
-            <span class="nextPageBtns">&gt;</span>
-            <span class="dRightVector">&raquo;</span>
-        </section>
-        <!-- <nav aria-label="pagination">
+
+    </section>
+    <section class="pagination">
+        <span class="dLeftVector">&laquo;</span>
+        <span class="prevPageBtns">&lt;</span>
+        <ol id="numbers">
+            <!-- <li class="numbers"><a href="">1</a></li> -->
+        </ol>
+        <span class="nextPageBtns">&gt;</span>
+        <span class="dRightVector">&raquo;</span>
+    </section>
+    <!-- <nav aria-label="pagination">
             <ul class="pagination">
                 <li><a href=""><span aria-hidden="true">&laquo;</span><span class="visuallyhidden">previous set of pages</span></a></li>
                 <li><a href=""><span class="visuallyhidden">page </span>1</a></li>

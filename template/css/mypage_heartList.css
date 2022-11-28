@@ -1,0 +1,106 @@
+#contentWrap{
+    padding-left: 10px;
+    height: 90vh;
+}
+
+#contentBox{
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+#contentTitle{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#contentBoxBody{
+    display: flex;
+    flex-direction: row;
+}
+
+#contentRealTitle{
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+#threeCheckBtWrap{
+    margin-left: 20px;
+}
+
+#totalCheckBt{
+    padding: 5px 10px;
+    border: 0;
+    border-radius: 10px;
+    color: green;
+}
+
+#notTotalCheckBt{
+    padding: 5px 10px;
+    border: 0;
+    border-radius: 10px;
+    color: rgb(85, 85, 85);
+}
+
+#deleteBt{
+    padding: 5px 22px;
+    border: 0;
+    border-radius: 10px;
+    color: red;
+}
+
+#titleUnderBar{
+    margin-top: 10px;
+    width: 100%;
+    height: 1px;
+    background-color: rgb(154, 154, 154);
+}
+
+#contentBody{
+    display: grid;
+    grid-template-rows: 50% 50%;
+}
+
+#contentTopBody, #contentBottomBody{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+#objectBox{
+    padding: 35px 10px;
+}
+
+#object2Box{
+    padding: 10px 10px;
+}
+
+#objectImg{
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+}
+
+#firstObjectBox{
+    border: 1px solid silver;
+    border-radius: 10px;
+}
+
+#nameObject{
+    font-size: 15px;
+}
+
+#greenIcon{
+    margin-top: 5px;
+}
+
+#priceWrap{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#priceDetail{
+    display: flex;
+    flex-direction: row;
+}
