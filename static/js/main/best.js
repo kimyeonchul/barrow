@@ -1,7 +1,8 @@
 
 
 //페이지네이션 ----------------------------------------------------------------------
-const rowsPerPage = 8;
+const rowsPerPage = 20;
+const rowz = document.querySelectorAll(".bestitemlink");
 const rows = document.querySelectorAll('.bestitem');
 const rowsCount = rows.length; //100/8  12.9 -> 13
 const pageCount = Math.ceil(100/rowsPerPage);
@@ -40,7 +41,6 @@ function displayRow(idx){
   let end = start+rowsPerPage;
 
   let rowsArray = [...rows];
-
   for(ra of rowsArray){
     ra.style.display = 'none';
   }

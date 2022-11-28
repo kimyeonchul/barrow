@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 100px;
-  padding: 0px 150px 0px 150px;
+  padding: 0px 150px 0px 100px;
   height: 100%;
 }
 
@@ -23,18 +23,38 @@
   flex-direction: column;
   padding: 0px;
   margin: 0px;
-  width: 224px;
 }
 
 .bestitemdescription {
-  width: 221px;
-  padding: 7px;
+  padding: 7px 14px 7px 14px;
 }
 
 .text_top {
   display: flex;
 }
+.juso {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: rgba(0, 0, 0, 0.6);
 
+}
+.bestitemPrice{
+  font-size:25px;
+}
+.bestitemday {
+  font-size:15px;
+  color: #F00E0E;
+  padding: 0px 30px 0px 5px;
+}
+.itembeforedate{
+  font-size:15px;
+}
+.priceAndDay > li > *{
+  margin : 0px 0px 0px 0px;
+}
 .text_top>span {
   font-family: 'Inter';
   font-style: normal;
@@ -82,21 +102,22 @@
 .bestitems {
   display: flex;
   height: 100%;
-  margin:0px 0px 40px 0px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .bestitemlink {
   display: flex;
   flex-direction: column;
-  width: 237px;
+  width: 100%;
   height: 321px;
   border-radius: 17px;
   border: 0.849398px solid #959190;
-  margin-right: 39px;
+    margin: 0px 39px 40px 0px;
 }
 .bestitem {
   display: flex;
   flex-direction: column;
+  width:260px;
+  margin: 0px 20px 0px 20px;
   /* align-items: center;
   width: 240px;
   height: 323px;
@@ -107,14 +128,21 @@
 
 .TransMethodImg {
   display: flex;
+  margin: 12px 0px 5px 0px;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
 }
-
+.dealmethod {
+  display: flex;
+  text-align: center;
+}
 .besong {
   padding: 0px 5px 0px 5px;
 }
 
 .bestitemImg {
-  /* width: 221px; */
+  width:260px;
   height: 210px;
   border-top-left-radius: 17px;
   border-top-right-radius: 17px;
@@ -124,15 +152,13 @@
 
 .priceAndDay {
   display: flex;
-  width:260px;
   padding: 0px;
   text-align: center;
+  flex-wrap: wrap;
 }
-
-.bestitemday {
-  color: #F00E0E;
+.krPrice {
+  font-size: 15px;
 }
-
 .priceAndDay>li {
   display: flex;
   align-items: center;

@@ -31,24 +31,18 @@
 }
 
 .leftSidebar{
-    position:fixed;
+     position:absolute;
     z-index: 200;
-    width: 139.26px;
-    height: 500px;
-    left: calc(50%-149px);
+    width: 200px;
+    height: 700px;
+    left: calc(50% - 80px);
     transform:translate(-850px,0);
-    top: 30%;
+    top: 20%;
 
-    /* Shawdow */
-
-    box-shadow: 0px 4px 20px 10px rgba(0, 0, 0, 0.04);
-  
-  /* Gray/Light */
-  
-  border: 1px solid #EEEBEA;
-  border-radius: 10px;
-  }
-
+}
+.leftSidebar > .categoryBox > dt > a {
+    line-height: 36px;
+}
   
 
 .rightSidebar {
@@ -109,48 +103,55 @@
 /* //best item-------------------------------------------------------------------------- */
 .bottom {
     display: flex;
-    flex-direction: column;
-    padding: 0px 70px 0px 70px;
-    height: 100%;
+  flex-direction: column;
+  padding: 0px 150px 0px 100px;
+  height: 100%;
 }
 
 .bestitem_text {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 36px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 36px;
 
 }
-.leftSidebar{
-     position:absolute;
-    z-index: 200;
-    width: 139.26px;
-    height: 550px;
-    left: calc(50% - 50px);
-    transform:translate(-850px,0);
-    top: 30%;
 
-    /* Shawdow */
-
-    box-shadow: 0px 4px 20px 10px rgba(0, 0, 0, 0.04);
-
-  /* Gray/Light */
-
-  border: 1px solid #EEEBEA;
-  border-radius: 10px;
-}
 .bestitemdescription>ul {
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-    margin: 0px;
-    width: 224px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  margin: 0px;
 }
 
 .bestitemdescription {
-    width: 221px;
-    padding: 7px;
+  padding: 7px 14px 7px 14px;
 }
 
+.text_top {
+  display: flex;
+}
+.juso {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: rgba(0, 0, 0, 0.6);
+
+}
+.bestitemPrice{
+  font-size:25px;
+}
+.bestitemday {
+  font-size:15px;
+  color: #F00E0E;
+  padding: 0px 30px 0px 5px;
+}
+.itembeforedate{
+  font-size:15px;
+}
+.priceAndDay > li > *{
+  margin : 0px 0px 0px 0px;
+}
 .text_top {
     display: flex;
 }
@@ -199,18 +200,18 @@
     font-weight: 500;
     color: black;
 }
-
+dt>a{
+    font-size:25px;
+}
 .bestitems{
   display: flex;
   height: 100%;
-  margin:0px 0px 40px 0px;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .bestitemlink {
   display: flex;
   flex-direction: column;
-  width: 237px;
+  width: 100%;
   height: 321px;
   border-radius: 17px;
   border: 0.849398px solid #959190;
@@ -219,6 +220,8 @@
 .bestitem {
   display: flex;
   flex-direction: column;
+  width:260px;
+  margin: 0px 20px 0px 20px;
   /* align-items: center;
   width: 240px;
   height: 323px;
@@ -229,14 +232,21 @@
 
 .TransMethodImg {
   display: flex;
+  margin: 12px 0px 5px 0px;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
 }
-
+.dealmethod {
+  display: flex;
+  text-align: center;
+}
 .besong {
   padding: 0px 5px 0px 5px;
 }
 
 .bestitemImg {
-  /* width: 221px; */
+  width:260px;
   height: 210px;
   border-top-left-radius: 17px;
   border-top-right-radius: 17px;
@@ -246,16 +256,13 @@
 
 .priceAndDay {
   display: flex;
-  width:260px;
   padding: 0px;
   text-align: center;
+  flex-wrap: wrap;
 }
-
-.bestitemday {
-  color: #F00E0E;
-  padding: 0px 30px 0px 5px;
+.krPrice {
+  font-size: 15px;
 }
-
 .priceAndDay>li {
   display: flex;
   align-items: center;
