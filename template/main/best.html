@@ -40,8 +40,9 @@
                     <section class="bestitems">
                     {% endif %}
                     {% if product %}
-                        <a href="#" class="bestitemlink">
+
                         <div class="bestitem">
+                            <a href="#" class="bestitemlink">
                             <img class="bestitemImg" src="{% static 'img/img/itemimg/itemimg1.png' %}"
                                  style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
@@ -51,20 +52,23 @@
                                 </ul>
                                 <ul>
                                     <div class="TransMethodImg">
+                                        <li class="juso">서울 서대문구 북가좌동</li>
+                                        <div class="dealmethod">
                                         {% if type.0 %}
                                             <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
                                         {% endif %}
                                         {% if type.1 %}
                                             <li class="check"><img src="{% static 'img/img/itemimg/check.png' %}"></li>
                                         {% endif %}
+                                        </div>
                                     </div>
                                     <ul class="priceAndDay">
                                         <li>
                                             <h1 class="bestitemPrice">{{product.price}}</h1>
+                                            <p class="krPrice">원 /</p>
                                         </li>
                                         <li>
-                                            <p>원/</p>
-                                            <p class="bestitemday">{{product.get_price_per_display}}</p>
+                                            <p class="bestitemday"><strong>{{product.get_price_per_display}}</strong></p>
                                         </li>
                                         <li>
                                             <p class="itembeforedate">{{product.get_created}}</p>
@@ -72,14 +76,14 @@
                                     </ul>
                                 </ul>
                             </div>
+                            </a>
                         </div>
-                        </a>
-                    {% else %}
-                        <a href="#" class="bestitemlink">
-                        <div class="bestitem">
-                            <img class="bestitemImg" src="/media/product/product_dafault.png" style="height: 325px; width:234px;">
-                        </div>
-                        </a>
+
+<!--                        <div class="bestitem">-->
+<!--                            <a href="#" class="bestitemlink">-->
+<!--                            <img class="bestitemImg" src="/media/product/product_dafault.png" style="height: 100%;">-->
+<!--                            </a>-->
+<!--                        </div>-->
                     {% endif %}
 
                     {% if forloop.counter|divisibleby:4 %}

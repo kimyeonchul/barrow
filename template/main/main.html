@@ -63,40 +63,49 @@
                 {% for product, type in best_products %}
                     {% if product %}
                         <div class="bestitem">
-                            <img class="bestitemImg" src="{{product.get_first_image.image}}">
+                             <a href="#" class="bestitemlink">
+                            <img class="bestitemImg" src="{{product.get_first_image.image}}"
+                             style="  border-bottom-left-radius: 0px;
+                                 border-bottom-right-radius: 0px;">
                             <div class="bestitemdescription">
                                 <ul>
                                     <li>{{product.title}}</li>
                                 </ul>
                                 <ul>
                                     <div class="TransMethodImg">
+                                        <li class="juso">서울 서대문구 북가좌동</li>
+                                        <div class="dealmethod">
                                         {% if type.0 %}
-                                            <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>                                        
+                                            <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
                                         {% endif %}
-                                        {% if type.1%}
+                                        {% if type.1 %}
                                             <li class="check"><img src="{% static 'img/img/itemimg/check.png' %}"></li>
                                         {% endif %}
+                                        </div>
                                     </div>
                                     <ul class="priceAndDay">
                                         <li>
                                             <h1 class="bestitemPrice">{{product.price}}</h1>
+                                            <p class="krPrice">원 /</p>
                                         </li>
                                         <li>
-                                            <p>원 /</p>
-                                            <p class="bestitemday">{{product.get_price_per_display}}</p>
+                                            <p class="bestitemday"><strong>{{product.get_price_per_display}}</strong></p>
                                         </li>
                                         <li>
-                                            <p class="">{{product.get_created}}</p>
+                                            <p class="itembeforedate">{{product.get_created}}</p>
                                         </li>
                                     </ul>
                                 </ul>
                             </div>
+                            </a>
                         </div>
                     {% else %}
                     <div class="bestitem">
-                        <img class="bestitemImg" src="/media/product/product_dafault.png">
+                        <a href="#" class="bestitemlink">
+                        <img class="bestitemImg" src="/media/product/product_dafault.png" style="height: 100%;">
                         <div class="bestitemdescription">
                         </div>
+                        </a>
                     </div>
                     {% endif %}
                     
