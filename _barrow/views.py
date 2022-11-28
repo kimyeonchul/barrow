@@ -107,7 +107,7 @@ def get_category_num():
     result['레저']=(products.count())
 
     products = Product.objects.filter(category = "HOMES")
-    result['가전제품']=(products.count())
+    result['가전']=(products.count())
 
     products = Product.objects.filter(category = "FURNITURES")
     result['가구']=(products.count())
@@ -147,21 +147,34 @@ def best(request, page_num):
 
 def category_view(request, category, sort):
     categories = {"의류":"CLOTHES", "신발":"SHOES", "여행용품":"TRAVELS", "가방":"BAGS", "캐리어":"CARRIERS", "스포츠":"SPORTS", "레저":"LEISURES", "가전":"HOMES", "가구":"FURNITURES", "전자제품":"ELECTROMICS", "캐주얼":"CASUALS", "기타":"OTHERS"}
-    sorts = {"최신순":"-created","높은가격순":"price","낮은가격순":"-price","조회순":"-views"}
+    sorts = {"최신순":"-created","높은가격순":"-price","낮은가격순":"price","조회순":"-views"}
 
     if sort == "추천순":
-        products = Product.objects.filter(category = categories[category]).annotate(
-            likes = Count("favor")
-        ).order_by("-likes")
+        if category == "전체":
+            products = Product.objects.all().annotate(
+                likes = Count("favor")
+            ).order_by("-likes")
+        else:
+            products = Product.objects.filter(category = categories[category]).annotate(
+                likes = Count("favor")
+            ).order_by("-likes")
         
     
     elif sort == "신청순":
-        products = Product.objects.filter(category = categories[category]).annotate(
-            deals = Count("deal")
-        ).order_by("-deals")
+        if category == "전체":
+            products = Product.objects.all().annotate(
+                deals = Count("deal")
+            ).order_by("-deals")
+        else:
+            products = Product.objects.filter(category = categories[category]).annotate(
+                deals = Count("deal")
+            ).order_by("-deals")
         
     else:
-        products = Product.objects.filter(category = categories[category]).order_by(sorts[sort])
+        if category == "전체":
+            products = Product.objects.all().order_by(sorts[sort])
+        else:
+            products = Product.objects.filter(category = categories[category]).order_by(sorts[sort])
 
     total_category_num = get_category_num()
 
@@ -174,9 +187,6 @@ def category_view(request, category, sort):
         types.append(type)
     products = list(zip(list(products),types))
     
-    if len(products)%20!=0:
-        for i in range(20 - len(products)%20):
-            products.append((None,None))
     context = {
         "category_num" : total_category_num,
         "cur_category_num" : total_category_num[category],

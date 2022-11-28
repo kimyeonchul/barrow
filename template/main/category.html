@@ -22,40 +22,43 @@
         <aside class="leftSidebar">
             <dl class="categoryBox">
                 <dt>
-                    <a href="{% url 'barrow:category' '의류' '최신순' %}">의류</a>
+                    <a href="{% url 'barrow:category' '전체' '최신순' %}">전체({{category_num.전체}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '신발' '최신순' %}">신발</a>
+                    <a href="{% url 'barrow:category' '의류' '최신순' %}">의류({{category_num.의류}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '여행용품' '최신순' %}">여행용품</a>
+                    <a href="{% url 'barrow:category' '신발' '최신순' %}">신발({{category_num.신발}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '가방' '최신순' %}">가방</a>
+                    <a href="{% url 'barrow:category' '여행용품' '최신순' %}">여행용품({{category_num.여행용품}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '캐리어' '최신순' %}">캐리어</a>
+                    <a href="{% url 'barrow:category' '가방' '최신순' %}">가방({{category_num.가방}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '스포츠' '최신순' %}">스포츠</a>
+                    <a href="{% url 'barrow:category' '캐리어' '최신순' %}">캐리어({{category_num.캐리어}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '레저' '최신순' %}">레저</a>
+                    <a href="{% url 'barrow:category' '스포츠' '최신순' %}">스포츠({{category_num.스포츠}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '가전' '최신순' %}">가전</a>
+                    <a href="{% url 'barrow:category' '레저' '최신순' %}">레저({{category_num.레저}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '가구' '최신순' %}">가구</a>
+                    <a href="{% url 'barrow:category' '가전' '최신순' %}">가전({{category_num.가전}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '전자제품' '최신순' %}">전자제품</a>
+                    <a href="{% url 'barrow:category' '가구' '최신순' %}">가구({{category_num.가구}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '캐주얼' '최신순' %}">캐주얼</a>
+                    <a href="{% url 'barrow:category' '전자제품' '최신순' %}">전자제품({{category_num.전자제품}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '기타' '최신순' %}">기타</a>
+                    <a href="{% url 'barrow:category' '캐주얼' '최신순' %}">캐주얼({{category_num.캐주얼}})</a>
+                </dt>
+                <dt>
+                    <a href="{% url 'barrow:category' '기타' '최신순' %}">기타({{category_num.기타}})</a>
                 </dt>
             </dl>
         </aside>
@@ -66,7 +69,7 @@
                     {% if is_key %}
                     <li class="categoryName">검색결과 : {{keyword}}</li>
                     {% else %}
-                    <li class="categoryName">여행용품</li>
+                    <li class="categoryName">{{category}}</li>
                     {% endif %}
                     <li>총 {{cur_category_num}}개</li>
                 </ul>
@@ -102,8 +105,8 @@
                     {% endif %}
                     {% if product %}
                         <div class="bestitem">
-                            <a href="#" class="bestitemlink">
-                            <img class="bestitemImg" src="{% static 'img/img/itemimg/itemimg1.png' %}"
+                            <a href="{% url 'products:itempage' product.id %}" class="bestitemlink">
+                            <img class="bestitemImg" src="{{product.get_first_image.image}}"
                                  style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
                             <div class="bestitemdescription">
@@ -112,7 +115,7 @@
                                 </ul>
                                 <ul>
                                   <div class="TransMethodImg">
-                                        <li class="juso">서울 서대문구 북가좌동</li>
+                                        <li class="juso">{{product.area}}</li>
                                         <div class="dealmethod">
                                         {% if type.0 %}
                                             <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
@@ -170,6 +173,7 @@
             </ul>
         </nav> -->
     </div>
+    <script type = "text/javascript">var item_num = "{{cur_category_num}}";</script>
 </body>
 
 </html>
