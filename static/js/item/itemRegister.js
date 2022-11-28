@@ -146,14 +146,11 @@ function loadImg(img){
     for (let i=0; i<img.files.length; i++){
       console.log("업로드");
       let reader = new FileReader();
-      var name = document.getElementById('img_upload').files[i].name;
-      console.log(name);
-
       var node = document.createElement('li');
       var tmp = `
-          <img src="" class="uploadimage">
-          <p>${name}</p>
+          <img src="" class="uploadimage">  
           <input type="button" class="img_remove" value="X">
+          <div id="captain">대표이미지<div>
 
       `
       node.innerHTML = tmp;
