@@ -187,7 +187,7 @@ def category_view(request, category, sort):
     }
     context.update(base(request))
     context.update(side(request))
-
+    print(products)
     return render(request, "main/category.html", context)
 
 def near_products(request):
