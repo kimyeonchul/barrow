@@ -1,0 +1,102 @@
+#contentWrap{
+    padding-left: 10px;
+    height: 90vh;
+}
+
+#contentBox{
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+#contentTitle{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#contentRealTitle{
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+#titleUnderBar{
+    width: 100%;
+    height: 1px;
+    background-color: rgb(154, 154, 154);
+    margin-top: 10px;
+}
+
+#notifyCheckList{
+    width: 100%;
+}
+
+#notifyCheckList div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 20px;
+}
+
+#notifyCheck{
+    border-bottom: 1px solid silver;
+}
+
+#notifyLabel{
+    margin-right: 15px;
+}
+
+#contentBody{
+    width: 650px;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+#notCheckTitle{
+    font-weight: 700;
+    display: flex;
+    flex-direction: row;
+}
+
+#notCheckRealTitle{
+    font-size: larger;
+}
+
+#notCheckNum{
+    display: flex;
+    flex-direction: row;
+    margin-left: 40px;
+    align-items: flex-end;
+}
+
+#notifyCheckList{
+    display: flex;
+    flex-direction: column;
+}
+
+#threeCheckBtWrap{
+    margin-top: 10px;
+}
+
+#totalCheckBt{
+    padding: 5px 10px;
+    border: 0;
+    border-radius: 10px;
+    color: green;
+}
+
+#notTotalCheckBt{
+    padding: 5px 10px;
+    border: 0;
+    border-radius: 10px;
+    color: rgb(85, 85, 85);
+}
+
+#deleteBt{
+    padding: 5px 22px;
+    border: 0;
+    border-radius: 10px;
+    color: red;
+}
