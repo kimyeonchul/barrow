@@ -1,0 +1,41 @@
+{% extends "mypage/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/mypage/mypage_modifyPw.css' %}">
+    <title>마이페이지</title>
+</head>
+{% include 'mypage/messages.html' %}
+<div id="contentWrap">
+    <div id="contentBox">
+        <div id="contentTitle">
+            <div id="contentRealTitle">회원 정보 수정</div>
+            <div id="titleUnderBar"></div>
+        </div>
+        <div id="contentBody">
+            <div id="contentBodyBox">
+                <div id="contentBodyBoxTitle">비밀번호 변경</div>
+                <div id="contentBodyBoxSubTitle">안전한 비밀번호로 내 정보를 보호하세요</div>
+                <form method = "POST" action = "{% url 'account:mypage_changepwd' %}">
+                    {% csrf_token %}
+                    <div id="questionBox">
+                        
+                            <input type="password" id="fitstQuestionInput" placeholder="현재 비밀번호" name = "old_password">
+                            <input type="password" id="secondQuestionInput" placeholder="새 비밀번호" name = "new_password1">
+                            <input type="password" id="thirdQuestionInput" placeholder="새 비밀번호 확인" name = "new_password2">
+                        
+                        
+                    </div>
+                    <div id="contentBtWrap">
+                        <button type="submit" id="checkBt">확인</button>
+                        <button type="button" id="backBt">돌아가기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

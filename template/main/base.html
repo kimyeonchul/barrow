@@ -99,9 +99,9 @@
                 <div class="header_top_menu">
                     <div class = "loginbox" style = "display: flex; align-items: center;">
                         {% if user.is_authenticated %}
-                            <p class="mypage">마이페이지</p>
+                            <p class="mypage"><a href = "{% url 'account:mypage_main' %}">마이페이지</a></p>
                             <div class="br"></div>
-                            <p class="username"><strong>{{user.username}}</strong> 님</p>
+                            <p class="username"><strong>{{user.name}}</strong> 님</p>
                             <div class="br"></div>
                             
                             <button class="logoutBtn active" >
