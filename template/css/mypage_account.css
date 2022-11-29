@@ -1,0 +1,103 @@
+#contentWrap{
+    padding-left: 10px;
+    height: 90vh;
+}
+
+#contentBox{
+    background-color: white;
+    border-radius: 10px;
+    height: 500px;
+    padding: 30px;
+    overflow: scroll;
+}
+
+#contentTitle{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#contentRealTitle{
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+#titleUnderBar{
+    margin-top: 10px;
+    width: 100%;
+    height: 1px;
+    background-color: rgb(154, 154, 154);
+}
+
+#contentBody{
+    margin-top: 40px;
+}
+
+#contentBodyBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#contentBodyTitle{
+    font-size: 23px;
+}
+
+#contentBodyBox button{
+    padding: 7px 20px;
+    font-size: 15px;
+    background-color: #1C6758;
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+
+#accountTable{
+    width: 100%;
+    margin: 15px auto 0px auto;
+    border-collapse : collapse;
+}
+
+#tableHead{
+    background-color: #D9D9D9;
+    margin: 0;
+}
+
+#tableHead th{
+    padding: 10px 0px;
+    font-weight: 500;
+    border: 1px solid rgb(151, 151, 151);
+}
+
+#accountNumber{
+    display: flex;
+    flex-direction: row;
+}
+
+#accountTable tr{
+    border: 1px solid rgb(151,151,151);
+}
+
+#accountTable tr > td{
+    padding: 10px 0px;
+    text-align: center;
+}
+
+#account1, #account2, #account3, #account4{
+    border-right: 1px solid rgb(151,151,151);
+}
+
+#account6 button{
+    border: 0;
+    padding: 5px 10px;
+    color: white;
+    background-color: black;
+    margin-right: 10px;
+}
+
+#account6{
+    display: flex;
+    justify-content: flex-end;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/mypage.css">
+    <link rel="stylesheet" href="/css/mypage_inputCard.css">
+    <title>마이페이지</title>
+</head>
+<body>
+    <div id="container">
+        <div id="headerWrap">
+            <div id="headerLogo">
+                <img src="img/logo.png" style="width: 140px; height: 52px;">
+                <div id="pageName">마이페이지</div>
+            </div>
+            <div id="headerUser">
+                <div id="userName"><div>김지영</div>님</div>
+                <button type="button">로그아웃</button>
+            </div>
+        </div>
+        <div id="bodyWrap">
+            <div id="navWrap">
+                <div id="navBox">
+                    <div><img src="img/dashboard.png" style="width: 70px; height: 50px;"></div>
+                    <div><img src="img/allim.png" style="width: 50px; height: 55px;"></div>
+                    <div><img src="img/editInfo.png" style="width: 50px; height: 55px;"></div>
+                    <div><img src="img/zzim.png" style="width: 45px; height: 55px;"></div>
+                    <div><img src="img/chat.png" style="width: 50px; height: 50px;"></div>
+                    <div><img src="img/money.png" style="width: 50px; height: 55px;"></div>
+                    <div><img src="img/useList.png" style="width: 50px; height: 55px;"></div>
+                </div>
+            </div>
+            <div id="contentWrap">
+                <div id="contentBox">
+                    <div id="inputCardBox">
+                        <div id="inputCardClose">
+                            <div style="font-size: 17px; font-weight: 200;">카드 등록</div>
+                            <div style="font-size: 30px;">x</div>
+                        </div>
+                        <div id="inputCardInput">
+                            <div id="inputCardInputWrap">
+                                <div id="inputCardInputBox">
+                                    <div id="inputCell">
+                                        <div id="inputCellP"><p>카드주</p></div>
+                                        <div id="inputCellInput"><input type="text"></div>
+                                    </div>
+                                    <div id="inputCell">
+                                        <div id="inputCellP"><p>카드선택</p></div>
+                                        <div id="inputCellInput">
+                                            <select>
+                                                <option>국민은행</option>
+                                                <option>신한은행</option>
+                                                <option>하나은행</option>
+                                                <option>우리은행</option>
+                                                <option>농협은행</option>
+                                                <option>한국씨티은행</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="inputCell">
+                                        <div id="inputCellP"><p>카드정보 입력</p></div>
+                                        <div id="inputCellInput2">
+                                            <div id="cardInfo">
+                                                카드정보
+                                                <input type="text"><input type="text"><input type="text"><input type="text">
+                                            </div>
+                                            <div style="margin-top: 10px;">
+                                                유효기간
+                                                <input type="text" style="margin-left: 10px;">
+                                                /
+                                                <input type="text" style="margin-right: 15px;">
+                                                CVC번호 (뒤 3자리)
+                                                <input type="text" style="margin-left: 10px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="inputCell2">
+                                        <div id="inputCellP"><p>비밀번호확인</p></div>
+                                        <div id="inputCellInput">
+                                            <input type="text">
+                                            <h4>등록된 비밀번호를 확인합니다.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="inputCardBt">
+                            <button type="button" id="inputBt">등록</button>
+                            <button type="button" id="exitBt">취소</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
