@@ -15,6 +15,7 @@ let pageActiveIdx = 0; //현재 보고 있는 페이지 그룹 번호
 let currentPageNum = 0; //현재 보고 있는 페이지 번호
 let maxPageNum = 9; //페이지그룹 최대 개수
 console.log(numbers);
+
 for(let i=1; i<=pageCount; i++){
    numbers.innerHTML += `<li><a href="">${i}</a></li>`;
 }
@@ -90,19 +91,31 @@ function displayPage(num){
 displayPage(0);
 const dLeftVector = document.querySelector(".dLeftVector");
 const dRightVector = document.querySelector(".dRightVector");
-dRightVector.addEventListener('click', ()=>{
-  let nextPageNum = pageActiveIdx*maxPageNum+maxPageNum;
-  displayRow(nextPageNum);
-  ++pageActiveIdx;
-  displayPage(pageActiveIdx);
-});
-dLeftVector.addEventListener('click', ()=>{
-  let nextPageNum = pageActiveIdx*maxPageNum-maxPageNum;
-  displayRow(nextPageNum);
-  --pageActiveIdx;
+if(pageActiveIdx !== 0) {
+  dRightVector.addEventListener('click', () => {
+    let nextPageNum = pageActiveIdx * maxPageNum + maxPageNum;
+    displayRow(nextPageNum);
+    ++pageActiveIdx;
+    displayPage(pageActiveIdx);
+  });
+  dLeftVector.addEventListener('click', () => {
+    let nextPageNum = pageActiveIdx * maxPageNum - maxPageNum;
+    displayRow(nextPageNum);
+    --pageActiveIdx;
+    displayPage(pageActiveIdx);
+  });
+}
+nextPageBtn.addEventListener('click', () => {
+  pageActiveIdx++;
+  displayRow(pageActiveIdx);
   displayPage(pageActiveIdx);
 });
 
+prevPageBtn.addEventListener('click', () => {
+  pageActiveIdx--;
+  displayRow(pageActiveIdx);
+  displayPage(pageActiveIdx);
+});
 // nextPageBtn.addEventListener('click',() => {
 //   let nextPageNum = pageActiveIdx;
 //   displayRow(nextPageNum);

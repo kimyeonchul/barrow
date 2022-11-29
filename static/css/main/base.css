@@ -148,8 +148,9 @@ ul {
   width: 130px;
   height: 45px;
   padding: 10px 10px 10px 10px;
-  background: white;
+  background: #3D8361;
   border: 2px solid #3D8361;
+  color:white;
   border-radius: 15px;
   font-family: 'Inter';
   font-style: normal;
@@ -178,6 +179,7 @@ ul {
   height: 45px;
   padding: 10px 10px 10px 10px;
   background: #3D8361;
+  border: 2px solid #3D8361;
   border-radius: 15px;
   font-family: 'Inter';
   font-style: normal;
@@ -288,10 +290,10 @@ a {
 }
 
 
-a:visited {
-  color: black;
-  text-decoration: none;
-}
+/*a:visited {*/
+/*  color: black;*/
+/*  text-decoration: none;*/
+/*}*/
 
 a:hover {
   color: black;

@@ -90,19 +90,32 @@ function displayPage(num){
 displayPage(0);
 const dLeftVector = document.querySelector(".dLeftVector");
 const dRightVector = document.querySelector(".dRightVector");
-dRightVector.addEventListener('click', ()=>{
-  let nextPageNum = pageActiveIdx*maxPageNum+maxPageNum;
-  displayRow(nextPageNum);
-  ++pageActiveIdx;
-  displayPage(pageActiveIdx);
-});
-dLeftVector.addEventListener('click', ()=>{
-  let nextPageNum = pageActiveIdx*maxPageNum-maxPageNum;
-  displayRow(nextPageNum);
-  --pageActiveIdx;
+if(pageActiveIdx !== 0) {
+  dRightVector.addEventListener('click', () => {
+    let nextPageNum = pageActiveIdx * maxPageNum + maxPageNum;
+    displayRow(nextPageNum);
+    ++pageActiveIdx;
+    displayPage(pageActiveIdx);
+  });
+  dLeftVector.addEventListener('click', () => {
+    let nextPageNum = pageActiveIdx * maxPageNum - maxPageNum;
+    displayRow(nextPageNum);
+    --pageActiveIdx;
+    displayPage(pageActiveIdx);
+  });
+}
+
+nextPageBtn.addEventListener('click', () => {
+  pageActiveIdx++;
+  displayRow(pageActiveIdx);
   displayPage(pageActiveIdx);
 });
 
+prevPageBtn.addEventListener('click', () => {
+  pageActiveIdx--;
+  displayRow(pageActiveIdx);
+  displayPage(pageActiveIdx);
+});
 // nextPageBtn.addEventListener('click',() => {
 //   let nextPageNum = pageActiveIdx;
 //   displayRow(nextPageNum);

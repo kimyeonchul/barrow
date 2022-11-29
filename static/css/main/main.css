@@ -260,11 +260,11 @@
 }
 .itembeforedate{
   font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 15.5904px;
-line-height: 16px;
-margin:0px 10px 0px 0px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15.5904px;
+  line-height: 16px;
+  margin:0px 10px 0px 0px;
 }
 .heartImg {
   width: 41px;
