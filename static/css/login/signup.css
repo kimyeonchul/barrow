@@ -1,11 +1,12 @@
 * {
     font-family: 'Inter', sans-serif;
+    font-size: 16px;
 }
 
 body {
     margin: 0%;
     padding: 0%;
-    height: 200vh;
+    height: min-content;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -13,6 +14,7 @@ body {
     margin-bottom: 100px;
     overflow-x: hidden;
 }
+
 
 a {
     text-decoration: none;
@@ -53,7 +55,7 @@ li {
 
 main {
     background-color: #F5F5F5;
-    width: 400px;
+    width: 500px;
     height: min-content;
     z-index: 1;
     padding: 20px;
@@ -92,7 +94,7 @@ main {
 }
 
 .input_birthdate {
-    width: 120px;
+    width: 150px;
     height: 35px;
     border-radius: 10px;
 }
@@ -120,8 +122,8 @@ main {
     background-color: #3D8361;
     border: none;
     color: white;
-    width: 200px;
-    height: 35px;
+    width: 220px;
+    height: 44px;
     border-radius: 10px;
     margin: 0 auto;
 }
@@ -205,7 +207,7 @@ label[for='check'] {
 .name_err_msg,
 .check_err_msg,
 .address_err_msg {
-    font-size: 10px;
+    font-size: 12px;
     color: red;
     line-height: 5px;
     visibility: hidden;
@@ -238,8 +240,8 @@ label[for='check'] {
 }
 
 .member_post_btn{
-    width: 100px;
-    height: 35px;
+    width: 120px;
+    height: 40px;
     border-radius: 10px;
     border: none;
     color: white;
@@ -264,7 +266,7 @@ label[for='check'] {
 
 .input_pwd_icon {
     position: absolute;
-    right: 20px;
+    right: 0px;
     top: 25px;
     visibility: hidden;
 }
