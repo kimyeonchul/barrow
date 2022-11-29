@@ -29,7 +29,7 @@
                         <h1>{{item.title}}</h1>
                     </div>
                     <div class="item_price">
-                        <p><span id="price_font">{{item.price}}</span></p>
+                        <p><span id="price_font">{{ item.price }}</span></p>
                         <p>원 /  </p>
                         <p>{{itemt.get_per_price_display}}</p>
                     </div>
@@ -74,6 +74,10 @@
 
     </div>
     </section>
+    
+    <script>
+        var itemPrice = "{{ item.price }}";
+    </script>
 </body>
 
 </html>

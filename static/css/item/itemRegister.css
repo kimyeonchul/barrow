@@ -135,37 +135,74 @@
     background-color: #EEEBEA;
     width : 230px;
     min-height: 200px;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 17px;
     margin : 30px 30px 10px 30px;
-    padding : 10px;
+    display: flex;
+    flex-wrap: wrap;
   }
 
-  .pic_box > li {
-    margin: 0px;
-    padding: 0px;
+  .pic_box > li:nth-child(1) {
+    width : 230px;
+    height: 130px;
+    margin-right: 5px;
+    padding: 5px;
     display: flex;
     vertical-align: middle;
     align-items: center;
+    position: relative;
   }
 
-  .pic_box .uploadimage {
-    width : 40px;
-    height : 40px;
-    margin-right : 10px;
+  .pic_box > li:nth-child(1) > img {
+    width : 230px;
+    height: 130px;
   }
+
+  .pic_box > li:nth-child(1) > #captain {
+    display: flex;
+    position: absolute;
+    background-color: #1C6758;
+    color: #F5F5F5;
+    font-size: 15px;
+    top : 0px;
+    left : 0px;
+    padding : 10px;
+    opacity: 0.8;
+  }
+
+  #captain {
+    display: none;
+  }
+
+  .pic_box > li {
+    width : 100px;
+    height: 100px;
+    margin-right: 5px;
+    padding: 5px;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    position: relative;
+
+  }
+
+  .pic_box .uploadimage  {
+    width : 100px;
+    height : 100px;
+    }
 
   .pic_box .img_remove {
-    margin-left: auto;
-    margin-right : 10px;
-    padding : 0px;
+    position: absolute;
     border : none;
     color: #FFFFFF;
-    background-color: #959190;
-    border-radius: 60px;
-    width: 20px;
-    height: 20px;
+    background: none;
     cursor: pointer;
+    top : 5px;
+    right : 0px;
+    text-align: center;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  }
+
+  img {
+    object-fit: cover;
   }
 
   .pic_body {
@@ -283,5 +320,5 @@
 }
 
 .uploadimage{
-  display: flex;
+  background-size: cover
 }

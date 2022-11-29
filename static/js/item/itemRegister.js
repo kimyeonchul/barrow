@@ -24,9 +24,7 @@ function findAddr(){
   });
 }
 
-/*
-폼 유효성 검사
-*/
+
 $(function(){
   var now_utc = Date.now()
   var timeOff = new Date().getTimezoneOffset()*60000;
@@ -36,86 +34,47 @@ $(function(){
   //오늘 이후로만 선택
 });
 
-
-function checkForm() {
-  console.log("submit");
-  checkTitle(item_register.title.value);
-  checkArea(item_register.area.value, item_register.area_detail.value);
-  checkPrice(item_register.price.value);
-  checkDate(item_register.start_date.value, item_register.end_date.value);
-  checkCategory(item_register.category.value);
-  checkMemo(item_register.memo.value);
-  //함수 실행되는지 테스트용, true 결과일 때 만 폼 제출하도록함
-}
-
-
-//공백 확인
-function checkExistData(value, dataName) {
-  //console.log(value);
-  if (value == ""){
-    alert(dataName + " 입력해주세요!");
+/*
+폼 유효성 검사
+*/
+function formCheck(frm) {
+  console.log("폼체크");
+  if (frm.title.value == "") {
+    alert("제목을 입력해 주세요");
+    frm.title.focus();
     return false;
   }
+  if (frm.img.value == "") {
+    alert("최소 한 장의 사진을 첨부해 주세요");
+    return false;
+  }
+  if (frm.area.value == "" || frm.area_detail.value == "") {
+    alert("주소를 정확히 입력해 주세요");
+    frm.area_detail.focus();
+    return false;
+  }
+  if (frm.price.value == "") {
+    alert("가격을 입력해 주세요");
+    frm.price.focus();
+    return false;
+    }
+  if (frm.start_date.value == "" || frm.end_date.value == "") {
+    alert("날짜를 정확히 입력해 주세요");
+    return false;
+    }
+  if (frm.memo.value == "") {
+    alert("상세정보를 입력해 주세요");
+    return false;
+    }
   return true;
 }
 
-//제목 확인
-function checkTitle(title){
-  if(!checkExistData(title, "제목을")){
-    return false;
-  }
-}
-
-//거래지역 확인
-function checkArea(area, area_detail){
-  if (!checkExistData(area, "거래지역을"))
-    return false;
-  if (!checkExistData(area_detail, "상세 주소를")) {
-    return false;
-  }
-}
-
-//가격 확인
-function checkPrice(price){
-  if (!checkExistData(price, "가격을")) {
-    return false;
-  }
-}
-
-//대여기간 확인
-function checkDate(start_date, end_date){
-  if (!checkExistData(start_date, "시작 날짜를")){
-    return false;
-  }
-  if (!checkExistData(end_date, "반납 날짜를")) {
-    return false;
-  }
-
-  //반납 날짜보다 시작 날짜가 빠를 때
-  if (start_date >= end_date) {
-    alert("반납 날짜는 시작 날짜보다 빠를 수 없습니다.");
-  }
-
-  //반납 날짜 = 시작 날짜 일때 
-}
-
-//카테고리 확인
-function checkCategory(category){
-  return (category == "선택" ? alert("카테고리를 입력해주세요!") : false)
-
-}
-
-//상세설명 확인
-function checkMemo(memo){
-  if (!checkExistData(memo, "상세 설명을")){
-    return false;
-  }
-}
-
-//사진 개수 확인
-function checkImgNum(){
-  if ($('#img_upload')[0].files.length > 6){
-    return false;
+function submitForm() {
+  if (!formCheck(item_register)) {
+    return;
+  } else {
+    alert("폼 제출");
+    $("#reigester_form").trigger("click");
   }
 }
 
@@ -146,14 +105,11 @@ function loadImg(img){
     for (let i=0; i<img.files.length; i++){
       console.log("업로드");
       let reader = new FileReader();
-      var name = document.getElementById('img_upload').files[i].name;
-      console.log(name);
-
       var node = document.createElement('li');
       var tmp = `
-          <img src="" class="uploadimage">
-          <p>${name}</p>
+          <img src="" class="uploadimage">  
           <input type="button" class="img_remove" value="X">
+          <div id="captain">대표이미지<div>
 
       `
       node.innerHTML = tmp;
