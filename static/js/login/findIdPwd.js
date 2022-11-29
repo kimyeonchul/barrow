@@ -54,7 +54,7 @@ function setFindIdMainpage() {
     //phone_num input err msg 생성
     var findid_inputphonenum_err_msg = document.createElement('p');
     $(findid_inputphonenum_err_msg).addClass('phone_num_err_msg');
-    $(findid_inputphonenum_err_msg).text('이름을 다시 확인해주세요.');
+    $(findid_inputphonenum_err_msg).text('전화번호를 다시 확인해주세요.');
     findid_inputphonenum_wrap.append(findid_inputphonenum_err_msg);
 
     //조회하기 버튼 생성
@@ -77,28 +77,34 @@ function setFindIdInput() {
 function setFindIdBtn() {
     //아이디 페이지에서 조회하기 버튼 클릭 시
     $('.inquire_btn_id').click(function () {
-        if(checkName() && checkPhoneNum()){
-             /*
-    $.ajax({
-        url:'', //request 보낼 서버의 경로
-        type:'post', // 메소드(get, post, put 등)
-        data:{'id':'admin'}, //보낼 데이터
-        success: function(data) {
-            //서버로부터 정상적으로 응답이 왔을 때 실행
-        },
-        error: function(err) {
-            //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+        if (checkName() && checkPhoneNum()) {
+            var name = $('.input_name').val();
+            var phoneNum = $('.input_phone_num').val();
+            $.ajax({
+                url: 'http://127.0.0.1:8000/account/findId/', //request 보낼 서버의 경로
+                type: 'post', // 메소드(get, post, put 등)
+                data: JSON.stringify({
+                    "name": name,
+                    "phoneNum": phoneNum
+                }), //보낼 데이터
+                success: function (data) {
+                    //서버로부터 정상적으로 응답이 왔을 때 실행
+                    if (data.user_id==null)
+                        noMatchingInfomation('.main_main_sec');
+                    else
+                        matchingIdInfomation(data.user_id);
+                },
+                error: function (xhr, textStatus, thrownError) {
+                    alert(
+                        "Could not send URL to Django. Error: " +
+                        xhr.status +
+                        ": " +
+                        xhr.responseText
+                    );
+                },
+            });
+
         }
-    });
-    */
-        }
-        
-        //*뭐 뭐 뭐 하면 정보 없음 페이지
-        var bool = true;
-        if (bool)
-            noMatchingInfomation('.main_main_sec');
-        else
-            matchingIdInfomation();
     });
 }
 
@@ -106,20 +112,20 @@ function setToggleFindIdPwd() {
     //아이디 toggle 버튼 클릭 시
     $('.selectId').click(function () {
         setFindIdMainpage();
-        $('.selectId').css('backgroundColor','#3D8361');
-        $('.selectId').css('color','white');
-        $('.selectPwd').css('backgroundColor','white');
-        $('.selectPwd').css('color','black');
+        $('.selectId').css('backgroundColor', '#3D8361');
+        $('.selectId').css('color', 'white');
+        $('.selectPwd').css('backgroundColor', 'white');
+        $('.selectPwd').css('color', 'black');
 
     });
 
     // 비밀번호 toggle 버튼 클릭 시
     $('.selectPwd').click(function () {
         setFindPwdMainpage();
-        $('.selectPwd').css('backgroundColor','#3D8361');
-        $('.selectPwd').css('color','white');
-        $('.selectId').css('backgroundColor','white');
-        $('.selectId').css('color','black');
+        $('.selectPwd').css('backgroundColor', '#3D8361');
+        $('.selectPwd').css('color', 'white');
+        $('.selectId').css('backgroundColor', 'white');
+        $('.selectId').css('color', 'black');
     });
 }
 
@@ -213,7 +219,7 @@ function setFindPwdInput() {
 function setFindPwdBtn() {
     //아이디 페이지에서 조회하기 버튼 클릭 시
     $('.inquire_btn_pwd').click(function () {
-        if(checkName()){
+        if (checkName()) {
             /*
     $.ajax({
         url:'', //request 보낼 서버의 경로
@@ -266,9 +272,12 @@ function noMatchingInfomation($nomatchingpage) {
     $(goSignup).text('회원가입');
     buttonWrap.append(goSignup);
 
+    $('.goFindIdBtn').click(function(){
+        setFindIdMainpage();
+    })
 }
 
-function matchingIdInfomation() {
+function matchingIdInfomation(user_id) {
     var container = $('.main_main_sec')
     $(container).empty();
     //* div 생성
@@ -279,7 +288,7 @@ function matchingIdInfomation() {
     //* p 생성
     var matchingPageText = document.createElement('p');
     $(matchingPageText).addClass('matchingPageText');
-    $(matchingPageText).text('회원님의 아이디는' + ' 입니다.');
+    $(matchingPageText).text('회원님의 아이디는' +user_id+' 입니다.');
     matchingPage.append(matchingPageText);
 
     //* button 생성
@@ -388,6 +397,7 @@ function checkName() {
         $('#input_name').focus();
         return false;
     }
+    return true;
 }
 
 function checkPwd() {
@@ -399,6 +409,7 @@ function checkPwd() {
         $('#input_new_pwd').focus();
         return false;
     }
+    return true;
 }
 
 function checkRePwd() {
@@ -409,6 +420,7 @@ function checkRePwd() {
         $('.input_new_re_pwd').focus();
         return false;
     }
+    return true;
 }
 
 function checkPhoneNum() {
@@ -419,6 +431,7 @@ function checkPhoneNum() {
         $('.input_phone_num').focus();
         return false;
     }
+    return true;
 }
 
 function setSelect() {
