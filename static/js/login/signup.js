@@ -12,7 +12,7 @@ function setAllInput() {
     setInput($('#input_pwd'), $('.pwd_err_msg'));
     setInput($('#input_pwd'), $('.input_pwd_icon'));
     setInput($('#input_repwd'), $('.repwd_err_msg'));
-
+    setInput($('#input_name'), $('.name_err_msg'));
 }
 
 function setInput($input, $target) {
@@ -32,6 +32,8 @@ function setCheckbox() {
             $('.check').prop('checked', false);
     });
     $('.check').click(function () {
+        console.log($('.check').length);
+        console.log( $("input:checkbox[name='check']:checked").length);
         var all_checkbox = $('.check').length;
         var checked_checkbox = $("input:checkbox[name='check']:checked").length;
         if (all_checkbox == checked_checkbox) {
@@ -76,7 +78,6 @@ function setAcodian() {
 function setSelect() {
     var now = new Date();
     var year = now.getFullYear();
-    console.log(year);
     for (var i = 1; i <= 12; i++) {
         $('#select_month').append("<option value='" + i + "'>" + i + "월</option>");
     }
@@ -96,9 +97,9 @@ function setTextArea() {
 }
 
 //* sign up checking
-$('.submit_btn').click(function () {
+$('#signup_btn').click(function () {
+    console.log(2);
     if(checkID() && checkPwd() && checkRePwd() && checkName() && checkAddress() && checkCheckbox()){
-        /*
     $.ajax({
         url:'', //request 보낼 서버의 경로
         type:'post', // 메소드(get, post, put 등)
@@ -110,7 +111,7 @@ $('.submit_btn').click(function () {
             //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
         }
     });
-    */
+    
     }
 });
 
@@ -122,6 +123,7 @@ function checkID() {
         $('#input_id').focus();
         return false;
     }
+    return true;
 }
 
 function checkPwd() {
@@ -133,6 +135,7 @@ function checkPwd() {
         $('#input_pwd').focus();
         return false;
     }
+    return true;
 }
 
 function checkRePwd() {
@@ -143,6 +146,7 @@ function checkRePwd() {
         $('#input_repwd').focus();
         return false;
     }
+    return true;
 }
 
 function checkName() {
@@ -153,6 +157,7 @@ function checkName() {
         $('#input_name').focus();
         return false;
     }
+    return true;
 }
 
 function checkAddress(){
@@ -164,6 +169,7 @@ function checkAddress(){
         $('#member_detail').focus();
         return false
     }
+    return true;
 }
 
 function checkCheckbox() {
@@ -172,6 +178,7 @@ function checkCheckbox() {
         $('.check_err_msg').css('visibility', 'visible');
         return false;
     }
+    return true;
 }
 /* 주소정보 api*/
 function findAddr() {

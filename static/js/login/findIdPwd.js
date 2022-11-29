@@ -106,11 +106,20 @@ function setToggleFindIdPwd() {
     //아이디 toggle 버튼 클릭 시
     $('.selectId').click(function () {
         setFindIdMainpage();
+        $('.selectId').css('backgroundColor','#3D8361');
+        $('.selectId').css('color','white');
+        $('.selectPwd').css('backgroundColor','white');
+        $('.selectPwd').css('color','black');
+
     });
 
     // 비밀번호 toggle 버튼 클릭 시
-    $('.selctPwd').click(function () {
+    $('.selectPwd').click(function () {
         setFindPwdMainpage();
+        $('.selectPwd').css('backgroundColor','#3D8361');
+        $('.selectPwd').css('color','white');
+        $('.selectId').css('backgroundColor','white');
+        $('.selectId').css('color','black');
     });
 }
 
