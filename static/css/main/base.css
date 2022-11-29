@@ -123,8 +123,15 @@ border-radius: 10px;
 }
 
 .loginOutText{
+  color: #3D8361;
   margin:0px;
   font-size:20px;
+}
+.loginOutText > a{
+  font-size : 20px;
+}
+.regiText{
+  color:white;
 }
 .br {
   background-color: black;
@@ -138,20 +145,38 @@ ul {
 }
 
 .logoutBtn {
-  width: 111px;
-  height: 41px;
-  background: #3D8361;
+  width: 130px;
+  height: 45px;
+  padding: 10px 10px 10px 10px;
+  background: white;
+  border: 2px solid #3D8361;
   border-radius: 15px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
-  line-height: 10px;
-  color: white;
+  line-height: 10px
+}
+.logoutText{
+  color:white;
+}
+.loginBtn {
+  width: 130px;
+  height: 45px;
+  padding: 10px 10px 10px 10px;
+  background: white;
+  border: 2px solid #3D8361;
+  border-radius: 15px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 10px
 }
 .regiBtn {
-  width: 111px;
-  height: 41px;
+  width: 130px;
+  height: 45px;
+  padding: 10px 10px 10px 10px;
   background: #3D8361;
   border-radius: 15px;
   font-family: 'Inter';
@@ -162,17 +187,8 @@ ul {
   color: white;
   margin: 0px 0px 0px 10px;
 }
-.loginBtn {
-  width: 111px;
-  height: 41px;
-  background: #3D8361;
-  border-radius: 15px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 10px;
-  color: white;
+.loginText {
+  color:#3D8361;
 }
 .bottom_items {
   display: flex;
@@ -183,7 +199,9 @@ ul {
   height: 42px;
   justify-content: space-between;
 }
-
+.nav_land {
+  margin : 0px 127px 0px 0px;
+}
 .bottom_items>li {
   text-align: center;
 }
@@ -263,16 +281,12 @@ a {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 23px;
   line-height: 24px;
   color: #000000;
   text-decoration: none;
 }
 
-a:link {
-  color: black;
-  text-decoration: none;
-}
 
 a:visited {
   color: black;
@@ -633,13 +647,13 @@ a:hover {
 .categoryClick {
   position: absolute;
   width: 169px;
-  height: 550px;
+  height: 600px;
   background: #F5F5F5;
   visibility: hidden;
   z-index: 110;
   /* // top:calc(50%-10px); */
   left: calc(50% - 60px);
-  transform: translate(-260%, 42%);
+  transform: translate(-270%, 32%);
 
   /* Gray/Light */
 
@@ -659,4 +673,7 @@ a:hover {
   }
   dt > a:hover{
      color : #3D8361;
+  }
+  .categoryClick > .categoryBox > dt > a {
+    font-size:20px;
   }
