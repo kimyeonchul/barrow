@@ -1,6 +1,8 @@
 from django.db import models
 from _account.models import User
 from _product.models import PRODUCT_TYPES, Product
+import datetime
+from datetime import timedelta
 
 DEAL_STATES = (
     ("WAIT", "대기중"),
@@ -26,5 +28,16 @@ class Deal(models.Model):
     def get_end_date(self):
         return str(self.end_date.year)+". " + str(self.end_date.month)+". " + str(self.end_date.day)
     def get_created(self):
-        return str(self.created.year)+". " + str(self.created.month)+". " + str(self.created.day) 
+        return str(self.created.year)+". " + str(self.created.month)+". " + str(self.created.day)
+    def get_created_from(self):
+        now = datetime.datetime.now()
+        created = now - self.created
+        if created < timedelta(days = 1):
+            return str(created.seconds // 3600)+"시간 전"
+        elif created < timedelta(days = 30):
+            return str(created.days)+"일 전"
+        elif created < timedelta(dayss = 365):
+            return str(created.days // 30)+"달 전"
+        else:
+            return str(created.years // 365)+"년 전"
  

@@ -11,6 +11,7 @@ class User(AbstractUser):
     name = models.CharField(max_length=200)
     birth = models.CharField(max_length=20)
     address = models.TextField(max_length=100)
+    address_detail = models.CharField(max_length = 100,null = False, default = "")
     phoneNum = models.CharField(max_length=20)
     # phoneNum = PhoneNumberField()          #setting.py에 installedappsdp  'phonenumber_field',이거추가
     favorite = models.ManyToManyField("_product.Product", related_name='favor')
