@@ -15,6 +15,7 @@ body {
     overflow-x: hidden;
 }
 
+
 a {
     text-decoration: none;
     font-family: 'Inter', sans-serif;
@@ -206,7 +207,7 @@ label[for='check'] {
 .name_err_msg,
 .check_err_msg,
 .address_err_msg {
-    font-size: 10px;
+    font-size: 12px;
     color: red;
     line-height: 5px;
     visibility: hidden;
@@ -265,7 +266,7 @@ label[for='check'] {
 
 .input_pwd_icon {
     position: absolute;
-    right: 20px;
+    right: 0px;
     top: 25px;
     visibility: hidden;
 }
