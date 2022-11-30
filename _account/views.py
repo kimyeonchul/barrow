@@ -163,8 +163,9 @@ def is_id_duplicated(request):
 def send_SMS(request):
     if request.method == "POST":
         data = json.loads(request.body)
+        print(1)
         if (data["from"] == "find" and User.objects.filter(username = data["id"],name = data["name"],phoneNum = data["phone_num"]).exists()) or data["from"] == "register":
-
+            print(2)
             num = 0
             text = "Barrow 확인 코드 : "
             for i in range(6):
@@ -178,13 +179,20 @@ def send_SMS(request):
             res = send(to,text)
             res = json.loads(res.content)
             
-            if res["statusName"] == "success":
+            try:
+                if res["statusName"] == "success":
+                    context = {
+                        "is_send" : True,
+                        "num": str(num)
+                    }
+                    return JsonResponse(context)
+            except:
                 context = {
-                    "is_send" : True,
-                    "num": str(num)
+                    "is_send" : False,
+                    "num": ""
                 }
-            return JsonResponse(context)
-        
+                print(3)
+
         context = {
             "is_send" : False,
             "num": ""
