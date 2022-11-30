@@ -79,7 +79,9 @@
             </ul>
         </div>
     </section>
-    {% include "main/side.html" %}
+    {% if user.is_authenticated %}
+        {% include "main/side.html" %}
+    {% endif %}
     <div class="allpage">
         <div class="header">
             <section class="header_top">
