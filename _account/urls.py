@@ -10,6 +10,7 @@ urlpatterns = [
     path("findIdPwd/",views.findIdPwd,name = "findIdPwd"),
     path("findId/",views.findId,name = "findId"),
     path("id_duplicated_check/",views.is_id_duplicated,name = "is_id_duplicated"),
+    path("send_SMS/",views.send_SMS,name = "send_sms"),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
     path("mypage/",views.mypage_main,name = "mypage_main"),
