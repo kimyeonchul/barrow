@@ -38,6 +38,7 @@ main {
     z-index: 1;
     padding: 20px;
     margin: 0px;
+    min-width: 280px;
 }
 
 .main_header {
@@ -121,11 +122,17 @@ main {
     main {
         width: 280px;
     }
+    p{
+        font-size: 16px;
+    }
 }
 
 @media screen and (min-width:376px) and (max-width: 576px) {
     main {
-        width: 350px;
+        width: 320px;
+    }
+    p{
+        font-size: 20px;
     }
 }
 
