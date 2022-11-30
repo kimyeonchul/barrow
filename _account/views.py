@@ -140,17 +140,17 @@ def findId(request):
         return JsonResponse(context)
 
 @csrf_exempt
-def findId(request):
+def is_id_duplicated(request):
     if request.method == "POST":
         data = json.loads(request.body)
 
         if User.objects.filter(username = data["id"]).exists():
             context = {
-                "user_id": User.objects.get(name=data["name"], phoneNum=data["phoneNum"], username = data["id"]).username
+                "is_id_duplicated": True
             }
         else:
             context = {
-                "user_id": None
+                "is_id_duplicated": False
             }
         return JsonResponse(context)
 #### mypage ####
@@ -217,18 +217,17 @@ def mypage_modify(request):
 @csrf_exempt
 def mypage_modify_confirm(request):
     if request.method == "POST":
-        data = json.loads(request.body)
-
-        if User.objects.filter(id=data["id"]).exists():
-            if check_password(data["pwd"], User.objects.get(id=data["id"]).password):
+        
+            if check_password(request.POST["pwd"], request.user.password):
                 return redirect("account:mypage_modify")
             else:
-                context = {
-                    "error": True,
-                }
-        return JsonResponse(context)
-    else:
-        return render(request, "mypage/mypage_modify.html")
+                messages.add_message(
+                request,
+                messages.ERROR,
+                '비밀번호가 틀렸습니다.'
+                )   
+            
+    return render(request, "mypage/mypage_modify.html")       
 
 
 def mypage_favorites(request):

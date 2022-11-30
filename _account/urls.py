@@ -9,7 +9,9 @@ urlpatterns = [
     path("getUserInfo/",views.getUserInfo, name="getUserInfo"),
     path("findIdPwd/",views.findIdPwd,name = "findIdPwd"),
     path("findId/",views.findId,name = "findId"),
+    path("id_duplicated_check/",views.is_id_duplicated,name = "is_id_duplicated"),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
     path("mypage/",views.mypage_main,name = "mypage_main"),
     path("mypage/notice/",views.mypage_notice,name = "mypage_notice"),
     path("mypage/modify/",views.mypage_modify, name = "mypage_modify"),
@@ -19,5 +21,6 @@ urlpatterns = [
     path("mypage/chatroom/",views.mypage_chatroom,name = "mypage_chatroom"),
     path("mypage/account/",views.mypage_account,name = "mypage_account"),
     path("mypage/use/<str:type>/",views.mypage_use,name = "mypage_use"),
+    
 
 ]
