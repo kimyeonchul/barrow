@@ -163,7 +163,7 @@ def is_id_duplicated(request):
 def send_SMS(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        if User.objects.filter(username = data["id"],name = data["name"],phoneNum = data["phone_num"]).exists():
+        if (data["from"] == "find" and User.objects.filter(username = data["id"],name = data["name"],phoneNum = data["phone_num"]).exists()) or data["from"] == "register":
 
             num = 0
             text = "Barrow 확인 코드 : "
