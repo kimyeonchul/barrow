@@ -13,6 +13,8 @@
     <link rel="stylesheet/less" type="text/css" href="{% static 'css/main/map.css' %}" />
     <script src="https://cdn.jsdelivr.net/npm/less"></script>
     <script type="text/javascript" src="{% static 'js/main/map.js' %}" defer></script>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cdf1ab47ddf57162ce7abadb88276242&libraries=services"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <title>Barrow</title>
 </head>
@@ -34,116 +36,61 @@
                     </div>
                 </div>
                 <!--전체 width가   -->
-                <section class="bestitems">
+                 {% for product, type in products %}
+                    {% if forloop.counter0|divisibleby:4 %}
+                    <section class="bestitems">
+                    {% endif %}
+                    {% if product %}
                     <div class="bestitem">
-                        <img class="bestitemImg" src="{% static 'img/img/itemimg/itemimg1.png' %}">
-                        <div class="bestitemdescription">
-                            <ul>
-                                <li>[사용감 X] 컴퓨터 대여해드려</li>
-                            </ul>
-                            <ul>
-                                <div class="TransMethodImg">
-                                    <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
-                                    <li class="check"><img src="{% static 'img/img/itemimg/check.png' %}"></li>
-                                </div>
-                                <ul class="priceAndDay">
-                                    <li>
-                                        <h1 class="bestitemPrice">20,000</h1>
-                                    </li>
-                                    <li>
-                                        <p>원 /</p>
-                                        <p class="bestitemday">day</p>
-                                    </li>
-                                    <li>
-                                        <p class="">3일 전</p>
-                                    </li>
+                        <a href="#" class="bestitemlink">
+                            <img class="bestitemImg" src="{{product.get_first_image.image}}"
+                                 style="  border-bottom-left-radius: 0px;
+                                 border-bottom-right-radius: 0px;">
+                            <div class="bestitemdescription">
+                                <ul>
+                                    <li>{{product.title}}</li>
                                 </ul>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="bestitem">
-                        <img class="bestitemImg" src="{% static 'img/img/itemimg/itemimg1.png' %}">
-                        <div class="bestitemdescription">
-                            <ul>
-                                <li>[사용감 X] 컴퓨터 대여해드려</li>
-                            </ul>
-                            <ul>
-                                <div class="TransMethodImg">
-    <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
-                                    <li class="check"><img src="{% static 'img/img/itemimg/check.png' %}"></li>
-                                </div>
-                                <ul class="priceAndDay">
-                                    <li>
-                                        <h1 class="bestitemPrice">20,000</h1>
-                                    </li>
-                                    <li>
-                                        <p>원 /</p>
-                                        <p class="bestitemday">day</p>
-                                    </li>
-                                    <li>
-                                        <p class="">3일 전</p>
-                                    </li>
+                                <ul>
+                                  <div class="TransMethodImg">
+                                        <li class="juso">{{product.area}}</li>
+                                        <div class="dealmethod">
+                                        {% if type.0 %}
+                                            <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
+                                        {% endif %}
+                                        {% if type.1 %}
+                                            <li class="check"><img src="{% static 'img/img/itemimg/check.png' %}"></li>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                    <ul class="priceAndDay">
+                                        <li>
+                                            <h1 class="bestitemPrice">{{product.price}}</h1>
+                                              <p class="krPrice">원 /</p>
+                                        </li>
+                                        <li>
+                                            <p class="bestitemday"><strong>{{product.get_price_per_display}}</strong></p>
+                                        </li>
+                                    </ul>
+                                    <div class="itemdate">
+                                    <p class="itembeforedate">{{product.get_created}}</p>
+                                    </div>
                                 </ul>
-                            </ul>
+                            </div>
+                            </a>
                         </div>
-                    </div>
-                    <div class="bestitem">
-                        <img class="bestitemImg" src="{% static 'img/img/itemimg/itemimg1.png' %}">
-                        <div class="bestitemdescription">
-                            <ul>
-                                <li>[사용감 X] 컴퓨터 대여해드려</li>
-                            </ul>
-                            <ul>
-                                <div class="TransMethodImg">
-      <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
-                                    <li class="check"><img src="{% static 'img/img/itemimg/check.png' %}"></li>
-                                </div>
-                                <ul class="priceAndDay">
-                                    <li>
-                                        <h1 class="bestitemPrice">20,000</h1>
-                                    </li>
-                                    <li>
-                                        <p>원 /</p>
-                                        <p class="bestitemday">day</p>
-                                    </li>
-                                    <li>
-                                        <p class="">3일 전</p>
-                                    </li>
-                                </ul>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="bestitem">
-                        <img class="bestitemImg" src="{% static 'img/img/itemimg/itemimg1.png' %}">
-                        <div class="bestitemdescription">
-                            <ul>
-                                <li>[사용감 X] 컴퓨터 대여해드려</li>
-                            </ul>
-                            <ul>
-                                <div class="TransMethodImg">
-    <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
-                                    <li class="check"><img src="{% static 'img/img/itemimg/check.png' %}"></li>
-                                </div>
-                                <ul class="priceAndDay">
-                                    <li>
-                                        <h1 class="bestitemPrice">20,000</h1>
-                                    </li>
-                                    <li>
-                                        <p>원 /</p>
-                                        <p class="bestitemday">day</p>
-                                    </li>
-                                    <li>
-                                        <p class="">3일 전</p>
-                                    </li>
-                                </ul>
-                            </ul>
-                        </div>
-                    </div>
+                    {% endif %}
+                {% if forloop.counter|divisibleby:4 %}
+                        </section>
+                    {% endif %}
+                {% endfor %}
     
                 </section>
             </section>
             <section class="mapApi">
-                <div>11</div>
+                <button id = "find-me">Show my location</button><br/>
+                <p id = "status"></p>
+                <a id = "map-link" target="_blank"></a>
+                <div id="map" style="width:400px;height:400px;"></div>
             </section>
         </section>
         <section class="pagination">

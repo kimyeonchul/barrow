@@ -12,7 +12,13 @@ const circle = document.querySelector(".circle");
 let currentIndex = 0; // 현재 슬라이드 화면 인덱스
 
 function Indexvalue(){
-    index_now.innerHTML = `${currentIndex+1}`;
+  console.log(currentIndex);
+  if(currentIndex === 3){
+    index_now.innerHTML = `${currentIndex-inners.length+1}`;
+  }
+  else{
+   index_now.innerHTML = `${currentIndex+1}`;
+  }
     index_all.innerHTML = `${inners.length}`;
   }
   Indexvalue();
