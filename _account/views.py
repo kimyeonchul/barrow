@@ -139,6 +139,20 @@ def findId(request):
             }
         return JsonResponse(context)
 
+@csrf_exempt
+def findId(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        if User.objects.filter(username = data["id"]).exists():
+            context = {
+                "user_id": User.objects.get(name=data["name"], phoneNum=data["phoneNum"], username = data["id"]).username
+            }
+        else:
+            context = {
+                "user_id": None
+            }
+        return JsonResponse(context)
 #### mypage ####
 
 
@@ -339,3 +353,4 @@ def change_pwd(request):
         return render(request, "mypage/mypage_modifyPw.html")
     else:
         return render(request, "mypage/mypage_modifyPw.html")
+
