@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.contrib import auth
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from .forms import CustomUserChangeForm
@@ -123,6 +123,9 @@ def home(request):
 
 
 def findIdPwd(request):
+    context = {}
+    if request.method == "POST":
+        return render(request, "")
     return render(request, "findIdPwd.html")
 
 
@@ -160,31 +163,34 @@ def is_id_duplicated(request):
 def send_SMS(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        
-        num = 0
-        text = "Barrow 확인 코드 : "
-        for i in range(6):
-            num*=10
-            num += random.randint(0,9)
-        text += str(num)
-        text +=". 이 코드를 다른 사람과 공유하지 마십시오. 당사 직원은 이 코드를 절대 요구하지 않습니다."
+        if User.objects.filter(username = data["id"],name = data["name"],phoneNum = data["phone_num"]).exists():
 
-        to = data["phone_num"]
+            num = 0
+            text = "Barrow 확인 코드 : "
+            for i in range(6):
+                num*=10
+                num += random.randint(0,9)
+            text += str(num)
+            text +=". 이 코드를 다른 사람과 공유하지 마십시오. 당사 직원은 이 코드를 절대 요구하지 않습니다."
 
-        res = send(to,text)
-        res = json.loads(res.content)
+            to = data["phone_num"]
+
+            res = send(to,text)
+            res = json.loads(res.content)
+            
+            if res["statusName"] == "success":
+                context = {
+                    "is_send" : True,
+                    "num": str(num)
+                }
+            return JsonResponse(context)
         
-        if res["statusName"] == "success":
-            context = {
-                "is_send" : True,
-                "num": str(num)
-            }
-        else:
-            context = {
-                "is_send" : False,
-                "num": ""
-            }
+        context = {
+            "is_send" : False,
+            "num": ""
+        }
         return JsonResponse(context)
+
 #### mypage ####
 
 
@@ -355,7 +361,7 @@ def mypage_use(request, type):
 
         return render(request, "mypage/mypage_useList.html",context)
 
-
+@csrf_exempt
 def change_pwd(request):
     if request.method == "POST":
         if request.user.is_authenticated:
@@ -375,13 +381,29 @@ def change_pwd(request):
                     messages.ERROR,
                     '비밀번호가 일치하지 않습니다.'
                 )
-        else:
             messages.add_message(
                 request,
                 messages.ERROR,
                 '비밀번호 변경 실패'
             )
-        return render(request, "mypage/mypage_modifyPw.html")
+            return render(request, "mypage/mypage_modifyPw.html")
+        else:
+            data = json.loads(request.body)  
+            user = User.objects.get(username = data["id"])              
+            form = SetPasswordForm(user, data=data["pwd"])
+            
+            if form.is_valid():
+                user = form.save()
+                return redirect('account:login')
+            else:
+                print(form.errors)
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    '비밀번호 변경 실패'
+                )
+                return render(request, "findIdPwd.html")
+        
     else:
         return render(request, "mypage/mypage_modifyPw.html")
 
