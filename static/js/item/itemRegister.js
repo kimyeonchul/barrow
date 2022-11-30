@@ -24,6 +24,10 @@ function findAddr(){
   });
 }
 
+$('#area').click(function(){
+  findAddr();
+});
+
 
 $(function(){
   var now_utc = Date.now()
@@ -38,16 +42,15 @@ $(function(){
 폼 유효성 검사
 */
 function formCheck(frm) {
-  console.log("폼체크");
   if (frm.title.value == "") {
     alert("제목을 입력해 주세요");
     frm.title.focus();
     return false;
   }
-  if (frm.img.value == "") {
-    alert("최소 한 장의 사진을 첨부해 주세요");
-    return false;
-  }
+  // if (frm.img[0].value == "") {
+  //   alert("최소 한 장의 사진을 첨부해 주세요");
+  //   return false;
+  // }
   if (frm.area.value == "" || frm.area_detail.value == "") {
     alert("주소를 정확히 입력해 주세요");
     frm.area_detail.focus();
@@ -73,8 +76,9 @@ function submitForm() {
   if (!formCheck(item_register)) {
     return;
   } else {
-    alert("폼 제출");
-    $("#reigester_form").trigger("click");
+    console.log("ㅎㅇ");
+    $('#register_form').trigger('click');
+    //realSubmit();
   }
 }
 
@@ -122,8 +126,9 @@ function loadImg(img){
       reader.readAsDataURL(img.files[i]);
 
       liArr[i].querySelector('.img_remove').addEventListener("click", (e)=>{
+        var fileNum = Array.from(liArr).indexOf(e.currentTarget);
         liArr[i].remove();
-        removeImg(i);
+        removeImg(fileNum);
       });
     }
   }
@@ -133,7 +138,7 @@ function loadImg(img){
 function removeImg(fileNum){
   const dataTransfer = new DataTransfer();
   let files = $('#img_upload')[0].files;	
-  let fileArray = Array.from(files);	//변수에 할당된 파일을 배열로 변환(FileList -> Array)
+  let fileArray = Array.from(files);	//변수에 할당된 파일을 배열로 변환(FileList -> Array) 
 
   fileArray.splice(fileNum, 1);	//해당하는 index의 파일을 배열에서 제거
   fileArray.forEach(file => { 
@@ -149,3 +154,4 @@ function rmChilderen(){
     parent.firstChild.remove()
   }
 }
+

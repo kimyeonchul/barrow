@@ -21,7 +21,7 @@ def new(request):
             new.save()
             print(request.FILES)
             print(request.FILES.getlist('img'))
-            for img in request.FILES.getlist('img'):
+            for img in request.FILES.getlist('img[]'):
                 print(img)
                 i = 0 
                 new_image = Product_image.objects.create(product = new, image = img, index = i)
