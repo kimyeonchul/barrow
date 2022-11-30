@@ -27,14 +27,14 @@
         </div>
         <div class="main_main_sec">
             <form action="" class="form_IdPwd">
-                <label for="input_id" >ID</label><br>
+                <label for="input_id">ID</label><br>
                 <div>
                     <input type="text" class="input_id" id="input_id" name="username"><br>
                     <p class="id_error_msg">아이디를 확인해주세요.</p>
                 </div>
                 <label for="input_pwd">password</label><br>
                 <div>
-                    <input type="password" class="input_pwd" id="input_pwd"name="password">
+                    <input type="password" class="input_pwd" id="input_pwd" name="password">
                     <p class="pwd_error_msg">비밀번호를 확인해주세요.</p>
                 </div>
                 <a class="find_idpwd_a" href="{% url 'account:findIdPwd' %}">아이디나 비밀번호를 잊어버렸나요?</a>

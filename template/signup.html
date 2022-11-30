@@ -70,7 +70,15 @@
                         <p class="address_err_msg">필수항목 입니다.</p>
                     </li>
                     <li class="submit_wrap">
-                        <button class="submit_btn">본인인증하기</button>
+                        <label for="input_name">본인인증</label><br>
+                        <div class="send_verification_wrap">
+                            <input type="tel" class="input_outer" id="input_phoneNum">
+                            <button type="button" class="submit_btn" id="send_verification_btn">인증번호받기</button>
+                        </div>
+                        <div class="verify_verification_wrap" >
+                            <input type="password" class="input_outer" id="input_verifyNum" disabled>
+                            <button type="button" class="submit_btn" id="verify_verification_btn" disabled>인증하기</button>
+                        </div>
                     </li>
                 </ul>
 

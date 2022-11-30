@@ -48,7 +48,8 @@ function setFindIdMainpage() {
     //phone_num input 생성
     var findid_inputphonenum = document.createElement('input');
     $(findid_inputphonenum).addClass('input_phone_num');
-    $(findid_inputphonenum).prop('placeholder', ' phone num');
+    $(findid_inputphonenum).prop("type", "tel");
+    $(findid_inputphonenum).prop('placeholder', ' - 없이 입력하세요.');
     findid_inputphonenum_wrap.append(findid_inputphonenum);
 
     //phone_num input err msg 생성
@@ -67,6 +68,13 @@ function setFindIdMainpage() {
     // setting js code
     setFindIdInput();
     setFindIdBtn();
+    setInputPhoneNum();
+}
+
+function setInputPhoneNum(){
+    $(".input_phone_num").keyup(function() { 
+        $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+    });
 }
 
 function setFindIdInput() {
@@ -161,36 +169,58 @@ function setFindPwdMainpage() {
     $(findpwd_inputname_err_msg).text('이름을 다시 확인해주세요.');
     findpwd_inputname_wrap.append(findpwd_inputname_err_msg);
 
-    //birthdate input label 생성
-    var findpwd_input_birthdate_label = document.createElement('label');
-    $(findpwd_input_birthdate_label).text('생년월일');
-    findpwd_form.append(findpwd_input_birthdate_label);
+     //id input div 생성
+     var findpwd_inputid_wrap = document.createElement('div');
+     $(findpwd_inputid_wrap).addClass('input_id_wrap');
+     findpwd_form.append(findpwd_inputid_wrap);
+ 
+     //id input label 생성
+     var findpwd_inputid_label = document.createElement('label');
+     $(findpwd_inputid_label).text('아이디');
+     findpwd_inputid_wrap.append(findpwd_inputid_label);
+ 
+     //name input 생성
+     var findpwd_inputnid = document.createElement('input');
+     $(findpwd_inputnid).addClass('input_id');
+     $(findpwd_inputnid).prop('placeholder', ' id');
+     findpwd_inputid_wrap.append(findpwd_inputnid);
+ 
+     //name input err msg 생성
+     var findpwd_inputid_err_msg = document.createElement('p');
+     $(findpwd_inputid_err_msg).addClass('id_err_msg');
+     $(findpwd_inputid_err_msg).text('아이디를 다시 확인해주세요.');
+     findpwd_inputid_wrap.append(findpwd_inputid_err_msg);
 
-    //birthdate input div 생성
-    var findpwd_input_birthdate_wrap = document.createElement('div');
-    $(findpwd_input_birthdate_wrap).addClass('input_brithdate_wrap');
-    findpwd_form.append(findpwd_input_birthdate_wrap);
+    // //birthdate input label 생성
+    // var findpwd_input_birthdate_label = document.createElement('label');
+    // $(findpwd_input_birthdate_label).text('생년월일');
+    // findpwd_form.append(findpwd_input_birthdate_label);
 
-    //birthdate year select 생성
-    var findpwd_input_year_birthdate = document.createElement('select');
-    $(findpwd_input_year_birthdate).addClass('input_birthdate');
-    $(findpwd_input_year_birthdate).attr('id', 'select_year')
-    $(findpwd_input_year_birthdate).prop('placeholder', ' year');
-    findpwd_input_birthdate_wrap.append(findpwd_input_year_birthdate);
+    // //birthdate input div 생성
+    // var findpwd_input_birthdate_wrap = document.createElement('div');
+    // $(findpwd_input_birthdate_wrap).addClass('input_brithdate_wrap');
+    // findpwd_form.append(findpwd_input_birthdate_wrap);
 
-    //birthdate month select 생성
-    var findpwd_input_month_birthdate = document.createElement('select');
-    $(findpwd_input_month_birthdate).addClass('input_birthdate');
-    $(findpwd_input_month_birthdate).attr('id', 'select_month')
-    $(findpwd_input_month_birthdate).prop('placeholder', ' month');
-    findpwd_input_birthdate_wrap.append(findpwd_input_month_birthdate);
+    // //birthdate year select 생성
+    // var findpwd_input_year_birthdate = document.createElement('select');
+    // $(findpwd_input_year_birthdate).addClass('input_birthdate');
+    // $(findpwd_input_year_birthdate).attr('id', 'select_year')
+    // $(findpwd_input_year_birthdate).prop('placeholder', ' year');
+    // findpwd_input_birthdate_wrap.append(findpwd_input_year_birthdate);
 
-    //birthdate yaer select 생성
-    var findpwd_input_date_birthdate = document.createElement('select');
-    $(findpwd_input_date_birthdate).addClass('input_birthdate');
-    $(findpwd_input_date_birthdate).attr('id', 'select_date')
-    $(findpwd_input_date_birthdate).prop('placeholder', ' date');
-    findpwd_input_birthdate_wrap.append(findpwd_input_date_birthdate);
+    // //birthdate month select 생성
+    // var findpwd_input_month_birthdate = document.createElement('select');
+    // $(findpwd_input_month_birthdate).addClass('input_birthdate');
+    // $(findpwd_input_month_birthdate).attr('id', 'select_month')
+    // $(findpwd_input_month_birthdate).prop('placeholder', ' month');
+    // findpwd_input_birthdate_wrap.append(findpwd_input_month_birthdate);
+
+    // //birthdate yaer select 생성
+    // var findpwd_input_date_birthdate = document.createElement('select');
+    // $(findpwd_input_date_birthdate).addClass('input_birthdate');
+    // $(findpwd_input_date_birthdate).attr('id', 'select_date')
+    // $(findpwd_input_date_birthdate).prop('placeholder', ' date');
+    // findpwd_input_birthdate_wrap.append(findpwd_input_date_birthdate);
 
     //본인인증 버튼 생성
     var findpwd_submit_btn = document.createElement('button');
@@ -208,7 +238,7 @@ function setFindPwdMainpage() {
 
     // setting js code
     setFindPwdInput();
-    setSelect();
+    //setSelect();
     setFindPwdBtn();
 }
 
@@ -217,31 +247,36 @@ function setFindPwdInput() {
 }
 
 function setFindPwdBtn() {
-    //아이디 페이지에서 조회하기 버튼 클릭 시
+    //비밀번호 페이지에서 조회하기 버튼 클릭 시
     $('.inquire_btn_pwd').click(function () {
-        if (checkName()) {
-            /*
-    $.ajax({
-        url:'', //request 보낼 서버의 경로
-        type:'post', // 메소드(get, post, put 등)
-        data:{'id':'admin'}, //보낼 데이터
-        success: function(data) {
-            //서버로부터 정상적으로 응답이 왔을 때 실행
-        },
-        error: function(err) {
-            //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
-        }
-    });
-    */
-        }
-        //*뭐 뭐 뭐 하면 정보 없음 페이지
-        var bool = false;
-        if (bool)
-            noMatchingInfomation('.main_main_sec');
-        else
-            setNewPasswordPage();
+     if (checkName() && checkID()) {
+    //     var name = $('.input_name').val();
+    //     var id = $('.input_id').val();
+    //     $.ajax({
+    //         url: '', //request 보낼 서버의 경로
+    //         type: 'post', // 메소드(get, post, put 등)
+    //         data: JSON.stringify({
+                
+    //         }), //보낼 데이터
+    //         success: function (data) {
+    //             //서버로부터 정상적으로 응답이 왔을 때 실행
+    //             if (data.user_id==null)
+    //                 noMatchingInfomation('.main_main_sec');
+    //             else
+    //             setNewPasswordPage();
+    //         },
+    //         error: function (xhr, textStatus, thrownError) {
+    //             alert(
+    //                 "Could not send URL to Django. Error: " +
+    //                 xhr.status +
+    //                 ": " +
+    //                 xhr.responseText
+    //             );
+    //         },
+       }
 
-    });
+     });
+    //}
 }
 
 function noMatchingInfomation($nomatchingpage) {
@@ -400,6 +435,17 @@ function checkName() {
     return true;
 }
 
+function checkID() {
+    var checkid = $('.input_id').val();
+    var regExp = /^[a-z]+[a-z0-9]{4,19}$/g;
+    if (!regExp.test(checkid)) {
+        $('.id_err_msg').css('visibility', 'visible');
+        $('.input_id').focus();
+        return false;
+    }
+    return true;
+}
+
 function checkPwd() {
     var checkpwd = $('.input_new_pwd').val();
     var regExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
@@ -434,17 +480,16 @@ function checkPhoneNum() {
     return true;
 }
 
-function setSelect() {
-    var now = new Date();
-    var year = now.getFullYear();
-    console.log(year);
-    for (var i = 1; i <= 12; i++) {
-        $('#select_month').append("<option value='" + i + "'>" + i + "월</option>");
-    }
-    for (var i = 1; i <= 31; i++) {
-        $('#select_date').append("<option value='" + i + "'>" + i + "일</option>");
-    }
-    for (var i = year - 50; i <= year; i++) {
-        $('#select_year').append("<option value='" + i + "'>" + i + "년</option>");
-    }
-}
+// function setSelect() {
+//     var now = new Date();
+//     var year = now.getFullYear();
+//     for (var i = 1; i <= 12; i++) {
+//         $('#select_month').append("<option value='" + i + "'>" + i + "월</option>");
+//     }
+//     for (var i = 1; i <= 31; i++) {
+//         $('#select_date').append("<option value='" + i + "'>" + i + "일</option>");
+//     }
+//     for (var i = year - 50; i <= year; i++) {
+//         $('#select_year').append("<option value='" + i + "'>" + i + "년</option>");
+//     }
+// }
