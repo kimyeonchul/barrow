@@ -133,7 +133,6 @@ def home(request):
     context.update(base(request))
     context.update(side(request))
 
-        
     return render(request, "main/main.html", context)
 
 def best(request, page_num):

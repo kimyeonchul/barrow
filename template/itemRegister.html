@@ -28,11 +28,12 @@
                 </div>
                 <hr class="hr-normal">
                 
-                {% if product_id %}
+                {% if product_id == 0 %}
                     <form name="item_register" id="item_register" method="post" action = "{% url 'products:new' %}">
                 {% else %}
                     <form name="item_register" id="item_register" method="post" action = "{% url 'products:modify' product_id %}">
-                {% endif %}    
+                {% endif %}
+                    {% csrf_token %}
                     <div class="pic_body">
                         <div class="pic_box"></div> 
                         <input type="file" id="img_upload" name ="img" class="img_upload" accept="image/*" required multiple style="display: none;">
@@ -50,7 +51,7 @@
                                 <label for="area">거래지역</label></li>
                                 <input type="text" name="area" id="area" value = {{item.area}}>
                                 <button type="button" id="area_btn" onclick="findAddr()">주소<br>찾기</button>
-                                <input type="text" name="area_detail" id="area_detail" placeholder="상세주소 입력" value = {{item.area}}>
+                                <input type="text" name="area_detail" id="area_detail" placeholder="상세주소 입력" value = {{item.area_detail}}>
                         
                         </div>
                         <hr class="hr-light">

@@ -16,17 +16,20 @@ def new(request):
         
         if form.is_valid():
             new = form.save(commit = False)
-            new.area = request.POST.get("area")+request.POST.get("area_detail")
             new.productor = request.user
             new.views = 0
             new.save()
-            for img in request.FILES.getlist('images'):
+            print(request.FILES)
+            print(request.FILES.getlist('img'))
+            for img in request.FILES.getlist('img'):
+                print(img)
                 i = 0 
                 new_image = Product_image.objects.create(product = new, image = img, index = i)
                 new_image.save()
                 i+=1
         else:
             print(form.errors)
+        return redirect("barrow:home")
     context = {}
     context.update(base(request))
     context.update(side(request))
@@ -52,6 +55,7 @@ def modify(request, product_id):
                 i+=1
             product.title = form.cleaned_data['title']
             product.area = form.cleaned_data['area']
+            product.area_detail = form.cleaned_data["area_detail"]
             product.type = form.cleaned_data['type']
             product.price = form.cleaned_data['price']
             product.price_per = form.cleaned_data['price_per']

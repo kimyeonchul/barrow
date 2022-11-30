@@ -5,10 +5,13 @@ $(document).ready(function () {
     setCheckbox();
     setAllInput();
     setTextArea();
+    setRealtimevalidation();
+    setInputPhoneNum();
 });
 
 function setAllInput() {
     setInput($('#input_id'), $('.id_err_msg'));
+    setInput($('#input_id'), $('.id_dup_msg'));
     setInput($('#input_pwd'), $('.pwd_err_msg'));
     setInput($('#input_pwd'), $('.input_pwd_icon'));
     setInput($('#input_repwd'), $('.repwd_err_msg'));
@@ -247,9 +250,55 @@ function setTextArea() {
     $('.check_textarea2').val(t2);
 }
 
+function setRealtimevalidation() {
+    $("#input_id").on("change keyup paste", function () {
+        checkID();
+        var id = $("#input_id").val();
+        $.ajax({
+            url: 'http://127.0.0.1:8000/account/id_duplicated_check/', //request 보낼 서버의 경로
+            type: 'post', // 메소드(get, post, put 등)
+            data: JSON.stringify({
+                "id": id
+            }), //보낼 데이터
+            success: function (data) {
+                //서버로부터 정상적으로 응답이 왔을 때 실행
+                if (data.is_id_duplicated == true)
+                    $('.id_dup_msg').css('visibility', 'visible');
+                else
+                    $('.id_dup_msg').css('visibility', 'hidden');
+            },
+            error: function (xhr, textStatus, thrownError) {
+                alert(
+                    "Could not send URL to Django. Error: " +
+                    xhr.status +
+                    ": " +
+                    xhr.responseText
+                );
+            },
+        });
+    });
+
+    $("#input_pwd").on("propertychange change keyup paste input", function () {
+        checkPwd();
+    });
+
+    $("#input_repwd").on("propertychange change keyup paste input", function () {
+        checkRePwd();
+    });
+
+    $("#input_name").on("propertychange change keyup paste input", function () {
+        checkName();
+    });
+}
+
+function setInputPhoneNum(){
+    $("#input_phoneNum").keyup(function() { 
+        $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+    });
+}
+
 //* sign up checking
 $('#signup_btn').click(function () {
-    console.log(2);
     if (checkID() && checkPwd() && checkRePwd() && checkName() && checkAddress() && checkCheckbox()) {
         $.ajax({
             url: '', //request 보낼 서버의 경로
@@ -264,6 +313,19 @@ $('#signup_btn').click(function () {
         });
 
     }
+});
+
+$('#send_verification_btn').click(function(){
+    let phonenum = $('#input_phoneNum').val();
+    $("#input_verifyNum").attr("disabled", false); 
+    $("#verify_verification_btn").attr("disabled", false); 
+
+});
+
+$('#verify_verification_btn').click(function(){
+    let verifynum = $('#input_verifyNum').val();
+    alert("인증 성공");
+
 });
 
 function checkID() {
