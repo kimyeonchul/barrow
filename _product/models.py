@@ -34,6 +34,7 @@ class Product(models.Model):
     productor = models.ForeignKey("_account.User",on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     area = models.CharField(max_length=100, verbose_name='거래 장소', null = False, default = "")
+    area_detail = models.CharField(max_length=100, verbose_name='거래 장소', null = False, default = "")
     type = models.CharField(max_length = 2, choices = PRODUCT_TYPES, null = False)
     price = models.IntegerField(null = False)
     price_per = models.CharField(null = False, max_length = 20,choices = PRODUCT_PRICE_PERS)

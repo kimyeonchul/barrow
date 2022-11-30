@@ -63,7 +63,7 @@
                 {% for product, type in best_products %}
                     {% if product %}
                         <div class="bestitem">
-                             <a href="#" class="bestitemlink">
+                             <a href="{% url 'products:itempage' product.id %}" class="bestitemlink">
                             <img class="bestitemImg" src="{{product.get_first_image.image}}"
                              style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
@@ -73,7 +73,7 @@
                                 </ul>
                                 <ul>
                                     <div class="TransMethodImg">
-                                        <li class="juso">서울 서대문구 북가좌동</li>
+                                        <li class="juso">{{product.address}}+{{product.address_detail}}</li>
                                         <div class="dealmethod">
                                         {% if type.0 %}
                                             <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
