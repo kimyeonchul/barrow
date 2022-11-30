@@ -1,20 +1,20 @@
 
 
 //페이지네이션 ----------------------------------------------------------------------
-const rowsPerPage = 8;
+const rowsPerPage = 20;
 const rows = document.querySelectorAll('.bestitem');
 const rowsCount = rows.length; //100/8  12.9 -> 13
-const pageCount = Math.ceil(100/rowsPerPage);
+const pageCount = Math.ceil(item_num/20);
 const numbers = document.querySelector('#numbers');
 
 const prevPageBtn = document.querySelector('.prevPageBtns');
 const nextPageBtn = document.querySelector('.nextPageBtns');
-console.log(prevPageBtn);
+console.log(pageCount);
 let pageActiveIdx = 0; //현재 보고 있는 페이지 그룹 번호
 let currentPageNum = 0; //현재 보고 있는 페이지 번호
 let maxPageNum = 9; //페이지그룹 최대 개수
 console.log(numbers);
-for(let i=1; i<pageCount; i++){
+for(let i=1; i<=pageCount; i++){
    numbers.innerHTML += `<li><a href="">${i}</a></li>`;
 }
 
