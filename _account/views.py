@@ -9,6 +9,7 @@ from .forms import CustomUserChangeForm
 from django.core.serializers import serialize
 from django.shortcuts import render, redirect
 import json
+import random
 from django.http import HttpResponse, JsonResponse
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
@@ -16,6 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 from _account.models import User
 from _deal.models import Deal
 
+from _account.sms import send
 
 @csrf_exempt
 def login(request):
@@ -151,6 +153,36 @@ def is_id_duplicated(request):
         else:
             context = {
                 "is_id_duplicated": False
+            }
+        return JsonResponse(context)
+
+@csrf_exempt
+def send_SMS(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        
+        num = 0
+        text = "Barrow 확인 코드 : "
+        for i in range(6):
+            num*=10
+            num += random.randint(0,9)
+        text += str(num)
+        text +=". 이 코드를 다른 사람과 공유하지 마십시오. 당사 직원은 이 코드를 절대 요구하지 않습니다."
+
+        to = data["phone_num"]
+
+        res = send(to,text)
+        res = json.loads(res.content)
+        
+        if res["statusName"] == "success":
+            context = {
+                "is_send" : True,
+                "num": str(num)
+            }
+        else:
+            context = {
+                "is_send" : False,
+                "num": ""
             }
         return JsonResponse(context)
 #### mypage ####
