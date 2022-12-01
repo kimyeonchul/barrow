@@ -28,14 +28,15 @@
                 </div>
                 <hr class="hr-normal">
                 
-                {% if product_id %}
+                {% if product_id == 0 %}
                     <form name="item_register" id="item_register" method="post" action = "{% url 'products:new' %}">
                 {% else %}
                     <form name="item_register" id="item_register" method="post" action = "{% url 'products:modify' product_id %}">
-                {% endif %}    
+                {% endif %}
+                    {% csrf_token %}
                     <div class="pic_body">
                         <div class="pic_box"></div> 
-                        <input type="file" id="img_upload" class="img_upload" accept="image/*" required multiple style="display: none;">
+                        <input type="file" id="img_upload" name ="img" class="img_upload" accept="image/*" required multiple style="display: none;">
                         <button class="small_btn" id="upload_btn" type="button" onclick="img_click()">파일 선택</button>
                     </div>
                     <div class="item_register_box1">
@@ -50,7 +51,7 @@
                                 <label for="area">거래지역</label></li>
                                 <input type="text" name="area" id="area" value = {{item.area}}>
                                 <button type="button" id="area_btn" onclick="findAddr()">주소<br>찾기</button>
-                                <input type="text" name="area_detail" id="area_detail" placeholder="상세주소 입력" value = {{item.area}}>
+                                <input type="text" name="area_detail" id="area_detail" placeholder="상세주소 입력" value = {{item.area_detail}}>
                         
                         </div>
                         <hr class="hr-light">
@@ -198,12 +199,12 @@
                         
                     </div>
                     <div id="hidden_button" >
-                        <input type="submit" value="제출하기"/>
+                        <input id="reigester_form" type="submit" value="제출하기"/>
                     </div>
                 </form>
                 <hr class="hr-normal">
                 <div class="submit_button" >
-                    <input type="submit" id="submit_button" value="제출하기" onclick="checkForm()"/>
+                    <input type="submit" id="submit_button" value="제출하기" onclick="submitForm()"/>
                 </div>
 
             </div>

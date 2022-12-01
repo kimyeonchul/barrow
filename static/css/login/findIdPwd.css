@@ -56,7 +56,7 @@ main {
 }
 
 .selectId,
-.selctPwd {
+.selectPwd {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -114,7 +114,8 @@ main {
 }
 
 .input_phone_num_wrap,
-.input_name_wrap {
+.input_name_wrap,
+.input_id_wrap {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -122,7 +123,8 @@ main {
 }
 
 .phone_num_err_msg,
-.name_err_msg {
+.name_err_msg,
+.id_err_msg {
     font-size: 10px;
     position: relative;
     color: red;
@@ -183,7 +185,7 @@ main {
 }
 
 /* find pwd main page */
-.input_brithdate_wrap {
+/* .input_brithdate_wrap {
     display: flex;
     justify-content: space-between;
     height: 40px;
@@ -195,7 +197,7 @@ main {
     width: 120px;
     height: 35px;
     border-radius: 10px;
-}
+} */
 
 .submit_btn {
     background-color: #3D8361;

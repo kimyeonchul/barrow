@@ -1,0 +1,64 @@
+{% extends "mypage/base.html" %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/mypage/mypage_heartList.css' %}">
+    <title>Barrow</title>
+</head>
+
+<div id="contentWrap">
+    <div id="contentBox">
+        <div id="contentTitle">
+            <div id="contentBoxBody">
+                <div id="contentRealTitle">찜 목록</div>
+                <div id="threeCheckBtWrap">
+                    <button type="button" id="totalCheckBt">전체 선택</button>
+                    <button type="button" id="notTotalCheckBt">선택 해제</button>
+                    <button type="button" id="deleteBt">삭제</button>
+                </div>
+            </div>
+            <div id="titleUnderBar"></div>
+        </div>
+        <div id="contentBody">
+            {% for product, type in products %}
+                {% if forloop.counter0|divisibleby:4 %}
+                    <div id="contentTopBody">
+                {% endif %}
+
+                    <div id="objectBox">
+                    
+                        <div id="firstObjectBox">
+                            <img id="objectImg" src="{{product.get_first_image.image}}">
+                            <div style="padding: 10px;">
+                                <div id="nameObject">{{product.title}}</div>
+                                {% if type.0 %}
+                                    <img src="{% static 'img/img/itemimg/besong.png' %}">
+                                {% endif %}
+                                {% if type.1 %}
+                                    <img src="{% static 'img/img/itemimg/check.png' %}">
+                                {% endif %}
+                                <div id="priceWrap">
+                                    <div id="priceDetail">
+                                        <div style="font-weight: 700; font-size: larger;">{{product.price}}원</div>
+                                        <div style="padding-top: 3px; margin-left: 7px;">/</div>
+                                        <div style="color: red; font-weight: 600; padding-top: 3px; margin-left: 5px;">{{product.get_price_per_display}}
+                                        </div>
+                                    </div>
+                                    <div style="padding-top: 3px;">{{product.get_created}}</div>
+                                </div>
+                            </div>
+                        </div>
+                {% if forloop.counter|divisibleby:4 %}        
+                    </div>
+                {% endif %}                   
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

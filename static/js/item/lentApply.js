@@ -83,3 +83,25 @@ $(function(){
 
 });
 
+/*
+폼 유효성 검사
+*/
+function formCheck(frm) {
+  console.log("폼체크");
+  if (frm.start_date.value == "" || frm.end_date.value == "") {
+    alert("날짜를 정확히 입력해 주세요");
+    return false;
+    }
+  return true;
+}
+
+function submitForm() {
+  if (!formCheck(lent_apply)) {
+    return;
+  } else {
+    alert("폼 제출");
+    $("#form_submit_btn").trigger("click");
+  }
+}
+
+

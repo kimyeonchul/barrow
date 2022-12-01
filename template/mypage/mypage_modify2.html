@@ -1,0 +1,62 @@
+{% extends "mypage/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/mypage/mypage_modify2.css' %}">
+    <title>Barrow</title>
+</head>
+{% include 'mypage/messages.html' %}
+<div id="contentWrap">
+    <div id="contentBox">
+        <div id="contentTitle">
+            <div id="contentRealTitle">회원 정보 수정</div>
+            <div id="titleUnderBar"></div>
+        </div>
+        <form method = "POST" action = "{% url 'account:mypage_modify' %}">
+            {% csrf_token %}
+            <div id="contentBody">
+                <div id="content_body_1">
+                    <div id="contentName">아이디</div>
+                    <div id="contentInput" style="width: 205px;"><input type="text" name = "username" value = "{{user.username}}"></div>
+                </div>
+                <div id="content_body_1">
+                    <div id="contentName">비밀번호</div>
+                    <div><button type="button" id="contentPwBt" onclick = "location.href = '{% url 'account:mypage_changepwd' %}'">비밀번호 변경하기</button></div>
+                </div>
+                <div id="content_body_1">
+                    <div id="contentName">이름</div>
+                    <div><input type="text" style="width: 205px;" name = "name" value = "{{user.name}}"></div>
+                </div>
+                <div id="content_body_1">
+                    <div id="contentName">생년월일</div>
+                    <div style="width: 205px;"><input type="text" name = "birth" value = "{{user.birth}}"></div>
+                </div>
+                <div id="content_body_1">
+                    <div id="contentName">주소</div>
+                    <div id="contentAddressBox">
+                        <input type="text" style="width: 250px;" name = "address" value = "{{user.address}}">
+                        <button type="button" id="contentAddressBt" >주소찾기</button>
+                    </div>
+                </div>
+                <div id="content_body_1">
+                    <div></div>
+                    <div id="">
+                        <input type="text" style="width: 365px;" name = "address_detail" value = "{{user.address_detail}}">
+                    </div>
+                </div>
+                <div id="content_body_1">
+                    <div id="contentName">핸드폰</div>
+                    <div><input type="text" style="width: 205px;" name = "phoneNum" value = "{{user.phoneNum}}"></div>
+                </div>
+                <div id="content_body_2">
+                    <button type="submit">수정하기</button>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</div>
+{% endblock %}

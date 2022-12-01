@@ -133,10 +133,10 @@
                                         <li>
                                             <p class="bestitemday"><strong>{{product.get_price_per_display}}</strong></p>
                                         </li>
-                                        <li>
-                                            <p class="itembeforedate">{{product.get_created}}</p>
-                                        </li>
                                     </ul>
+                                    <div class="itemdate">
+                                    <p class="itembeforedate">{{product.get_created}}</p>
+                                    </div>
                                 </ul>
                             </div>
                             </a>
@@ -154,14 +154,14 @@
 
     </section>
     <section class="pagination">
-        <span class="dLeftVector">&laquo;</span>
-        <span class="prevPageBtns">&lt;</span>
-        <ol id="numbers">
-            <!-- <li class="numbers"><a href="">1</a></li> -->
-        </ol>
-        <span class="nextPageBtns">&gt;</span>
-        <span class="dRightVector">&raquo;</span>
-    </section>
+            <span class="dLeftVector">&laquo;</span>
+            <span class="prevPageBtn">&lt;</span>
+            <ol id="numbers">
+                <!-- <li class="numbers"><a href="">1</a></li> -->
+            </ol>
+            <span class="nextPageBtn">&gt;</span>
+            <span class="dRightVector">&raquo;</span>
+        </section>
     <!-- <nav aria-label="pagination">
             <ul class="pagination">
                 <li><a href=""><span aria-hidden="true">&laquo;</span><span class="visuallyhidden">previous set of pages</span></a></li>

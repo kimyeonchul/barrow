@@ -20,6 +20,10 @@ a {
     font-family: 'Heebo', sans-serif;
 }
 
+p{
+    font-size: 28px;
+}
+
 input {
     border-radius: 10px;
     height: 35px;
@@ -29,11 +33,12 @@ input {
 
 main {
     background-color: #F5F5F5;
-    width: 400px;
-    height: 550px;
+    width: 500px;
+    height: 700px;
     z-index: 1;
     padding: 20px;
     margin: 0px;
+    min-width: 280px;
 }
 
 .main_header {
@@ -43,16 +48,21 @@ main {
 
 .main_header .main_header_text {
     line-height: 8px;
-    font-size: 16px;
+}
+
+.welcome_msg{
+    font-size:32px;
+    font-weight: bold;
 }
 
 .main_header .main_header_text p:nth-child(3) {
-    font-size: 8px;
+    font-size: 12px;
     display: inline;
 }
 
 .signup_btn {
-    font-size: 8px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .main_header_logo {
@@ -67,18 +77,20 @@ main {
 }
 
 .find_idpwd_a {
-    font-size: 8px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .login_btn {
     background-color: #3D8361;
     border: none;
-    height: 35px;
+    height: 50px;
     border-radius: 10px;
-    width: 200px;
+    width: 220px;
     margin: auto;
     color: white;
     font-weight: bold;
+    font-size: 16px;
 }
 
 .main_footer {
@@ -99,7 +111,7 @@ main {
 
 .id_error_msg,
 .pwd_error_msg {
-    font-size: 10px;
+    font-size: 12px;
     position: relative;
     color: red;
     font-weight: bold;
@@ -110,11 +122,17 @@ main {
     main {
         width: 280px;
     }
+    p{
+        font-size: 16px;
+    }
 }
 
 @media screen and (min-width:376px) and (max-width: 576px) {
     main {
-        width: 350px;
+        width: 320px;
+    }
+    p{
+        font-size: 20px;
     }
 }
 

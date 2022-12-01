@@ -1,11 +1,12 @@
 * {
     font-family: 'Inter', sans-serif;
+    font-size: 16px;
 }
 
 body {
     margin: 0%;
     padding: 0%;
-    height: 200vh;
+    height: min-content;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -13,6 +14,7 @@ body {
     margin-bottom: 100px;
     overflow-x: hidden;
 }
+
 
 a {
     text-decoration: none;
@@ -53,7 +55,7 @@ li {
 
 main {
     background-color: #F5F5F5;
-    width: 400px;
+    width: 500px;
     height: min-content;
     z-index: 1;
     padding: 20px;
@@ -92,7 +94,7 @@ main {
 }
 
 .input_birthdate {
-    width: 120px;
+    width: 150px;
     height: 35px;
     border-radius: 10px;
 }
@@ -113,15 +115,40 @@ main {
 }
 
 .submit_wrap {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.send_verification_wrap {
+    margin-bottom: 30px;
+}
+
+.send_verification_wrap,
+.verify_verification_wrap {
+    display: flex;
+    justify-content: space-around;
+}
+
+#input_phoneNum,
+#input_verifyNum {
+    width: 350px;
+    height: 35px;
+    border-radius: 10px;
+}
+
+#send_verification_btn,
+#verify_verification_btn {
+    width: 120px;
+    height: 40px;
 }
 
 .submit_btn {
     background-color: #3D8361;
     border: none;
     color: white;
-    width: 200px;
-    height: 35px;
+    width: 220px;
+    height: 44px;
     border-radius: 10px;
     margin: 0 auto;
 }
@@ -205,7 +232,7 @@ label[for='check'] {
 .name_err_msg,
 .check_err_msg,
 .address_err_msg {
-    font-size: 10px;
+    font-size: 12px;
     color: red;
     line-height: 5px;
     visibility: hidden;
@@ -221,7 +248,7 @@ label[for='check'] {
     margin-bottom: 40px;
 }
 
-.input_address_wrap{
+.input_address_wrap {
     display: flex;
     justify-content: flex-start;
 }
@@ -230,16 +257,16 @@ label[for='check'] {
     margin-bottom: 30px;
 }
 
-.input_member_post{
+.input_member_post {
     margin-right: 20px;
     width: 200px;
     height: 35px;
     border-radius: 10px;
 }
 
-.member_post_btn{
-    width: 100px;
-    height: 35px;
+.member_post_btn {
+    width: 120px;
+    height: 40px;
     border-radius: 10px;
     border: none;
     color: white;
@@ -264,14 +291,45 @@ label[for='check'] {
 
 .input_pwd_icon {
     position: absolute;
-    right: 20px;
+    right: 0px;
     top: 25px;
     visibility: hidden;
 }
 
-@media screen and (max-width: 375px){
+@media screen and (max-width: 375px) {
     main {
         width: 280px;
+    }
+
+    .input_address_wrap{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input_member_post{
+        margin-right: 0px;
+    }
+
+    .input_detail_address{
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .member_post_btn{
+        margin-bottom: 10px;
+    }
+
+    .send_verification_wrap,
+    .verify_verification_wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #input_phoneNum,
+    #input_verifyNum {
+        margin-bottom: 10px;
     }
 }
 
@@ -279,8 +337,18 @@ label[for='check'] {
     main {
         width: 350px;
     }
+
+    .send_verification_wrap,
+    .verify_verification_wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #input_phoneNum,
+    #input_verifyNum {
+        margin-bottom: 10px;
+    }
 }
 
-@media screen and (min-width:577px) and (max-width: 768px) {
-
-}
+@media screen and (min-width:577px) and (max-width: 768px) {}

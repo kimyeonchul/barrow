@@ -42,7 +42,7 @@
                     {% if product %}
 
                         <div class="bestitem">
-                            <a href="#" class="bestitemlink">
+                            <a href="{% url 'products:itempage' product.id %}" class="bestitemlink">
                             <img class="bestitemImg" src="{{product.get_first_image.image}}"
                                  style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
@@ -70,10 +70,10 @@
                                         <li>
                                             <p class="bestitemday"><strong>{{product.get_price_per_display}}</strong></p>
                                         </li>
-                                        <li>
-                                            <p class="itembeforedate">{{product.get_created}}</p>
-                                        </li>
                                     </ul>
+                                    <div class="itemdate">
+                                        <p class="itembeforedate">{{product.get_created}}</p>
+                                    </div>
                                 </ul>
                             </div>
                             </a>

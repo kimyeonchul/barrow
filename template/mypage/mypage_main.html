@@ -1,0 +1,183 @@
+{% extends "mypage/base.html" %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/mypage/mypage_main.css' %}">
+    <title>Barrow</title>
+</head>
+
+            <div id="contentBox">
+                <div id="contentTopWrap">
+                    <div id="contentLeftWrap">
+                        <div id="myInfoWrap">
+                            <div id="myInfoBox">
+                                <div id="myInfoImg">
+                                    <img src="{{user.image}}" style="width: 70px; height: 70px;">
+                                    <button type="button"onclick="location.href='{% url 'account:mypage_modify_confirm' %}'">수정하기</button>
+                                </div>
+                                <div id="myInfoName">
+                                    <div id="helloName">안녕하세요,<div style="padding: 0px 5px; color: #3d8361">{{user.name}}</div>님</div>
+                                    <div id="helloEmail" style="color: #545454;">{{user.username}}</div>
+                                    <div id="helloAddress">{{user.address}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="borrowWrap">
+                            <div id="borrowedWrap">
+                                <div id="borrowedBox">
+                                    <div id="borrowedTitle">
+                                        <div id="borrowedName">
+                                            <img src="{% static 'img/mypage/logo_lend.png' %}">
+                                            <p>빌린 상품</p>
+                                        </div>
+                                        <div id="plusLook"><a href = "{% url 'account:mypage_use' 'barrow_from' %}">더보기</a></div>
+                                    </div>
+                                    <div id="underBar"></div>
+                                    <div id="borrowedNumberBox">
+                                        <div id="firstNum">
+                                            <p id="objName">전체</p>
+                                            <p id="objNum" style="color: red;">{{lend.total}}</p>
+                                        </div>
+                                        <div id="secondNum">
+                                            <p id="objName">대기 중</p>
+                                            <p id="objNum">{{lend.WAIT}}</p>
+                                        </div>
+                                        <div id="thirdNum">
+                                            <p id="objName">대여 중</p>
+                                            <p id="objNum">{{lend.LEND}}</p>
+                                        </div>
+                                        <div id="fourthNum">
+                                            <p id="objName">종료</p>
+                                            <p id="objNum">{{lend.TERMINATE}}</p>
+                                        </div>
+                                    </div>
+                                    {% for product in lend.products %}
+                                        <div id="borrowingObjectDetail">
+                                            <div id="borrowingDetailImg">
+                                                <img src="{{product.product.get_first_image.image}}">
+                                            </div>
+                                            <div id="borrowingDetailText">
+                                                <div id="borrowingDetailTitle">{{product.product.title}}</div>
+                                                <div id="borrowingDetailState">{{product.get_state_display}}</div>
+                                                <div id="borrowingDetailNumber">
+                                                    <div id="borrowingDetailMoney"><div>{{product.product.price}}</div>원/{{product.product.get_price_per_display}}</div>
+                                                    <div id="borrowingDetailTime">{{product.get_created_from}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                            <div id="borrowingWrap">
+                                <div id="borrowingBox">
+                                    <div id="borrowingTitle">
+                                        <div id="borrowingName">
+                                            <img src="{% static 'img/mypage/barrow.png' %}">
+                                            <p>빌려준 상품</p>
+                                        </div>
+                                        <div id="plusLook"><a href = "{% url 'account:mypage_use' 'barrow_from' %}">더보기</a></div>
+                                    </div>
+                                    <div id="underBar"></div>
+                                    <div id="borrowingNumberBox">
+                                        <div id="firstNum">
+                                            <p id="objName">전체</p>
+                                            <p id="objNum" style="color: red;">{{barrow.total}}</p>
+                                        </div>
+                                        <div id="secondNum">
+                                            <p id="objName">대기 중</p>
+                                            <p id="objNum">{{barrow.WAIT}}</p>
+                                        </div>
+                                        <div id="thirdNum">
+                                            <p id="objName">대여 중</p>
+                                            <p id="objNum">{{barrow.LEND}}</p>
+                                        </div>
+                                        <div id="fourthNum">
+                                            <p id="objName">종료</p>
+                                            <p id="objNum">{{barrow.TERMINATE}}</p>
+                                        </div>
+                                    </div>
+                                    {% for product in barrow.products %}
+                                        <div id="borrowingObjectDetail">
+                                            <div id="borrowingDetailImg">
+                                                <img src="{{product.product.get_first_image.image}}">
+                                            </div>
+                                            <div id="borrowingDetailText">
+                                                <div id="borrowingDetailTitle">{{product.product.title}}</div>
+                                                <div id="borrowingDetailState">{{product.get_state_display}}</div>
+                                                <div id="borrowingDetailNumber">
+                                                    <div id="borrowingDetailMoney"><div>{{product.product.price}}</div>원/{{product.product.get_price_per_display}}</div>
+                                                    <div id="borrowingDetailTime">{{product.get_created_from}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="notifyWrap">
+                        <div id="notifyBox">
+                            <div id="notifyTitle">
+                                <div id="notifyName">
+                                    <img src="{% static 'img/mypage/logo_notice.png' %}">
+                                    <p>알림목록</p>
+                                </div>
+                                <div id="plusLook"><a href = "{% url 'account:mypage_notice' %}">더보기</a></div>
+                            </div>
+                            <div id="underBar"></div>
+                            <div id="notCheckNum">
+                                <div id="notCheckNumText">읽지 않은 알림이 <div>1개</div> 있어요.</div>
+                            </div>
+                            <div id="notifyList">
+                                <ul>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                    <li>수락했어?</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="contentBottomWrap">
+                    <div id="favBox">
+                        <div id="firstFavObject">
+                            <div id="favTitle">
+                                <div id="favName">
+                                    <img src="{% static 'img/mypage/logo_favorite.png' %}">
+                                    <p>찜한 상품</p>
+                                </div>
+                                <div id="plusLook"><a href = "{% url 'account:mypage_favorite' %}"">더보기</a></div>
+                            </div>
+                            <div id="underBar"></div>
+                            {% for product in favorite %}
+                                <div id="borrowingObjectDetail">
+                                    <div id="borrowingDetailImg">
+                                        <img src="{{product.get_first_image.image}}">
+                                    </div>
+                                    <div id="borrowingDetailText">
+                                        <div id="borrowingDetailTitle">{{product.title}}</div>
+                                        <div id="borrowingDetailNumber">
+                                            <div id="borrowingDetailMoney"><div>{{product.price}}</div>원/{{product.get_price_per_display}}</div>
+                                            <div id="borrowingDetailTime">{{product.get_created}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        {% endblock %}

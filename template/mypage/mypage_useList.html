@@ -1,0 +1,85 @@
+{% extends "mypage/base.html" %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/mypage/mypage_userList.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
+    <title>Barrow</title>
+</head>
+<body>
+    
+            <div id="contentWrap">
+                <div id="contentBox">
+                    <div id="contentTitle">
+                        <div id="borrowBox">
+                            <div id="borrowingTitle" onclick = "location.href = '{% url 'account:mypage_use' 'barrow_from' %}'">빌린 내역</div>
+                            <div id="borrowedTitle" onclick = "location.href = '{% url 'account:mypage_use' 'barrow_to' %}'">빌려준 내역</div>
+                        </div>
+                        <div id="titleUnderBar"></div>
+                    </div>
+
+                    <div id="contentBody">
+                        <div id="listNumberBox">
+                            <div id="totalNum">
+                                <div id="numName">전체</div>
+                                <div id="numNumber">{{barrow.total}}</div>
+                            </div>
+                            <div id="totalNum">
+                                <div id="numName">대기 중</div>
+                                <div id="numNumber">{{barrow.WAIT}}</div>
+                            </div>
+                            <div id="totalNum">
+                                <div id="numName">대여 중</div>
+                                <div id="numNumber">{{barrow.LEND}}</div>
+                            </div>
+                            <div id="totalNum1">
+                                <div id="numName">종료</div>
+                                <div id="numNumber">{{barrow.TERMINATE}}</div>
+                            </div>
+                        </div>
+                        <form method = "POST" action = "{% url 'account:mypage_use' type %}">
+                            {% csrf_token %}
+                            <div id="optionWrap">
+                                <div id="optionWrapBody">
+                                    <div><input id="startDate" type="date" name = "startdate"></div>
+                                    <div style="font-size: 25px;">~</div>
+                                    <div><input id="endDate" type="date" name = "enddate"></div>
+                                    <div><button id = "date_search" type="button">기간조회</button></div>
+                                </div>
+                                <div id="optionBody">
+                                    <input type="text" placeholder="내역 검색" name = "keyword">
+                                    <img id = "key_search" src="{% static 'img/mypage/find.png' %}">
+                                </div>
+                                <input id = "search_submit" type = "submit" style = "display: none;">
+                            </div>
+                        </form>
+                        
+                        <div id="optionListBody">
+                            {% for product in barrow.products %}
+                                <div id="optionListBox">
+                                    <div>
+                                        <img src="{{product.product.get_first_image.image}}">
+                                    </div>
+                                    <div id="nameAndPrice">
+                                        <div style="padding-top: 10px;">{{product.product.title}}</div>
+                                        <div style="display: flex; flex-direction: row; align-items: center;">
+                                            <div style="font-size: 22px;"></div>
+                                            <div style="padding-left: 10px; padding-bottom: 7px;">{{product.product.price}}원 / {{product.product.get_price_per_display}}</div>
+                                        </div>
+                                    </div>
+                                    <div id="howIng">
+                                        <div>{{product.get_state_display}}</div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="{% static 'js/mypage/use_list.js' %}"></script> 
+{% endblock %}

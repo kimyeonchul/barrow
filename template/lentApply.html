@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    
+    {% include "mypage/messages.html" %}
         <div class="container">
             <div class="item_box">
                 <div class="item_pic">
@@ -50,7 +50,8 @@
                     <hr class="hr-light">
                 </div>
                 <div class="lent_apply_detail">
-                    <form name="lent_apply" id="lent_apply_form" type = "POST" action = "{% url 'deal:new' item.id %}">
+                    <form name="lent_apply" id="lent_apply_form" method = "POST" action = "{% url 'deal:new' item.id %}">
+                        {% csrf_token %}
                         <div class="lent_inform">
                             <div class="lent_days">
                                 <li><p>대여기간</p></li>
@@ -79,7 +80,7 @@
 
                     </form>
                     <div class="buttons">
-                        <button id="submit_btn" >신청하기</button>
+                        <button id="submit_btn" onclick="submitForm()" >신청하기</button>
                         <button id="reject_btn" onclick = "location.href = '{% url 'products:itempage' item.id %}'">취소하기</button>
                     </div>
                 </div>
