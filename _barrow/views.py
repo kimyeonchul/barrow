@@ -8,6 +8,10 @@ from django.db.models import Sum, Count
 import datetime
 from datetime import timedelta
 
+import requests
+import numpy as np
+import pandas as pd
+
 def base(request):
         user = request.user
         recent_search_query = None
@@ -196,11 +200,68 @@ def category_view(request, category, sort):
     }
     context.update(base(request))
     context.update(side(request))
-    print(products)
     return render(request, "main/category.html", context)
 
 def near_products(request):
-    return render(request, "main/map.html")
+    ##도로명 주소 지번으로 변환하기
+
+    #user 주소에서 동 찾아내기
+    user_address = request.user.address
+    user_address_split = user_address.split(" ")
+    url = 'https://dapi.kakao.com/v2/local/search/address.json'
+    params = {'query' : user_address}
+    headers = {"Authorization": "KakaoAK 507b88e0987b8499d1fa196252551262"}
+    place = requests.get(url, headers = headers, params = params).json()
+    user_address_DONG = place["documents"][0]["address"]["region_3depth_name"]
+    # user랑 도, 시, 동 같은 제품 가져오기
+    user_address_for_query = user_address_split[0]+" "+user_address_split[1]+ " " + user_address_split[2]
+    map_contents = Product.objects.filter(area__contains = user_address_for_query)
+    
+    #데이터 정제하기
+    ids = list(map_contents.values_list("id",flat = True).order_by("id"))
+    addresses = list(map_contents.values_list("area",flat = True).order_by("id"))
+    addrs = []
+    for i in range(len(ids)):
+        addrs.append(
+            {
+                "id" : ids[i],
+                "address" : addresses[i] 
+            }
+        )
+    #유저랑 같은동인것 검색
+    products = []
+    for product in addrs:
+        url = 'https://dapi.kakao.com/v2/local/search/address.json'
+        params = {'query' : product["address"]}
+        headers = {"Authorization": "KakaoAK 507b88e0987b8499d1fa196252551262"}
+        place = requests.get(url, headers = headers, params = params).json()
+        
+        try:
+            if user_address_DONG == place["documents"][0]["address"]["region_3depth_name"]:
+                products.append(Product.objects.get(id = product["id"]))
+        except:
+            continue
+    
+    types = [int(product.type) for product in products]
+    products_near = list(zip(list(products),types))
+    #전체 상품 이미지src랑 도로명 주소 보내기
+    products = Product.objects.all()
+    products_all = []
+    for product in products:
+        image = product.get_first_image()
+        products_all.append(
+            {
+                "image" : image.image.url,
+                "address" : product.area
+            }
+        )
+    context = {
+        "products_near" : products_near,
+        "products_all" : products_all
+    }
+    context.update(base(request))
+    context.update(side(request))
+    return render(request, "main/map.html", context)
 
 def create_most_search():
     most_search_queries = Keyword.objects.all().values("content").annotate(

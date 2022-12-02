@@ -21,12 +21,12 @@ def new(request):
             new.save()
             print(request.FILES)
             print(request.FILES.getlist('img'))
-            for img in request.FILES.getlist('img[]'):
-                print(img)
-                i = 0 
+            i = 0
+            for img in request.FILES.getlist('img[]'): 
                 new_image = Product_image.objects.create(product = new, image = img, index = i)
                 new_image.save()
                 i+=1
+
         else:
             print(form.errors)
         return redirect("barrow:home")
@@ -48,8 +48,9 @@ def modify(request, product_id):
             cur_images = Product_image.objects.filter(product = product)
             for img in cur_images:
                 img.delete()
-            for img in request.FILES.getlist("images"):
-                i = 0               
+            i = 0  
+            for img in request.FILES.getlist("img[]"):
+                             
                 new_image = Product_image.objects.create(product = product, image = img, index = i)
                 new_image.save()
                 i+=1

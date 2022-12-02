@@ -32,7 +32,7 @@
                 <div class="item_album">
                     <div class="item_pic">
                         {% for img in item_images %}
-                            <img class="pics" src="{{img.image}}">
+                            <img class="pics" src="{{img.image.url}}">
                         {% endfor%}
                         
                     </div>
@@ -101,7 +101,7 @@
             </div>
             <div class="lender_info">
                 <div>
-                    <img class="lender_portrait" src = "{{item.productor.image}}">
+                    <img class="lender_portrait" src = "{{item.productor.image.url}}">
                 </div>
                 <p>{{productor.name}}님의 대여 상품입니다</p>
             </div>
