@@ -1,3 +1,5 @@
+let varifyNum;
+let varifyflag=false;
 $(document).ready(function () {
     //* setting 
     setSelect();
@@ -7,6 +9,7 @@ $(document).ready(function () {
     setTextArea();
     setRealtimevalidation();
     setInputPhoneNum();
+    setPhoneNumVerify();
 });
 
 function setAllInput() {
@@ -16,6 +19,7 @@ function setAllInput() {
     setInput($('#input_pwd'), $('.input_pwd_icon'));
     setInput($('#input_repwd'), $('.repwd_err_msg'));
     setInput($('#input_name'), $('.name_err_msg'));
+    setInput($('#input_phoneNum'), $('.phonenum_err_msg'));
 }
 
 function setInput($input, $target) {
@@ -297,9 +301,52 @@ function setInputPhoneNum(){
     });
 }
 
+function setPhoneNumVerify(){
+    $('#send_verification_btn').click(function(){
+        if(!checkID()||!checkName()||!checkPhoneNum())
+            return ;
+        let id = $('#input_id').val();
+        let name = $('#input_name').val();
+        let phonenum = $('#input_phoneNum').val();
+        let newPhoneNum='';
+        for(var i=0;i<phonenum.length;i++){
+            if(phonenum[i]=='-')
+                continue;
+            newPhoneNum+=phonenum[i];
+        }
+        $.ajax({
+            url: 'http://127.0.0.1:8000/account/send_SMS/', //request 보낼 서버의 경로
+            type: 'post', // 메소드(get, post, put 등)
+            data: JSON.stringify({
+                "from":"register",
+                "id": id,
+                "name":name,
+                "phone_num":newPhoneNum
+            }), //보낼 데이터
+            success: function (data) {
+                //서버로부터 정상적으로 응답이 왔을 때 실행
+                if (data.is_send == true)
+                    varifyNum = data.num;
+                else
+                    alert("안되면 이상한건데 ");
+            },
+            error: function (xhr, textStatus, thrownError) {
+                alert(
+                    "Could not send URL to Django. Error: " +
+                    xhr.status +
+                    ": " +
+                    xhr.responseText
+                );
+            },
+        });
+        $("#input_verifyNum").attr("disabled", false); 
+        $("#verify_verification_btn").attr("disabled", false); 
+    });
+}
+
 //* sign up checking
 $('#signup_btn').click(function () {
-    if (checkID() && checkPwd() && checkRePwd() && checkName() && checkAddress() && checkCheckbox()) {
+    if (checkID() && checkPwd() && checkRePwd() && checkName() && checkAddress() && checkCheckbox()&& varifyflag) {
         $.ajax({
             url: '', //request 보낼 서버의 경로
             type: 'post', // 메소드(get, post, put 등)
@@ -315,17 +362,9 @@ $('#signup_btn').click(function () {
     }
 });
 
-$('#send_verification_btn').click(function(){
-    let phonenum = $('#input_phoneNum').val();
-    $("#input_verifyNum").attr("disabled", false); 
-    $("#verify_verification_btn").attr("disabled", false); 
-
-});
 
 $('#verify_verification_btn').click(function(){
-    let verifynum = $('#input_verifyNum').val();
-    alert("인증 성공");
-
+    checkVerify();
 });
 
 function checkID() {
@@ -393,6 +432,30 @@ function checkCheckbox() {
     }
     return true;
 }
+
+function checkPhoneNum(){
+    var checkphonenum = $('#input_phoneNum').val();
+    var regExp = /^(010|011|016|017|018|019)-[0-9]{3,4}-[0-9]{4}$/;
+    if (!regExp.test(checkphonenum)) {
+        $('.phonenum_err_msg').css('visibility', 'visible');
+        $('#input_phoneNum').focus();
+        return false;
+    }
+    return true;
+}
+
+function checkVerify(){
+    let inputverify = $('#input_verifyNum').val();
+    if(varifyNum==inputverify){
+        varifyflag = true;
+        $("#input_phoneNum").attr("disabled", true); 
+        $("#send_verification_btn").attr("disabled", true); 
+        $("#input_verifyNum").attr("disabled", true); 
+        $("#verify_verification_btn").attr("disabled", true); 
+        alert("인증 성공");
+    }
+}
+
 /* 주소정보 api*/
 function findAddr() {
     new daum.Postcode({
