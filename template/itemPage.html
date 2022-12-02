@@ -55,7 +55,7 @@
                     <div class="item_view">
                         <p>조회 {{item.views}}</p>
                         <p> • </p>
-                        <p>찜 {{favorite}}</p>
+                        <p>찜 <span class="favoriteNum">{{favorite}}</span></p>
                         <p> • </p>
                         <p>{{item.get_created}}</p>
                     </div>
@@ -79,7 +79,7 @@
                     {% else %}
                         {% if state == "TERMINATE" %}
                             <div class="item_buttons">
-                                <button class="mid_btn" id="love"> ♥ 찜 {{favorite}}</button>
+                                <button class="mid_btn" id="love_btn" onclick="love_btn()"> ♥ 찜 <span class = "favoriteNum">{{favorite}}</span></button>
                                 <button class="mid_btn" id="chat">채팅 보내기</button>
                                 <button class="mid_btn" id="apply" onclick = "location.href = '{% url 'deal:new' item.id %}'">대여 신청하기</button>
                             </div>
@@ -147,6 +147,8 @@
 </body>
 <script type="text/javascript">
     var itemPrice = "{{item.price}}";
+    var product_id = "{{item.id}}";
+    var user_id = "{{user.id}}";
 </script>
 
 </html>

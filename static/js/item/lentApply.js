@@ -12,6 +12,7 @@ $.datepicker.setDefaults({
   dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
   showMonthAfterYear: true,
   yearSuffix: '년',
+  minDate : 0,
 });
 
 $(function(){
@@ -22,8 +23,8 @@ $(function(){
 
 function getDates() { //시작일과 마감일 사이 날짜 배열에 넣기
 	const dateRange = [];
-	let startDate = new Date("2022-11-22");
-  let endDate = new Date("2022-12-5");
+	let startDate = new Date("2022-12-6");
+  let endDate = new Date("2022-12-10");
   //11.22 부터 12.4까지 선택 못함!
   
 	while(startDate <= endDate) {
@@ -72,7 +73,16 @@ function getDateDiff(d1, d2) {
 }
 
 $(function(){
-  var price_per = 7; //week이라고 치자
+  var price_per;
+  //var price_per_day = 7; //week이면
+  if (price_per_day == 'month') {
+    price_per = 30;
+  } else if (price_per_day == 'week') {
+    price_per = 7;
+  } else {
+    price_per = 1;
+  }
+
   var delivery_charge = 1350; //배달료 천삼백오십원이라고 치자
   var price_unit = parseInt(price / price_per); //1일당 대여비
   var lentDays = getDateDiff(lentStartDay, lentEndDay) + 1; //대여일 수
@@ -99,9 +109,10 @@ function submitForm() {
   if (!formCheck(lent_apply)) {
     return;
   } else {
-    alert("폼 제출");
+    //alert("폼 제출");
     $("#form_submit_btn").trigger("click");
   }
 }
+
 
 

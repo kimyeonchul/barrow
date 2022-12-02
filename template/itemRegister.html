@@ -10,8 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="{% static 'js/asset/jquery-ui.js' %}"></script>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/item/itemRegister.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <title>Barrow</title>
@@ -29,14 +28,14 @@
                 <hr class="hr-normal">
                 
                 {% if product_id == 0 %}
-                    <form name="item_register" id="item_register" method="post" action = "{% url 'products:new' %}">
+                    <form name="item_register" id="item_register" method="post" action = "{% url 'products:new' %}" enctype="multipart/form-data">
                 {% else %}
-                    <form name="item_register" id="item_register" method="post" action = "{% url 'products:modify' product_id %}">
+                    <form name="item_register" id="item_register" method="post" action = "{% url 'products:modify' product_id %}" enctype="multipart/form-data">
                 {% endif %}
                     {% csrf_token %}
                     <div class="pic_body">
                         <div class="pic_box"></div> 
-                        <input type="file" id="img_upload" name ="img" class="img_upload" accept="image/*" required multiple style="display: none;">
+                        <input type="file" id="img_upload" name ="img[]" class="img_upload" required multiple style="display: none;">
                         <button class="small_btn" id="upload_btn" type="button" onclick="img_click()">파일 선택</button>
                     </div>
                     <div class="item_register_box1">
@@ -49,7 +48,7 @@
                         <div class="item_register_flex">
                             <li>
                                 <label for="area">거래지역</label></li>
-                                <input type="text" name="area" id="area" value = {{item.area}}>
+                                <input type="text" name="area" id="area" value = " {{item.area}} " readonly>
                                 <button type="button" id="area_btn" onclick="findAddr()">주소<br>찾기</button>
                                 <input type="text" name="area_detail" id="area_detail" placeholder="상세주소 입력" value = {{item.area_detail}}>
                         
@@ -199,12 +198,12 @@
                         
                     </div>
                     <div id="hidden_button" >
-                        <input id="reigester_form" type="submit" value="제출하기"/>
+                        <input id="register_form" type="submit" value="제출하기"/>
                     </div>
                 </form>
                 <hr class="hr-normal">
                 <div class="submit_button" >
-                    <input type="submit" id="submit_button" value="제출하기" onclick="submitForm()"/>
+                    <input type="button" id="submit_button" value="제출하기" onclick="submitForm()"/>
                 </div>
 
             </div>
@@ -213,6 +212,12 @@
     </section>
     <script type="text/javascript" src="{% static 'js/item/itemRegister.js' %}"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        var modifyUrl = "{% url 'products:modify' product_id %}";
+        var newUrl = "{% url 'products:new' %}";
+        var product_id = "{{ product.id }}";
+        var user_id = "{{ user.id }}";
+    </script>
 </body>
 </html>
 {% endblock %}
