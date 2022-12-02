@@ -64,7 +64,7 @@
                     {% if product %}
                         <div class="bestitem">
                              <a href="{% url 'products:itempage' product.id %}" class="bestitemlink">
-                            <img class="bestitemImg" src="{{product.get_first_image.image}}"
+                            <img class="bestitemImg" src="{{product.get_first_image.image.url}}"
                              style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
                             <div class="bestitemdescription">
@@ -73,7 +73,7 @@
                                 </ul>
                                 <ul>
                                     <div class="TransMethodImg">
-                                        <li class="juso">{{product.address}}+{{product.address_detail}}</li>
+                                        <li class="juso">{{product.area}} {{product.area_detail}}</li>
                                         <div class="dealmethod">
                                         {% if type.0 %}
                                             <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>

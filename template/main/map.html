@@ -19,7 +19,7 @@
     <title>Barrow</title>
 </head>
 
-<body>
+
 
         <section class="bottomDiv">
             <section class="bottom">
@@ -36,14 +36,14 @@
                     </div>
                 </div>
                 <!--전체 width가   -->
-                 {% for product, type in products %}
+                 {% for product, type in products_near %}
                     {% if forloop.counter0|divisibleby:4 %}
                     <section class="bestitems">
                     {% endif %}
                     {% if product %}
                     <div class="bestitem">
                         <a href="#" class="bestitemlink">
-                            <img class="bestitemImg" src="{{product.get_first_image.image}}"
+                            <img class="bestitemImg" src="{{product.get_first_image.image.url}}"
                                  style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
                             <div class="bestitemdescription">
@@ -113,7 +113,7 @@
             </ul>
         </nav> -->
     </div>
-</body>
+
 
 </html>
 {% endblock %}

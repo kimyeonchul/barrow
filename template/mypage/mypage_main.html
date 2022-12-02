@@ -16,7 +16,7 @@
                         <div id="myInfoWrap">
                             <div id="myInfoBox">
                                 <div id="myInfoImg">
-                                    <img src="{{user.image}}" style="width: 70px; height: 70px;">
+                                    <img src="{{user.image.url}}" style="width: 70px; height: 70px;">
                                     <button type="button"onclick="location.href='{% url 'account:mypage_modify_confirm' %}'">수정하기</button>
                                 </div>
                                 <div id="myInfoName">
@@ -58,7 +58,7 @@
                                     {% for product in lend.products %}
                                         <div id="borrowingObjectDetail">
                                             <div id="borrowingDetailImg">
-                                                <img src="{{product.product.get_first_image.image}}">
+                                                <img src="{{product.product.get_first_image.image.url}}">
                                             </div>
                                             <div id="borrowingDetailText">
                                                 <div id="borrowingDetailTitle">{{product.product.title}}</div>
@@ -104,7 +104,7 @@
                                     {% for product in barrow.products %}
                                         <div id="borrowingObjectDetail">
                                             <div id="borrowingDetailImg">
-                                                <img src="{{product.product.get_first_image.image}}">
+                                                <img src="{{product.product.get_first_image.image.url}}">
                                             </div>
                                             <div id="borrowingDetailText">
                                                 <div id="borrowingDetailTitle">{{product.product.title}}</div>
@@ -164,7 +164,7 @@
                             {% for product in favorite %}
                                 <div id="borrowingObjectDetail">
                                     <div id="borrowingDetailImg">
-                                        <img src="{{product.get_first_image.image}}">
+                                        <img src="{{product.get_first_image.image.url}}">
                                     </div>
                                     <div id="borrowingDetailText">
                                         <div id="borrowingDetailTitle">{{product.title}}</div>

@@ -106,7 +106,7 @@
                     {% if product %}
                         <div class="bestitem">
                             <a href="{% url 'products:itempage' product.id %}" class="bestitemlink">
-                            <img class="bestitemImg" src="{{product.get_first_image.image}}"
+                            <img class="bestitemImg" src="{{product.get_first_image.image.url}}"
                                  style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
                             <div class="bestitemdescription">
