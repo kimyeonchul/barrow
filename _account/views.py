@@ -5,16 +5,17 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-from .forms import CustomUserChangeForm
+from .forms import CustomUserChangeForm, CustomUserCreateForm
 from django.core.serializers import serialize
 from django.shortcuts import render, redirect
 import json
 import random
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
+from django.urls import reverse
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 
-from _account.models import User
+from _account.models import User, User_view
 from _deal.models import Deal
 
 from _account.sms import send
@@ -22,49 +23,43 @@ from _account.sms import send
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        user = User.objects.filter(username=data.get("username"))
+        user = User.objects.filter(username=request.POST.get("username"))
         if user.exists():
-            password = data.get("password")
+            password = request.POST.get("password")
             user = user[0]
-            if user.password == password:
+            if check_password(password, user.password):
                 auth.login(request, user)
 
                 return redirect("barrow:home")
             else:
-                context = {
-                    "err": "PWD"
-                }
-                return JsonResponse(context)
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    '비밀번호가 틀립니다.'
+                )
+                return redirect("account:login")
         else:
-            context = {
-                "err": "ID"
-            }
-            return JsonResponse(context)
+            messages.add_message(
+                request,
+                messages.ERROR,
+                '존재하지 않는 아이디 입니다.'
+            )
+            return redirect("account:login")
 
     else:
         return render(request, "login.html")
 
-
-@csrf_exempt
 def register(request):
     if request.method == 'POST':
+        print(request.POST)
+        form = CustomUserCreateForm(request.POST)
         try:
-            user = User()
-            data = json.loads(request.body)
-            user.username = data.get("username")
-            user.password = data.get("password")
-            user.name = data.get("name")
-            user.birth = data.get("birth1") + \
-                data.get("birth2")+data.get("birth3")
-            user.address = data.get("address1")+data.get("address2")
-            user.address_detail = data.get("address3")
-            user.phoneNum = data.get("phoneNum", "")
+            user = form.save(commit = False)
+            user.birth = request.POST["birth1"] + "-" + request.POST["birth2"] + request.POST["birth3"]
             user.save()
-
-            return redirect('login')
-
+            return redirect('account:login')
         except Exception as e:
+            print(form.errors)
             print(e)
             return render(request, 'signup.html')
 
@@ -163,8 +158,9 @@ def is_id_duplicated(request):
 def send_SMS(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        print(1)
-        if (data["from"] == "find" and User.objects.filter(username = data["id"],name = data["name"],phoneNum = data["phone_num"]).exists()) or data["from"] == "register":
+        phone_num = data["phone_num"][0:3] + "-" + data["phone_num"][3:7] + "-" + data["phone_num"][7:]
+        print(data)
+        if (data["from"] == "find" and User.objects.filter(username = data["id"],name = data["name"],phoneNum = phone_num).exists()) or data["from"] == "register":
             print(2)
             num = 0
             text = "Barrow 확인 코드 : "
@@ -191,7 +187,7 @@ def send_SMS(request):
                     "is_send" : False,
                     "num": ""
                 }
-                print(3)
+                print(res)
 
         context = {
             "is_send" : False,
@@ -402,7 +398,10 @@ def change_pwd(request):
             
             if form.is_valid():
                 user = form.save()
-                return redirect('account:login')
+                context = {
+                    "url" : reverse('account:login')
+                }
+                return JsonResponse(context)
             else:
                 print(form.errors)
                 messages.add_message(
