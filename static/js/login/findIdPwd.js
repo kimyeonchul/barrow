@@ -501,7 +501,9 @@ function setinput_new_pwd_change_btn() {
                 }), //보낼 데이터
                 success: function (data) {
                     //서버로부터 정상적으로 응답이 왔을 때 실행
+                    console.log(data)
                     alert("변경성공");
+                    window.location.href = 'http://127.0.0.1:8000' + data["url"]
                 },
                 error: function (xhr, textStatus, thrownError) {
                     alert(

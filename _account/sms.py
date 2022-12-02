@@ -14,8 +14,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 secret_file = os.path.join(BASE_DIR, 'secrets.json')
 with open(secret_file) as f:
     secrets = json.loads(f.read())
-timestamp = int(time.time() * 1000)
-timestamp = str(timestamp)
 
 def get_secret(setting, secrets=secrets):
     try:
@@ -30,7 +28,7 @@ access_key = get_secret("SMS_ACCESS_KEY")
 url = "https://sens.apigw.ntruss.com"
 uri = "/sms/v2/services/ncp:sms:kr:296962052810:barrow_test/messages"
 
-def make_signature():
+def make_signature(timestamp):
         secret_key = get_secret("SMS_SECRET_KEY")
         secret_key = bytes(secret_key, "UTF-8")
         method = "POST"
@@ -39,12 +37,13 @@ def make_signature():
         signingKey = base64.b64encode(hmac.new(secret_key, message, digestmod = hashlib.sha256).digest())
         return signingKey
 def send(to, text):   
-
+    timestamp = int(time.time() * 1000)
+    timestamp = str(timestamp)
     header = {
         "Content-Type" : "application/json; charset=utf-8",
         "x-ncp-apigw-timestamp" : timestamp,
         "x-ncp-iam-access-key" : access_key,
-        "x-ncp-apigw-signature-v2" : make_signature()
+        "x-ncp-apigw-signature-v2" : make_signature(timestamp)
     }
 
     data = {

@@ -347,17 +347,8 @@ function setPhoneNumVerify(){
 //* sign up checking
 $('#signup_btn').click(function () {
     if (checkID() && checkPwd() && checkRePwd() && checkName() && checkAddress() && checkCheckbox()&& varifyflag) {
-        $.ajax({
-            url: '', //request 보낼 서버의 경로
-            type: 'post', // 메소드(get, post, put 등)
-            data: { 'id': 'admin' }, //보낼 데이터
-            success: function (data) {
-                //서버로부터 정상적으로 응답이 왔을 때 실행
-            },
-            error: function (err) {
-                //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
-            }
-        });
+        console.log($("#sign_up_submit"))
+        $("#sign_up_submit").trigger("click")
 
     }
 });
@@ -448,7 +439,6 @@ function checkVerify(){
     let inputverify = $('#input_verifyNum').val();
     if(varifyNum==inputverify){
         varifyflag = true;
-        $("#input_phoneNum").attr("disabled", true); 
         $("#send_verification_btn").attr("disabled", true); 
         $("#input_verifyNum").attr("disabled", true); 
         $("#verify_verification_btn").attr("disabled", true); 
