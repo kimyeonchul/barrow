@@ -42,11 +42,11 @@
                     <form name="item_register" id="item_register" method="post" action = "{% url 'products:modify' product_id %}" enctype="multipart/form-data">
                         <div class="pic_body">
                             <div class="pic_box">
-                                
+
                                     {% for image in images %}
-                                        <li id = "li{{forloop.counter0}}">
+                                        <li id = "li{{forloop.counter0}}" class = "origin">
                                             <img src = "{{image.image.url}}" class = "uploadimage" id = "{{forloop.counter0}}">
-                                            <input type = "file" name = "img{{forloop.counter0}}" id = "image_input{{forloop.counter0}}" class = "img_input">
+                                            <input type = "file" name = "img{{forloop.counter0}}" id = "image_input{{forloop.counter0}}" class = "img_input" style = "display: none;">
                                             <input type = "button" id = "image_remove{{forloop.counter0}}" class = "img_remove" value = "X">
                                             <div id = "captain">
                                                 "대표이미지"
@@ -54,9 +54,10 @@
                                         </li>
                                         
                                     {% endfor %}
-                
+                                    
                             </div> 
-                            
+                            <input type="file" id="img_upload2" name ="img[]" class="img_upload2" required multiple style = "display: none;">
+                            <button class="small_btn" id="upload_btn2" type="button" onclick="img_click2()">파일 선택</button>
                         </div>
                 {% endif %}
                     {% csrf_token %}

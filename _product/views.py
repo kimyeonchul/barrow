@@ -57,24 +57,24 @@ def modify(request, product_id):
                 except:
                     try:
                         img = request.FILES["img"+str(i)]
-                        print(img)
                         image = Product_image.objects.get(product=product, index= i)
-                        print(image)
                         image.image = img
-                        print(image.image)
                         image.save()
-                        print(1)
                     except:
                         images = Product_image.objects.filter(product = product).order_by("index")
                         images[i].delete()
             
+
             images = Product_image.objects.filter(product = product).order_by("index")
             i = 0
             for image in images:
                 image.index = i
                 image.save()
                 i+=1
-            
+            for image in request.FILES.getlist("img[]"):
+                new = Product_image.objects.create(product = product, image = image, index = i)
+                new.save()
+                i+=1
             product.title = form.cleaned_data['title']
             product.area = form.cleaned_data['area']
             product.area_detail = form.cleaned_data["area_detail"]

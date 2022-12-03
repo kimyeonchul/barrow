@@ -96,7 +96,6 @@ function img_click() {
 $(document).ready(function(){
   const imageTag = document.getElementById('img_upload');
   const pic_box = document.querySelector('.pic_box');
-
   if(imageTag){
     imageTag.addEventListener('change', function () {
       rmChilderen();
@@ -158,9 +157,14 @@ function removeImg(fileNum){
 
 //다시 업로드하면 리스트 초기화
 function rmChilderen(){
-  const parent = document.querySelector('.pic_box');
-  while(parent.firstChild)  {
-    parent.firstChild.remove()
+  console.log("1")
+  var lies = $(".pic_box>li")
+  console.log(lies)
+  for(var li of lies){
+    console.log($(li).attr("class"))
+    if($(li).attr("class")!="origin"){
+      li.remove();
+    }
   }
 }
 //사진 수정
@@ -184,4 +188,61 @@ $(".img_remove").click(function(){
   img_id = $(this).attr("id").replace("image_remove","");
   $("#li"+img_id).remove();
 })
+
+function img_click2() {
+  document.querySelector('.img_upload2').click();  
+}
+
+//파일선택했을 때
+$(document).ready(function(){
+  const imageTag = document.getElementById('img_upload2');
+  const pic_box = document.querySelector('.pic_box');
+  if(imageTag){
+    imageTag.addEventListener('change', function () {
+      rmChilderen();
+      console.log('파일선택');
+      loadImg(this);
+    });
+  }
+  
+})
+
+
+//썸네일, 리스트 생성
+function loadImg(img){
+  var origin_num = $(".origin").length;
+  if (img.files.length > 5-origin_num) {
+    alert("이미지는 최대 5개까지 업로드 가능합니다.");
+    return;
+  } else {
+    for (let i=0; i<img.files.length; i++){
+      console.log(img.files.length);
+      let reader = new FileReader();
+      var node = document.createElement('li');
+      var tmp = `
+          <img src="" class="uploadimage">  
+          <input type="button" class="img_remove" value="X">
+          <div id="captain">대표이미지<div>
+
+      `
+      node.innerHTML = tmp;
+      document.querySelector('.pic_box').appendChild(node);
+      
+      var liArr = $('.pic_box li').get();
+      console.log(liArr)
+      reader.onload = function(e) {
+        liArr[i+origin_num].querySelector('img').setAttribute('src', e.target.result);
+      }
+      console.log(img.files[i])
+      reader.readAsDataURL(img.files[i]);
+
+      liArr[i+origin_num].querySelector('.img_remove').addEventListener("click", (e)=>{
+        var fileNum = Array.from(liArr).indexOf(e.currentTarget);
+        liArr[i+origin_num].remove();
+        removeImg(fileNum);
+      });
+    }
+  }
+}
+
 

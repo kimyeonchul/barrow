@@ -258,7 +258,7 @@ def near_products(request):
     context = {
         "products_near" : products_near,
         "products_all" : products_all,
-        "item_num" : products_all.count()
+        "item_num" : len(products_all)
     }
     print(context)
     context.update(base(request))

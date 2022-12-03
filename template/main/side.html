@@ -24,7 +24,10 @@
         <div class="recentitembox">
 <!--            <p>최근 본 상품이 없습니다.</p>-->
             {% for product in recent_views %}
-                <img src="{{product.get_first_image.image.url}}" class="recentItem">
+                <a href = "{% url 'products:itempage' product.id %}">
+                    <img src="{{product.get_first_image.image.url}}" class="recentItem">
+                </a>
+                
             {% endfor %}
         </div>
         <section class="paginations">
