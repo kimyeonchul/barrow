@@ -23,21 +23,45 @@
             <div class="item_body">
                 <div class="item_body_title">
                     <img class="barrow_clipboard" src="{% static 'img/img/fluent-emoji_clipboard.png' %}">
-                    <h1>빌려주기</h1>
+                    {% if product_id == 0 %}
+                        <h1>빌려주기</h1>
+                    {% else %}
+                        <h1>수정하기</h1>
+                    {% endif %}
                 </div>
                 <hr class="hr-normal">
                 
                 {% if product_id == 0 %}
                     <form name="item_register" id="item_register" method="post" action = "{% url 'products:new' %}" enctype="multipart/form-data">
+                        <div class="pic_body">
+                            <div class="pic_box"></div> 
+                            <input type="file" id="img_upload" name ="img[]" class="img_upload" required multiple>
+                            <button class="small_btn" id="upload_btn" type="button" onclick="img_click()">파일 선택</button>
+                        </div>
                 {% else %}
                     <form name="item_register" id="item_register" method="post" action = "{% url 'products:modify' product_id %}" enctype="multipart/form-data">
+                        <div class="pic_body">
+                            <div class="pic_box">
+                                
+                                    {% for image in images %}
+                                        <li id = "li{{forloop.counter0}}">
+                                            <img src = "{{image.image.url}}" class = "uploadimage" id = "{{forloop.counter0}}">
+                                            <input type = "file" name = "img{{forloop.counter0}}" id = "image_input{{forloop.counter0}}" class = "img_input">
+                                            <input type = "button" id = "image_remove{{forloop.counter0}}" class = "img_remove" value = "X">
+                                            <div id = "captain">
+                                                "대표이미지"
+                                            </div>
+                                        </li>
+                                        
+                                    {% endfor %}
+                
+                            </div> 
+                            
+                        </div>
                 {% endif %}
                     {% csrf_token %}
-                    <div class="pic_body">
-                        <div class="pic_box"></div> 
-                        <input type="file" id="img_upload" name ="img[]" class="img_upload" required multiple style="display: none;">
-                        <button class="small_btn" id="upload_btn" type="button" onclick="img_click()">파일 선택</button>
-                    </div>
+                    
+                    
                     <div class="item_register_box1">
 
                         <div class="item_register_flex">
@@ -116,9 +140,9 @@
                         <hr class="hr-light">
                         <div class="item_register_flex">
                             <li><label>대여기간</label></li>
-                            <input type="date" id="start_date" name="start_date" value = "{{item.start_date.year}}-{{item.start_date.month}}-{{item.start_date.day}}">
+                            <input type="date" id="start_date" name="start_date" value = "{{item.start_date|date:'Y-m-d'}}">
                             <span class="word"> 부터 </span>
-                            <input type="date" id="end_date" name="end_date" value = "{{item.start_date.year}}-{{item.start_date.month}}-{{item.start_date.day}}">
+                            <input type="date" id="end_date" name="end_date" value = "{{item.end_date|date:'Y-m-d'}}">
                             <span class="word"> 까지 </span>
                         </div>
                         <hr class="hr-light">
