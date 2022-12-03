@@ -17,9 +17,11 @@ from datetime import datetime
 def new(request, product_id):
     item = Product.objects.get(id = product_id)
     reserveds = Deal.objects.filter(product = item)
+    dates = [{"start_date" : reserved.get_start_date(),"end_date" : reserved.get_end_date()} for reserved in reserveds]
+    print(dates)
     context = {
             "item" : item,
-            "reserveds" : reserveds,
+            "reserveds" : dates,
     }
     context.update(base(request))
     context.update(side(request))
@@ -40,7 +42,7 @@ def new(request, product_id):
                         )            
             return render(request, "lentApply.html", context)
         form = DealForm(request.POST)
-
+        print(request.POST)
         if form.is_valid():
             new = form.save(commit=False)
             new.type = request.POST["type"]
