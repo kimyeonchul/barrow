@@ -10,7 +10,7 @@ const rowsPerPage = 20;
 const rowz = document.querySelectorAll(".bestitemlink");
 const rows = document.querySelectorAll('.bestitem');
 const rowsCount = rows.length; //100/8  12.9 -> 13
-const pageCount = Math.ceil(item_num/20);
+const pageCount = Math.ceil(100/20);
 const numbers = document.querySelector('#numbers');
 
 const prevPageBtn = document.querySelector('.prevPageBtns');
@@ -131,6 +131,27 @@ prevPageBtn.addEventListener('click', () => {
 //   displayRow(nextPageNum);
 //   --pageActiveIdx;
 // });
+ function sendPost(url, params) {
+     {% csrf_token %}
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('target', '_blank');
+    form.setAttribute('action', url);
+    document.charset = "UTF-8";
+
+    for (var key in params) {
+      var hiddenField = document.createElement('input');
+      hiddenField.setAttribute('type', 'hidden');
+      hiddenField.setAttribute('name', key);
+      hiddenField.setAttribute('value', params[key]);
+      form.appendChild(hiddenField);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+  sendPost('http://localhost:8000/near_products',{wido : staticlat},{gungdo : staticlon});
+
 function geoFindMe() {
     const status = document.querySelector('#status');
     const mapLink = document.querySelector('#map-link');
@@ -225,7 +246,7 @@ function gido(){
                 myinfowindow.open(map, mylocationmarker);
                 infowindow.open(map, marker);
 
-                // mylocationmarker.setMap(map);
+                mylocationmarker.setMap(map);
                 // marker.setMap(map);
 
                 map.setCenter(mapOption.center);

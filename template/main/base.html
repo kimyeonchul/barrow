@@ -130,7 +130,12 @@
                             <a>카테고리 선택</a>
                         </li>
                         <li class="nav_best"><a href="{% url 'barrow:best' '1' %}">베스트</a></li>
-                        <li class="nav_gido"><a href="{% url 'barrow:near_products' %}">주변 지도로 찾기</a></li>
+                        <li class="nav_gido">
+                             <form class="transferdata" action="{% url 'barrow:near_products' %}" method="post">
+                                 {% csrf_token %}
+                                 <input type='submit'>주변지도로 찾기
+                             </form>
+                        </li>
                         <li class="nav_land"><a href="{% url 'products:new' %}">빌려주기</a></li>
                         
                         <li class="nav_realmenu_box">
