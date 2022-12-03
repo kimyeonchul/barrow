@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main/base.css' %}" />
     <script src="https://cdn.jsdelivr.net/npm/less"></script>
     <script type="text/javascript" src="{% static 'js/main/base.js' %}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cdf1ab47ddf57162ce7abadb88276242&libraries=services"></script>   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <title>Document</title>
 </head>
@@ -59,26 +62,37 @@
             </dt>
         </dl>
     </section>
-    <section class="recentSearchContainer">
-        <div class="recentSearchBox">
-            <p class="text">최근 검색어</p>
-            <div class="searchBrTags"></div>
-            {% for e in recent_search %}
-                <ul class="recentSearch">
-                    <li>{{e.content}}</li>
-                    <li>{{e.get_date}}</li>
-                </ul>
-            {% endfor %}
-            <div class="searchBrTags"></div>
-            <ul class="autoSave">
-                <li>자동저장</li>
-                <li class="recenticon">
-                    <img class="backgroundCircle" src="{% static 'img/img/searchimg/backgroundCircle.png' %}" onclick="circleMove(class{})">
-                    <img class="circle" src="{% static 'img/img/searchimg/circle.png' %}">
-                </li>
-            </ul>
-        </div>
-    </section>
+    {% if user.is_authenticated %}
+            <section class="recentSearchContainer">
+                
+                <div class="recentSearchBox">
+                    {% if user.search_save %}
+                        <div id = "keyword">
+                            <p class="text">최근 검색어</p>
+                            <div class="searchBrTags"></div>
+                            {% for e in recent_search %}
+                                <ul class="recentSearch">
+                                    <li>{{e.content}}</li>
+                                    <li>{{e.get_date}}</li>
+                                </ul>
+                            {% endfor %}
+                        </div>
+                        
+                    {% endif %}
+
+                        <div class="searchBrTags"></div>
+                        <ul class="autoSave">
+                            <li>자동저장</li>
+                            <li class="recenticon">
+                                <img class="backgroundCircle" src="{% static 'img/img/searchimg/backgroundCircle.png' %}" onclick="circleMove(class{})">
+                                <img class="circle" src="{% static 'img/img/searchimg/circle.png' %}">
+                            </li>
+                        </ul>
+                    
+                </div>
+            </section>
+        
+    {% endif %}
     {% if user.is_authenticated %}
         {% include "main/side.html" %}
     {% endif %}
@@ -121,7 +135,17 @@
                     
                 </div>
             </section>
-
+            <div style = "display:none;">
+                <p id = "status"></p>
+                <a id = "map-link" target="_blank"></a>
+                <form class="transferdata" action="{% url 'barrow:near_products' %}" method="post">
+                    {% csrf_token %}
+                    <input type = "text" name = "cur_posx" id = 'cur_posx' style = "display: none;">
+                    <input type = "text" name = "cur_posy" id = 'cur_posy' style = "display: none;">
+                    <input type='submit' id = "submit" style = "display:none;">
+                </form>
+            </div>
+            
             <section class="header_bottom">
                 <nav class="header_bottom_nav">
                     <ul class="bottom_items">
@@ -131,10 +155,7 @@
                         </li>
                         <li class="nav_best"><a href="{% url 'barrow:best' '1' %}">베스트</a></li>
                         <li class="nav_gido">
-                             <form class="transferdata" action="{% url 'barrow:near_products' %}" method="post">
-                                 {% csrf_token %}
-                                 <input type='submit'>주변지도로 찾기
-                             </form>
+                            <a>주변지도로 찾기</a>
                         </li>
                         <li class="nav_land"><a href="{% url 'products:new' %}">빌려주기</a></li>
                         
@@ -217,6 +238,9 @@
         {% block content %}
         {% endblock %}
     </div>
+    <script>
+        var user_id = "{{user.id}}";
+    </script>
 </body>
 
 </html>

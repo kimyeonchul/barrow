@@ -203,20 +203,20 @@ def category_view(request, category, sort):
     return render(request, "main/category.html", context)
 
 def near_products(request):
+    print(request.POST)
     ##도로명 주소 지번으로 변환하기
 
     #user 주소에서 동 찾아내기
-    user_address = request.user.address
-    user_address_split = user_address.split(" ")
-    url = 'https://dapi.kakao.com/v2/local/search/address.json'
-    params = {'query' : user_address}
+
+    url = 'https://dapi.kakao.com/v2/local/geo/coord2address.json'
+    params = {'x' : request.POST["cur_posx"], 'y' : request.POST["cur_posy"]}
     headers = {"Authorization": "KakaoAK 507b88e0987b8499d1fa196252551262"}
     place = requests.get(url, headers = headers, params = params).json()
     user_address_DONG = place["documents"][0]["address"]["region_3depth_name"]
     # user랑 도, 시, 동 같은 제품 가져오기
-    user_address_for_query = user_address_split[0]+" "+user_address_split[1]+ " " + user_address_split[2]
+    user_address_for_query = place["documents"][0]["address"]["region_1depth_name"]+" "+place["documents"][0]["address"]["region_2depth_name"]
     map_contents = Product.objects.filter(area__contains = user_address_for_query)
-    
+    print(map_contents)
     #데이터 정제하기
     ids = list(map_contents.values_list("id",flat = True).order_by("id"))
     addresses = list(map_contents.values_list("area",flat = True).order_by("id"))
@@ -257,8 +257,10 @@ def near_products(request):
         )
     context = {
         "products_near" : products_near,
-        "products_all" : products_all
+        "products_all" : products_all,
+        "item_num" : products_all.count()
     }
+    print(context)
     context.update(base(request))
     context.update(side(request))
     return render(request, "main/map.html", context)

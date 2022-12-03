@@ -131,27 +131,7 @@ prevPageBtn.addEventListener('click', () => {
 //   displayRow(nextPageNum);
 //   --pageActiveIdx;
 // });
- function sendPost(url, params) {
-     {% csrf_token %}
-    var form = document.createElement('form');
-    form.setAttribute('method', 'post');
-    form.setAttribute('target', '_blank');
-    form.setAttribute('action', url);
-    document.charset = "UTF-8";
-
-    for (var key in params) {
-      var hiddenField = document.createElement('input');
-      hiddenField.setAttribute('type', 'hidden');
-      hiddenField.setAttribute('name', key);
-      hiddenField.setAttribute('value', params[key]);
-      form.appendChild(hiddenField);
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-  }
-  sendPost('http://localhost:8000/near_products',{wido : staticlat},{gungdo : staticlon});
-
+ 
 function geoFindMe() {
     const status = document.querySelector('#status');
     const mapLink = document.querySelector('#map-link');
@@ -180,8 +160,10 @@ function geoFindMe() {
     }
     gido();
   }
-    document.querySelector('#find-me').addEventListener('click', geoFindMe);
-
+    // document.querySelector('#find-me').addEventListener('click', geoFindMe);
+$(document).ready(function(){
+  geoFindMe();
+});
 
 
 function gido(){
@@ -218,8 +200,8 @@ function gido(){
         // });
 
         // // 마커가 지도 위에 표시되도록 설정합니다
-
-        geocoder.addressSearch('서울특별시 종로구 홍지문2길 20', function(result, status) {
+        for(var product of products){
+          geocoder.addressSearch(product["address"], function(result, status) {
 
             // 정상적으로 검색이 완료됐으면
              if (status === kakao.maps.services.Status.OK) {
@@ -237,7 +219,7 @@ function gido(){
                 });
                 // 인포윈도우로 장소에 대한 설명을 표시합니다
                 var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+                    content: '<img src = '+product["image"]+' style = "width:150px;text-align:center;padding:6px 0;">'
                 });
 
                 var myinfowindow = new kakao.maps.InfoWindow({
@@ -254,4 +236,6 @@ function gido(){
                 // map.setCenter(coords);
             }
         });
+        }
+        
     }
