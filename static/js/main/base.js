@@ -4,6 +4,8 @@ const input_search = document.querySelector(".input_search");
 const recentSearchContainer = document.querySelector(".recentSearchContainer");
 const categoryClick = document.querySelector(".categoryClick");
 const transferdata = document.querySelector(".transferdata");
+const circle = document.querySelector(".circle");
+
 let view = "visible";
 let viewstatus = 'show';
 let inout = 'in';
@@ -83,10 +85,52 @@ function circleMove(item) {
       circle.style="animation-name:circleleft";
       circle.style=`transform:translate(-18px,0)`;
         view = "hidden";
+        $.ajax({
+          url: 'http://127.0.0.1:8000/search/is_save/', //request 보낼 서버의 경로
+          type: 'post', // 메소드(get, post, put 등)
+          data: JSON.stringify({
+              "user":user_id,
+              "is_save": true
+          }), //보낼 데이터
+          success: function (data) {
+              //서버로부터 정상적으로 응답이 왔을 때 실행
+              $("#keyword").css("display","block");
+
+              
+          },
+          error: function (xhr, textStatus, thrownError) {
+              alert(
+                  "Could not send URL to Django. Error: " +
+                  xhr.status +
+                  ": " +
+                  xhr.responseText
+              );
+          },
+      });
     }
     else{
       circle.style="animation-name:circleright"
         view = "visible";
+        $.ajax({
+          url: 'http://127.0.0.1:8000/search/is_save/', //request 보낼 서버의 경로
+          type: 'post', // 메소드(get, post, put 등)
+          data: JSON.stringify({
+              "user":user_id,
+              "is_save": false
+          }), //보낼 데이터
+          success: function (data) {
+              //서버로부터 정상적으로 응답이 왔을 때 실행
+              $("#keyword").css("display","none");
+          },
+          error: function (xhr, textStatus, thrownError) {
+              alert(
+                  "Could not send URL to Django. Error: " +
+                  xhr.status +
+                  ": " +
+                  xhr.responseText
+              );
+          },
+      });
     }
 }
 
@@ -123,7 +167,7 @@ newP.innerHTML = "<input type='text' value={staticlat} style='display:none'> ";
 newinput.innerHTML = "<input type='text' value={staticlon} style='display:none'> ";
 transferdata.appendChild(newP);
 transferdata.appendChild(newinput);
-geoFindMe();
+
 function geoFindMe() {
     const status = document.querySelector('#status');
     const mapLink = document.querySelector('#map-link');
@@ -133,8 +177,8 @@ function geoFindMe() {
     function success(position) {
       const latitude  = position.coords.latitude;
       const longitude = position.coords.longitude;
-        staticlat = latitude;
-        staticlon = longitude;
+      staticlat = latitude;
+      staticlon = longitude;
       status.textContent = '';
       mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
       mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
@@ -150,9 +194,9 @@ function geoFindMe() {
       status.textContent = 'Locating…';
       navigator.geolocation.getCurrentPosition(success, error);
     }
-    gido();
+    // gido();
   }
-    document.querySelector('#find-me').addEventListener('click', geoFindMe);
+    // document.querySelector('#find-me').addEventListener('click', geoFindMe);
 
 
 
@@ -227,3 +271,12 @@ function gido(){
             }
         });
     }
+geoFindMe();
+
+console.log($(".nav_gido > a"));
+$(".nav_gido > a").click(function(){
+  $("#cur_posx").val(staticlon);
+  $("#cur_posy").val(staticlat);
+  console.log(staticlon, staticlat)
+  $("#submit").trigger("click");
+});

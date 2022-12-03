@@ -1,4 +1,3 @@
-console.log("main");
 
 
 // 슬라이드 배너======================================================================================
@@ -8,7 +7,6 @@ const outer = document.querySelector('.outer');
 const innerList = document.querySelector('.inner-list');
 const inners = document.querySelectorAll('.inner');
 const imgs = document.querySelectorAll('.slideimg');
-const circle = document.querySelector(".circle");
 let currentIndex = 0; // 현재 슬라이드 화면 인덱스
 
 function Indexvalue(){
@@ -31,18 +29,6 @@ const getInterval = () => {
   }, 2000);
 }
 
-function circleMove(item) {
-  console.log(item);
-    if (view === "visible") {
-      circle.style="animation-name:circleleft";
-      circle.style=`transform:translate(-18px,40%)`;
-        view = "hidden";
-    }
-    else{
-      circle.style="animation-name:circleright"
-        view = "visible";
-    }   
-}
 
 
 
