@@ -10,7 +10,7 @@ const rowsPerPage = 20;
 const rowz = document.querySelectorAll(".bestitemlink");
 const rows = document.querySelectorAll('.bestitem');
 const rowsCount = rows.length; //100/8  12.9 -> 13
-const pageCount = Math.ceil(item_num/20);
+const pageCount = Math.ceil(100/20);
 const numbers = document.querySelector('#numbers');
 
 const prevPageBtn = document.querySelector('.prevPageBtns');
@@ -132,6 +132,7 @@ prevPageBtn.addEventListener('click', () => {
 //   --pageActiveIdx;
 // });
 function geoFindMe() {
+    console.log('되는데?');
     const status = document.querySelector('#status');
     const mapLink = document.querySelector('#map-link');
 
@@ -225,7 +226,7 @@ function gido(){
                 myinfowindow.open(map, mylocationmarker);
                 infowindow.open(map, marker);
 
-                // mylocationmarker.setMap(map);
+                mylocationmarker.setMap(map);
                 // marker.setMap(map);
 
                 map.setCenter(mapOption.center);
