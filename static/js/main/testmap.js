@@ -1,130 +1,138 @@
-const bottomVector = document.querySelector(".bottomVector");
-const nav_realtimesearch = document.querySelector(".nav_realtimesearch");
-const input_search = document.querySelector(".input_search");
-const recentSearchContainer = document.querySelector(".recentSearchContainer");
-const categoryClick = document.querySelector(".categoryClick");
-const transferdata = document.querySelector(".transferdata");
-let view = "visible";
-let viewstatus = 'show';
-let inout = 'in';
+
+console.log("hi");
 var staticlat = 0;
 var staticlon = 0;
 
-function realtimeViewVisible(e) {
-  console.log(e);
-    if (view === "visible") {
-        nav_realtimesearch.style="visibility:visible";
-        view = "hidden";
-    }
-    else {
-        nav_realtimesearch.style = "visibility:hidden";
-        view = "visible";
-    }
 
+
+//페이지네이션 ----------------------------------------------------------------------
+const rowsPerPage = 20;
+const rowz = document.querySelectorAll(".bestitemlink");
+const rows = document.querySelectorAll('.bestitem');
+const rowsCount = rows.length; //100/8  12.9 -> 13
+const pageCount = Math.ceil(100/20);
+const numbers = document.querySelector('#numbers');
+
+const prevPageBtn = document.querySelector('.prevPageBtns');
+const nextPageBtn = document.querySelector('.nextPageBtns');
+console.log(prevPageBtn);
+let pageActiveIdx = 0; //현재 보고 있는 페이지 그룹 번호
+let currentPageNum = 0; //현재 보고 있는 페이지 번호
+let maxPageNum = 9; //페이지그룹 최대 개수
+console.log(numbers);
+
+for(let i=1; i<=pageCount; i++){
+   numbers.innerHTML += `<li><a href="">${i}</a></li>`;
 }
-document.addEventListener('mouseup', (e) => {
-  // let e.target.closest('.recentSearchContainer').className
-  let tgE1 = e.target;
-  let recent = tgE1.closest('.nav_realtimesearch');
 
-    if(!recent){
-      nav_realtimesearch.style = "visibility:hidden";
-       viewstatus = "show";
+const numberBtn = numbers.querySelectorAll('a');
+console.log(numberBtn);
 
-    }
+for(nb of numberBtn){
+  nb.style.display="none";
+}
 
-})
-//외부영역 클릭시 최근검색창 닫기===========================================================
-input_search.addEventListener('click', (e) => {
-  // console.log(e.target.parentNode);
-    if(viewstatus === 'show'){
-      recentSearchContainer.style = "visibility:visible";
-      viewstatus = "hide";
-    }
-})
-document.addEventListener('mouseup', (e) => {
-  // let e.target.closest('.recentSearchContainer').className
-  let tgE1 = e.target;
-  let recent = tgE1.closest('.recentSearchContainer');
-    if(!recent){
-      recentSearchContainer.style = "visibility:hidden";
-       viewstatus = "show";
+numberBtn.forEach((item,idx) => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+      for(nb of numberBtn){
+        nb.classList.remove('active');
+      }
+      e.target.classList.add('active');
+      displayRow(idx);
+    });
+});
+function displayRow(idx){
+  let start = idx*rowsPerPage;
+  let end = start+rowsPerPage;
 
-    }
-
-})
-//현재 클릭한 요소의 타겟의 조상 .closest('.recentSearchContainer')이 없다면 null return ========================
-function categoryBox(e){
-  if (viewstatus === "show") {
-    categoryClick.style="visibility:visible";
-    viewstatus = "hide";
+  let rowsArray = [...rows];
+  for(ra of rowsArray){
+    ra.style.display = 'none';
   }
-  else{
-    categoryClick.style = "visibility:hidden";
-    viewstatus = "show";
+
+  let newRows = rowsArray.slice(start,end);
+  for(nr of newRows){
+    nr.style.display = '';
+  }
+  for(nb of numberBtn){
+    nb.classList.remove('active');
+  }
+  console.log(numberBtn[idx]);
+  numberBtn[idx].classList.add('active');
+}
+
+displayRow(0);
+
+//페이지네이션 그룹 표시 함수
+function displayPage(num){
+  //페이지네이션 번호 감추기
+  for(nb of numberBtn){
+    nb.style.display ='none';
+  }
+  let totalPageCount = Math.ceil(pageCount/maxPageNum);
+  console.log(totalPageCount);
+  console.log(pageActiveIdx);
+  let pageArr = [...numberBtn];
+  let start = num*maxPageNum;
+  let end = start+maxPageNum;
+  let pageListArr = pageArr.slice(start, end);
+
+  for(let item of pageListArr){
+    item.style.display="block";
+  }
+
+  if(pageActiveIdx == 0) {
+    prevPageBtn.style.display = 'none'
+  } else {
+    prevPageBtn.style.display = 'flex'
+  }
+  if(pageActiveIdx == totalPageCount -1) {
+    nextPageBtn.style.display = 'none'
+  } else {
+    nextPageBtn.style.display = 'flex'
   }
 }
-document.addEventListener('mouseup', (e) => {
-  // let e.target.closest('.recentSearchContainer').className
-  let tgE1 = e.target;
-  let recent = tgE1.closest('.categoryClick');
-    if(!recent){
-      categoryClick.style = "visibility:hidden";
-       viewstatus = "show";
-
-    }
-
-})
-
-
-function circleMove(item) {
-  console.log(item);
-    if (view === "visible") {
-      circle.style="animation-name:circleleft";
-      circle.style=`transform:translate(-18px,0)`;
-        view = "hidden";
-    }
-    else{
-      circle.style="animation-name:circleright"
-        view = "visible";
-    }
+displayPage(0);
+const dLeftVector = document.querySelector(".dLeftVector");
+const dRightVector = document.querySelector(".dRightVector");
+if(pageActiveIdx !== 0) {
+  dRightVector.addEventListener('click', () => {
+    let nextPageNum = pageActiveIdx * maxPageNum + maxPageNum;
+    displayRow(nextPageNum);
+    ++pageActiveIdx;
+    displayPage(pageActiveIdx);
+  });
+  dLeftVector.addEventListener('click', () => {
+    let nextPageNum = pageActiveIdx * maxPageNum - maxPageNum;
+    displayRow(nextPageNum);
+    --pageActiveIdx;
+    displayPage(pageActiveIdx);
+  });
 }
+nextPageBtn.addEventListener('click', () => {
+  pageActiveIdx++;
+  displayRow(pageActiveIdx);
+  displayPage(pageActiveIdx);
+});
 
-
-
-
-// ============================================================================
-const outers = document.querySelector('.nav_realmenu_box');
-const innerLists = document.querySelector('.nav_realmenu_left');
-const innerss = document.querySelectorAll('.nav_inner');
-// const imgs = document.querySelectorAll('img');
-let currentIndexs = 0; // 현재 슬라이드 화면 인덱스
-
-innerss.forEach((inner) => {
-    inner.style.width = `${innerLists.clientWidth}px`; // inner의 width를 모두 outer의 width로 만들기
-    inner.style.height = `${innerLists.clientHeight}px`;
-})
-innerLists.style.height = `${outers.clientHeight * innerss.length}px`;
-
-
-const getIntervals = () => {
-    return setInterval(() => {
-        currentIndexs++;
-        currentIndexs = currentIndexs >= innerss.length ? 0 : currentIndexs;
-        innerLists.style.marginTop = `-${outers.clientHeight * currentIndexs}px`;
-    }, 4000);
-}
-
-let intervalz = getIntervals(); // interval 등록
-
-const newP = document.createElement('p');
-const newinput = document.createElement('p');
-newP.innerHTML = "<input type='text' value={staticlat} style='display:none'> ";
-newinput.innerHTML = "<input type='text' value={staticlon} style='display:none'> ";
-transferdata.appendChild(newP);
-transferdata.appendChild(newinput);
-geoFindMe();
+prevPageBtn.addEventListener('click', () => {
+  pageActiveIdx--;
+  displayRow(pageActiveIdx);
+  displayPage(pageActiveIdx);
+});
+// nextPageBtn.addEventListener('click',() => {
+//   let nextPageNum = pageActiveIdx;
+//   displayRow(nextPageNum);
+//   ++pageActiveIdx;
+// });
+// prevPageBtn.addEventListener('click',() => {
+//   let nextPageNum = pageActiveIdx;
+//   displayRow(nextPageNum);
+//   --pageActiveIdx;
+// });
 function geoFindMe() {
+    console.log('되는데?');
     const status = document.querySelector('#status');
     const mapLink = document.querySelector('#map-link');
 

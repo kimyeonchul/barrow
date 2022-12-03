@@ -131,8 +131,28 @@ prevPageBtn.addEventListener('click', () => {
 //   displayRow(nextPageNum);
 //   --pageActiveIdx;
 // });
+ function sendPost(url, params) {
+     {% csrf_token %}
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('target', '_blank');
+    form.setAttribute('action', url);
+    document.charset = "UTF-8";
+
+    for (var key in params) {
+      var hiddenField = document.createElement('input');
+      hiddenField.setAttribute('type', 'hidden');
+      hiddenField.setAttribute('name', key);
+      hiddenField.setAttribute('value', params[key]);
+      form.appendChild(hiddenField);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+  sendPost('http://localhost:8000/near_products',{wido : staticlat},{gungdo : staticlon});
+
 function geoFindMe() {
-    console.log('되는데?');
     const status = document.querySelector('#status');
     const mapLink = document.querySelector('#map-link');
 
