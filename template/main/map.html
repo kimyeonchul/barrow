@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<!DOCTYPE html>`
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -35,14 +35,15 @@
 <!--                        <p class="ViewMoreBtn">더보기</p>-->
                     </div>
                 </div>
+
                 <!--전체 width가   -->
                  {% for product, type in products_near %}
                     {% if forloop.counter0|divisibleby:4 %}
                     <section class="bestitems">
                     {% endif %}
                     {% if product %}
-                    <div class="bestitem">
-                        <a href="#" class="bestitemlink">
+                     <div class="bestitem">
+                            <a href="{% url 'products:itempage' product.id %}" class="bestitemlink">
                             <img class="bestitemImg" src="{{product.get_first_image.image.url}}"
                                  style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
@@ -51,7 +52,7 @@
                                     <li>{{product.title}}</li>
                                 </ul>
                                 <ul>
-                                  <div class="TransMethodImg">
+                                    <div class="TransMethodImg">
                                         <li class="juso">{{product.area}}</li>
                                         <div class="dealmethod">
                                         {% if type.0 %}
@@ -65,35 +66,28 @@
                                     <ul class="priceAndDay">
                                         <li>
                                             <h1 class="bestitemPrice">{{product.price}}</h1>
-                                              <p class="krPrice">원 /</p>
+                                            <p class="krPrice">원 /</p>
                                         </li>
                                         <li>
                                             <p class="bestitemday"><strong>{{product.get_price_per_display}}</strong></p>
                                         </li>
                                     </ul>
                                     <div class="itemdate">
-                                    <p class="itembeforedate">{{product.get_created}}</p>
+                                        <p class="itembeforedate">{{product.get_created}}</p>
                                     </div>
                                 </ul>
                             </div>
                             </a>
                         </div>
+
                     {% endif %}
-                {% if forloop.counter|divisibleby:4 %}
+
+                    {% if forloop.counter|divisibleby:4 %}
                         </section>
                     {% endif %}
+
                 {% endfor %}
-    
-                </section>
-             <section class="mapApi">
-                <button id = "find-me">Show my location</button><br/>
-                <p id = "status"></p>
-                <a id = "map-link" target="_blank"></a>
-                <div id="map" style="width:400px;height:400px;"></div>
-            </section>
-            </section>
-        </section>
-         <section class="pagination">
+<section class="pagination">
             <span class="dLeftVector">&laquo;</span>
             <span class="prevPageBtns">&lt;</span>
             <ol id="numbers">
@@ -102,6 +96,18 @@
             <span class="nextPageBtns">&gt;</span>
             <span class="dRightVector">&raquo;</span>
         </section>
+            </section>
+
+<section class="mapApi">
+<!--                <button id = "find-me">Show my location</button><br/>-->
+                <p id = "status"></p>
+                <a id = "map-link" target="_blank" style="display:none"></a>
+                <div id="map" style="width:100%;height:840px;  border-radius: 17px;"></div>
+            </section>
+
+        </section>
+        </section>
+
         <!-- <nav aria-label="pagination">
             <ul class="pagination">
                 <li><a href=""><span aria-hidden="true">&laquo;</span><span class="visuallyhidden">previous set of pages</span></a></li>
@@ -117,5 +123,6 @@
     <script>
         var products = {{products_all|safe}};
     </script>
+<script type = "text/javascript"> var item_num = "{{item_num}}";</script>
 </html>
 {% endblock %}

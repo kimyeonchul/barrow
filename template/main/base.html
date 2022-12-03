@@ -68,19 +68,19 @@
                 <div class="recentSearchBox">
                     {% if user.search_save %}
                         <div id = "keyword">
-                            <p class="text">최근 검색어</p>
+                            <h3 class="text">최근 검색어</h3>
                             <div class="searchBrTags"></div>
                             {% for e in recent_search %}
                                 <ul class="recentSearch">
                                     <li>{{e.content}}</li>
                                     <li>{{e.get_date}}</li>
                                 </ul>
+                            <div class="searchBrTags"></div>
                             {% endfor %}
                         </div>
                         
                     {% endif %}
 
-                        <div class="searchBrTags"></div>
                         <ul class="autoSave">
                             <li>자동저장</li>
                             <li class="recenticon">
