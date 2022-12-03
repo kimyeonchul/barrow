@@ -14,6 +14,9 @@ let pageActiveIdx = 0; //현재 보고 있는 페이지 그룹 번호
 let currentPageNum = 0; //현재 보고 있는 페이지 번호
 let maxPageNum = 9; //페이지그룹 최대 개수
 console.log(numbers);
+if(rowsCount === 0){
+       numbers.innerHTML += `<li><a href="">${1}</a></li>`;
+}
 for(let i=1; i<=pageCount; i++){
    numbers.innerHTML += `<li><a href="">${i}</a></li>`;
 }

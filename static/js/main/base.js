@@ -83,20 +83,20 @@ function circleMove(item) {
   console.log(item);
     if (view === "visible") {
       circle.style="animation-name:circleleft";
-      circle.style=`transform:translate(-18px,0)`;
+      circle.style=`transform:translate(-18px, 5px)`;
         view = "hidden";
         $.ajax({
           url: 'http://127.0.0.1:8000/search/is_save/', //request 보낼 서버의 경로
           type: 'post', // 메소드(get, post, put 등)
           data: JSON.stringify({
               "user":user_id,
-              "is_save": true
+              "is_save": false
           }), //보낼 데이터
           success: function (data) {
               //서버로부터 정상적으로 응답이 왔을 때 실행
-              $("#keyword").css("display","block");
+              $("#keyword").css("display","none");
 
-              
+
           },
           error: function (xhr, textStatus, thrownError) {
               alert(
@@ -116,11 +116,11 @@ function circleMove(item) {
           type: 'post', // 메소드(get, post, put 등)
           data: JSON.stringify({
               "user":user_id,
-              "is_save": false
+              "is_save": true
           }), //보낼 데이터
           success: function (data) {
               //서버로부터 정상적으로 응답이 왔을 때 실행
-              $("#keyword").css("display","none");
+              $("#keyword").css("display","block");
           },
           error: function (xhr, textStatus, thrownError) {
               alert(
