@@ -21,12 +21,12 @@ def new(request):
             new.save()
             print(request.FILES)
             print(request.FILES.getlist('img'))
-            for img in request.FILES.getlist('img'):
-                print(img)
-                i = 0 
+            i = 0
+            for img in request.FILES.getlist('img[]'):
                 new_image = Product_image.objects.create(product = new, image = img, index = i)
                 new_image.save()
                 i+=1
+
         else:
             print(form.errors)
         return redirect("barrow:home")
@@ -43,15 +43,37 @@ def modify(request, product_id):
     if request.method == "POST":
         product = Product.objects.get(id = product_id)
         form = ProductForm(request.POST)
-        
+        print(request.POST)
+        print(request.FILES)
+        pass
         if form.is_valid():
             cur_images = Product_image.objects.filter(product = product)
-            for img in cur_images:
-                img.delete()
-            for img in request.FILES.getlist("images"):
-                i = 0               
-                new_image = Product_image.objects.create(product = product, image = img, index = i)
-                new_image.save()
+            for i in range(cur_images.count()):
+                try:
+                    img = request.POST["img"+str(i)]
+                    if img == '':
+                        continue
+                        
+                except:
+                    try:
+                        img = request.FILES["img"+str(i)]
+                        image = Product_image.objects.get(product=product, index= i)
+                        image.image = img
+                        image.save()
+                    except:
+                        images = Product_image.objects.filter(product = product).order_by("index")
+                        images[i].delete()
+            
+
+            images = Product_image.objects.filter(product = product).order_by("index")
+            i = 0
+            for image in images:
+                image.index = i
+                image.save()
+                i+=1
+            for image in request.FILES.getlist("img[]"):
+                new = Product_image.objects.create(product = product, image = image, index = i)
+                new.save()
                 i+=1
             product.title = form.cleaned_data['title']
             product.area = form.cleaned_data['area']
@@ -76,6 +98,9 @@ def modify(request, product_id):
         types.append(type)
         context["product_id"] = product_id
         context["item"] = Product.objects.get(id = product_id)
+        context["images"] = []
+        images = Product_image.objects.filter(product = context["item"])
+        context["images"] = images
         context["type"] = type
         return render(request, "itemRegister.html", context)
 

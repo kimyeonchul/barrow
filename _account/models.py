@@ -14,10 +14,10 @@ class User(AbstractUser):
     address_detail = models.CharField(max_length = 100,null = False, default = "")
     phoneNum = models.CharField(max_length=20)
     # phoneNum = PhoneNumberField()          #setting.py에 installedappsdp  'phonenumber_field',이거추가
-    favorite = models.ManyToManyField("_product.Product", related_name='favor')
-    keyword = models.ManyToManyField("_search.Keyword", related_name='search')
+    favorite = models.ManyToManyField("_product.Product", related_name='favor',null = True)
+    keyword = models.ManyToManyField("_search.Keyword", related_name='search',null = True)
     search_save = models.BooleanField(null = True, default = True)
-    image = models.ImageField(default='/media/account/account_default.png', upload_to='account', blank=True, null=True)
+    image = models.ImageField(default='account/account_default.png', upload_to='account', blank=True, null=True)
 
 
     def view(self, prd):

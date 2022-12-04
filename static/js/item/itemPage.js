@@ -72,6 +72,79 @@ function modal(id) {
       });
 }
 
-function test() {
-  console.log("하이욤");
+/* 
+  찜 버튼 클릭
+*/
+function getLove() {
+  $('#love_btn').addClass('favorite');
+  $.ajax({
+    url: 'http://127.0.0.1:8000/product/set_favorite',
+    type: "POST",
+    dataType: "JSON",
+    data: JSON.stringify({
+      "product_id": product_id,
+      "user_id" : user_id,
+     }),
+    headers: { "X-CSRFToken": "{{ csrf_token }}" },
+
+    success: function(result){
+      var favorite_num = result['favorite_num'];
+      //console.log(favorite_num);  
+      $('.favoriteNum').text(favorite_num);
+
+    },
+
+    error: function (xhr, textStatus, thrownError) {
+      alert(
+          "Could not send URL to Django. Error: " +
+          xhr.status +
+          ": " +
+          xhr.responseText
+      );
+    },
+  })
+}
+
+function takeAwayLove() {
+  $('#love_btn').removeClass('favorite');
+  $.ajax({
+    url: 'http://127.0.0.1:8000/product/set_favorite',
+    type: "DELETE",
+    dataType: "JSON",
+    data: JSON.stringify({
+      "product_id": product_id,
+      "user_id" : user_id,
+     }),
+    headers: { "X-CSRFToken": "{{ csrf_token }}" },
+
+    success: function(result){
+      var favorite_num = result['favorite_num'];
+      //console.log(favorite_num);
+      $('.favoriteNum').text(favorite_num);
+
+    },
+
+    error: function (xhr, textStatus, thrownError) {
+      alert(
+          "Could not send URL to Django. Error: " +
+          xhr.status +
+          ": " +
+          xhr.responseText
+      );
+    },
+  })
+}
+
+function showFavoriteNum() {
+}
+
+function love_btn(){
+  if($("#love_btn").hasClass("favorite") === true) {
+      takeAwayLove();
+      showFavoriteNum();
+      console.log("찜해제");
+    } else {
+      getLove();
+      console.log("찜등록");
+    }
 }

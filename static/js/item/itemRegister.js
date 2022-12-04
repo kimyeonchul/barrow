@@ -1,3 +1,4 @@
+
 /*
   우편번호 api 적용 함수
 */
@@ -24,8 +25,13 @@ function findAddr(){
   });
 }
 
+$('#area').click(function(){
+  findAddr();
+});
+
 
 $(function(){
+
   var now_utc = Date.now()
   var timeOff = new Date().getTimezoneOffset()*60000;
   var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
@@ -38,16 +44,15 @@ $(function(){
 폼 유효성 검사
 */
 function formCheck(frm) {
-  console.log("폼체크");
   if (frm.title.value == "") {
     alert("제목을 입력해 주세요");
     frm.title.focus();
     return false;
   }
-  if (frm.img.value == "") {
-    alert("최소 한 장의 사진을 첨부해 주세요");
-    return false;
-  }
+  // if (frm.img[0].value == "") {
+  //   alert("최소 한 장의 사진을 첨부해 주세요");
+  //   return false;
+  // }
   if (frm.area.value == "" || frm.area_detail.value == "") {
     alert("주소를 정확히 입력해 주세요");
     frm.area_detail.focus();
@@ -73,8 +78,9 @@ function submitForm() {
   if (!formCheck(item_register)) {
     return;
   } else {
-    alert("폼 제출");
-    $("#reigester_form").trigger("click");
+    console.log("ㅎㅇ");
+    $('#register_form').trigger('click');
+    //realSubmit();
   }
 }
 
@@ -87,14 +93,19 @@ function img_click() {
 }
 
 //파일선택했을 때
-const imageTag = document.getElementById('img_upload');
-const pic_box = document.querySelector('.pic_box');
+$(document).ready(function(){
+  const imageTag = document.getElementById('img_upload');
+  const pic_box = document.querySelector('.pic_box');
+  if(imageTag){
+    imageTag.addEventListener('change', function () {
+      rmChilderen();
+      console.log('파일선택');
+      loadImg(this);
+    });
+  }
+  
+})
 
-imageTag.addEventListener('change', function () {
-    rmChilderen();
-    console.log('파일선택');
-    loadImg(this);
-});
 
 //썸네일, 리스트 생성
 function loadImg(img){
@@ -119,11 +130,13 @@ function loadImg(img){
       reader.onload = function(e) {
         liArr[i].querySelector('img').setAttribute('src', e.target.result);
       }
+      console.log(img.files[i])
       reader.readAsDataURL(img.files[i]);
 
       liArr[i].querySelector('.img_remove').addEventListener("click", (e)=>{
+        var fileNum = Array.from(liArr).indexOf(e.currentTarget);
         liArr[i].remove();
-        removeImg(i);
+        removeImg(fileNum);
       });
     }
   }
@@ -133,7 +146,7 @@ function loadImg(img){
 function removeImg(fileNum){
   const dataTransfer = new DataTransfer();
   let files = $('#img_upload')[0].files;	
-  let fileArray = Array.from(files);	//변수에 할당된 파일을 배열로 변환(FileList -> Array)
+  let fileArray = Array.from(files);	//변수에 할당된 파일을 배열로 변환(FileList -> Array) 
 
   fileArray.splice(fileNum, 1);	//해당하는 index의 파일을 배열에서 제거
   fileArray.forEach(file => { 
@@ -144,8 +157,92 @@ function removeImg(fileNum){
 
 //다시 업로드하면 리스트 초기화
 function rmChilderen(){
-  const parent = document.querySelector('.pic_box');
-  while(parent.firstChild)  {
-    parent.firstChild.remove()
+  console.log("1")
+  var lies = $(".pic_box>li")
+  console.log(lies)
+  for(var li of lies){
+    console.log($(li).attr("class"))
+    if($(li).attr("class")!="origin"){
+      li.remove();
+    }
   }
 }
+//사진 수정
+$(".uploadimage").click(function(){
+  $("#image_input"+$(this).attr("id")).trigger("click")
+});
+$(".img_input").change(function(){  
+  let reader = new FileReader();
+  if(!this.files.length) {
+      return;
+  }
+  img_id = $(this).attr("id")
+  img_id = img_id.replace("image_input","")
+
+  reader.readAsDataURL(this.files[0]);
+  reader.onload = function (e) {
+    $("#"+img_id).attr("src",e.target.result)
+  }
+});
+$(".img_remove").click(function(){
+  img_id = $(this).attr("id").replace("image_remove","");
+  $("#li"+img_id).remove();
+})
+
+function img_click2() {
+  document.querySelector('.img_upload2').click();  
+}
+
+//파일선택했을 때
+$(document).ready(function(){
+  const imageTag = document.getElementById('img_upload2');
+  const pic_box = document.querySelector('.pic_box');
+  if(imageTag){
+    imageTag.addEventListener('change', function () {
+      rmChilderen();
+      console.log('파일선택');
+      loadImg(this);
+    });
+  }
+  
+})
+
+
+//썸네일, 리스트 생성
+function loadImg(img){
+  var origin_num = $(".origin").length;
+  if (img.files.length > 5-origin_num) {
+    alert("이미지는 최대 5개까지 업로드 가능합니다.");
+    return;
+  } else {
+    for (let i=0; i<img.files.length; i++){
+      console.log(img.files.length);
+      let reader = new FileReader();
+      var node = document.createElement('li');
+      var tmp = `
+          <img src="" class="uploadimage">  
+          <input type="button" class="img_remove" value="X">
+          <div id="captain">대표이미지<div>
+
+      `
+      node.innerHTML = tmp;
+      document.querySelector('.pic_box').appendChild(node);
+      
+      var liArr = $('.pic_box li').get();
+      console.log(liArr)
+      reader.onload = function(e) {
+        liArr[i+origin_num].querySelector('img').setAttribute('src', e.target.result);
+      }
+      console.log(img.files[i])
+      reader.readAsDataURL(img.files[i]);
+
+      liArr[i+origin_num].querySelector('.img_remove').addEventListener("click", (e)=>{
+        var fileNum = Array.from(liArr).indexOf(e.currentTarget);
+        liArr[i+origin_num].remove();
+        removeImg(fileNum);
+      });
+    }
+  }
+}
+
+

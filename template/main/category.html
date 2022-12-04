@@ -106,7 +106,7 @@
                     {% if product %}
                         <div class="bestitem">
                             <a href="{% url 'products:itempage' product.id %}" class="bestitemlink">
-                            <img class="bestitemImg" src="{{product.get_first_image.image}}"
+                            <img class="bestitemImg" src="{{product.get_first_image.image.url}}"
                                  style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
                             <div class="bestitemdescription">
@@ -154,14 +154,14 @@
 
     </section>
     <section class="pagination">
-        <span class="dLeftVector">&laquo;</span>
-        <span class="prevPageBtns">&lt;</span>
-        <ol id="numbers">
-            <!-- <li class="numbers"><a href="">1</a></li> -->
-        </ol>
-        <span class="nextPageBtns">&gt;</span>
-        <span class="dRightVector">&raquo;</span>
-    </section>
+            <span class="dLeftVector">&laquo;</span>
+            <span class="prevPageBtns">&lt;</span>
+            <ol id="numbers">
+                <!-- <li class="numbers"><a href="">1</a></li> -->
+            </ol>
+            <span class="nextPageBtns">&gt;</span>
+            <span class="dRightVector">&raquo;</span>
+        </section>
     <!-- <nav aria-label="pagination">
             <ul class="pagination">
                 <li><a href=""><span aria-hidden="true">&laquo;</span><span class="visuallyhidden">previous set of pages</span></a></li>

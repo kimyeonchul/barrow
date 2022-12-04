@@ -28,6 +28,7 @@ main {
     z-index: 1;
     padding: 20px;
     margin: auto;
+    min-width: 280px;
 }
 
 .main_header {
@@ -124,13 +125,51 @@ main {
 
 .phone_num_err_msg,
 .name_err_msg,
-.id_err_msg {
+.id_err_msg,
+.phonenum_err_msg {
     font-size: 10px;
     position: relative;
     color: red;
     font-weight: bold;
     visibility: hidden;
 }
+
+.submit_wrap {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.send_verification_wrap {
+    margin-bottom: 30px;
+}
+
+.send_verification_wrap,
+.verify_verification_wrap {
+    display: flex;
+    justify-content: space-around;
+}
+
+#input_phone_num,
+#input_verifyNum {
+    width: 280px;
+    height: 35px;
+    border-radius: 10px;
+}
+
+.input_outer {
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
+
+}
+
+#send_verification_btn,
+#verify_verification_btn {
+    width: 100px;
+    height: 40px;
+}
+
 
 /* 아이디 일치하는 정보 있거나
 아이디 일치하는 정보 없거나
