@@ -1,6 +1,6 @@
 #contentBox{
-    display: grid;
-    grid-template-rows: 80% 20%;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 15px;
 }
 
@@ -10,12 +10,11 @@
 }
 
 #contentLeftWrap{
-    display: grid;
-    grid-template-rows: 22% 78%;
+    display: flex;
+    flex-direction: column;
 } 
 
 #myInfoWrap{
-    height: 100%;
     width: 100%;
     padding-left: 10px;
     box-sizing: border-box;
@@ -29,7 +28,6 @@
     background-color: white;
     border-radius: 10px;
     width: 100%;
-    height: 100%;
 }
 
 #myInfoImg{
@@ -59,6 +57,7 @@
     padding: 10px 10px;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 #helloName{
@@ -66,11 +65,18 @@
     flex-direction: row;
     font-weight: bolder;
     font-size: 23px;
+    padding-top: 10px;
+    box-sizing: border-box;
+}
+
+#helloEmail{
+    font-size: 15px;
+    margin-top: 3px;
 }
 
 #helloAddress{
     font-size: 20px;
-    padding-top: 8px;
+    padding-top: 10px;
 }
 
 #borrowWrap{
@@ -123,6 +129,11 @@
     align-items: center;
 }
 
+#plusLookLink{
+    text-decoration: none;
+    color: black;
+}
+
 #borrowedName img{
     width: 20px;
 }
@@ -143,6 +154,13 @@
     background-color: rgb(150, 149, 149);
 }
 
+#underBar2{
+    width: 26%;
+    margin-left: 25px;
+    margin-top: 7px;
+    height: 1px;
+    background-color: rgb(150, 149, 149);
+}
 #borrowedNumberBox, #borrowingNumberBox{
     width: 90%;
     margin: 15px auto 0px auto;
@@ -181,7 +199,7 @@
     display: grid;
     grid-template-columns: 25% 75%;
     width: 85%;
-    margin: 20px auto;
+    margin: 20px;
     border: 1px solid rgb(205, 205, 205);
 }
 
@@ -198,7 +216,7 @@
 #borrowingDetailText{
     display: grid;
     grid-template-rows: 25% 50% 25%;
-    padding: 10px 10px 10px 0px;
+    padding: 10px 10px 15px 0px;
 }
 
 #borrowingDetailState{
@@ -214,10 +232,19 @@
     flex-direction: row;
 }
 
-#borrowingDetailMoney div{
+#borrowingDetailMoneyNum{
     font-weight: 700;
     font-size: larger;
     padding-right: 3px;
+}
+
+#borrowingDetailMoneyDay{
+    font-weight: 700;
+    padding-left: 2px;
+}
+
+#borrowingDetailMoney2{
+
 }
 #notifyWrap{
     width: 100%;
@@ -246,10 +273,11 @@
     padding: 20px 20px 0px 20px;
 }
 
-#notifyName, #plusLook{
+#notifyName{
     display: flex;
     flex-direction: row;
     align-items: center;
+    text-decoration: none;
 }
 
 #notifyName img{
@@ -293,26 +321,26 @@
 
 #favBox{
     width: 100%;
-    height: auto;
+    height: 100%;
     background-color: white;
     border-radius: 10px;
-    display: grid;
-    grid-template-columns: 33.3% 33.3% 33.3%;
 }
 
 #firstFavObject{
-    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 #favTitle{
     display: flex;
+    width: 30%;
     flex-direction: row;
     justify-content: space-between;
     padding: 15px 30px 0px 30px;
     box-sizing: border-box;
 }
 
-#favName, #plusLook{
+#favName{
     display: flex;
     flex-direction: row;
     align-items: center;

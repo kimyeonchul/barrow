@@ -34,7 +34,9 @@
                                             <img src="{% static 'img/mypage/logo_lend.png' %}">
                                             <p>빌린 상품</p>
                                         </div>
-                                        <div id="plusLook"><a href = "{% url 'account:mypage_use' 'barrow_from' %}">더보기</a></div>
+                                        <div id="plusLook">
+                                            <a id="plusLookLink" href = "{% url 'account:mypage_use' 'barrow_from' %}">더보기</a>
+                                        </div>
                                     </div>
                                     <div id="underBar"></div>
                                     <div id="borrowedNumberBox">
@@ -64,7 +66,13 @@
                                                 <div id="borrowingDetailTitle">{{product.product.title}}</div>
                                                 <div id="borrowingDetailState">{{product.get_state_display}}</div>
                                                 <div id="borrowingDetailNumber">
-                                                    <div id="borrowingDetailMoney"><div>{{product.product.price}}</div>원/{{product.product.get_price_per_display}}</div>
+                                                    <div id="borrowingDetailMoney">
+                                                        <div id="borrowingDetailMoneyNum">{{product.product.price}}</div>
+                                                        <div style="display: flex; flex-direction: row; padding-top: 2.5px; padding-left: 5px;">
+                                                            <div>원/</div>
+                                                            <div id="borrowingDetailMoneyDay" >{{product.product.get_price_per_display}}</div>
+                                                        </div>
+                                                    </div>
                                                     <div id="borrowingDetailTime">{{product.get_created_from}}</div>
                                                 </div>
                                             </div>
@@ -80,7 +88,9 @@
                                             <img src="{% static 'img/mypage/barrow.png' %}">
                                             <p>빌려준 상품</p>
                                         </div>
-                                        <div id="plusLook"><a href = "{% url 'account:mypage_use' 'barrow_from' %}">더보기</a></div>
+                                        <div id="plusLook">
+                                            <a id="plusLookLink" href = "{% url 'account:mypage_use' 'barrow_from' %}">더보기</a>
+                                        </div>
                                     </div>
                                     <div id="underBar"></div>
                                     <div id="borrowingNumberBox">
@@ -110,7 +120,13 @@
                                                 <div id="borrowingDetailTitle">{{product.product.title}}</div>
                                                 <div id="borrowingDetailState">{{product.get_state_display}}</div>
                                                 <div id="borrowingDetailNumber">
-                                                    <div id="borrowingDetailMoney"><div>{{product.product.price}}</div>원/{{product.product.get_price_per_display}}</div>
+                                                    <div id="borrowingDetailMoney">
+                                                        <div id="borrowingDetailMoneyNum">{{product.product.price}}</div>
+                                                        <div style="display: flex; flex-direction: row; padding-top: 2.5px; padding-left: 5px;">
+                                                            <div>원 / </div>
+                                                            <div id="borrowingDetailMoneyDay">{{product.product.get_price_per_display}}</div>
+                                                        </div>
+                                                    </div>
                                                     <div id="borrowingDetailTime">{{product.get_created_from}}</div>
                                                 </div>
                                             </div>
@@ -128,7 +144,9 @@
                                     <img src="{% static 'img/mypage/logo_notice.png' %}">
                                     <p>알림목록</p>
                                 </div>
-                                <div id="plusLook"><a href = "{% url 'account:mypage_notice' %}">더보기</a></div>
+                                <div id="plusLook">
+                                    <a id="plusLookLink" href = "{% url 'account:mypage_notice' %}">더보기</a>
+                                </div>
                             </div>
                             <div id="underBar"></div>
                             <div id="notCheckNum">
@@ -158,25 +176,35 @@
                                     <img src="{% static 'img/mypage/logo_favorite.png' %}">
                                     <p>찜한 상품</p>
                                 </div>
-                                <div id="plusLook"><a href = "{% url 'account:mypage_favorite' %}"">더보기</a></div>
+                                <div id="plusLook">
+                                    <a id="plusLookLink" href = "{% url 'account:mypage_favorite' %}"">더보기</a>
+                                </div>
                             </div>
-                            <div id="underBar"></div>
+                            <div id="underBar2"></div>
+                        </div>
+                        <div style="width: 100%; display: grid; grid-template-columns: 33.3% 33.3% 33.3%;">
                             {% for product in favorite %}
-                                <div id="borrowingObjectDetail">
-                                    <div id="borrowingDetailImg">
-                                        <img src="{{product.get_first_image.image}}">
-                                    </div>
-                                    <div id="borrowingDetailText">
-                                        <div id="borrowingDetailTitle">{{product.title}}</div>
-                                        <div id="borrowingDetailNumber">
-                                            <div id="borrowingDetailMoney"><div>{{product.price}}</div>원/{{product.get_price_per_display}}</div>
-                                            <div id="borrowingDetailTime">{{product.get_created}}</div>
+                            <div id="borrowingObjectDetail">
+                                <div id="borrowingDetailImg">
+                                    <img src="{{product.get_first_image.image}}">
+                                </div>
+                                <div id="borrowingDetailText">
+                                    <div id="borrowingDetailTitle">{{product.title}}</div>
+                                    <div id="borrowingDetailState">{{product.get_state_display}}</div>
+                                    <div id="borrowingDetailNumber">
+                                        <div id="borrowingDetailMoney">
+                                            <div id="borrowingDetailMoneyNum">{{product.price}}</div>
+                                            <div style="display: flex; flex-direction: row; padding-top: 2.5px; padding-left: 5px;">
+                                                <div>원 / </div>
+                                                <div id="borrowingDetailMoneyDay" style="color: #F00E0E;">{{product.get_price_per_display}}</div>
+                                            </div>
                                         </div>
+                                        <div id="borrowingDetailTime">{{product.get_created}}</div>
                                     </div>
                                 </div>
+                            </div>
                             {% endfor %}
-                        </div>
-                        
+                        </div> 
                     </div>
                 </div>
             </div>
