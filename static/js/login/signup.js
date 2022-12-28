@@ -1,3 +1,5 @@
+let varifyNum;
+let varifyflag=false;
 $(document).ready(function () {
     //* setting 
     setSelect();
@@ -5,14 +7,19 @@ $(document).ready(function () {
     setCheckbox();
     setAllInput();
     setTextArea();
+    setRealtimevalidation();
+    setInputPhoneNum();
+    setPhoneNumVerify();
 });
 
 function setAllInput() {
     setInput($('#input_id'), $('.id_err_msg'));
+    setInput($('#input_id'), $('.id_dup_msg'));
     setInput($('#input_pwd'), $('.pwd_err_msg'));
     setInput($('#input_pwd'), $('.input_pwd_icon'));
     setInput($('#input_repwd'), $('.repwd_err_msg'));
     setInput($('#input_name'), $('.name_err_msg'));
+    setInput($('#input_phoneNum'), $('.phonenum_err_msg'));
 }
 
 function setInput($input, $target) {
@@ -247,23 +254,108 @@ function setTextArea() {
     $('.check_textarea2').val(t2);
 }
 
-//* sign up checking
-$('#signup_btn').click(function () {
-    console.log(2);
-    if (checkID() && checkPwd() && checkRePwd() && checkName() && checkAddress() && checkCheckbox()) {
+function setRealtimevalidation() {
+    $("#input_id").on("change keyup paste", function () {
+        checkID();
+        var id = $("#input_id").val();
         $.ajax({
-            url: '', //request 보낼 서버의 경로
+            url: 'http://127.0.0.1:8000/account/id_duplicated_check/', //request 보낼 서버의 경로
             type: 'post', // 메소드(get, post, put 등)
-            data: { 'id': 'admin' }, //보낼 데이터
+            data: JSON.stringify({
+                "id": id
+            }), //보낼 데이터
             success: function (data) {
                 //서버로부터 정상적으로 응답이 왔을 때 실행
+                if (data.is_id_duplicated == true)
+                    $('.id_dup_msg').css('visibility', 'visible');
+                else
+                    $('.id_dup_msg').css('visibility', 'hidden');
             },
-            error: function (err) {
-                //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
-            }
+            error: function (xhr, textStatus, thrownError) {
+                alert(
+                    "Could not send URL to Django. Error: " +
+                    xhr.status +
+                    ": " +
+                    xhr.responseText
+                );
+            },
         });
+    });
+
+    $("#input_pwd").on("propertychange change keyup paste input", function () {
+        checkPwd();
+    });
+
+    $("#input_repwd").on("propertychange change keyup paste input", function () {
+        checkRePwd();
+    });
+
+    $("#input_name").on("propertychange change keyup paste input", function () {
+        checkName();
+    });
+}
+
+function setInputPhoneNum(){
+    $("#input_phoneNum").keyup(function() { 
+        $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+    });
+}
+
+function setPhoneNumVerify(){
+    $('#send_verification_btn').click(function(){
+        if(!checkID()||!checkName()||!checkPhoneNum())
+            return ;
+        let id = $('#input_id').val();
+        let name = $('#input_name').val();
+        let phonenum = $('#input_phoneNum').val();
+        let newPhoneNum='';
+        for(var i=0;i<phonenum.length;i++){
+            if(phonenum[i]=='-')
+                continue;
+            newPhoneNum+=phonenum[i];
+        }
+        $.ajax({
+            url: 'http://127.0.0.1:8000/account/send_SMS/', //request 보낼 서버의 경로
+            type: 'post', // 메소드(get, post, put 등)
+            data: JSON.stringify({
+                "from":"register",
+                "id": id,
+                "name":name,
+                "phone_num":newPhoneNum
+            }), //보낼 데이터
+            success: function (data) {
+                //서버로부터 정상적으로 응답이 왔을 때 실행
+                if (data.is_send == true)
+                    varifyNum = data.num;
+                else
+                    alert("안되면 이상한건데 ");
+            },
+            error: function (xhr, textStatus, thrownError) {
+                alert(
+                    "Could not send URL to Django. Error: " +
+                    xhr.status +
+                    ": " +
+                    xhr.responseText
+                );
+            },
+        });
+        $("#input_verifyNum").attr("disabled", false); 
+        $("#verify_verification_btn").attr("disabled", false); 
+    });
+}
+
+//* sign up checking
+$('#signup_btn').click(function () {
+    if (checkID() && checkPwd() && checkRePwd() && checkName() && checkAddress() && checkCheckbox()&& varifyflag) {
+        console.log($("#sign_up_submit"))
+        $("#sign_up_submit").trigger("click")
 
     }
+});
+
+
+$('#verify_verification_btn').click(function(){
+    checkVerify();
 });
 
 function checkID() {
@@ -331,6 +423,29 @@ function checkCheckbox() {
     }
     return true;
 }
+
+function checkPhoneNum(){
+    var checkphonenum = $('#input_phoneNum').val();
+    var regExp = /^(010|011|016|017|018|019)-[0-9]{3,4}-[0-9]{4}$/;
+    if (!regExp.test(checkphonenum)) {
+        $('.phonenum_err_msg').css('visibility', 'visible');
+        $('#input_phoneNum').focus();
+        return false;
+    }
+    return true;
+}
+
+function checkVerify(){
+    let inputverify = $('#input_verifyNum').val();
+    if(varifyNum==inputverify){
+        varifyflag = true;
+        $("#send_verification_btn").attr("disabled", true); 
+        $("#input_verifyNum").attr("disabled", true); 
+        $("#verify_verification_btn").attr("disabled", true); 
+        alert("인증 성공");
+    }
+}
+
 /* 주소정보 api*/
 function findAddr() {
     new daum.Postcode({

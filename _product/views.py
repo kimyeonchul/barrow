@@ -16,17 +16,20 @@ def new(request):
         
         if form.is_valid():
             new = form.save(commit = False)
-            new.area = request.POST.get("area")+request.POST.get("area_detail")
             new.productor = request.user
             new.views = 0
             new.save()
-            for img in request.FILES.getlist('images'):
-                i = 0 
+            print(request.FILES)
+            print(request.FILES.getlist('img'))
+            i = 0
+            for img in request.FILES.getlist('img[]'):
                 new_image = Product_image.objects.create(product = new, image = img, index = i)
                 new_image.save()
                 i+=1
+
         else:
             print(form.errors)
+        return redirect("barrow:home")
     context = {}
     context.update(base(request))
     context.update(side(request))
@@ -40,18 +43,41 @@ def modify(request, product_id):
     if request.method == "POST":
         product = Product.objects.get(id = product_id)
         form = ProductForm(request.POST)
-        
+        print(request.POST)
+        print(request.FILES)
+        pass
         if form.is_valid():
             cur_images = Product_image.objects.filter(product = product)
-            for img in cur_images:
-                img.delete()
-            for img in request.FILES.getlist("images"):
-                i = 0               
-                new_image = Product_image.objects.create(product = product, image = img, index = i)
-                new_image.save()
+            for i in range(cur_images.count()):
+                try:
+                    img = request.POST["img"+str(i)]
+                    if img == '':
+                        continue
+                        
+                except:
+                    try:
+                        img = request.FILES["img"+str(i)]
+                        image = Product_image.objects.get(product=product, index= i)
+                        image.image = img
+                        image.save()
+                    except:
+                        images = Product_image.objects.filter(product = product).order_by("index")
+                        images[i].delete()
+            
+
+            images = Product_image.objects.filter(product = product).order_by("index")
+            i = 0
+            for image in images:
+                image.index = i
+                image.save()
+                i+=1
+            for image in request.FILES.getlist("img[]"):
+                new = Product_image.objects.create(product = product, image = image, index = i)
+                new.save()
                 i+=1
             product.title = form.cleaned_data['title']
             product.area = form.cleaned_data['area']
+            product.area_detail = form.cleaned_data["area_detail"]
             product.type = form.cleaned_data['type']
             product.price = form.cleaned_data['price']
             product.price_per = form.cleaned_data['price_per']
@@ -72,6 +98,9 @@ def modify(request, product_id):
         types.append(type)
         context["product_id"] = product_id
         context["item"] = Product.objects.get(id = product_id)
+        context["images"] = []
+        images = Product_image.objects.filter(product = context["item"])
+        context["images"] = images
         context["type"] = type
         return render(request, "itemRegister.html", context)
 

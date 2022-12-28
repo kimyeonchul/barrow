@@ -9,10 +9,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/item/lentApply.css' %}" />
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="{% static 'js/asset/jquery-ui.js' %}"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{% static 'css/item/lentApply.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <script type="text/javascript" src="{% static 'js/item/lentApply.js' %}"></script>
     <script src="https://kit.fontawesome.com/04d19e7b2e.js" crossorigin="anonymous"></script>
@@ -20,11 +20,11 @@
 </head>
 
 <body>
-    
+    {% include "mypage/messages.html" %}
         <div class="container">
             <div class="item_box">
                 <div class="item_pic">
-                    <img class="pics" src="{{item.get_first_image.image}}">
+                    <img class="pics" src="{{item.get_first_image.image.url}}">
                 </div>
                 <div class="item_info">
 
@@ -34,7 +34,7 @@
                     <div class="item_price">
                         <p><span id="price_font">{{item.price}}</span></p>
                         <p>원 /  </p>
-                        <p>{{item.get_per_price_display}}</p>
+                        <p>{{item.get_price_per_display}}</p>
                     </div>
                     <div class="item_details">
                         <li> 대여기간 <span class="item_details_date"><i class="fa-solid fa-calendar"></i>  {{item.get_start_date}} ~ {{item.get_end_date}}</span></li>
@@ -50,7 +50,8 @@
                     <hr class="hr-light">
                 </div>
                 <div class="lent_apply_detail">
-                    <form name="lent_apply" id="lent_apply_form" type = "POST" action = "{% url 'deal:new' item.id %}">
+                    <form name="lent_apply" id="lent_apply_form" method = "POST" action = "{% url 'deal:new' item.id %}">
+                        {% csrf_token %}
                         <div class="lent_inform">
                             <div class="lent_days">
                                 <li><p>대여기간</p></li>
@@ -91,10 +92,11 @@
 
     <script>
         var price = "{{ item.price }}";
-        //var price_per = "{{ item.price_per }}"
+        var price_per_day = "{{ item.get_price_per_display }}";
         //var delivery_charge = ""
         var lentStartDay = "{{item.get_start_date}}";
         var lentEndDay = "{{item.get_end_date}}";
+        var dates = {{reserveds|safe}};
     </script>
 </body>
 

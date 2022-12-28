@@ -62,7 +62,7 @@
                             {% for product in barrow.products %}
                                 <div id="optionListBox">
                                     <div>
-                                        <img src="{{product.product.get_first_image.image}}">
+                                        <img src="{{product.product.get_first_image.image.url}}">
                                     </div>
                                     <div id="nameAndPrice">
                                         <div style="padding-top: 10px;">{{product.product.title}}</div>

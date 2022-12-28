@@ -18,7 +18,7 @@
                 <div id="threeCheckBtWrap">
                     <button type="button" id="totalCheckBt">전체 선택</button>
                     <button type="button" id="notTotalCheckBt">선택 해제</button>
-                    <button type="button" id="{{product.id}}">삭제</button>
+                    <button type="button" id="deleteBt">삭제</button>
                 </div>
             </div>
             <div id="titleUnderBar"></div>
@@ -32,7 +32,7 @@
                     <div id="objectBox">
                     
                         <div id="firstObjectBox">
-                            <img id="objectImg" src="{{product.get_first_image.image}}">
+                            <img id="objectImg" src="{{product.get_first_image.image.url}}">
                             <div style="padding: 10px;">
                                 <div id="nameObject">{{product.title}}</div>
                                 {% if type.0 %}

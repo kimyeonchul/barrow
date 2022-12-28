@@ -1,9 +1,9 @@
 from django import forms
-from . import models as MODELS
+from .models import Deal
 
 class DealForm(forms.ModelForm):
     class Meta:
-        model = MODELS.Deal
-        fields = ["start_date","end_date","type"]
+        model = Deal
+        fields = ["start_date","end_date"]
         
         

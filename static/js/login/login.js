@@ -5,28 +5,7 @@ $(document).ready(function () {
 
 $('.login_btn').click(function () {
     if (checkID() && checkPwd()) {
-        var username = $('#input_id').val();
-        var password = $('#input_pwd').val();
-        $.ajax({
-            url: 'http://127.0.0.1:8000/account/login/', //request 보낼 서버의 경로
-            type: 'post', // 메소드(get, post, put 등)
-            data: JSON.stringify({
-                "username": username,
-                "password": password
-            }), //보낼 데이터 //보낼 데이터
-            success: function (data) {
-            //서버로부터 정상적으로 응답이 왔을 때 실행
-            //로그인 진행
-            },
-            error: function (xhr, textStatus, thrownError) {
-                alert(
-                    "Could not send URL to Django. Error: " +
-                    xhr.status +
-                    ": " +
-                    xhr.responseText
-                );
-            },
-        });
+        $("#login_submit").trigger("click")
     }
 
 

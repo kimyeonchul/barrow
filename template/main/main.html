@@ -63,17 +63,17 @@
                 {% for product, type in best_products %}
                     {% if product %}
                         <div class="bestitem">
-                             <a href="#" class="bestitemlink">
-                            <img class="bestitemImg" src="{{product.get_first_image.image}}"
+                             <a href="{% url 'products:itempage' product.id %}" class="bestitemlink">
+                            <img class="bestitemImg" src="{{product.get_first_image.image.url}}"
                              style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
                             <div class="bestitemdescription">
                                 <ul>
                                     <li>{{product.title}}</li>
                                 </ul>
-                                <ul>
+                               <ul>
                                     <div class="TransMethodImg">
-                                        <li class="juso">서울 서대문구 북가좌동</li>
+                                        <li class="juso">{{product.area}}</li>
                                         <div class="dealmethod">
                                         {% if type.0 %}
                                             <li class="besong"><img src="{% static 'img/img/itemimg/besong.png' %}"></li>
@@ -91,22 +91,23 @@
                                         <li>
                                             <p class="bestitemday"><strong>{{product.get_price_per_display}}</strong></p>
                                         </li>
-                                        <li>
-                                            <p class="itembeforedate">{{product.get_created}}</p>
-                                        </li>
                                     </ul>
+                                    <div class="itemdate">
+                                        <p class="itembeforedate">{{product.get_created}}</p>
+                                    </div>
+                                </ul>
                                 </ul>
                             </div>
                             </a>
                         </div>
-                    {% else %}
-                    <div class="bestitem">
-                        <a href="#" class="bestitemlink">
-                        <img class="bestitemImg" src="/media/product/product_dafault.png" style="height: 100%;">
-                        <div class="bestitemdescription">
-                        </div>
-                        </a>
-                    </div>
+<!--                   -->
+<!--                    <div class="bestitem">-->
+<!--                        <a href="#" class="bestitemlink">-->
+<!--                        <img class="bestitemImg" src="/media/product/product_dafault.png" style="height: 100%;">-->
+<!--                        <div class="bestitemdescription">-->
+<!--                        </div>-->
+<!--                        </a>-->
+<!--                    </div>-->
                     {% endif %}
                     
                 {% endfor %}

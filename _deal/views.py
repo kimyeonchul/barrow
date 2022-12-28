@@ -8,33 +8,58 @@ from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
 
+from django.contrib import messages
+
+
 import datetime
+from datetime import datetime
 
 def new(request, product_id):
     item = Product.objects.get(id = product_id)
+    reserveds = Deal.objects.filter(product = item)
+    dates = [{"start_date" : reserved.get_start_date(),"end_date" : reserved.get_end_date()} for reserved in reserveds]
+    print(dates)
+    context = {
+            "item" : item,
+            "reserveds" : dates,
+    }
+    context.update(base(request))
+    context.update(side(request))
     if request.method == "GET":
         
-        reserveds = Deal.objects.filter(product = item)
-        context = {
-            "item" : item,
-            "reserveds" : reserveds,
-        }
-        context.update(base(request))
-        context.update(side(request))
+        
+        
         return render(request, "lentApply.html", context)
 
     elif request.method == "POST":
+        print(type(request.POST.get("start_date")))
+        
+        if datetime.strptime(request.POST.get("start_date"), '%Y-%m-%d')<item.start_date or datetime.strptime(request.POST.get("end_date"), '%Y-%m-%d')>item.end_date:
+            messages.add_message(
+                                request,
+                                messages.ERROR,
+                                '대여 기간이 잘못되었습니다.'
+                        )            
+            return render(request, "lentApply.html", context)
         form = DealForm(request.POST)
+        print(request.POST)
         if form.is_valid():
             new = form.save(commit=False)
+            new.type = request.POST["type"]
             new.state = "WAIT"
             new.user_cons = request.user
             new.user_prod = item.productor
             new.product = item
             new.save()
+            return redirect("products:itempage",product_id)
+        
         else:
-            print(form.errors)
-        return redirect("products:itempage",product_id)
+            messages.add_message(
+                                request,
+                                messages.ERROR,
+                                '양식이 틀렸습니다.'
+                        )            
+            return render(request, "lentApply.html", context)
 
 @csrf_exempt    
 def accept(request, product_id):
@@ -43,7 +68,7 @@ def accept(request, product_id):
         
         item_image = Product_image.objects.filter(product = item)[0]
 
-        deals = Deal.objects.filter(product = item, user_prod = request.user)
+        deals = Deal.objects.filter(product = item, user_prod = request.user, state = "WAIT")
         
         context = {
             "item" : item,
@@ -54,13 +79,11 @@ def accept(request, product_id):
         context.update(side(request))
         return render(request, "lentAccept.html", context)
     elif request.method == "POST":
-        data = json.loads(request.body)
-
-        deal = Deal.objects.get(id = data["id"])
+        deal = Deal.objects.get(id = request.POST["id"])
         deal.state = "LEND"
         deal.save()
 
-        return JsonResponse({"is_accepted" : True})
+        return redirect("deal:accept",product_id)
 
 def delete(request, product_id):
     item = Product.objects.get(id = product_id)

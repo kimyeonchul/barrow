@@ -2,67 +2,64 @@ from datetime import datetime
 
 from django.contrib import auth
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-from .forms import CustomUserChangeForm
+from .forms import CustomUserChangeForm, CustomUserCreateForm
 from django.core.serializers import serialize
 from django.shortcuts import render, redirect
 import json
-from django.http import HttpResponse, JsonResponse
+import random
+from django.http import HttpResponseRedirect, JsonResponse
+from django.urls import reverse
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 
-from _account.models import User
+from _account.models import User, User_view
 from _deal.models import Deal
 
+from _account.sms import send
 
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        user = User.objects.filter(username=data.get("username"))
+        user = User.objects.filter(username=request.POST.get("username"))
         if user.exists():
-            password = data.get("password")
+            password = request.POST.get("password")
             user = user[0]
-            if user.password == password:
+            if check_password(password, user.password):
                 auth.login(request, user)
 
                 return redirect("barrow:home")
             else:
-                context = {
-                    "err": "PWD"
-                }
-                return JsonResponse(context)
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    '비밀번호가 틀립니다.'
+                )
+                return redirect("account:login")
         else:
-            context = {
-                "err": "ID"
-            }
-            return JsonResponse(context)
+            messages.add_message(
+                request,
+                messages.ERROR,
+                '존재하지 않는 아이디 입니다.'
+            )
+            return redirect("account:login")
 
     else:
         return render(request, "login.html")
 
-
-@csrf_exempt
 def register(request):
     if request.method == 'POST':
+        print(request.POST)
+        form = CustomUserCreateForm(request.POST)
         try:
-            user = User()
-            data = json.loads(request.body)
-            user.username = data.get("username")
-            user.password = data.get("password")
-            user.name = data.get("name")
-            user.birth = data.get("birth1") + \
-                data.get("birth2")+data.get("birth3")
-            user.address = data.get("address1")+data.get("address2")
-            user.address_detail = data.get("address3")
-            user.phoneNum = data.get("phoneNum", "")
+            user = form.save(commit = False)
+            user.birth = request.POST["birth1"] + "-" + request.POST["birth2"] + request.POST["birth3"]
             user.save()
-
-            return redirect('login')
-
+            return redirect('account:login')
         except Exception as e:
+            print(form.errors)
             print(e)
             return render(request, 'signup.html')
 
@@ -121,6 +118,9 @@ def home(request):
 
 
 def findIdPwd(request):
+    context = {}
+    if request.method == "POST":
+        return render(request, "")
     return render(request, "findIdPwd.html")
 
 
@@ -137,6 +137,62 @@ def findId(request):
             context = {
                 "user_id": None
             }
+        return JsonResponse(context)
+
+@csrf_exempt
+def is_id_duplicated(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        if User.objects.filter(username = data["id"]).exists():
+            context = {
+                "is_id_duplicated": True
+            }
+        else:
+            context = {
+                "is_id_duplicated": False
+            }
+        return JsonResponse(context)
+
+@csrf_exempt
+def send_SMS(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        phone_num = data["phone_num"][0:3] + "-" + data["phone_num"][3:7] + "-" + data["phone_num"][7:]
+        print(data)
+        if (data["from"] == "find" and User.objects.filter(username = data["id"],name = data["name"],phoneNum = phone_num).exists()) or data["from"] == "register":
+            print(2)
+            num = 0
+            text = "Barrow 확인 코드 : "
+            for i in range(6):
+                num*=10
+                num += random.randint(0,9)
+            text += str(num)
+            text +=". 이 코드를 다른 사람과 공유하지 마십시오. 당사 직원은 이 코드를 절대 요구하지 않습니다."
+
+            to = data["phone_num"]
+
+            res = send(to,text)
+            res = json.loads(res.content)
+            
+            try:
+                if res["statusName"] == "success":
+                    context = {
+                        "is_send" : True,
+                        "num": str(num)
+                    }
+                    return JsonResponse(context)
+            except:
+                context = {
+                    "is_send" : False,
+                    "num": ""
+                }
+                print(res)
+
+        context = {
+            "is_send" : False,
+            "num": ""
+        }
         return JsonResponse(context)
 
 #### mypage ####
@@ -203,18 +259,17 @@ def mypage_modify(request):
 @csrf_exempt
 def mypage_modify_confirm(request):
     if request.method == "POST":
-        data = json.loads(request.body)
-
-        if User.objects.filter(id=data["id"]).exists():
-            if check_password(data["pwd"], User.objects.get(id=data["id"]).password):
+        
+            if check_password(request.POST["pwd"], request.user.password):
                 return redirect("account:mypage_modify")
             else:
-                context = {
-                    "error": True,
-                }
-        return JsonResponse(context)
-    else:
-        return render(request, "mypage/mypage_modify.html")
+                messages.add_message(
+                request,
+                messages.ERROR,
+                '비밀번호가 틀렸습니다.'
+                )   
+            
+    return render(request, "mypage/mypage_modify.html")       
 
 
 def mypage_favorites(request):
@@ -310,7 +365,7 @@ def mypage_use(request, type):
 
         return render(request, "mypage/mypage_useList.html",context)
 
-
+@csrf_exempt
 def change_pwd(request):
     if request.method == "POST":
         if request.user.is_authenticated:
@@ -330,12 +385,32 @@ def change_pwd(request):
                     messages.ERROR,
                     '비밀번호가 일치하지 않습니다.'
                 )
-        else:
             messages.add_message(
                 request,
                 messages.ERROR,
                 '비밀번호 변경 실패'
             )
-        return render(request, "mypage/mypage_modifyPw.html")
+            return render(request, "mypage/mypage_modifyPw.html")
+        else:
+            data = json.loads(request.body)  
+            user = User.objects.get(username = data["id"])              
+            form = SetPasswordForm(user, data=data["pwd"])
+            
+            if form.is_valid():
+                user = form.save()
+                context = {
+                    "url" : reverse('account:login')
+                }
+                return JsonResponse(context)
+            else:
+                print(form.errors)
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    '비밀번호 변경 실패'
+                )
+                return render(request, "findIdPwd.html")
+        
     else:
         return render(request, "mypage/mypage_modifyPw.html")
+

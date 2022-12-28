@@ -1,3 +1,7 @@
+let varifyNum;
+let varifyflag = false;
+let constid;
+
 $(document).ready(function () {
     setFindIdMainpage();
     setToggleFindIdPwd();
@@ -48,7 +52,8 @@ function setFindIdMainpage() {
     //phone_num input 생성
     var findid_inputphonenum = document.createElement('input');
     $(findid_inputphonenum).addClass('input_phone_num');
-    $(findid_inputphonenum).prop('placeholder', ' phone num');
+    $(findid_inputphonenum).prop("type", "tel");
+    $(findid_inputphonenum).prop('placeholder', ' - 없이 입력하세요.');
     findid_inputphonenum_wrap.append(findid_inputphonenum);
 
     //phone_num input err msg 생성
@@ -67,6 +72,13 @@ function setFindIdMainpage() {
     // setting js code
     setFindIdInput();
     setFindIdBtn();
+    setInputPhoneNum();
+}
+
+function setInputPhoneNum() {
+    $(".input_phone_num").keyup(function () {
+        $(this).val($(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/, "$1-$2-$3").replace("--", "-"));
+    });
 }
 
 function setFindIdInput() {
@@ -89,7 +101,7 @@ function setFindIdBtn() {
                 }), //보낼 데이터
                 success: function (data) {
                     //서버로부터 정상적으로 응답이 왔을 때 실행
-                    if (data.user_id==null)
+                    if (data.user_id == null)
                         noMatchingInfomation('.main_main_sec');
                     else
                         matchingIdInfomation(data.user_id);
@@ -161,88 +173,186 @@ function setFindPwdMainpage() {
     $(findpwd_inputname_err_msg).text('이름을 다시 확인해주세요.');
     findpwd_inputname_wrap.append(findpwd_inputname_err_msg);
 
-    //birthdate input label 생성
-    var findpwd_input_birthdate_label = document.createElement('label');
-    $(findpwd_input_birthdate_label).text('생년월일');
-    findpwd_form.append(findpwd_input_birthdate_label);
+    //id input div 생성
+    var findpwd_inputid_wrap = document.createElement('div');
+    $(findpwd_inputid_wrap).addClass('input_id_wrap');
+    findpwd_form.append(findpwd_inputid_wrap);
 
-    //birthdate input div 생성
-    var findpwd_input_birthdate_wrap = document.createElement('div');
-    $(findpwd_input_birthdate_wrap).addClass('input_brithdate_wrap');
-    findpwd_form.append(findpwd_input_birthdate_wrap);
+    //id input label 생성
+    var findpwd_inputid_label = document.createElement('label');
+    $(findpwd_inputid_label).text('아이디');
+    findpwd_inputid_wrap.append(findpwd_inputid_label);
 
-    //birthdate year select 생성
-    var findpwd_input_year_birthdate = document.createElement('select');
-    $(findpwd_input_year_birthdate).addClass('input_birthdate');
-    $(findpwd_input_year_birthdate).attr('id', 'select_year')
-    $(findpwd_input_year_birthdate).prop('placeholder', ' year');
-    findpwd_input_birthdate_wrap.append(findpwd_input_year_birthdate);
+    //name input 생성
+    var findpwd_inputnid = document.createElement('input');
+    $(findpwd_inputnid).addClass('input_id');
+    $(findpwd_inputnid).prop('placeholder', ' id');
+    findpwd_inputid_wrap.append(findpwd_inputnid);
 
-    //birthdate month select 생성
-    var findpwd_input_month_birthdate = document.createElement('select');
-    $(findpwd_input_month_birthdate).addClass('input_birthdate');
-    $(findpwd_input_month_birthdate).attr('id', 'select_month')
-    $(findpwd_input_month_birthdate).prop('placeholder', ' month');
-    findpwd_input_birthdate_wrap.append(findpwd_input_month_birthdate);
+    //name input err msg 생성
+    var findpwd_inputid_err_msg = document.createElement('p');
+    $(findpwd_inputid_err_msg).addClass('id_err_msg');
+    $(findpwd_inputid_err_msg).text('아이디를 다시 확인해주세요.');
+    findpwd_inputid_wrap.append(findpwd_inputid_err_msg);
 
-    //birthdate yaer select 생성
-    var findpwd_input_date_birthdate = document.createElement('select');
-    $(findpwd_input_date_birthdate).addClass('input_birthdate');
-    $(findpwd_input_date_birthdate).attr('id', 'select_date')
-    $(findpwd_input_date_birthdate).prop('placeholder', ' date');
-    findpwd_input_birthdate_wrap.append(findpwd_input_date_birthdate);
+    //감싸는 submit div 생성
+    var findpwd_submit_wrap = document.createElement('div');
+    $(findpwd_submit_wrap).addClass('submit_wrap');
+    findpwd_form.append(findpwd_submit_wrap);
 
-    //본인인증 버튼 생성
-    var findpwd_submit_btn = document.createElement('button');
-    $(findpwd_submit_btn).addClass('submit_btn');
-    $(findpwd_submit_btn).prop('type', 'button');
-    $(findpwd_submit_btn).text('본인인증하기');
-    findpwd_form.append(findpwd_submit_btn);
+    //input phoneNum label 생성
+    var findpwd_inputPhoneNUm_label = document.createElement('label');
+    $(findpwd_inputPhoneNUm_label).text('본인인증');
+    findpwd_submit_wrap.append(findpwd_inputPhoneNUm_label);
 
-    //조회하기 버튼 생성
+    //name input err msg 생성
+    var findpwd_inputPhoneNUm_err_msg = document.createElement('p');
+    $(findpwd_inputPhoneNUm_err_msg).addClass('phonenum_err_msg');
+    $(findpwd_inputPhoneNUm_err_msg).text('전화번호를 다시 확인해주세요.');
+    findpwd_submit_wrap.append(findpwd_inputPhoneNUm_err_msg);
+
+    //send_verification_wrap div 생성
+    var findpwd_send_verification_wrap = document.createElement('div');
+    $(findpwd_send_verification_wrap).addClass('send_verification_wrap');
+    findpwd_submit_wrap.append(findpwd_send_verification_wrap);
+
+    //input_phone_num input 생성
+    var findpwd_input_phone_num = document.createElement('input');
+    $(findpwd_input_phone_num).attr('id', 'input_phone_num');
+    $(findpwd_input_phone_num).addClass('input_outer');
+    $(findpwd_input_phone_num).addClass('input_phone_num');
+    $(findpwd_input_phone_num).prop('placeholder', ' 전화번호');
+    $(findpwd_input_verifyNum).prop('type', 'password');
+    findpwd_send_verification_wrap.append(findpwd_input_phone_num);
+
+    //send_verification_btn button 생성
+    var findpwd_send_verification_btn = document.createElement('button');
+    $(findpwd_send_verification_btn).attr('id', 'send_verification_btn');
+    $(findpwd_send_verification_btn).addClass('submit_btn');
+    $(findpwd_send_verification_btn).text('인증번호받기');
+    $(findpwd_send_verification_btn).prop('type', 'button');
+    findpwd_send_verification_wrap.append(findpwd_send_verification_btn);
+
+    //verify_verification_wrap div 생성
+    var findpwd_verify_verification_wrap = document.createElement('div');
+    $(findpwd_verify_verification_wrap).addClass('verify_verification_wrap');
+    findpwd_submit_wrap.append(findpwd_verify_verification_wrap);
+
+    //input_verifyNum input 생성
+    var findpwd_input_verifyNum = document.createElement('input');
+    $(findpwd_input_verifyNum).attr('id', 'input_verifyNum');
+    $(findpwd_input_verifyNum).addClass('input_outer');
+    $(findpwd_input_verifyNum).prop('placeholder', ' 인증번호');
+    $(findpwd_input_verifyNum).prop('type', 'password');
+    findpwd_verify_verification_wrap.append(findpwd_input_verifyNum);
+
+    //verify_verification_btn button 생성
+    var findpwd_verify_verification_btn = document.createElement('button');
+    $(findpwd_verify_verification_btn).attr('id', 'verify_verification_btn');
+    $(findpwd_verify_verification_btn).text('인증하기');
+    $(findpwd_verify_verification_btn).addClass('submit_btn');
+    $(findpwd_verify_verification_btn).prop('type', 'button');
+    findpwd_verify_verification_wrap.append(findpwd_verify_verification_btn);
+
+    //재설정하기 버튼 생성
     var findpwd_findpwd_btn = document.createElement('input');
     $(findpwd_findpwd_btn).addClass('inquire_btn_pwd');
+    $(findpwd_findpwd_btn).attr('id', 'inquire_btn_pwd');
     $(findpwd_findpwd_btn).prop('type', 'button');
-    $(findpwd_findpwd_btn).val('조회하기');
+    $(findpwd_findpwd_btn).val('재설정하기');
     container.append(findpwd_findpwd_btn);
 
     // setting js code
     setFindPwdInput();
-    setSelect();
     setFindPwdBtn();
+    setInputPhoneNum();
+    setsend_verification_btn();
+    setverify_verification_btn();
 }
 
 function setFindPwdInput() {
     setInput($('.input_name'), $('.name_err_msg'));
+    setInput($('.input_id'), $('.id_err_msg'));
+
+}
+
+function setsend_verification_btn() {
+    $('#send_verification_btn').click(function () {
+        if (!checkName() || !checkID() || !checkPhoneNum())
+            return;
+        let id = $('.input_id').val();
+        let name = $('.input_name').val();
+        let phonenum = $('#input_phone_num').val();
+        let newPhoneNum = '';
+        for (var i = 0; i < phonenum.length; i++) {
+            if (phonenum[i] == '-')
+                continue;
+            newPhoneNum += phonenum[i];
+        }
+        $.ajax({
+            url: 'http://127.0.0.1:8000/account/send_SMS/', //request 보낼 서버의 경로
+            type: 'post', // 메소드(get, post, put 등)
+            data: JSON.stringify({
+                "from": "find",
+                "id": id,
+                "name": name,
+                "phone_num": newPhoneNum
+            }), //보낼 데이터
+            success: function (data) {
+                //서버로부터 정상적으로 응답이 왔을 때 실행
+                console.log(data);
+                console.log(id+name+newPhoneNum);
+                if (data.is_send == true)
+                    varifyNum = data.num;
+                else
+                    noMatchingInfomation('.main_main_sec');
+            },
+            error: function (xhr, textStatus, thrownError) {
+                alert(
+                    "Could not send URL to Django. Error: " +
+                    xhr.status +
+                    ": " +
+                    xhr.responseText
+                );
+            },
+        });
+        $("#input_verifyNum").attr("disabled", false);
+        $("#verify_verification_btn").attr("disabled", false);
+    });
+}
+
+function setverify_verification_btn() {
+    $("#input_verifyNum").attr("disabled", true);
+    $("#verify_verification_btn").attr("disabled", true);
+    $('#verify_verification_btn').click(function () {
+        checkVerify();
+    });
+}
+
+function checkVerify() {
+    let inputverify = $('#input_verifyNum').val();
+    if (varifyNum == inputverify) {
+        varifyflag = true;
+        $("#input_phone_num").attr("disabled", true);
+        $("#send_verification_btn").attr("disabled", true);
+        $("#input_verifyNum").attr("disabled", true);
+        $("#verify_verification_btn").attr("disabled", true);
+        alert("인증 성공");
+    }
+    else
+        alert("인증 실패");
 }
 
 function setFindPwdBtn() {
-    //아이디 페이지에서 조회하기 버튼 클릭 시
-    $('.inquire_btn_pwd').click(function () {
-        if (checkName()) {
-            /*
-    $.ajax({
-        url:'', //request 보낼 서버의 경로
-        type:'post', // 메소드(get, post, put 등)
-        data:{'id':'admin'}, //보낼 데이터
-        success: function(data) {
-            //서버로부터 정상적으로 응답이 왔을 때 실행
-        },
-        error: function(err) {
-            //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
-        }
-    });
-    */
-        }
-        //*뭐 뭐 뭐 하면 정보 없음 페이지
-        var bool = false;
-        if (bool)
-            noMatchingInfomation('.main_main_sec');
-        else
+    //비밀번호 페이지에서 재설정하기 버튼 클릭 시
+    $('#inquire_btn_pwd').click(function () {
+        if (checkName() && checkID() && checkPhoneNum() && varifyflag) {
+            constid = $('.input_id').val();
             setNewPasswordPage();
-
+        }
     });
 }
+
 
 function noMatchingInfomation($nomatchingpage) {
     var container = $($nomatchingpage)
@@ -272,7 +382,7 @@ function noMatchingInfomation($nomatchingpage) {
     $(goSignup).text('회원가입');
     buttonWrap.append(goSignup);
 
-    $('.goFindIdBtn').click(function(){
+    $('.goFindIdBtn').click(function () {
         setFindIdMainpage();
     })
 }
@@ -288,7 +398,7 @@ function matchingIdInfomation(user_id) {
     //* p 생성
     var matchingPageText = document.createElement('p');
     $(matchingPageText).addClass('matchingPageText');
-    $(matchingPageText).text('회원님의 아이디는' +user_id+' 입니다.');
+    $(matchingPageText).text('회원님의 아이디는' + user_id + ' 입니다.');
     matchingPage.append(matchingPageText);
 
     //* button 생성
@@ -363,23 +473,49 @@ function setNewPasswordPage() {
 
     //setting
     setNewPasswordInput();
-
-    //btn 클릭 시 check하고 넘어감
-    $('.input_new_pwd_change_btn').click(function () {
-        checkPwd();
-        checkRePwd();
-
-        var bool = true;
-        if (bool) {
-
-        }
-    });
+    setinput_new_pwd_change_btn();
 }
 
 function setNewPasswordInput() {
     setInput($('.input_new_pwd'), $('.input_new_pwd_err'));
     setInput($('.input_new_pwd'), $('.input_new_pwd_icon'));
     setInput($('.input_new_re_pwd'), $('.input_new_re_pwd_err'));
+}
+
+function setinput_new_pwd_change_btn() {
+    //btn 클릭 시 check하고 넘어감
+    $('.input_new_pwd_change_btn').click(function () {
+        if (checkPwd() && checkRePwd()) {
+            let id = constid;
+            let newpwd = $('.input_new_pwd').val();
+            let newrepwd = $('.input_new_re_pwd').val();
+            $.ajax({
+                url: 'http://127.0.0.1:8000/account/mypage/changePwd/', //request 보낼 서버의 경로
+                type: 'post', // 메소드(get, post, put 등)
+                data: JSON.stringify({
+                    "id": id,
+                    "pwd": {
+                        "new_password1": newpwd,
+                        "new_password2": newrepwd
+                    }
+                }), //보낼 데이터
+                success: function (data) {
+                    //서버로부터 정상적으로 응답이 왔을 때 실행
+                    console.log(data)
+                    alert("변경성공");
+                    window.location.href = 'http://127.0.0.1:8000' + data["url"]
+                },
+                error: function (xhr, textStatus, thrownError) {
+                    alert(
+                        "Could not send URL to Django. Error: " +
+                        xhr.status +
+                        ": " +
+                        xhr.responseText
+                    );
+                },
+            });
+        }
+    });
 }
 
 function setInput($input, $target) {
@@ -395,6 +531,17 @@ function checkName() {
     if (!regExp.test(checkname)) {
         $('.name_err_msg').css('visibility', 'visible');
         $('#input_name').focus();
+        return false;
+    }
+    return true;
+}
+
+function checkID() {
+    var checkid = $('.input_id').val();
+    var regExp = /^[a-z]+[a-z0-9]{4,19}$/g;
+    if (!regExp.test(checkid)) {
+        $('.id_err_msg').css('visibility', 'visible');
+        $('.input_id').focus();
         return false;
     }
     return true;
@@ -427,24 +574,9 @@ function checkPhoneNum() {
     var checkphonenum = $('.input_phone_num').val();
     var regExp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
     if (!regExp.test(checkphonenum)) {
-        $('.phone_num_err_msg').css('visibility', 'visible');
+        $('.phonenum_err_msg').css('visibility', 'visible');
         $('.input_phone_num').focus();
         return false;
     }
     return true;
-}
-
-function setSelect() {
-    var now = new Date();
-    var year = now.getFullYear();
-    console.log(year);
-    for (var i = 1; i <= 12; i++) {
-        $('#select_month').append("<option value='" + i + "'>" + i + "월</option>");
-    }
-    for (var i = 1; i <= 31; i++) {
-        $('#select_date').append("<option value='" + i + "'>" + i + "일</option>");
-    }
-    for (var i = year - 50; i <= year; i++) {
-        $('#select_year').append("<option value='" + i + "'>" + i + "년</option>");
-    }
 }

@@ -135,15 +135,20 @@ def search(request, ctgr = "전체", srt = "최신순"):
 
     return render(request, 'main/category.html',context)
 
+@csrf_exempt
 def search_save(request):
     if request.method == "POST":
         data = json.loads(request.body)
-    
+    print(data)
     if data.get("is_save"):
-        User.objects.get(id = data.get("user")).search_save = True
+        user = User.objects.get(id = data.get("user"))
+        user.search_save = True
+        user.save()
         is_saved = True
     else:
-        User.objects.get(id = data.get("user")).search_save = False
+        user = User.objects.get(id = data.get("user"))
+        user.search_save = False
+        user.save()
         is_saved = False
 
     context = {

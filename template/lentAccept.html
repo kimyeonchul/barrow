@@ -10,9 +10,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/item/lentAccept.css' %}" />
-    <script type="text/javascript" src="{% static 'js/item/lentAccept.js' %}" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <script src="https://kit.fontawesome.com/04d19e7b2e.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
     <title>Barrow</title>
 </head>
 
@@ -21,7 +21,7 @@
         <div class="container">
             <div class="item_box">
                 <div class="item_pic">
-                    <img class = "pics" src = "{{item.get_first_image.image}}">
+                    <img class = "pics" src = "{{item.get_first_image.image.url}}">
                 </div>
                 <div class="item_info">
 
@@ -31,7 +31,7 @@
                     <div class="item_price">
                         <p><span id="price_font">{{ item.price }}</span></p>
                         <p>원 /  </p>
-                        <p>{{itemt.get_per_price_display}}</p>
+                        <p>{{item.get_price_per_display}}</p>
                     </div>
                     <div class="item_details">
                         <li> 대여기간 <span class="item_details_date"><i class="fa-solid fa-calendar"></i>  {{item.get_start_date}} ~ {{item.get_end_date}}</span></li>
@@ -51,7 +51,7 @@
                         <div class="lent_offer">
                             <div class="offer_inform">
                                 <div class="offer_portrait">
-                                    <img src="{{deal.user_cons.image}}">
+                                    <img src="{{deal.user_cons.image.url}}">
                                 </div>
                                 <div class="offer_name">{{deal.user_cons.name}}님</div>
                                 <div class="offer_address">{{deal.user_cons.address}}</div>
@@ -65,6 +65,11 @@
                             <p id = "deal_id" style = "display:none">{{deal.id}}</p>
                             <button id="chat">채팅<br>보내기</button>
                             <button id="accept">대여<br>수락하기</button>
+                            <form method = "POST" action = "{% url 'deal:accept' deal.product.id %}">
+                                <input type = "number" name = "id" style = "display: none;" value = "{{deal.id}}">
+                                <input id = "submit" type = submit style = "display: none;">
+                            </form> 
+                            
                         </div>
                     </div>
                     <hr class="hr-light">
@@ -77,7 +82,10 @@
     
     <script>
         var itemPrice = "{{ item.price }}";
+        var dates = "{{reservesd}}"
     </script>
+    <script type="text/javascript" src="{% static 'js/item/lentAccept.js' %}" defer></script>
+
 </body>
 
 </html>

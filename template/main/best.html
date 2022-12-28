@@ -42,8 +42,8 @@
                     {% if product %}
 
                         <div class="bestitem">
-                            <a href="#" class="bestitemlink">
-                            <img class="bestitemImg" src="{{product.get_first_image.image}}"
+                            <a href="{% url 'products:itempage' product.id %}" class="bestitemlink">
+                            <img class="bestitemImg" src="{{product.get_first_image.image.url}}"
                                  style="  border-bottom-left-radius: 0px;
                                  border-bottom-right-radius: 0px;">
                             <div class="bestitemdescription">
@@ -106,7 +106,7 @@
                 <li><a href=""><span class="visuallyhidden">next set of pages</span><span aria-hidden="true">&raquo;</span></a></li>
             </ul>
         </nav> -->
-    <script type = "text/javascript">var item_num = "{{total_page_num}}";</script>
+    <script type = "text/javascript"> var item_num = "{{total_page_num}}";</script>
 </body>
 </html>
 {% endblock %}
