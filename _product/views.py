@@ -137,6 +137,17 @@ def itempage(request, product_id):
         }
         if request.user.is_authenticated:
             request.user.view(item)
+        else:
+            context = {
+                "item" : item,
+                "item_images" : item_images,
+                "productor" : productor,
+                "favorite" : item.favor.count(),
+                "state" : "TERMINATE"
+            }
+            context.update(base(request))
+            context.update(side(request))
+            return render(request,"itemPage.html", context)
         
         if Deal.objects.filter(user_cons = request.user, product = item, state = "WAIT"):
             context = {
