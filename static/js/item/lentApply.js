@@ -13,10 +13,11 @@ $.datepicker.setDefaults({
   showMonthAfterYear: true,
   yearSuffix: '년',
   minDate : 0,
+  beforeShowDay: availableDates,
 });
+
 $(function(){
   $('.datepicker').datepicker({
-    beforeShowDay: LentDates,
     onSelect: function() {
       try{
         var D1 = $.datepicker.formatDate("yy-mm-dd",$("#start_date").datepicker("getDate")); 
@@ -30,11 +31,35 @@ $(function(){
   });
 });
 
+function availableDates(date){ //배열 내 날짜만 able
+  var availableDates = getLentDates();
+  var thisMonth = date.getMonth()+1;
+  var thisDay = date.getDate();
+
+  if(thisMonth<10){
+    thisMonth = "0"+thisMonth;
+  }
+
+  if(thisDay<10){
+    thisDay = "0"+thisDay;
+  }
+
+  ymd = date.getFullYear() + "-" + thisMonth + "-" + thisDay;
+
+  if ($.inArray(ymd, availableDates) != -1) {
+    return [true,"",""];
+  } else {
+    return [false,"",""];
+  }
+
+}
+
 function getLentDates() { //시작일과 마감일 사이 날짜 배열에 넣기
 	const dateRange = [];
-  var startDate_str = "2022-" + lentStartDay.replace(" / ",'-')
-  var endDate_str = "2022-" + lentEndDay.replace(" / ",'-')
-	let startDate = new Date(startDate_str);
+  var startDate_str = lentStartYear.split(',')[1].trim() + "-" + lentStartDay.replace(" / ",'-');
+  var endDate_str = lentEndYear.split(',')[1].trim() + "-" + lentEndDay.replace(" / ",'-');
+	
+  let startDate = new Date(startDate_str);
   let endDate = new Date(endDate_str);
   //11.22 부터 12.4까지 선택 못함!
   
@@ -43,6 +68,22 @@ function getLentDates() { //시작일과 마감일 사이 날짜 배열에 넣�
 		startDate.setDate(startDate.getDate() + 1);
 	}
 	return dateRange;
+}
+
+function LentDates(date){ //배열 내 날짜 disable
+  var dateLentRange = getLentDates();
+  var dateReservedRange = getReservedDates();
+  var m = date.getMonth() + 1;
+  var d = date.getDate();
+  var y = date.getFullYear();
+  if ($.inArray(y + '-' + m.toString().padStart(2,'0') + '-' + d.toString().padStart(2,'0'), dateReservedRange) != -1) {
+    return [false];
+  }
+  else if ($.inArray(y + '-' + m.toString().padStart(2,'0') + '-' + d.toString().padStart(2,'0'), dateLentRange) != -1) {
+    return [true];
+  } 
+  return [false];
+
 }
 
 function getReservedDates() { //시작일과 마감일 사이 날짜 배열에 넣기
@@ -59,24 +100,7 @@ function getReservedDates() { //시작일과 마감일 사이 날짜 배열에 �
       startDate.setDate(startDate.getDate() + 1);
     }
   }
-  
-  //11.22 부터 12.4까지 선택 못함!
 	return Array.from(dateRange);
-}
-function LentDates(date){ //배열 내 날짜 disable
-  var dateLentRange = getLentDates();
-  var dateReservedRange = getReservedDates();
-  var m = date.getMonth() + 1;
-  var d = date.getDate();
-  var y = date.getFullYear();
-  if ($.inArray(y + '-' + m.toString().padStart(2,'0') + '-' + d.toString().padStart(2,'0'), dateReservedRange) != -1) {
-    return [false];
-  }
-  else if ($.inArray(y + '-' + m.toString().padStart(2,'0') + '-' + d.toString().padStart(2,'0'), dateLentRange) != -1) {
-    return [true];
-  } 
-  return [false];
-
 }
 
 
@@ -106,9 +130,9 @@ function getDateDiff(d1, d2) {
 function setPrice(D1,D2){
   var price_per;
   //var price_per_day = 7; //week이면
-  if (price_per_day == 'month') {
+  if (price_per_day == 'MONTH') {
     price_per = 30;
-  } else if (price_per_day == 'week') {
+  } else if (price_per_day == 'WEEK') {
     price_per = 7;
   } else {
     price_per = 1;
@@ -143,6 +167,5 @@ function submitForm() {
     $("#form_submit_btn").trigger("click");
   }
 }
-
 
 
