@@ -80,6 +80,10 @@
     margin-top: 10px;
 }
 
+#threeCheckBtWrap button{
+    cursor: pointer;
+}
+
 #totalCheckBt{
     padding: 5px 10px;
     border: 0;

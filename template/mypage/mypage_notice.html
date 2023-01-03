@@ -29,37 +29,41 @@
                         <div id="titleUnderBar"></div>
                         <div id="notifyCheckList">
                             <div id="notifyCheck">
-                                <label><input id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
+                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
                                 <div>2022-11-19 22:00</div>
                             </div>
                             <div id="notifyCheck">
-                                <label><input id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
+                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
                                 <div>2022-11-19 22:00</div>
                             </div>
                             <div id="notifyCheck">
-                                <label><input id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
+                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
                                 <div>2022-11-19 22:00</div>
                             </div>
                             <div id="notifyCheck">
-                                <label><input id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
+                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
                                 <div>2022-11-19 22:00</div>
                             </div>
                             <div id="notifyCheck">
-                                <label><input id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
+                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
                                 <div>2022-11-19 22:00</div>
                             </div>
                             <div id="notifyCheck">
-                                <label><input id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
+                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
                                 <div>2022-11-19 22:00</div>
                             </div>
                         </div>
                         <div id="threeCheckBtWrap">
-                            <button type="button" id="totalCheckBt">전체 선택</button>
-                            <button type="button" id="notTotalCheckBt">선택 해제</button>
+                            <button type="button" id="totalCheckBt" onclick="allYes();">전체 선택</button>
+                            <button type="button" id="notTotalCheckBt"onclick="allNo();">선택 해제</button>
                             <button type="button" id="deleteBt">삭제</button>
                         </div>
                     </div>
                 </div>
             </div>
+    </head>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'js/mypage/mypage_notice.js' %}" defer></script>
+
             {% endblock %}
        

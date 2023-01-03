@@ -29,7 +29,9 @@
 #threeCheckBtWrap{
     margin-left: 20px;
 }
-
+#threeCheckBtWrap button{
+    cursor: pointer;
+}
 #totalCheckBt{
     padding: 5px 10px;
     border: 0;
@@ -65,10 +67,12 @@
 
 #contentTopBody, #contentBottomBody{
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
 }
 
 #objectBox{
+    width: 100%;
     padding: 35px 10px;
 }
 
@@ -84,8 +88,28 @@
 #firstObjectBox{
     border: 1px solid silver;
     border-radius: 10px;
+    position: relative;
 }
 
+#firstObjectBox input{
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 1px solid #999;
+    appearance: none;
+    cursor: pointer;
+    border-radius: 15px;
+    left: 15px;
+    top: 15px;
+    background-color: white;
+}
+
+#firstObjectBox input:checked {
+    background: #3D8361;
+    padding: 5px;
+    border: none;
+  }
 #nameObject{
     font-size: 15px;
 }

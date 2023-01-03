@@ -20,7 +20,7 @@
             <div id="contentBody">
                 <div id="content_body_1">
                     <div id="contentName">아이디</div>
-                    <div id="contentInput" style="width: 205px;"><input type="text" name = "username" value = "{{user.username}}"></div>
+                    <div id="contentInput" style="width: 235px;"><input type="text" name = "username" value = "{{user.username}}"></div>
                 </div>
                 <div id="content_body_1">
                     <div id="contentName">비밀번호</div>
@@ -28,28 +28,28 @@
                 </div>
                 <div id="content_body_1">
                     <div id="contentName">이름</div>
-                    <div><input type="text" style="width: 205px;" name = "name" value = "{{user.name}}"></div>
+                    <div><input type="text" style="width: 235px;" name = "name" value = "{{user.name}}"></div>
                 </div>
                 <div id="content_body_1">
                     <div id="contentName">생년월일</div>
-                    <div style="width: 205px;"><input type="text" name = "birth" value = "{{user.birth}}"></div>
+                    <div style="width: 235px;"><input type="text" name = "birth" value = "{{user.birth}}"></div>
                 </div>
                 <div id="content_body_1">
                     <div id="contentName">주소</div>
                     <div id="contentAddressBox">
-                        <input type="text" style="width: 250px;" name = "address" value = "{{user.address}}">
-                        <button type="button" id="contentAddressBt" >주소찾기</button>
+                        <input type="text" style="width: 300px;" name = "address" id="modify2_Addr"value = "{{user.address}}">
+                        <button type="button" id="contentAddressBt" onclick="findAddr();" >주소찾기</button>
                     </div>
                 </div>
                 <div id="content_body_1">
                     <div></div>
                     <div id="">
-                        <input type="text" style="width: 365px;" name = "address_detail" value = "{{user.address_detail}}">
+                        <input type="text" style="width: 450px; margin-top: -20px;" name = "address_detail" value = "{{user.address_detail}}">
                     </div>
                 </div>
                 <div id="content_body_1">
                     <div id="contentName">핸드폰</div>
-                    <div><input type="text" style="width: 205px;" name = "phoneNum" value = "{{user.phoneNum}}"></div>
+                    <div><input type="text" style="width: 235px;" name = "phoneNum" value = "{{user.phoneNum}}"></div>
                 </div>
                 <div id="content_body_2">
                     <button type="submit">수정하기</button>
@@ -59,4 +59,7 @@
         
     </div>
 </div>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="{% static 'js\mypage\find_Addr.js' %}"></script>
 {% endblock %}

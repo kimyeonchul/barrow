@@ -65,10 +65,10 @@
                                         <img src="{{product.product.get_first_image.image.url}}">
                                     </div>
                                     <div id="nameAndPrice">
-                                        <div style="padding-top: 10px;">{{product.product.title}}</div>
+                                        <div style="padding-top: 10px; padding-left: 10px;">{{product.product.title}}</div>
                                         <div style="display: flex; flex-direction: row; align-items: center;">
-                                            <div style="font-size: 22px;"></div>
-                                            <div style="padding-left: 10px; padding-bottom: 7px;">{{product.product.price}}원 / {{product.product.get_price_per_display}}</div>
+                                            <div style="font-size: 20px;"></div>
+                                            <div style="padding-left: 10px; padding-bottom: 7px; font-size: 25px;">{{product.product.price}}원 / {{product.product.get_price_per_display}}</div>
                                         </div>
                                     </div>
                                     <div id="howIng">
@@ -81,5 +81,6 @@
                     </div>
                 </div>
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
             <script src="{% static 'js/mypage/use_list.js' %}"></script> 
 {% endblock %}

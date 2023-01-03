@@ -6,7 +6,7 @@
 #contentBox{
     background-color: white;
     border-radius: 10px;
-    padding: 30px;
+    padding: 50px;
 }
 
 #contentTitle{
@@ -16,7 +16,7 @@
 }
 
 #contentRealTitle{
-    font-size: 22px;
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: 3px;;
 }
@@ -29,7 +29,7 @@
 }
 
 #contentBody{
-    width: 500px;
+    width: 700px;
     margin: 0 auto;
     padding-top: 30px;
 }
@@ -37,9 +37,10 @@
 #contentBodyBox{
     border: 1px solid rgb(185, 185, 185);
     border-radius: 5px;
-    padding: 30px 40px;
+    padding: 100px 100px;
     display: flex;
     flex-direction: column;
+    margin: 70px auto;
 }
 
 #questionBox{
@@ -48,22 +49,23 @@
 }
 
 #contentBodyBoxTitle{
-    font-size: 23px;
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: 2px;
 }
 
 #contentBodyBoxSubTitle{
+    font-size: 20px;
     margin-top: 10px;
-    color:rgb(134, 134, 134);
+    color: rgb(134, 134, 134);
 }
 
 #contentBodyBox input{
-    height: 35px;
+    height: 40px;
     padding: 5px 12px;
     border: 1px solid silver;
     border-radius: 15px;
-    font-size: 15px;
+    font-size: 20px;
 }
 
 #fitstQuestionInput{
@@ -87,8 +89,11 @@
 }
 
 #contentBtWrap button{
-    margin: 0 5px;
+    margin: 0 10px;
+    font-size: 20px;
+    cursor: pointer;
 }
+
 #checkBt{
     background-color: red;
     border: 0;
@@ -107,4 +112,5 @@
     color: white;
     font-weight: 600;
     cursor: pointer;
+    padding: 12px 15px;
 }

@@ -64,8 +64,8 @@
 #pageName{
     font-size: 25px;
     font-weight: 800;
-    margin-bottom : 5px;
-    margin-left: 10px;
+    margin-bottom : 18px;
+    margin-left: 20px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -82,7 +82,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 550px;
+    height: 860px;
     background-color: #3d8361;
     border-radius: 10px;
 }
