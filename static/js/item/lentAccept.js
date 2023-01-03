@@ -8,5 +8,5 @@ function getPrice() {
 }
 
 $("#accept").click(function(){
-  $("#submit").trigger("click");
+  $("#accept_submit").trigger("click");
 });
