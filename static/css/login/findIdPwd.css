@@ -64,6 +64,7 @@ main {
     border: 1px solid gray;
     height: inherit;
     align-items: center;
+    cursor:pointer;
 }
 
 .selectId {
@@ -112,6 +113,7 @@ main {
     color: white;
     margin-top: 30px;
     margin-bottom: 30px;
+    cursor:pointer;
 }
 
 .input_phone_num_wrap,
@@ -246,6 +248,7 @@ main {
     height: 35px;
     border-radius: 10px;
     margin: 0 auto;
+    cursor:pointer;
 }
 
 /* 비밀번호 찾기 성공시 새 비밀번호 페이지 */

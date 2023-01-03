@@ -287,7 +287,7 @@ def mypage_favorites(request):
                     }
         return JsonResponse(context)
     else:
-        products = User.objects.get(id = 10).favorite.all()
+        products = User.objects.get(id = request.user.id).favorite.all()
         type_queries = list(products.values("type"))
         types = []
 
