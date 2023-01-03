@@ -151,6 +151,7 @@ main {
     height: 44px;
     border-radius: 10px;
     margin: 0 auto;
+    cursor:pointer;
 }
 
 .form_join_title {
@@ -272,6 +273,7 @@ label[for='check'] {
     border: none;
     color: white;
     background-color: #3D8361;
+    cursor:pointer;
 }
 
 .address_api {
