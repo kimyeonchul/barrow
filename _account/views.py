@@ -276,7 +276,7 @@ def mypage_favorites(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
-            target = User.objects.get(id = request.user.id).favorite.get(id = data["id"])
+            target = User.objects.get(id = data["user_id"]).favorite.get(id = data["id"])
             target.delete()
             context = {
                         "is_deleted": True,
@@ -287,6 +287,7 @@ def mypage_favorites(request):
                     }
         return JsonResponse(context)
     else:
+        print(request.user.id)
         products = User.objects.get(id = request.user.id).favorite.all()
         type_queries = list(products.values("type"))
         types = []

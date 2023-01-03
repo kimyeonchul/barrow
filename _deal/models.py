@@ -36,7 +36,7 @@ class Deal(models.Model):
             return str(created.seconds // 3600)+"시간 전"
         elif created < timedelta(days = 30):
             return str(created.days)+"일 전"
-        elif created < timedelta(dayss = 365):
+        elif created < timedelta(days = 365):
             return str(created.days // 30)+"달 전"
         else:
             return str(created.years // 365)+"년 전"
