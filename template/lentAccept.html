@@ -67,7 +67,7 @@
                             <button id="accept">대여<br>수락하기</button>
                             <form method = "POST" action = "{% url 'deal:accept' deal.product.id %}">
                                 <input type = "number" name = "id" style = "display: none;" value = "{{deal.id}}">
-                                <input id = "submit" type = submit style = "display: none;">
+                                <input id = "accept_submit" type = submit style = "display: none;">
                             </form> 
                             
                         </div>
