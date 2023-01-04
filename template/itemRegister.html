@@ -17,66 +17,75 @@
 </head>
 
 <body>
-    
-        <div class="container">
 
-            <div class="item_body">
-                <div class="item_body_title">
-                    <img class="barrow_clipboard" src="{% static 'img/img/fluent-emoji_clipboard.png' %}">
-                    {% if product_id == 0 %}
-                        <h1>빌려주기</h1>
-                    {% else %}
-                        <h1>수정하기</h1>
-                    {% endif %}
-                </div>
-                <hr class="hr-normal">
-                
+    <div class="container">
+
+        <div class="item_body">
+            <div class="item_body_title">
+                <img class="barrow_clipboard" src="{% static 'img/img/fluent-emoji_clipboard.png' %}">
                 {% if product_id == 0 %}
-                    <form name="item_register" id="item_register" method="post" action = "{% url 'products:new' %}" enctype="multipart/form-data">
-                        <div class="pic_body">
-                            <div class="pic_box"></div> 
-                            <input type="file" id="img_upload" name ="img[]" class="img_upload" required multiple style = "display: none;">
-                            <button class="small_btn" id="upload_btn" type="button" onclick="img_click()">파일 선택</button>
-                        </div>
+                <h1>빌려주기</h1>
                 {% else %}
-                    <form name="item_register" id="item_register" method="post" action = "{% url 'products:modify' product_id %}" enctype="multipart/form-data">
-                        <div class="pic_body">
-                            <div class="pic_box">
-
-                                    {% for image in images %}
-                                        <li id = "li{{forloop.counter0}}" class = "origin">
-                                            <img src = "{{image.image.url}}" class = "uploadimage" id = "{{forloop.counter0}}">
-                                            <input type = "file" name = "img{{forloop.counter0}}" id = "image_input{{forloop.counter0}}" class = "img_input" style = "display: none;">
-                                            <input type = "button" id = "image_remove{{forloop.counter0}}" class = "img_remove" value = "X">
-                                            <div id = "captain">
-                                                "대표이미지"
-                                            </div>
-                                        </li>
-                                        
-                                    {% endfor %}
-                                    
-                            </div> 
-                            <input type="file" id="img_upload2" name ="img[]" class="img_upload2" required multiple style = "display: none;">
-                            <button class="small_btn" id="upload_btn2" type="button" onclick="img_click2()">파일 선택</button>
-                        </div>
+                <h1>수정하기</h1>
                 {% endif %}
+            </div>
+            <hr class="hr-normal">
+
+            {% if product_id == 0 %}
+            <form name="item_register" id="item_register" method="post" action="{% url 'products:new' %}"
+                enctype="multipart/form-data">
+                <div class="pic_body">
+                    <div class="pic_box"></div>
+                    <input type="file" id="img_upload" name="img[]" class="img_upload" required multiple
+                        style="display: none;">
+                    <button class="small_btn" id="upload_btn" type="button" onclick="img_click()">파일 선택</button>
+                </div>
+
+                {% else %} <!-- 사진 수정 -->
+
+                <form name="item_register" id="item_register" method="post"
+                    action="{% url 'products:modify' product_id %}" enctype="multipart/form-data">
+                    <div class="pic_body">
+                        <div class="pic_box">
+
+                            {% for image in images %}
+                            <li id="li{{forloop.counter0}}" class="origin">
+                                <img src="{{image.image.url}}" class="uploadimage" id="{{forloop.counter0}}">
+                                <input type="file" name="img{{forloop.counter0}}" id="image_input{{forloop.counter0}}"
+                                    class="img_input" style="display:none;">
+                                <input type="button" id="image_remove{{forloop.counter0}}" class="img_remove" value="X">
+                                <div id="captain">
+                                    대표이미지
+                                </div>
+                            </li>
+
+                            {% endfor %}
+
+                        </div>
+
+                        <button class="small_btn" id="upload_btn2" type="button" onclick="img_click2()">파일 선택</button>
+                    </div>
+                    {% endif %}
                     {% csrf_token %}
-                    
-                    
+
+
                     <div class="item_register_box1">
 
                         <div class="item_register_flex">
                             <li><label for="title">제목</label></li>
-                            <input type="text" name="title" id="title" maxlength="120" placeholder="120자 이내로 입력해주세요" value = {{item.title}}>
+                            <input type="text" name="title" id="title" maxlength="120" placeholder="120자 이내로 입력해주세요"
+                                value={{item.title}}>
                         </div>
                         <hr class="hr-light">
                         <div class="item_register_flex">
                             <li>
-                                <label for="area">거래지역</label></li>
-                                <input type="text" name="area" id="area" value = " {{item.area}} " readonly>
-                                <button type="button" id="area_btn" onclick="findAddr()">주소<br>찾기</button>
-                                <input type="text" name="area_detail" id="area_detail" placeholder="상세주소 입력" value = {{item.area_detail}}>
-                        
+                                <label for="area">거래지역</label>
+                            </li>
+                            <input type="text" name="area" id="area" value=" {{item.area}} " readonly>
+                            <button type="button" id="area_btn" onclick="findAddr()">주소<br>찾기</button>
+                            <input type="text" name="area_detail" id="area_detail" placeholder="상세주소 입력"
+                                value={{item.area_detail}}>
+
                         </div>
                         <hr class="hr-light">
                         <div class="item_register_flex">
@@ -84,56 +93,57 @@
                             <div class="radio_types">
                                 <li>
                                     {% if type.0 and not type.1 %}
-                                        <input type="radio" name="type" id="type_1" value="10" checked>
+                                    <input type="radio" name="type" id="type_1" value="10" checked>
                                     {% else %}
-                                        <input type="radio" name="type" id="type_1" value="10" checked>
+                                    <input type="radio" name="type" id="type_1" value="10" checked>
                                     {% endif %}
                                     <label for="type_1">택배만</label>
 
                                     {% if not type.0 and type.1 %}
-                                        <input type="radio" name="type" id="type_2" value="01" checked>
+                                    <input type="radio" name="type" id="type_2" value="01" checked>
                                     {% else %}
-                                        <input type="radio" name="type" id="type_2" value="01">
+                                    <input type="radio" name="type" id="type_2" value="01">
                                     {% endif %}
                                     <label for="type_2">직거래만</label>
-                                
+
                                     {% if type.0 and type.1 %}
-                                        <input type="radio" name="type" id="type_3" value="11" checked>
+                                    <input type="radio" name="type" id="type_3" value="11" checked>
                                     {% else %}
-                                        <input type="radio" name="type" id="type_3" value="11">
+                                    <input type="radio" name="type" id="type_3" value="11">
                                     {% endif %}
                                     <label for="type_3">둘 다</label>
-                                    
+
                                 </li>
                             </div>
                         </div>
                         <hr class="hr-light">
                         <div class="item_register_flex">
                             <li><label for="price">가격</label></li>
-                            
+
 
                             <div class="radio_types">
-                                
-                                <input type="text" name="price" id="price" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" value = "{{item.price}}">
+
+                                <input type="text" name="price" id="price"
+                                    onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="{{item.price}}">
                                 <span class="word"> 원 </span>
                                 {% if item.per_day == DAY %}
-                                    <input type="radio" name="price_per" id="price_per1" value="PER_DAY" checked>
+                                <input type="radio" name="price_per" id="price_per1" value="PER_DAY" checked>
                                 {% else %}
-                                    <input type="radio" name="price_per" id="price_per1" value="PER_DAY">
+                                <input type="radio" name="price_per" id="price_per1" value="PER_DAY">
                                 {% endif %}
                                 <label for="price_per1">DAY</label>
-                        
+
                                 {% if item.per_day == WEEK %}
-                                    <input type="radio" name="price_per" id="price_per2" value="PER_WEEK" checked>
+                                <input type="radio" name="price_per" id="price_per2" value="PER_WEEK" checked>
                                 {% else %}
-                                    <input type="radio" name="price_per" id="price_per2" value="PER_WEEK">
+                                <input type="radio" name="price_per" id="price_per2" value="PER_WEEK">
                                 {% endif %}
                                 <label for="price_per2">WEEK</label>
-                      
+
                                 {% if item.per_day == MONTH %}
-                                    <input type="radio" name="price_per" id="price_per3" value="PER_MONTH" checked>
+                                <input type="radio" name="price_per" id="price_per3" value="PER_MONTH" checked>
                                 {% else %}
-                                    <input type="radio" name="price_per" id="price_per3" value="PER_MONTH">
+                                <input type="radio" name="price_per" id="price_per3" value="PER_MONTH">
                                 {% endif %}
                                 <label for="price_per3">MONTH</label>
                             </div>
@@ -141,99 +151,101 @@
                         <hr class="hr-light">
                         <div class="item_register_flex">
                             <li><label>대여기간</label></li>
-                            <input type="date" id="start_date" name="start_date" value = "{{item.start_date|date:'Y-m-d'}}">
+                            <input type="date" id="start_date" name="start_date"
+                                value="{{item.start_date|date:'Y-m-d'}}">
                             <span class="word"> 부터 </span>
-                            <input type="date" id="end_date" name="end_date" value = "{{item.end_date|date:'Y-m-d'}}">
+                            <input type="date" id="end_date" name="end_date" value="{{item.end_date|date:'Y-m-d'}}">
                             <span class="word"> 까지 </span>
                         </div>
                         <hr class="hr-light">
                         <div class="item_register_flex">
                             <li><label>카테고리</label></li>
-                                <select name="category" id="category">
-                                    <option disabled>선택</option>
-                                    {% if item.category == CLOTHES %}
-                                        <option value="CLOTHES" selected>의류</option>
-                                    {% else %}
-                                        <option value="CLOTHES" >의류</option>
-                                    {% endif %}
-                                    {% if item.category == SHOES %}
-                                        <option value="SHOES" selected>신발</option>
-                                    {% else %}
-                                        <option value="SHOES">신발</option>
-                                    {% endif %}
-                                    {% if item.category == TRAVELS %}
-                                        <option value="TRAVELS" selected>여행용품</option>
-                                    {% else %}
-                                        <option value="TRAVELS">여행용품</option>
-                                    {% endif %}
-                                    {% if item.category == BAGS %}
-                                        <option value="BAGS" selected>가방</option>
-                                    {% else %}
-                                        <option value="BAGS">가방</option>
-                                    {% endif %}
-                                    {% if item.category == CARRIERS %}
-                                        <option value="CARRIERS" selected>캐리어</option>
-                                    {% else %}
-                                        <option value="CARRIERS">캐리어</option>
-                                    {% endif %}
-                                    {% if item.category == SPORTS %}
-                                        <option value="SPORTS" selected>스포츠</option>
-                                    {% else %}
-                                        <option value="SPORTS">스포츠</option>
-                                    {% endif %}
-                                    {% if item.category == LEISURES %}
-                                        <option value="LEISURES" selected>레저</option>
-                                    {% else %}
-                                        <option value="LEISURES">레저</option>
-                                    {% endif %}
-                                    {% if item.category == HOMES %}
-                                        <option value="HOMES" selected>가전</option>
-                                    {% else %}
-                                        <option value="HOMES">가전</option>
-                                    {% endif %}
-                                    {% if item.category == FURNITURES %}
-                                    <option value="FURNITURES" selected>가구</option>
-                                    {% else %}
-                                    <option value="FURNITURES">가구</option>
-                                    {% endif %}
-                                    {% if item.category == ELECTRONICS %}
-                                        <option value="ELECTRONICS" selected>전자제품</option>
-                                    {% else %}
-                                        <option value="ELECTRONICS">전자제품</option>
-                                    {% endif %}
-                                    {% if item.category == CASUALS %}
-                                        <option value="CASUALS" selected>캐주얼</option>
-                                    {% else %}
-                                        <option value="CASUALS">캐주얼</option>
-                                    {% endif %}
-                                    {% if item.category == OTHERS %}
-                                        <option value="OTHERS" selected>기타</option>
-                                    {% else %}
-                                        <option value="OTHERS">기타</option>
-                                    {% endif %}
-                                    
-                                </select>
+                            <select name="category" id="category">
+                                <option disabled>선택</option>
+                                {% if item.category == CLOTHES %}
+                                <option value="CLOTHES" selected>의류</option>
+                                {% else %}
+                                <option value="CLOTHES">의류</option>
+                                {% endif %}
+                                {% if item.category == SHOES %}
+                                <option value="SHOES" selected>신발</option>
+                                {% else %}
+                                <option value="SHOES">신발</option>
+                                {% endif %}
+                                {% if item.category == TRAVELS %}
+                                <option value="TRAVELS" selected>여행용품</option>
+                                {% else %}
+                                <option value="TRAVELS">여행용품</option>
+                                {% endif %}
+                                {% if item.category == BAGS %}
+                                <option value="BAGS" selected>가방</option>
+                                {% else %}
+                                <option value="BAGS">가방</option>
+                                {% endif %}
+                                {% if item.category == CARRIERS %}
+                                <option value="CARRIERS" selected>캐리어</option>
+                                {% else %}
+                                <option value="CARRIERS">캐리어</option>
+                                {% endif %}
+                                {% if item.category == SPORTS %}
+                                <option value="SPORTS" selected>스포츠</option>
+                                {% else %}
+                                <option value="SPORTS">스포츠</option>
+                                {% endif %}
+                                {% if item.category == LEISURES %}
+                                <option value="LEISURES" selected>레저</option>
+                                {% else %}
+                                <option value="LEISURES">레저</option>
+                                {% endif %}
+                                {% if item.category == HOMES %}
+                                <option value="HOMES" selected>가전</option>
+                                {% else %}
+                                <option value="HOMES">가전</option>
+                                {% endif %}
+                                {% if item.category == FURNITURES %}
+                                <option value="FURNITURES" selected>가구</option>
+                                {% else %}
+                                <option value="FURNITURES">가구</option>
+                                {% endif %}
+                                {% if item.category == ELECTRONICS %}
+                                <option value="ELECTRONICS" selected>전자제품</option>
+                                {% else %}
+                                <option value="ELECTRONICS">전자제품</option>
+                                {% endif %}
+                                {% if item.category == CASUALS %}
+                                <option value="CASUALS" selected>캐주얼</option>
+                                {% else %}
+                                <option value="CASUALS">캐주얼</option>
+                                {% endif %}
+                                {% if item.category == OTHERS %}
+                                <option value="OTHERS" selected>기타</option>
+                                {% else %}
+                                <option value="OTHERS">기타</option>
+                                {% endif %}
+
+                            </select>
                         </div>
                         <hr class="hr-light">
                         <div class="memo">
                             <li><label for="memo">상세설명</label></li>
-                            <textarea name="memo" id="memo" cols="20" rows="10"  maxlength="1000" placeholder="1000자 이내로 입력해주세요" >{{item.memo}}</textarea>
+                            <textarea name="memo" id="memo" cols="20" rows="10" maxlength="1000"
+                                placeholder="1000자 이내로 입력해주세요">{{item.memo}}</textarea>
                         </div>
                         <div></div>
-                        
+
                     </div>
-                    <div id="hidden_button" >
-                        <input id="register_form" type="submit" value="제출하기"/>
+                    <div id="hidden_button">
+                        <input id="register_form" type="submit" value="제출하기" />
                     </div>
                 </form>
                 <hr class="hr-normal">
-                <div class="submit_button" >
-                    <input type="button" id="submit_button" value="제출하기" onclick="submitForm()"/>
+                <div class="submit_button">
+                    <input type="button" id="submit_button" value="제출하기" onclick="submitForm()" />
                 </div>
 
-            </div>
-
         </div>
+
+    </div>
     </section>
     <script type="text/javascript" src="{% static 'js/item/itemRegister.js' %}"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -244,5 +256,6 @@
         var user_id = "{{ user.id }}";
     </script>
 </body>
+
 </html>
 {% endblock %}
