@@ -139,9 +139,10 @@ function setPrice(D1, D2) {
   }
 
   var delivery_charge = 1350; //배달료 천삼백오십원이라고 치자
-  var price_unit = parseInt(price / price_per); //1일당 대여비
+  var price_unit = price / price_per; //1일당 대여비
+  console.log(price_unit)
   var lentDays = getDateDiff(D1, D2) + 1; //대여일 수
-  var lent_price = (price_unit == 0) ? 1 : price_unit * lentDays;
+  var lent_price = Math.ceil(price_unit * lentDays);
 
 
   $("#lent_price").text(lent_price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
