@@ -50,12 +50,11 @@
                                     </div>
                                 </div>
                             </div>
-                    {% if forloop.counter|divisibleby:4 %}
                         </div>
+                {% if forloop.counter|divisibleby:4 %}
+                    </div>
                 {% endif %}                   
             {% endfor %}
-            
-                </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'js/mypage/mypage_heartList.js' %}" defer></script>
