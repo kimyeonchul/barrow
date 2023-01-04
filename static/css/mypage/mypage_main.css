@@ -1,6 +1,6 @@
 #contentBox{
-    display: grid;
-    grid-template-rows: 80% 20%;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 15px;
 }
 
@@ -10,12 +10,11 @@
 }
 
 #contentLeftWrap{
-    display: grid;
-    grid-template-rows: 22% 78%;
+    display: flex;
+    flex-direction: column;
 } 
 
 #myInfoWrap{
-    height: 100%;
     width: 100%;
     padding-left: 10px;
     box-sizing: border-box;
@@ -29,7 +28,6 @@
     background-color: white;
     border-radius: 10px;
     width: 100%;
-    height: 100%;
 }
 
 #myInfoImg{
@@ -59,6 +57,7 @@
     padding: 10px 10px;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 #helloName{
@@ -66,11 +65,18 @@
     flex-direction: row;
     font-weight: bolder;
     font-size: 23px;
+    padding-top: 10px;
+    box-sizing: border-box;
+}
+
+#helloEmail{
+    font-size: 15px;
+    margin-top: 3px;
 }
 
 #helloAddress{
     font-size: 20px;
-    padding-top: 8px;
+    padding-top: 10px;
 }
 
 #borrowWrap{
@@ -86,7 +92,7 @@
 
 #borrowedBox{
     width: 100%;
-    height: 100%;
+    height: 500px;
     border-radius: 10px;
     background-color: white;
 }
@@ -107,20 +113,25 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 15px 20px 0px 20px;
+    padding: 15px 25px 0px 20px;
 }
 
 #borrowedTitle{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 15px 20px 0px 20px;
+    padding: 15px 25px 0px 20px;
 }
 
 #borrowedName, #borrowingName, #plusLook{
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+#plusLook a{
+    text-decoration: none;
+    color: black;
 }
 
 #borrowedName img{
@@ -132,7 +143,9 @@
 }
 
 #borrowedName p, #borrowingName p{
-    padding-left: 5px;
+    padding-left: 10px;
+    font-weight: 800;
+    font-size: 20px;
 }
 
 #underBar{
@@ -143,6 +156,13 @@
     background-color: rgb(150, 149, 149);
 }
 
+#underBar2{
+    width: 30%;
+    margin-left: 25px;
+    margin-top: 7px;
+    height: 1px;
+    background-color: rgb(150, 149, 149);
+}
 #borrowedNumberBox, #borrowingNumberBox{
     width: 90%;
     margin: 15px auto 0px auto;
@@ -180,25 +200,25 @@
 #borrowingObjectDetail{
     display: grid;
     grid-template-columns: 25% 75%;
-    width: 85%;
-    margin: 20px auto;
+    margin: 20px;
     border: 1px solid rgb(205, 205, 205);
 }
 
 #borrowingDetailImg{
-    height: 100%;
+    height: 92px;
+    width: 100px;
     padding: 0;
 }
 
 #borrowingDetailImg img{
     height: 100%;
-    width: 80%;
+    width: 100%;
 }
 
 #borrowingDetailText{
     display: grid;
     grid-template-rows: 25% 50% 25%;
-    padding: 10px 10px 10px 0px;
+    padding: 10px 10px 15px 0px;
 }
 
 #borrowingDetailState{
@@ -214,10 +234,19 @@
     flex-direction: row;
 }
 
-#borrowingDetailMoney div{
+#borrowingDetailMoneyNum{
     font-weight: 700;
     font-size: larger;
     padding-right: 3px;
+}
+
+#borrowingDetailMoneyDay{
+    font-weight: 700;
+    padding-left: 2px;
+}
+
+#borrowingDetailMoney2{
+
 }
 #notifyWrap{
     width: 100%;
@@ -246,10 +275,11 @@
     padding: 20px 20px 0px 20px;
 }
 
-#notifyName, #plusLook{
+#notifyName{
     display: flex;
     flex-direction: row;
     align-items: center;
+    text-decoration: none;
 }
 
 #notifyName img{
@@ -257,7 +287,9 @@
 }
 
 #notifyName p{
-    padding-left: 5px;
+    padding-left: 10px;
+    font-weight: 800;
+    font-size: 20px;
 }
 
 #notCheckNum{
@@ -293,26 +325,35 @@
 
 #favBox{
     width: 100%;
-    height: auto;
+    height: 100%;
     background-color: white;
     border-radius: 10px;
-    display: grid;
-    grid-template-columns: 33.3% 33.3% 33.3%;
 }
 
 #firstFavObject{
-    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 #favTitle{
     display: flex;
+    width: 30%;
     flex-direction: row;
     justify-content: space-between;
     padding: 15px 30px 0px 30px;
     box-sizing: border-box;
 }
 
-#favName, #plusLook{
+#favTitle2{
+    display: flex;
+    width: 34%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 30px 0px 30px;
+    box-sizing: border-box;
+}
+
+#favName{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -323,9 +364,51 @@
 }
 
 #favName p{
-    padding-left: 7px;
+    padding-left: 10px;
+    font-weight: 800;
+    font-size: 20px;
 }
 
 #secondFavObject, #thirdFavObject{
     padding-top: 40px;
+}
+
+#heartObjectBigWrap{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    padding-left: 10px;
+}
+
+#heartObjectDetail{
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    margin: 20px;
+    border: 1px solid rgb(205, 205, 205);
+}
+
+#heartDetailImg{
+    width: 140px;
+    height: 90px;
+}
+#heartDetailImg img{
+    width: 100%;
+    height: 100%;
+}
+
+#heartDetailText{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    display: grid;
+    grid-template-rows: 10% 90%;
+}
+
+#heartDetailNumber{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
 }

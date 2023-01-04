@@ -1,12 +1,12 @@
 #contentWrap{
     padding-left: 10px;
-    height: 90vh;
+    height: 88vh;
 }
 
 #contentBox{
     background-color: white;
     border-radius: 10px;
-    padding: 30px;
+    padding: 50px;
 }
 
 #contentTitle{
@@ -16,7 +16,7 @@
 }
 
 #contentRealTitle{
-    font-size: 22px;
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: 3px;;
 }
@@ -29,29 +29,31 @@
 }
 
 #contentBody{
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     padding-top: 30px;
 }
 
 #content_body_1{
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 30% 70%;
     width: 90%;
-    padding: 10px 0px;
-
+    padding: 20px 0px;
+    box-sizing: border-box;
 }
 
 #content_body_1 input{
     width: 100%;
-    height: 35px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 20px;
     border: 0;
     border-radius: 2px;
     background-color: rgb(235, 235, 235);
 }
 
 #contentName{
-    font-size: 18px;
+    font-size: 25px;
     display: flex;
     align-items: center;
 }
@@ -62,43 +64,44 @@
 }
 
 #contentPwBt{
-    height: 35px;
-    padding: 0px 40px;
+    cursor: pointer;
+    padding: 10px 40px;
     border: 0;
     border-radius: 3px;
     background-color: #3D8361;
     color: white;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 20px;
     letter-spacing: 2px;
 }
 
 #contentAddressBt{
-    height: 35px;
-    padding: 0px 20px;
+    padding: 7px 20px;
     border: 0;
     border-radius: 3px;
     background-color: #3D8361;
+    cursor: pointer;
     color: white;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 20px;
     letter-spacing: 2px;
     margin-left: 15px;
 }
 
 #content_body_2{
     width: 100%;
-    margin-top: 30px;
+    margin-top: 70px;
     display: flex;
     justify-content: center;
 }
 
 #content_body_2 button{
-    padding: 7px 18px;
+    padding: 10px 25px;
     border: 0;
     border-radius: 10px;
     background-color: red;
     color: white;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 25px;
+    cursor: pointer;
 }
