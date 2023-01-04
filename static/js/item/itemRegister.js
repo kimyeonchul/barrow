@@ -172,7 +172,7 @@ $(".uploadimage").click(function () {
 });
 
 $(".img_input").change(function () {
-  console.log("뀨");
+  console.log("뀨잉");
   let reader = new FileReader();
 
   console.log(reader);
