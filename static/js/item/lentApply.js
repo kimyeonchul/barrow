@@ -12,95 +12,95 @@ $.datepicker.setDefaults({
   dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
   showMonthAfterYear: true,
   yearSuffix: '년',
-  minDate : 0,
+  minDate: 0,
   beforeShowDay: availableDates,
 });
 
-$(function(){
+$(function () {
   $('.datepicker').datepicker({
-    onSelect: function() {
-      try{
-        var D1 = $.datepicker.formatDate("yy-mm-dd",$("#start_date").datepicker("getDate")); 
-        var D2 = $.datepicker.formatDate("yy-mm-dd",$("#end_date").datepicker("getDate")); 
-        setPrice(D1,D2)
+    onSelect: function () {
+      try {
+        var D1 = $.datepicker.formatDate("yy-mm-dd", $("#start_date").datepicker("getDate"));
+        var D2 = $.datepicker.formatDate("yy-mm-dd", $("#end_date").datepicker("getDate"));
+        setPrice(D1, D2)
       }
-      catch{
-        
+      catch {
+
       }
     }
   });
 });
 
-function availableDates(date){ //배열 내 날짜만 able
+function availableDates(date) { //배열 내 날짜만 able
   var availableDates = getLentDates();
-  var thisMonth = date.getMonth()+1;
+  var thisMonth = date.getMonth() + 1;
   var thisDay = date.getDate();
 
-  if(thisMonth<10){
-    thisMonth = "0"+thisMonth;
+  if (thisMonth < 10) {
+    thisMonth = "0" + thisMonth;
   }
 
-  if(thisDay<10){
-    thisDay = "0"+thisDay;
+  if (thisDay < 10) {
+    thisDay = "0" + thisDay;
   }
 
   ymd = date.getFullYear() + "-" + thisMonth + "-" + thisDay;
 
   if ($.inArray(ymd, availableDates) != -1) {
-    return [true,"",""];
+    return [true, "", ""];
   } else {
-    return [false,"",""];
+    return [false, "", ""];
   }
 
 }
 
 function getLentDates() { //시작일과 마감일 사이 날짜 배열에 넣기
-	const dateRange = [];
-  var startDate_str = lentStartYear.split(',')[1].trim() + "-" + lentStartDay.replace(" / ",'-');
-  var endDate_str = lentEndYear.split(',')[1].trim() + "-" + lentEndDay.replace(" / ",'-');
-	
+  const dateRange = [];
+  var startDate_str = lentStartYear.split(',')[1].trim() + "-" + lentStartDay.replace(" / ", '-');
+  var endDate_str = lentEndYear.split(',')[1].trim() + "-" + lentEndDay.replace(" / ", '-');
+
   let startDate = new Date(startDate_str);
   let endDate = new Date(endDate_str);
   //11.22 부터 12.4까지 선택 못함!
-  
-	while(startDate <= endDate) {
-		dateRange.push(startDate.toISOString().split('T')[0]);
-		startDate.setDate(startDate.getDate() + 1);
-	}
-	return dateRange;
+
+  while (startDate <= endDate) {
+    dateRange.push(startDate.toISOString().split('T')[0]);
+    startDate.setDate(startDate.getDate() + 1);
+  }
+  return dateRange;
 }
 
-function LentDates(date){ //배열 내 날짜 disable
+function LentDates(date) { //배열 내 날짜 disable
   var dateLentRange = getLentDates();
   var dateReservedRange = getReservedDates();
   var m = date.getMonth() + 1;
   var d = date.getDate();
   var y = date.getFullYear();
-  if ($.inArray(y + '-' + m.toString().padStart(2,'0') + '-' + d.toString().padStart(2,'0'), dateReservedRange) != -1) {
+  if ($.inArray(y + '-' + m.toString().padStart(2, '0') + '-' + d.toString().padStart(2, '0'), dateReservedRange) != -1) {
     return [false];
   }
-  else if ($.inArray(y + '-' + m.toString().padStart(2,'0') + '-' + d.toString().padStart(2,'0'), dateLentRange) != -1) {
+  else if ($.inArray(y + '-' + m.toString().padStart(2, '0') + '-' + d.toString().padStart(2, '0'), dateLentRange) != -1) {
     return [true];
-  } 
+  }
   return [false];
 
 }
 
 function getReservedDates() { //시작일과 마감일 사이 날짜 배열에 넣기
-	var dateRange = new Set();
-  for(var date of dates){
-    var startDate_str = date["start_date"].replaceAll(". ","-")
-    var endDate_str = date["end_date"].replaceAll(". ","-")
+  var dateRange = new Set();
+  for (var date of dates) {
+    var startDate_str = date["start_date"].replaceAll(". ", "-")
+    var endDate_str = date["end_date"].replaceAll(". ", "-")
 
-	  let startDate = new Date(startDate_str);
+    let startDate = new Date(startDate_str);
     let endDate = new Date(endDate_str);
 
-    while(startDate <= endDate) {
+    while (startDate <= endDate) {
       dateRange.add(startDate.toISOString().split('T')[0]);
       startDate.setDate(startDate.getDate() + 1);
     }
   }
-	return Array.from(dateRange);
+  return Array.from(dateRange);
 }
 
 
@@ -127,7 +127,7 @@ function getDateDiff(d1, d2) {
   return Math.abs(diffDate / (1000 * 60 * 60 * 24)); // 밀리세컨 * 초 * 분 * 시 = 일
 }
 
-function setPrice(D1,D2){
+function setPrice(D1, D2) {
   var price_per;
   //var price_per_day = 7; //week이면
   if (price_per_day == 'MONTH') {
@@ -141,7 +141,9 @@ function setPrice(D1,D2){
   var delivery_charge = 1350; //배달료 천삼백오십원이라고 치자
   var price_unit = parseInt(price / price_per); //1일당 대여비
   var lentDays = getDateDiff(D1, D2) + 1; //대여일 수
-  var lent_price = price_unit * lentDays;
+  var lent_price = (price_unit == 0) ? 1 : price_unit * lentDays;
+
+
   $("#lent_price").text(lent_price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
   $('#total_price').text((lent_price + delivery_charge).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
 
@@ -155,7 +157,7 @@ function formCheck(frm) {
   if (frm.start_date.value == "" || frm.end_date.value == "") {
     alert("날짜를 정확히 입력해 주세요");
     return false;
-    }
+  }
   return true;
 }
 

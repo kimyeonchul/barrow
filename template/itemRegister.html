@@ -41,7 +41,7 @@
                     <button class="small_btn" id="upload_btn" type="button" onclick="img_click()">파일 선택</button>
                 </div>
 
-                {% else %} <!-- 사진 수정 -->
+                {% else %} <!-- 기존 사진 수정 -->
 
                 <form name="item_register" id="item_register" method="post"
                     action="{% url 'products:modify' product_id %}" enctype="multipart/form-data">
@@ -62,7 +62,8 @@
                             {% endfor %}
 
                         </div>
-
+                        <input type="file" id="img_upload2" name="img[]" class="img_upload2" multiple
+                            style="display: none;">
                         <button class="small_btn" id="upload_btn2" type="button" onclick="img_click2()">파일 선택</button>
                     </div>
                     {% endif %}
