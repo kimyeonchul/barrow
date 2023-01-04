@@ -17,122 +17,128 @@
 </head>
 
 <body>
-    
-        <div class="container">
-            <div class="menu_list">
-                <span>
+
+    <div class="container">
+        <div class="menu_list">
+            <span>
                 <a href="{% url 'barrow:home' %}">홈</a>
                 <i class="fa-solid fa-angle-right"></i>
-                <a href="{% url 'barrow:category' item.get_category_display '최신순' %}" >{{item.get_category_display}}</a>
+                <a href="{% url 'barrow:category' item.get_category_display '최신순' %}">{{item.get_category_display}}</a>
                 <i class="fa-solid fa-angle-right"></i>
-                </span>
-            </div>
+            </span>
+        </div>
 
-            <div class="item_box">
-                <div class="item_album">
-                    <div class="item_pic">
-                        {% for img in item_images %}
-                            <img class="pics" src="{{img.image.url}}">
-                        {% endfor%}
-                        
-                    </div>
-                    <div class="pic_btns">
-                        
-                    </div>
+        <div class="item_box">
+            <div class="item_album">
+                <div class="item_pic">
+                    {% for img in item_images %}
+                    <img class="pics" src="{{img.image.url}}">
+                    {% endfor%}
 
                 </div>
-                <div class="item_info">
-
-                    <div class="item_title">
-                        <h1>{{item.title}}</h1>
-                    </div>
-                    <div class="item_price">
-                        <p><span id="price_font">{{item.price}}</span></p>
-                        <p>원 / </p>
-                        <p>{{item.get_price_per_display}}</p>
-                    </div>
-                    <hr class="hr-light">
-                    <div class="item_view">
-                        <p>조회 {{item.views}}</p>
-                        <p> • </p>
-                        <p>찜 <span class="favoriteNum">{{favorite}}</span></p>
-                        <p> • </p>
-                        <p>{{item.get_created}}</p>
-                    </div>
-
-                    <div class="item_details">
-                        <li> 대여기간 <span class="item_details_date"><i class="fa-solid fa-calendar"></i>  {{item.get_start_date}} ~ {{item.get_end_date}}</span></li>
-                        <li> 거래지역 <span class="item_details_text">{{item.area}}</span> </li>
-                        <li> 거래방법 <span class="item_details_text">{{item.get_type_display}}</spap> </li>
-                    </div>
-
-                    <!--타인의 아이템-->
-                    {% if productor.is_mine %}
-                        
-                        <div class="item_buttons">
-                            <button class="mid_btn" id="love" onclick = "location.href = '{% url 'products:modify' item.id %}'"> 수정하기 </button>
-                            <button class="mid_btn" id="chat" onclick="modal('delete_check_modal')" > 삭제하기 </button>
-                            <button class="mid_btn" id="apply" onclick = "location.href = '{% url 'deal:accept' item.id %}'">대여 수락하기</button>
-                        </div>
-                    <!-- 내 아이템 -->
-                    
-                    {% else %}
-                        {% if state == "TERMINATE" and user.is_authenticated %}
-                            <div class="item_buttons">
-                                <button class="mid_btn" id="love_btn" onclick="love_btn()"> ♥ 찜 <span class = "favoriteNum">{{favorite}}</span></button>
-                                <button class="mid_btn" id="chat">채팅 보내기</button>
-                                <button class="mid_btn" id="apply" onclick = "location.href = '{% url 'deal:new' item.id %}'">대여 신청하기</button>
-                            </div>
-                        
-                        {% elif state == "WAIT" %}
-                            <div class="item_requested">
-                                <p id="wait">현재 신청 수락을 기다리고 있는 상품입니다.</p>
-                            </div>
-                        {% elif state == "LEND" %}
-                            <div class="item_requested">
-                                <p>현재 대여중인 상품입니다.</p>
-                                <p>반납 예정일은 <span id="returnDay">{{deal_end_date}}</span> 입니다.</p>
-                            </div>
-                        {% endif %}
-                    {% endif %}
+                <div class="pic_btns">
 
                 </div>
 
             </div>
-            <div class="lender_info">
-                <div>
-                    <img class="lender_portrait" src = "{{item.productor.image.url}}">
+            <div class="item_info">
+
+                <div class="item_title">
+                    <h1>{{item.title}}</h1>
                 </div>
-                <p>{{productor.name}}님의 대여 상품입니다</p>
-            </div>
-            <div class="item_memo">
-                <h2>상세 설명</h2>
-                <hr class="hr-light">
-                <div class="item_memo_text">
-                    <p>
-                        {% for c in item.memo %}
-                            {{c}}
-                            {% if forloop.counter|divisibleby:100%}
-                                <br>
-                            {% endif %}
-                        {% endfor %}
-                    </p>
+                <div class="item_price">
+                    <p><span id="price_font">{{item.price}}</span></p>
+                    <p>원 / </p>
+                    <p>{{item.get_price_per_display}}</p>
                 </div>
                 <hr class="hr-light">
-            </div>
-            {% if state == "WAIT" %}
-                <div class="reject_button">
-                    <button class="mid_btn" id="love" onclick="modal('cancel_check_modal')"> 신청 취소하기 </button>
+                <div class="item_view">
+                    <p>조회 {{item.views}}</p>
+                    <p> • </p>
+                    <p>찜 <span class="favoriteNum">{{favorite}}</span></p>
+                    <p> • </p>
+                    <p>{{item.get_created}}</p>
                 </div>
-            {% endif %}
+
+                <div class="item_details">
+                    <li> 대여기간 <span class="item_details_date"><i class="fa-solid fa-calendar"></i>
+                            {{item.get_start_date}} ~ {{item.get_end_date}}</span></li>
+                    <li> 거래지역 <span class="item_details_text">{{item.area}}</span> </li>
+                    <li> 거래방법 <span class="item_details_text">{{item.get_type_display}}</spap>
+                    </li>
+                </div>
+
+                <!--타인의 아이템-->
+                {% if productor.is_mine %}
+
+                <div class="item_buttons">
+                    <button class="mid_btn" id="love" onclick="location.href = '{% url 'products:modify' item.id %}'">
+                        수정하기 </button>
+                    <button class="mid_btn" id="chat" onclick="modal('delete_check_modal')"> 삭제하기 </button>
+                    <button class="mid_btn" id="apply" onclick="location.href = '{% url 'deal:accept' item.id %}'">대여
+                        수락하기</button>
+                </div>
+                <!-- 내 아이템 -->
+
+                {% else %}
+                {% if state == "TERMINATE" and user.is_authenticated %}
+                <div class="item_buttons">
+                    <button class="mid_btn" id="love_btn" onclick="love_btn()"> ♥ 찜 <span
+                            class="favoriteNum">{{favorite}}</span></button>
+                    <button class="mid_btn" id="chat">채팅 보내기</button>
+                    <button class="mid_btn" id="apply" onclick="location.href = '{% url 'deal:new' item.id %}'">대여
+                        신청하기</button>
+                </div>
+
+                {% elif state == "WAIT" %}
+                <div class="item_requested">
+                    <p id="wait">현재 신청 수락을 기다리고 있는 상품입니다.</p>
+                </div>
+                {% elif state == "LEND" %}
+                <div class="item_requested">
+                    <p>현재 대여중인 상품입니다.</p>
+                    <p>반납 예정일은 <span id="returnDay">{{deal_end_date}}</span> 입니다.</p>
+                </div>
+                {% endif %}
+                {% endif %}
+
+            </div>
 
         </div>
-    </section>
+        <div class="lender_info">
+            <div>
+                <img class="lender_portrait" src="{{item.productor.image.url}}">
+            </div>
+            <p>{{productor.name}}님의 대여 상품입니다</p>
+        </div>
+        <div class="item_memo">
+            <h2>상세 설명</h2>
+            <hr class="hr-light">
+            <div class="item_memo_text">
+                <p>
+                    {% for c in item.memo %}
+                    {{c}}
+                    {% if forloop.counter|divisibleby:100%}
+                    <br>
+                    {% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+            <hr class="hr-light">
+        </div>
+        {% if state == "WAIT" %}
+        <div class="reject_button">
+            <button class="mid_btn" id="love" onclick="modal('cancel_check_modal')"> 신청 취소하기 </button>
+        </div>
+        {% endif %}
+
+    </div>
+
     <div class="modal" id="delete_check_modal">
         <p>상품을 삭제 하시겠습니까?</p>
         <p>해당 상품의 등록이 삭제됩니다.</p>
         <div class="modal_btn">
-            <button class="modal_ok_btn" onclick = "location.href = '{% url 'products:delete' item.id %}'">삭제하기</button>
+            <button class="modal_ok_btn" onclick="location.href = '{% url 'products:delete' item.id %}'">삭제하기</button>
             <button class="modal_close_btn">돌아가기</button>
         </div>
     </div>
@@ -140,7 +146,7 @@
         <p>신청을 취소 하시겠습니까?</p>
         <p>해당 상품에 대한 대여신청이 취소됩니다.</p>
         <div class="modal_btn">
-            <button class="modal_ok_btn" onclick = "location.href = '{% url 'deal:delete' item.id %}'">취소하기</button>
+            <button class="modal_ok_btn" onclick="location.href = '{% url 'deal:delete' item.id %}'">취소하기</button>
             <button class="modal_close_btn">돌아가기</button>
         </div>
     </div>
