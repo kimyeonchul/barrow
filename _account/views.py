@@ -17,7 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from _account.models import User, User_view
 from _deal.models import Deal
-
+from _notification.models import Notification
 from _account.sms import send
 
 @csrf_exempt
@@ -57,6 +57,9 @@ def register(request):
             user = form.save(commit = False)
             user.birth = request.POST["birth1"] + "-" + request.POST["birth2"] + request.POST["birth3"]
             user.save()
+
+            new_notice = Notification(user = user,content = "Barrow의 회원이 되신것을 축하합니다.")
+            new_notice.save()
             return redirect('account:login')
         except Exception as e:
             print(form.errors)
@@ -229,9 +232,45 @@ def mypage_main(request):
     context["favorite"] = favorite
     return render(request, "mypage/mypage_main.html", context)
 
-
+@csrf_exempt
 def mypage_notice(request):
-    return render(request, "mypage/mypage_notice.html")
+    if request.method == "GET":
+        notifications = Notification.objects.filter(user = request.user)
+        copy = []
+        
+        for notification in notifications:
+            
+            elem = {
+                "id" : notification.id,
+                "content" : notification.content,
+                "is_read" : notification.is_read,
+                "created" : notification.created
+            }
+            copy.append(elem)
+            if not notification.is_read :
+                notification.is_read = True
+                notification.save()
+        
+        context = {
+            "notifications" : copy,
+            "total_num" : notifications.count(),
+            "not_read_num" : notifications.filter(is_read = False).count()
+        }
+        return render(request, "mypage/mypage_notice.html",context)
+    elif request.method == "DELETE":
+        data = json.loads(request.body)
+        try:
+            for id in data["ids"]:
+                notification = Notification.objects.get(id = id)
+                notification.delete()
+            context = {
+                "is_deleted" : True
+            }
+        except :
+            context = {
+                "is_deleted" : False
+            }
+        return JsonResponse(context)
 
 
 def mypage_modify(request):

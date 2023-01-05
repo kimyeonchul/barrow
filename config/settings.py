@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     '_payment',
     '_product',
     '_search',
+    '_notification',
 ]
 
 
