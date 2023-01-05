@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .forms import DealForm
 from .models import Deal
+from _notification.models import Notification
 from _product.models import Product, Product_image
 from _barrow.views import base, side
 
@@ -27,8 +28,6 @@ def new(request, product_id):
     context.update(side(request))
     if request.method == "GET":
         
-        
-        
         return render(request, "lentApply.html", context)
 
     elif request.method == "POST":
@@ -51,6 +50,9 @@ def new(request, product_id):
             new.user_prod = item.productor
             new.product = item
             new.save()
+
+            new_notice = Notification(user = item.productor,content = str(request.user.name) + "님이 대여를 신청했습니다.")
+            new_notice.save()
             return redirect("products:itempage",product_id)
         
         else:
@@ -83,6 +85,8 @@ def accept(request, product_id):
         deal.state = "LEND"
         deal.save()
 
+        new_notice = Notification(user = deal.user_cons,content = str(deal.user_prod.name) + "님이 대여를 수락했습니다.")
+        new_notice.save()
         return redirect("deal:accept",product_id)
 
 def delete(request, product_id):
