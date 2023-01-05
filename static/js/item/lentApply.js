@@ -129,7 +129,8 @@ function getDateDiff(d1, d2) {
 
 function setPrice(D1, D2) {
   var price_per;
-  //var price_per_day = 7; //week이면
+  var delivery_charge = 1350; //배달료 천삼백오십원이라고 치자
+
   if (price_per_day == 'MONTH') {
     price_per = 30;
   } else if (price_per_day == 'WEEK') {
@@ -138,12 +139,10 @@ function setPrice(D1, D2) {
     price_per = 1;
   }
 
-  var delivery_charge = 1350; //배달료 천삼백오십원이라고 치자
-  var price_unit = price / price_per; //1일당 대여비
-  console.log(price_unit)
-  var lentDays = getDateDiff(D1, D2) + 1; //대여일 수
-  var lent_price = Math.ceil(price_unit * lentDays);
+  var lentDays = getDateDiff(D1, D2) + 1; //대여일 수 계산
+  var price_unit = Math.ceil(lentDays / price_per); //대여 단위 기준으로 반올림
 
+  var lent_price = price_unit * price;
 
   $("#lent_price").text(lent_price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
   $('#total_price').text((lent_price + delivery_charge).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
