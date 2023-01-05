@@ -4,7 +4,7 @@ var staticlat = 0;
 var staticlon = 0;
 
 
-
+// document.querySelector('svg').style="width:inherit; height:inherit;";
 // nextPageBtn.addEventListener('click',() => {
 //   let nextPageNum = pageActiveIdx;
 //   displayRow(nextPageNum);

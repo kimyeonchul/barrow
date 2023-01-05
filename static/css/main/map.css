@@ -4,7 +4,10 @@
 
 /* //찜하기 & 최근 본 상품--------------------------------------------------------------------------------------- */
 
-
+svg {
+  width:500px;
+  height: 500px;
+}
 
 /* //best item-------------------------------------------------------------------------- */
 .bottomDiv {
@@ -27,12 +30,15 @@
 .mapApi {
     display:flex;
     flex-basis:40%;
+  width:562.99px;
   height: 840px;
     border:1px solid black;
     margin: 70px 0px 0px 30px;
    border-radius: 17px;
   border: 0.849398px solid #959190;
+  border:0px;
 }
+
 .bestitem_text {
   display: flex;
   flex-direction: column;

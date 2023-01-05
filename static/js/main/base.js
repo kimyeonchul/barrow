@@ -12,6 +12,8 @@ let inout = 'in';
 var staticlat = 0;
 var staticlon = 0;
 
+
+
 function realtimeViewVisible(e) {
   console.log(e);
     if (view === "visible") {
@@ -77,6 +79,8 @@ document.addEventListener('mouseup', (e) => {
     }
 
 })
+
+const linkcolors = document.querySelectorAll('dt>a');
 
 
 function circleMove(item) {

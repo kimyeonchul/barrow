@@ -22,43 +22,43 @@
         <aside class="leftSidebar">
             <dl class="categoryBox">
                 <dt>
-                    <a href="{% url 'barrow:category' '전체' '최신순' %}">전체({{category_num.전체}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '전체' '최신순' %}" >전체({{category_num.전체}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '의류' '최신순' %}">의류({{category_num.의류}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '의류' '최신순' %}" >의류({{category_num.의류}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '신발' '최신순' %}">신발({{category_num.신발}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '신발' '최신순' %}" >신발({{category_num.신발}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '여행용품' '최신순' %}">여행용품({{category_num.여행용품}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '여행용품' '최신순' %}" >여행용품({{category_num.여행용품}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '가방' '최신순' %}">가방({{category_num.가방}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '가방' '최신순' %}" >가방({{category_num.가방}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '캐리어' '최신순' %}">캐리어({{category_num.캐리어}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '캐리어' '최신순' %}" >캐리어({{category_num.캐리어}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '스포츠' '최신순' %}">스포츠({{category_num.스포츠}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '스포츠' '최신순' %}" >스포츠({{category_num.스포츠}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '레저' '최신순' %}">레저({{category_num.레저}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '레저' '최신순' %}" >레저({{category_num.레저}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '가전' '최신순' %}">가전({{category_num.가전}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '가전' '최신순' %}" >가전({{category_num.가전}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '가구' '최신순' %}">가구({{category_num.가구}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '가구' '최신순' %}" >가구({{category_num.가구}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '전자제품' '최신순' %}">전자제품({{category_num.전자제품}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '전자제품' '최신순' %}" >전자제품({{category_num.전자제품}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '캐주얼' '최신순' %}">캐주얼({{category_num.캐주얼}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '캐주얼' '최신순' %}" >캐주얼({{category_num.캐주얼}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '기타' '최신순' %}">기타({{category_num.기타}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '기타' '최신순' %}" >기타({{category_num.기타}})</a>
                 </dt>
             </dl>
         </aside>
@@ -154,13 +154,13 @@
 
     </section>
     <section class="pagination">
-            <span class="dLeftVector">&laquo;</span>
+            <span class="dLeftVector" style="cursor:pointer">&laquo;</span>
             <span class="prevPageBtns">&lt;</span>
             <ol id="numbers">
                 <!-- <li class="numbers"><a href="">1</a></li> -->
             </ol>
             <span class="nextPageBtns">&gt;</span>
-            <span class="dRightVector">&raquo;</span>
+            <span class="dRightVector" style="cursor:pointer">&raquo;</span>
         </section>
     <!-- <nav aria-label="pagination">
             <ul class="pagination">
@@ -174,6 +174,8 @@
         </nav> -->
     </div>
     <script type = "text/javascript">var item_num = "{{cur_category_num}}";</script>
+        <script type = "text/javascript" >var categoryName = "{{category}}";</script>
+<script type = "text/javascript" >var categorySort = "{{sort}}";</script>
 </body>
 
 </html>
