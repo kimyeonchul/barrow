@@ -19,6 +19,7 @@ urlpatterns = [
     path("mypage/modify/confirm/",views.mypage_modify_confirm,name = "mypage_modify_confirm"),
     path("mypage/changePwd/",views.change_pwd,name = "mypage_changepwd"),
     path("mypage/favorite/",views.mypage_favorites,name = "mypage_favorite"),
+
     path("mypage/chatroom/",views.mypage_chatroom,name = "mypage_chatroom"),
 
     path("mypage/use/<str:type>/",views.mypage_use,name = "mypage_use"),

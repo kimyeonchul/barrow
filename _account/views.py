@@ -345,8 +345,7 @@ def mypage_favorites(request):
         return render(request, "mypage/mypage_heartList.html",context)
 
 
-def mypage_chatroom(request):
-    return render(request, "mypage/room.html")
+
 
 
 def mypage_account(request):

@@ -8,6 +8,7 @@ function allNo(){
     $("input[name=cbox]").prop("checked", false);
 }
 
+
 function deleteNotice(){
     if ($('input:checkbox[name="cbox"]').is(":checked")) {
         var names = [];

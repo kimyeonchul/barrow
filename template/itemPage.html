@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/item/itemPage.css' %}" />
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="{% static 'js/item/itemPage.js' %}"></script>
     <script src="https://kit.fontawesome.com/04d19e7b2e.js" crossorigin="anonymous"></script>
     <title>Barrow</title>
 </head>
@@ -86,6 +85,11 @@
                     <button class="mid_btn" id="love_btn" onclick="love_btn()"> ♥ 찜 <span
                             class="favoriteNum">{{favorite}}</span></button>
                     <button class="mid_btn" id="chat">채팅 보내기</button>
+                    <form method = "POST" action = "{% url 'products:send_msg'%}">
+                        {% csrf_token %}
+                        <input type = "number" name = "product_id" style = "display: none;" value = "{{item.id}}">
+                        <input id = "send_msg" type = submit style = "display: none;">
+                    </form>
                     <button class="mid_btn" id="apply" onclick="location.href = '{% url 'deal:new' item.id %}'">대여
                         신청하기</button>
                 </div>
@@ -156,6 +160,7 @@
     var product_id = "{{item.id}}";
     var user_id = "{{user.id}}";
 </script>
+<script type="text/javascript" src="{% static 'js/item/itemPage.js' %}"></script>
 
 </html>
 {% endblock %}
