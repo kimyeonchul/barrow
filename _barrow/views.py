@@ -14,28 +14,7 @@ import pandas as pd
 
 
 def base(request):
-<<<<<<< Updated upstream
-        user = request.user
-        recent_search_query = None
-        
-        #검색기록
-        if request.user.is_authenticated:
-            recent_search_query = user.keyword.all().order_by("-date")
-            recent_search_query = recent_search_query[:10]
-        
-        today = datetime.now()
-        most_search_date = str(today.year) + '-' + str(today.month).zfill(2) + "-" + str(today.day).zfill(2) +" " + str(today.hour).zfill(2) + ":00"
 
-        if CurMostSearch.objects.all().exists():
-
-            last_mosts = CurMostSearch.objects.all()
-
-            if last_mosts[0].time.hour != today.hour:
-                print(1)
-                create_most_search()
-        else:
-            
-=======
     user = request.user
     recent_search_query = None
 
@@ -54,7 +33,6 @@ def base(request):
 
         if last_mosts[0].time.hour != today.hour:
             print(1)
->>>>>>> Stashed changes
             create_most_search()
     else:
 
@@ -93,11 +71,9 @@ def side(request):
 
 
 def get_best():
-<<<<<<< Updated upstream
+
     best = Product.objects.filter(start_date__lte = datetime.now(),end_date__gte=datetime.now()).order_by("-views")
-=======
-    best = Product.objects.filter(start_date__lte=datetime.now(), end_date__gte=datetime.now()).order_by("-views")
->>>>>>> Stashed changes
+
     type_queries = list(best.values("type"))
     types = []
 
@@ -118,46 +94,7 @@ def get_best():
 
 def get_category_num():
     result = {}
-<<<<<<< Updated upstream
-    products = Product.objects.filter(start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['전체'] = (products.count())
-
-    products = Product.objects.filter(category = "CLOTHES",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['의류']=(products.count())
-
-    products = Product.objects.filter(category = "SHOES",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['신발']=(products.count())
-
-    products = Product.objects.filter(category = "TRAVELS",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['여행용품']=(products.count())
-
-    products = Product.objects.filter(category = "BAGS",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['가방']=(products.count())
-
-    products = Product.objects.filter(category = "CARRIERS",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['캐리어']=(products.count())
-
-    products = Product.objects.filter(category = "SPORTS",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['스포츠']=(products.count())
-
-    products = Product.objects.filter(category = "LEISURES",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['레저']=(products.count())
-
-    products = Product.objects.filter(category = "HOMES",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['가전']=(products.count())
-
-    products = Product.objects.filter(category = "FURNITURES",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['가구']=(products.count())
-
-    products = Product.objects.filter(category = "ELECTROMICS",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['전자제품']=(products.count())
-
-    products = Product.objects.filter(category = "CASUALS",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['캐주얼']=(products.count())
     
-    products = Product.objects.filter(category = "OTHERS",start_date__lte = datetime.now(),end_date__gte=datetime.now())
-    result['기타']=(products.count())
-=======
     products = Product.objects.filter(start_date__lte=datetime.now(), end_date__gte=datetime.now())
     result['전체'] = (products.count())
 
@@ -198,7 +135,6 @@ def get_category_num():
 
     products = Product.objects.filter(category="OTHERS", start_date__lte=datetime.now(), end_date__gte=datetime.now())
     result['기타'] = (products.count())
->>>>>>> Stashed changes
 
     return result
 
@@ -233,14 +169,7 @@ def category_view(request, category, sort):
 
     if sort == "추천순":
         if category == "전체":
-<<<<<<< Updated upstream
-            products = Product.objects.filter(start_date__lte = datetime.now(),end_date__gte=datetime.now()).annotate(
-                likes = Count("favor")
-            ).order_by("-likes")
-        else:
-            products = Product.objects.filter(category = categories[category],start_date__lte = datetime.now(),end_date__gte=datetime.now()).annotate(
-                likes = Count("favor")
-=======
+
             products = Product.objects.filter(start_date__lte=datetime.now(), end_date__gte=datetime.now()).annotate(
                 likes=Count("favor")
             ).order_by("-likes")
@@ -248,20 +177,12 @@ def category_view(request, category, sort):
             products = Product.objects.filter(category=categories[category], start_date__lte=datetime.now(),
                                               end_date__gte=datetime.now()).annotate(
                 likes=Count("favor")
->>>>>>> Stashed changes
             ).order_by("-likes")
 
 
     elif sort == "신청순":
         if category == "전체":
-<<<<<<< Updated upstream
-            products = Product.objects.filter(start_date__lte = datetime.now(),end_date__gte=datetime.now()).annotate(
-                deals = Count("deal")
-            ).order_by("-deals")
-        else:
-            products = Product.objects.filter(category = categories[category],start_date__lte = datetime.now(),end_date__gte=datetime.now()).annotate(
-                deals = Count("deal")
-=======
+
             products = Product.objects.filter(start_date__lte=datetime.now(), end_date__gte=datetime.now()).annotate(
                 deals=Count("deal")
             ).order_by("-deals")
@@ -269,22 +190,13 @@ def category_view(request, category, sort):
             products = Product.objects.filter(category=categories[category], start_date__lte=datetime.now(),
                                               end_date__gte=datetime.now()).annotate(
                 deals=Count("deal")
->>>>>>> Stashed changes
             ).order_by("-deals")
 
     else:
         if category == "전체":
-<<<<<<< Updated upstream
             products = Product.objects.filter(start_date__lte = datetime.now(),end_date__gte=datetime.now()).order_by(sorts[sort])
         else:
             products = Product.objects.filter(category = categories[category],start_date__lte = datetime.now(),end_date__gte=datetime.now()).order_by(sorts[sort])
-=======
-            products = Product.objects.filter(start_date__lte=datetime.now(), end_date__gte=datetime.now()).order_by(
-                sorts[sort])
-        else:
-            products = Product.objects.filter(category=categories[category], start_date__lte=datetime.now(),
-                                              end_date__gte=datetime.now()).order_by(sorts[sort])
->>>>>>> Stashed changes
 
     total_category_num = get_category_num()
 
@@ -322,15 +234,9 @@ def near_products(request):
     place = requests.get(url, headers=headers, params=params).json()
     user_address_DONG = place["documents"][0]["address"]["region_3depth_name"]
     # user랑 도, 시, 동 같은 제품 가져오기
-<<<<<<< Updated upstream
     user_address_for_query = place["documents"][0]["address"]["region_1depth_name"]+" "+place["documents"][0]["address"]["region_2depth_name"]
     map_contents = Product.objects.filter(area__contains = user_address_for_query,start_date__lte = datetime.now(),end_date__gte=datetime.now())
-=======
-    user_address_for_query = place["documents"][0]["address"]["region_1depth_name"] + " " + \
-                             place["documents"][0]["address"]["region_2depth_name"]
-    map_contents = Product.objects.filter(area__contains=user_address_for_query, start_date__lte=datetime.now(),
-                                          end_date__gte=datetime.now())
->>>>>>> Stashed changes
+
     print(map_contents)
     # 데이터 정제하기
     ids = list(map_contents.values_list("id", flat=True).order_by("id"))
@@ -353,25 +259,17 @@ def near_products(request):
 
         try:
             if user_address_DONG == place["documents"][0]["address"]["region_3depth_name"]:
-<<<<<<< Updated upstream
-                products.append(Product.objects.get(id = product["id"],start_date__lte = datetime.now(),end_date__gte=datetime.now()))
-=======
+
                 products.append(
                     Product.objects.get(id=product["id"], start_date__lte=datetime.now(), end_date__gte=datetime.now()))
->>>>>>> Stashed changes
         except:
             continue
 
     types = [int(product.type) for product in products]
-<<<<<<< Updated upstream
-    products_near = list(zip(list(products),types))
-    #전체 상품 이미지src랑 도로명 주소 보내기
-    products = Product.objects.filter(start_date__lte = datetime.now(),end_date__gte=datetime.now())
-=======
+
     products_near = list(zip(list(products), types))
     # 전체 상품 이미지src랑 도로명 주소 보내기
     products = Product.objects.filter(start_date__lte=datetime.now(), end_date__gte=datetime.now())
->>>>>>> Stashed changes
     products_all = []
     for product in products:
         image = product.get_first_image()
@@ -382,6 +280,7 @@ def near_products(request):
             }
         )
     context = {
+
         "products_near": products_near,
         "near_item_num": len(products_near),
         "products_all": products_all,
@@ -415,5 +314,6 @@ def create_most_search():
             vector = int(last_mosts[most_search_queries[i]["content"]]) - i
         else:
             vector = 0
+
 
         CurMostSearch.objects.create(keyword=most_search_queries[i]["content"], rank=i, vector=vector)

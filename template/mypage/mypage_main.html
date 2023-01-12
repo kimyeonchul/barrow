@@ -144,19 +144,14 @@
                             </div>
                             <div id="underBar"></div>
                             <div id="notCheckNum">
-                                <div id="notCheckNumText">읽지 않은 알림이 <div>1개</div> 있어요.</div>
+                                <div id="notCheckNumText">읽지 않은 알림이 <div>{{unread_notice_num}}개</div> 있어요.</div>
                             </div>
                             <div id="notifyList">
                                 <ul>
-                                    <li>수락했어?</li>
-                                    <li>수락했어?</li>
-                                    <li>수락했어?</li>
-                                    <li>수락했어?</li>
-                                    <li>수락했어?</li>
-                                    <li>수락했어?</li>
-                                    <li>수락했어?</li>
-                                    <li>수락했어?</li>
-                                    <li>수락했어?</li>
+                                    {% for notification in notices %}
+                                        <li>{{notification.content}}</li>
+                                    {% endfor %}
+                                    
                                 </ul>
                             </div>
                         </div>
