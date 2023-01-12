@@ -1,6 +1,4 @@
-.nav_category >a:visited {
-    color:red;
-  }
+
 /* //찜하기 & 최근 본 상품--------------------------------------------------------------------------------------- */
 
 
@@ -43,7 +41,6 @@
 .leftSidebar > .categoryBox > dt > a {
     line-height: 36px;
 }
-  
 
 .rightSidebar {
     position: fixed;
@@ -211,7 +208,6 @@ dt>a{
 }
 .bestitems {
   display: flex;
-  height: 100%;
   justify-content: flex-start;
 }
 .bestitemlink {
@@ -309,7 +305,9 @@ margin:0px 10px 0px 0px;
 //   padding-top: .5em;
 // } */
 
-
+/*a: {*/
+/*    color:red;*/
+/*}*/
 .pagination {
 
   list-style: none;
@@ -319,11 +317,29 @@ margin:0px 10px 0px 0px;
   text-align: center;
   justify-content: center;
 }
-
 .pagination li {
   margin: 0 1px;
 }
 
+
+/*
+카테고리 클릭시
+*/
+
+.clicked {
+    color: #3D8361;
+    font-size: 30px;
+    font-weight: 700;
+}
+.clicked2{
+    font-weight: 600;
+}
+.div1 {
+    color:black;
+}
+/*
+카테고리 클릭시
+*/
 /* // .pagination a {
 //   display: block;
 //   padding: .5em 1em;

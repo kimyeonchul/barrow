@@ -22,43 +22,43 @@
         <aside class="leftSidebar">
             <dl class="categoryBox">
                 <dt>
-                    <a href="{% url 'barrow:category' '전체' '최신순' %}">전체({{category_num.전체}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '전체' '최신순' %}" >전체({{category_num.전체}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '의류' '최신순' %}">의류({{category_num.의류}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '의류' '최신순' %}" >의류({{category_num.의류}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '신발' '최신순' %}">신발({{category_num.신발}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '신발' '최신순' %}" >신발({{category_num.신발}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '여행용품' '최신순' %}">여행용품({{category_num.여행용품}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '여행용품' '최신순' %}" >여행용품({{category_num.여행용품}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '가방' '최신순' %}">가방({{category_num.가방}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '가방' '최신순' %}" >가방({{category_num.가방}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '캐리어' '최신순' %}">캐리어({{category_num.캐리어}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '캐리어' '최신순' %}" >캐리어({{category_num.캐리어}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '스포츠' '최신순' %}">스포츠({{category_num.스포츠}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '스포츠' '최신순' %}" >스포츠({{category_num.스포츠}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '레저' '최신순' %}">레저({{category_num.레저}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '레저' '최신순' %}" >레저({{category_num.레저}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '가전' '최신순' %}">가전({{category_num.가전}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '가전' '최신순' %}" >가전({{category_num.가전}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '가구' '최신순' %}">가구({{category_num.가구}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '가구' '최신순' %}" >가구({{category_num.가구}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '전자제품' '최신순' %}">전자제품({{category_num.전자제품}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '전자제품' '최신순' %}" >전자제품({{category_num.전자제품}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '캐주얼' '최신순' %}">캐주얼({{category_num.캐주얼}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '캐주얼' '최신순' %}" >캐주얼({{category_num.캐주얼}})</a>
                 </dt>
                 <dt>
-                    <a href="{% url 'barrow:category' '기타' '최신순' %}">기타({{category_num.기타}})</a>
+                    <a class="div2" href="{% url 'barrow:category' '기타' '최신순' %}" >기타({{category_num.기타}})</a>
                 </dt>
             </dl>
         </aside>
@@ -76,29 +76,30 @@
                 <div class="categoryBrTags"></div>
                 <ul class="categorySort">
                     {% if is_key %}
-                    <li class="latestOrder"><a href="/search/result/{{category}}/최신순/?content={{keyword}}">최신순</a></li>
-                    <li class="highPriceOrder"><a
+                    <li class="latestOrder"><a class="order2" href="/search/result/{{category}}/최신순/?content={{keyword}}">최신순</a></li>
+                    <li class="highPriceOrder"><a class="order2"
                             href="/search/result/{{category}}/높은가격순/?content={{keyword}}">높은가격순</a></li>
-                    <li class="lowPriceOrder"><a href="/search/result/{{category}}/낮은가격순/?content={{keyword}}">낮은가격순</a>
+                    <li class="lowPriceOrder"><a class="order2" href="/search/result/{{category}}/낮은가격순/?content={{keyword}}">낮은가격순</a>
                     </li>
-                    <li class="viewOrder"><a href="/search/result/{{category}}/조회순/?content={{keyword}}">조회순</a></li>
-                    <li class="recommendOrder"><a href="/search/result/{{category}}/추천순/?content={{keyword}}">추천순</a>
+                    <li class="viewOrder"><a class="order2" href="/search/result/{{category}}/조회순/?content={{keyword}}">조회순</a></li>
+                    <li class="recommendOrder"><a class="order2" href="/search/result/{{category}}/추천순/?content={{keyword}}">추천순</a>
                     </li>
-                    <li class="applicationOrder"><a href="/search/result/{{category}}/신청순/?content={{keyword}}">신청순</a>
+                    <li class="applicationOrder"><a class="order2" href="/search/result/{{category}}/신청순/?content={{keyword}}">신청순</a>
                     </li>
                     {% else %}
-                    <li class="latestOrder"><a href="{% url 'barrow:category' category '최신순' %}">최신순</a></li>
-                    <li class="highPriceOrder"><a href="{% url 'barrow:category' category '높은가격순' %}">높은가격순</a></li>
-                    <li class="lowPriceOrder"><a href="{% url 'barrow:category' category '낮은가격순' %}">낮은가격순</a></li>
-                    <li class="viewOrder"><a href="{% url 'barrow:category' category '조회순' %}">조회순</a></li>
-                    <li class="recommendOrder"><a href="{% url 'barrow:category' category '추천순' %}">추천순</a></li>
-                    <li class="applicationOrder"><a href="{% url 'barrow:category' category '신청순' %}">신청순</a></li>
+                    <li class="latestOrder"><a class="order2" href="{% url 'barrow:category' category '최신순' %}">최신순</a></li>
+                    <li class="highPriceOrder"><a class="order2" href="{% url 'barrow:category' category '높은가격순' %}">높은가격순</a></li>
+                    <li class="lowPriceOrder"><a class="order2" href="{% url 'barrow:category' category '낮은가격순' %}">낮은가격순</a></li>
+                    <li class="viewOrder"><a class="order2" href="{% url 'barrow:category' category '조회순' %}">조회순</a></li>
+                    <li class="recommendOrder"><a class="order2" href="{% url 'barrow:category' category '추천순' %}">추천순</a></li>
+                    <li class="applicationOrder"><a class="order2" href="{% url 'barrow:category' category '신청순' %}">신청순</a></li>
                     {% endif %}
                 </ul>
             </div>
 
             </section>
             <!--전체 width가   -->
+        <div>
                 {% for product, type in products %}
                     {% if forloop.counter0|divisibleby:4 %}
                     <section class="bestitems">
@@ -147,20 +148,20 @@
                         </section>
                     {% endif %}
                 {% endfor %}
-                
+                </div>
             </section>
            
         </section>
 
     </section>
     <section class="pagination">
-            <span class="dLeftVector">&laquo;</span>
+            <span class="dLeftVector" style="cursor:pointer">&laquo;</span>
             <span class="prevPageBtns">&lt;</span>
             <ol id="numbers">
                 <!-- <li class="numbers"><a href="">1</a></li> -->
             </ol>
             <span class="nextPageBtns">&gt;</span>
-            <span class="dRightVector">&raquo;</span>
+            <span class="dRightVector" style="cursor:pointer">&raquo;</span>
         </section>
     <!-- <nav aria-label="pagination">
             <ul class="pagination">
@@ -174,6 +175,8 @@
         </nav> -->
     </div>
     <script type = "text/javascript">var item_num = "{{cur_category_num}}";</script>
+        <script type = "text/javascript" >var categoryName = "{{category}}";</script>
+<script type = "text/javascript" >var categorySort = "{{sort}}";</script>
 </body>
 
 </html>
