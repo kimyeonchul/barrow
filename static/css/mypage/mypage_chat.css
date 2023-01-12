@@ -51,10 +51,6 @@
     border: 1px solid silver;
     background-color: white;
     padding: 10px 30px 20px 30px;
-    overflow: scroll;
-    box-sizing: border-box;
-    -ms-overflow-style: none; /* 인터넷 익스플로러 */
-    scrollbar-width: none; /* 파이어폭스 */
 }
 
 #chatListBox::-webkit-scrollbar {
@@ -90,6 +86,7 @@
     border-radius: 15px;
     height: 700px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -97,4 +94,171 @@
 #chatBox img{
     width: 130px; 
     height: 100px;
+}
+
+#chatingBox{
+    border: 1px solid silver;
+    border-radius: 15px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+}
+
+#withChatName{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0, 0.002);
+}
+
+#withChatName h3{
+    font-size: 30px;
+}
+
+#withChatName img{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 15px;
+    top: 25px;
+}
+
+#chatItemBox{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    border: 1px solid silver;
+}
+
+#chatItemBox img{
+    width: 150px;
+    height: 100px;
+}
+
+#chatItemNameBox{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#itemTitle{
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+#itemContent{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+#chattingBoxWrap{
+    background-color: white;
+    height: 430px;
+    overflow: scroll;
+    box-sizing: border-box;
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+}
+
+#chattingBoxWrap::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+}
+
+
+#chattedPerson{
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+    align-items: center;
+}
+
+#chattedPerson img{
+    padding-left: 15px;
+    width: 50px;
+    height: 50px;
+}
+
+#chattedBox{
+    padding: 10px 13px;
+    background-color: #F5F5F5;
+    margin-left: 15px;
+    font-size: 15px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+#chattedTime{
+    padding-left: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: auto;
+}
+
+#chattingPerson{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-top: 20px;
+    align-items: center;
+}
+
+#chattingTime{
+    padding-right: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    float: bottom;
+}
+
+#chattingBox{
+    color: white;
+    margin-right: 15px;
+    padding: 10px 13px;
+    background-color: #3D8361;
+    font-size: 15px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+#chatWriteWrap{
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+#chatWriteWrap img{
+    padding-left: 10px;
+}
+
+#chatWriteWrap input{
+    background-color: white;
+    border-radius: 10px;
+    height: 40px;
+    border: 0;
+    width: 75%;
+    padding-left: 15px;
+    font-size: 18px;
+}
+
+#chatWriteWrap button{
+    margin-left: 5px;
+    background-color: red;
+    color: white;
+    font-size: 15px;
+    padding: 11px 30px;
+    border: 0;
+    border-radius: 15px;
+    box-sizing: border-box;
+    cursor: pointer;
 }

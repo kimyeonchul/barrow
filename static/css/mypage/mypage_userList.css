@@ -33,9 +33,17 @@
     font-size: 20px;
 }
 
-.borrowTitle{
+.borrowedTitle, .borrowingTitle{
     padding: 7px 20px;
     cursor: pointer;
+}
+
+.borrowedTitle{
+    background-color: #3D8361;
+}
+
+.borrowingTitle{
+    background-color: white;
 }
 
 #listNumberBox{

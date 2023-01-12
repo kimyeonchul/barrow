@@ -16,8 +16,13 @@
                 <div id="contentBox">
                     <div id="contentTitle">
                         <div id="borrowBox">
-                            <div class="borrowTitle" id="titleTrue" onclick = "location.href = '{% url 'account:mypage_use' 'barrow_from' %}'">빌린 내역</div>
-                            <div class="borrowTitle" id="titleFalse" onclick = "location.href = '{% url 'account:mypage_use' 'barrow_to' %}'">빌려준 내역</div>
+                            {% if type == "barrow_to" %}
+                                <div class="borrowingTitle" onclick="location.href = '{% url 'account:mypage_use' 'barrow_from' %}'">빌린 내역</div>
+                                <div class="borrowedTitle" onclick="location.href = '{% url 'account:mypage_use' 'barrow_to' %}'">빌려준 내역</div>
+                            {% else %}
+                                <div class="borrowedTitle" onclick="location.href = '{% url 'account:mypage_use' 'barrow_from' %}'">빌린 내역</div>
+                                <div class="borrowingTitle" onclick="location.href = '{% url 'account:mypage_use' 'barrow_to' %}'">빌려준 내역</div>
+                            {% endif %}
                         </div>
                         <div id="titleUnderBar"></div>
                     </div>
@@ -82,5 +87,9 @@
                 </div>
             </div>
             <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
-            <script src="{% static 'js/mypage/use_list.js' %}"></script> 
+            <script src="{% static 'js/mypage/use_list.js' %}"></script>
+            <script>
+                var borrowedurl = "{% url 'account:mypage_use' 'barrow_from' %}";
+                var borrowingurl = "{% url 'account:mypage_use' 'barrow_to' %}";
+            </script>
 {% endblock %}

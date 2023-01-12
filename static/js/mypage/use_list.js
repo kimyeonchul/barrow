@@ -13,6 +13,24 @@ $('.borrowTitle').click(function(){
     }
 })
 
+// function changeUrl(){
+//     var clicked = localStorage.getItem('clickTitle');
+//     if(clicked == 'borrowedTitle'){
+//         location.href=borrowedurl;
+//         $('.borrowedTitle').css('background-color', 'green');
+//     }else{
+//         location.href=borrowingurl;
+//         $('.borrowingTitle').css('background-color', 'green');
+//     }
+// }
+//
+// $(document).ready(function() {
+//     $(document).on("click", "#borrowBox > div", function (event) {
+//         localStorage.setItem('clickTitle', $(this).attr('class'));
+//         changeUrl();
+//     });
+// });
+
 
 // $(document).ready(function () {
 //         $('#titleClickTrue').css('background-color', '#3D8361');
