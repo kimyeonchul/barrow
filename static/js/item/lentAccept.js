@@ -10,3 +10,7 @@ function getPrice() {
 $("#accept").click(function(){
   $("#accept_submit").trigger("click");
 });
+
+$("#chat").click(function(){
+  $("#send_msg").trigger("click");
+});

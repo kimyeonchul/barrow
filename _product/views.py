@@ -4,7 +4,9 @@ from .models import Product, Product_image
 from _barrow.views import base, side
 from _account.models import User
 from _deal.models import Deal
+from _chatting.models import Room
 
+from django.utils.safestring import mark_safe
 from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -192,3 +194,26 @@ def set_favorite(request):
 
     favorite_num = item.favor.count()
     return JsonResponse({"favorite_num" : favorite_num})
+
+def send_msg(request):
+    if request.method == "POST":
+        item = Product.objects.get(id = request.POST.get("product_id"))
+       
+        if Room.objects.filter(user__id=item.productor.id).exists() and Room.objects.filter(user__id=request.user.id).exists():
+            room = Room.objects.filter(user__id=request.user.id) and Room.objects.filter(user__id=item.productor.id)
+            room = room[0]
+            room_name = str(room.product.title)+str(room.room_num)
+            print(room_name)
+            return render(request, 'chat_redirect.html', {
+                'room_name_json': mark_safe(json.dumps(room_name))
+            })
+        else:
+            room_num = Room.objects.filter(product = item).count()
+            new = Room(room_num = room_num+1,product = item)
+            new.save()
+            new.user.add(request.user)
+            new.user.add(item.productor)
+            room_name = str(new.product.title)+" "+str(new.room_num)
+            return render(request, 'chat_redirect.html', {
+                'room_name_json': mark_safe(json.dumps(room_name))
+            })

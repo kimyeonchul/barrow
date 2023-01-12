@@ -3,18 +3,10 @@ import json
 from channels.generic.websocket import WebsocketConsumer
 from django.db import models
 
-# Create your models here.
-from _account.models import User
-from _product.models import Product
-
-
-
-
-
 class Room(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    prod = models.ForeignKey(User, on_delete=models.CASCADE, related_name='prod')
-    cons = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cons')
+    room_num = models.IntegerField(null = False, default = 0)
+    product = models.ForeignKey("_product.Product",on_delete=models.CASCADE)
+    user = models.ManyToManyField("_account.User")
 
 
 class Message(models.Model):

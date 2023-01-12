@@ -7,3 +7,4 @@ function allYes(){
 function allNo(){
     $("input[name=cbox]").prop("checked", false);
 }
+

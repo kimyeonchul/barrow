@@ -148,3 +148,8 @@ function love_btn(){
       console.log("찜등록");
     }
 }
+
+$("#chat").click(function(){
+  console.log("왜 안되는데")
+  $("#send_msg").trigger("click");
+});

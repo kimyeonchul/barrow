@@ -7,4 +7,5 @@ urlpatterns = [
    path("delete/<int:product_id>/",delete,name = "delete"),
    path("itempage/<int:product_id>/",itempage,name = "itempage"),
    path("set_favorite",set_favorite,name = "set_favorite"),
+   path("send_msg/",send_msg, name = "send_msg"),
 ]
