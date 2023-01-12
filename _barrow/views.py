@@ -257,8 +257,10 @@ def near_products(request):
         )
     context = {
         "products_near" : products_near,
+        "near_item_num" : len(products_near),
         "products_all" : products_all,
-        "item_num" : len(products_all)
+        "item_num" : len(products_all),
+        
     }
     print(context)
     context.update(base(request))
@@ -288,5 +290,3 @@ def create_most_search():
             vector = 0
         
         CurMostSearch.objects.create(keyword = most_search_queries[i]["content"], rank = i, vector = vector)
-                
-    

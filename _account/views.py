@@ -230,6 +230,9 @@ def mypage_main(request):
 
     favorite = request.user.favorite.all().order_by("-id")[0:3]
     context["favorite"] = favorite
+
+    context["notices"] = Notification.objects.filter(user = request.user)
+    context["unread_notice_num"] = Notification.objects.filter(user = request.user,is_read = False).count()
     return render(request, "mypage/mypage_main.html", context)
 
 @csrf_exempt
@@ -315,8 +318,9 @@ def mypage_favorites(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
-            target = User.objects.get(id = data["user_id"]).favorite.get(id = data["id"])
-            target.delete()
+            for id in data["id"]:
+                target = User.objects.get(id = data["user_id"]).favorite.get(id = id)
+                target.delete()
             context = {
                         "is_deleted": True,
                     }           
