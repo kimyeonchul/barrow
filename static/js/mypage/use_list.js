@@ -5,19 +5,16 @@ $("#key_search").click(function(){
     $("#search_submit").trigger("click")
 });
 
-// function clickTitle(){
-//     this.prop('value', 'true');
-//     $("div[value=true]").css('background-color', 'background-color: rgb(246, 142, 142);')
-// }
+$('.borrowTitle').click(function(){
+    if(this.id == 'titleTrue'){
+        this.data('id', 'titleFalse');
+    }else{
+        this.data('id', 'titleTrue');
+    }
+})
 
-$(document).ready(function () {
-    $('#borrowingTitle').click(function(){
-        $('#borrowingTitle').val('true');
-        $('#borrowedTitle').val('false');
-    })
 
-    $('#borrowedTitle').click(function(){
-        $('#borrowingTitle').val('false');
-        $('#borrowedTitle').val('true');
-    })
-});
+// $(document).ready(function () {
+//         $('#titleClickTrue').css('background-color', '#3D8361');
+//         $('#titleClickFalse').css('background-color', 'white');
+// });

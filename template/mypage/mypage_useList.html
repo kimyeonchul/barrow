@@ -16,8 +16,8 @@
                 <div id="contentBox">
                     <div id="contentTitle">
                         <div id="borrowBox">
-                            <div id="borrowingTitle" onclick = "location.href = '{% url 'account:mypage_use' 'barrow_from' %}'">빌린 내역</div>
-                            <div id="borrowedTitle" onclick = "location.href = '{% url 'account:mypage_use' 'barrow_to' %}'">빌려준 내역</div>
+                            <div class="borrowTitle" id="titleTrue" onclick = "location.href = '{% url 'account:mypage_use' 'barrow_from' %}'">빌린 내역</div>
+                            <div class="borrowTitle" id="titleFalse" onclick = "location.href = '{% url 'account:mypage_use' 'barrow_to' %}'">빌려준 내역</div>
                         </div>
                         <div id="titleUnderBar"></div>
                     </div>

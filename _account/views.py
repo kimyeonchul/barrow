@@ -57,9 +57,6 @@ def register(request):
             user = form.save(commit = False)
             user.birth = request.POST["birth1"] + "-" + request.POST["birth2"] + request.POST["birth3"]
             user.save()
-
-            new_notice = Notification(user = user,content = "Barrow의 회원이 되신것을 축하합니다.")
-            new_notice.save()
             return redirect('account:login')
         except Exception as e:
             print(form.errors)
@@ -235,43 +232,44 @@ def mypage_main(request):
     context["unread_notice_num"] = Notification.objects.filter(user = request.user,is_read = False).count()
     return render(request, "mypage/mypage_main.html", context)
 
+
 @csrf_exempt
 def mypage_notice(request):
     if request.method == "GET":
-        notifications = Notification.objects.filter(user = request.user)
+        notifications = Notification.objects.filter(user=request.user)
         copy = []
-        
+
         for notification in notifications:
-            
+
             elem = {
-                "id" : notification.id,
-                "content" : notification.content,
-                "is_read" : notification.is_read,
-                "created" : notification.created
+                "id": notification.id,
+                "content": notification.content,
+                "is_read": notification.is_read,
+                "created": notification.created
             }
             copy.append(elem)
-            if not notification.is_read :
+            if not notification.is_read:
                 notification.is_read = True
                 notification.save()
-        
+
         context = {
-            "notifications" : copy,
-            "total_num" : notifications.count(),
-            "not_read_num" : notifications.filter(is_read = False).count()
+            "notifications": copy,
+            "total_num": notifications.count(),
+            "not_read_num": notifications.filter(is_read=False).count()
         }
-        return render(request, "mypage/mypage_notice.html",context)
+        return render(request, "mypage/mypage_notice.html", context)
     elif request.method == "DELETE":
         data = json.loads(request.body)
         try:
             for id in data["ids"]:
-                notification = Notification.objects.get(id = id)
+                notification = Notification.objects.get(id=id)
                 notification.delete()
             context = {
-                "is_deleted" : True
+                "is_deleted": True
             }
-        except :
+        except:
             context = {
-                "is_deleted" : False
+                "is_deleted": False
             }
         return JsonResponse(context)
 
@@ -313,13 +311,14 @@ def mypage_modify_confirm(request):
             
     return render(request, "mypage/mypage_modify.html")       
 
-
+@csrf_exempt
 def mypage_favorites(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
             for id in data["id"]:
                 target = User.objects.get(id = data["user_id"]).favorite.get(id = id)
+                print(target)
                 target.delete()
             context = {
                         "is_deleted": True,
