@@ -22,36 +22,28 @@
                                 읽지 않은 알림
                             </div>
                             <div id="notCheckNum">
-                                <div style="color: green; padding-right: 5px;">12</div>
-                                <div>/  21</div>
+                                <div style="color: green; padding-right: 5px;">{{not_read_num}}</div>
+                                <div>/  {{total_num}}</div>
                             </div>
                         </div>
                         <div id="titleUnderBar"></div>
                         <div id="notifyCheckList">
-                            <div id="notifyCheck">
-                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
-                                <div>2022-11-19 22:00</div>
-                            </div>
-                            <div id="notifyCheck">
-                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
-                                <div>2022-11-19 22:00</div>
-                            </div>
-                            <div id="notifyCheck">
-                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
-                                <div>2022-11-19 22:00</div>
-                            </div>
-                            <div id="notifyCheck">
-                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
-                                <div>2022-11-19 22:00</div>
-                            </div>
-                            <div id="notifyCheck">
-                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
-                                <div>2022-11-19 22:00</div>
-                            </div>
-                            <div id="notifyCheck">
-                                <label><input name="cbox" id="notifyLabel" type="checkbox">읽었게요 안 읽었게요 ㅋㅋ</label>
-                                <div>2022-11-19 22:00</div>
-                            </div>
+                            {% for notice in notifications %}
+                                <!-- 읽었을떄 -->
+                                {% if notice.is_read %}
+                                    <div id = "{{notice.id}}" class="notifyCheck">
+                                        <label><input name="cbox" id="notifyLabel" type="checkbox">{{notice.content}}</label>
+                                        <div>{{notice.created|date:"Y-m-d H:i"}}</div>
+                                    </div>
+                                <!-- 안읽었을때 -->
+                                {% else %}
+                                    <div id = "{{notice.id}}" class="notifyCheck">
+                                        <label><input name="cbox" id="notifyLabel" type="checkbox">{{notice.content}}</label>
+                                        <div>{{notice.created|date:"Y-m-d H:i"}}</div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            
                         </div>
                         <div id="threeCheckBtWrap">
                             <button type="button" id="totalCheckBt" onclick="allYes();">전체 선택</button>
