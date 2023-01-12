@@ -33,17 +33,17 @@
     font-size: 20px;
 }
 
-#borrowingTitle, #borrowedTitle{
+.borrowedTitle, .borrowingTitle{
     padding: 7px 20px;
     cursor: pointer;
 }
 
-#borrowingTitle{
-    background-color: rgb(246, 142, 142);
+.borrowedTitle{
+    background-color: #3D8361;
 }
 
-#borrowedTitle{
-    background-color: rgb(154, 154, 154);
+.borrowingTitle{
+    background-color: white;
 }
 
 #listNumberBox{
@@ -183,3 +183,8 @@
 .optionListLastBox{
     border-bottom: 1px solid rgb(171, 171, 171);
 }
+
+#titleTrue{
+    background-color: #3D8361;
+}
+

@@ -20,7 +20,7 @@ urlpatterns = [
     path("mypage/changePwd/",views.change_pwd,name = "mypage_changepwd"),
     path("mypage/favorite/",views.mypage_favorites,name = "mypage_favorite"),
     path("mypage/chatroom/",views.mypage_chatroom,name = "mypage_chatroom"),
-    path("mypage/account/",views.mypage_account,name = "mypage_account"),
+
     path("mypage/use/<str:type>/",views.mypage_use,name = "mypage_use"),
     
 

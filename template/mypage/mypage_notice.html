@@ -31,14 +31,14 @@
                             {% for notice in notifications %}
                                 <!-- 읽었을떄 -->
                                 {% if notice.is_read %}
-                                    <div id = "{{notice.id}}" class="notifyCheck">
-                                        <label><input name="cbox" id="notifyLabel" type="checkbox">{{notice.content}}</label>
+                                    <div class="notifyCheck">
+                                        <label><input name="cbox" class="notifyLabel" type="checkbox" id = "{{notice.id}}" >{{notice.content}}</label>
                                         <div>{{notice.created|date:"Y-m-d H:i"}}</div>
                                     </div>
                                 <!-- 안읽었을때 -->
                                 {% else %}
                                     <div id = "{{notice.id}}" class="notifyCheck">
-                                        <label><input name="cbox" id="notifyLabel" type="checkbox">{{notice.content}}</label>
+                                        <label><input name="cbox" class="notifyLabel" type="checkbox" id = "{{notice.id}}" >{{notice.content}}</label>
                                         <div>{{notice.created|date:"Y-m-d H:i"}}</div>
                                     </div>
                                 {% endif %}
@@ -48,13 +48,13 @@
                         <div id="threeCheckBtWrap">
                             <button type="button" id="totalCheckBt" onclick="allYes();">전체 선택</button>
                             <button type="button" id="notTotalCheckBt"onclick="allNo();">선택 해제</button>
-                            <button type="button" id="deleteBt">삭제</button>
+                            <button type="button" id="deleteBt" onclick="deleteNotice()">삭제</button>
                         </div>
                     </div>
                 </div>
             </div>
     </head>
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"; type="text/javascript"></script>
     <script type="text/javascript" src="{% static 'js/mypage/mypage_notice.js' %}" defer></script>
 
             {% endblock %}
