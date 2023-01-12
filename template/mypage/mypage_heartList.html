@@ -18,7 +18,7 @@
                 <div id="threeCheckBtWrap">
                     <button type="button" id="totalCheckBt" onClick="allYes();">전체 선택</button>
                     <button type="button" id="notTotalCheckBt" onClick="allNo();">선택 해제</button>
-                    <button type="button" id="deleteBt" onClick="heartItemDelete();">삭제</button>
+                    <button type="button" id="deleteBt" onClick="deleteItem();">삭제</button>
                 </div>
             </div>
             <div id="titleUnderBar"></div>
@@ -30,7 +30,7 @@
                 {% endif %}
                         <div id="objectBox">
                             <div id="firstObjectBox">
-                                <input type="checkbox" name="cbox" id="heartItemLabel">
+                                <input type="checkbox" name="cbox" id = "{{product.id}}">
                                 <img id="objectImg" src="{{product.get_first_image.image.url}}">
                                 <div style="padding: 10px;">
                                     <div id="nameObject">{{product.title}}</div>
@@ -56,9 +56,12 @@
                 {% endif %}                   
             {% endfor %}
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"; type="text/javascript"></script>
     <script type="text/javascript" src="{% static 'js/mypage/mypage_heartList.js' %}" defer></script>
-
+    <script type="text/javascript">
+        var near_item_num = "{{near_item_num}}";
+        var userId = parseInt("{{ user.id }}");
+    </script>
 </div>
 
 {% endblock %}
