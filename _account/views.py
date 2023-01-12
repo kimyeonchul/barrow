@@ -457,3 +457,13 @@ def change_pwd(request):
     else:
         return render(request, "mypage/mypage_modifyPw.html")
 
+def add_account(request):
+    return render(request,"mypage/mypage_addAccount.html")
+
+def mypage_chatroom(request):
+    return render(request, "mypage/mypage_chat.html")
+def input_card(request):
+    return render(request, "mypage/mypage_inputCard.html")
+
+def input_account(request):
+    return render(request, "mypage/mypage_inputAccount.html")

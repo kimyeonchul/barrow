@@ -7,6 +7,7 @@
     background-color: rgba(164, 164, 164, 0.2);
     border-radius: 10px;
     padding: 40px 50px;
+    height: 800px;
 }
 
 #contentTitle{
@@ -45,13 +46,19 @@
 }
 
 #chatListBox{
-    height: 500px;
+    height: 700px;
     border-radius: 15px;
     border: 1px solid silver;
     background-color: white;
     padding: 10px 30px 20px 30px;
     overflow: scroll;
     box-sizing: border-box;
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+}
+
+#chatListBox::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
 }
 
 #chatList{
@@ -81,7 +88,7 @@
 #chatBox{
     border: 1px solid silver;
     border-radius: 15px;
-    height: 500px;
+    height: 700px;
     display: flex;
     justify-content: center;
     align-items: center;
