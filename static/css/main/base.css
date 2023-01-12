@@ -22,9 +22,9 @@ body {
 }
 
 .allpage {
-  width: 1400px;
+  width: 70vw;
   border: 50px 46.73px 44.82px 46.73px;
-  height: inherit;
+  /*height: 100vh;*/
   /* height: 100vh; */
   z-index: 100;
   background-color: white;
@@ -53,13 +53,24 @@ border-radius: 10px;
 
 @media screen and (min-width:577px) and (max-width: 768px) {
   .allpage {
+    background: #1C6758;
+    display: flex;
+    flex-direction: column;
     width:500px;
-
+  }
+  .bottom_items{
+    flex-direction: column;
+  }
+  .input_search{
+    display:none;
+  }
+  .mid {
+    display:none;
   }
 }
 .header {
   width: 100%;
-  height: 180px;
+  /*height: 180px;*/
 
 }
 
@@ -673,14 +684,18 @@ a:hover {
     cursor:pointer;
   }
   .categoryBox > dt:hover{
-    color : #11d978;
+    color : #3D8361;
     transform: scale( 1.1, 1.1 );
     transition: all 0.2s ease-in-out;
   }
 
   dt > a:hover{
-     color : #11d978;
+     color : #3D8361;
   }
   .categoryClick > .categoryBox > dt > a {
     font-size:20px;
+  }
+
+  a {
+    cursor:pointer;
   }

@@ -1,4 +1,6 @@
 var div2 = document.getElementsByClassName("div2");
+var order2 = document.getElementsByClassName("order2");
+const allpage = document.querySelector('.allPage');
 var urls = `http://127.0.0.1:8000/category/${categoryName}/${categorySort}/`
 if(urls){
     for (var i = 0; i < div2.length; i++) {
@@ -11,6 +13,19 @@ if(urls){
              }
        }
   }
+
+if(urls) {
+  for (var i = 0; i < order2.length; i++) {
+    var a = order2[i].innerText
+    if (categorySort === a) {
+      order2[i].classList.add("clicked2");
+    } else {
+      order2[i].classList.remove("clicked2");
+    }
+  }
+}
+
+
 //
 // const nowcategory = document.querySelector(".div1");
 //

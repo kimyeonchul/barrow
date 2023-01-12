@@ -208,7 +208,6 @@ dt>a{
 }
 .bestitems {
   display: flex;
-  height: 100%;
   justify-content: flex-start;
 }
 .bestitemlink {
@@ -328,9 +327,13 @@ margin:0px 10px 0px 0px;
 */
 
 .clicked {
-    color: #11d978;
+    color: #3D8361;
+    font-size: 30px;
+    font-weight: 700;
 }
-
+.clicked2{
+    font-weight: 600;
+}
 .div1 {
     color:black;
 }

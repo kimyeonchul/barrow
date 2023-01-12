@@ -1,3 +1,7 @@
+ let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+
+
 const bottomVector = document.querySelector(".bottomVector");
 const nav_realtimesearch = document.querySelector(".nav_realtimesearch");
 const input_search = document.querySelector(".input_search");
@@ -138,10 +142,6 @@ function circleMove(item) {
     }
 }
 
-
-
-
-// ============================================================================
 const outers = document.querySelector('.nav_realmenu_box');
 const innerLists = document.querySelector('.nav_realmenu_left');
 const innerss = document.querySelectorAll('.nav_inner');
@@ -162,8 +162,11 @@ const getIntervals = () => {
         innerLists.style.marginTop = `-${outers.clientHeight * currentIndexs}px`;
     }, 4000);
 }
+let timer = getIntervals();
 
-let intervalz = getIntervals(); // interval 등록
+
+
+// ============================================================================
 
 const newP = document.createElement('p');
 const newinput = document.createElement('p');
@@ -204,77 +207,6 @@ function geoFindMe() {
 
 
 
-function gido(){
-    console.log(staticlat);
-    console.log(staticlon);
-  var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-            mapOption = {
-                center: new kakao.maps.LatLng(staticlat, staticlon), // 지도의 중심좌표
-                level: 3 // 지도의 확대 레벨
-            };
-            console.log(mapOption.center);
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-        var geocoder = new kakao.maps.services.Geocoder();
-        // var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
-        //     imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-        //     imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-        // // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-        // var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-        //     markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
-
-        // // 마커를 생성합니다
-        // var marker = new kakao.maps.Marker({
-        //     position: markerPosition,
-        //     image: markerImage // 마커이미지 설정
-        // });
-
-        // var markerImage2 = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-        //     markerPosition2 = new kakao.maps.LatLng(37.54695, 127.09598); // 마커가 표시될 위치입니다
-
-        // var marker2 = new kakao.maps.Marker({
-        //     position: markerPosition2,
-        //     image: markerImage2 // 마커이미지 설정
-        // });
-
-        // // 마커가 지도 위에 표시되도록 설정합니다
-
-        geocoder.addressSearch('서울특별시 종로구 홍지문2길 20', function(result, status) {
-
-            // 정상적으로 검색이 완료됐으면
-             if (status === kakao.maps.services.Status.OK) {
-
-                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-                // 결과값으로 받은 위치를 마커로 표시합니다
-                var marker = new kakao.maps.Marker({
-                    map: map,
-                    position: coords
-                });
-                var mylocationmarker = new kakao.maps.Marker({
-                    map: map,
-                    position: mapOption.center
-                });
-                // 인포윈도우로 장소에 대한 설명을 표시합니다
-                var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-                });
-
-                var myinfowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">내 위치</div>'
-                });
-                myinfowindow.open(map, mylocationmarker);
-                infowindow.open(map, marker);
-
-                mylocationmarker.setMap(map);
-                // marker.setMap(map);
-
-                map.setCenter(mapOption.center);
-                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                // map.setCenter(coords);
-            }
-        });
-    }
 geoFindMe();
 
 console.log($(".nav_gido > a"));

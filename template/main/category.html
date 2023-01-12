@@ -76,29 +76,30 @@
                 <div class="categoryBrTags"></div>
                 <ul class="categorySort">
                     {% if is_key %}
-                    <li class="latestOrder"><a href="/search/result/{{category}}/최신순/?content={{keyword}}">최신순</a></li>
-                    <li class="highPriceOrder"><a
+                    <li class="latestOrder"><a class="order2" href="/search/result/{{category}}/최신순/?content={{keyword}}">최신순</a></li>
+                    <li class="highPriceOrder"><a class="order2"
                             href="/search/result/{{category}}/높은가격순/?content={{keyword}}">높은가격순</a></li>
-                    <li class="lowPriceOrder"><a href="/search/result/{{category}}/낮은가격순/?content={{keyword}}">낮은가격순</a>
+                    <li class="lowPriceOrder"><a class="order2" href="/search/result/{{category}}/낮은가격순/?content={{keyword}}">낮은가격순</a>
                     </li>
-                    <li class="viewOrder"><a href="/search/result/{{category}}/조회순/?content={{keyword}}">조회순</a></li>
-                    <li class="recommendOrder"><a href="/search/result/{{category}}/추천순/?content={{keyword}}">추천순</a>
+                    <li class="viewOrder"><a class="order2" href="/search/result/{{category}}/조회순/?content={{keyword}}">조회순</a></li>
+                    <li class="recommendOrder"><a class="order2" href="/search/result/{{category}}/추천순/?content={{keyword}}">추천순</a>
                     </li>
-                    <li class="applicationOrder"><a href="/search/result/{{category}}/신청순/?content={{keyword}}">신청순</a>
+                    <li class="applicationOrder"><a class="order2" href="/search/result/{{category}}/신청순/?content={{keyword}}">신청순</a>
                     </li>
                     {% else %}
-                    <li class="latestOrder"><a href="{% url 'barrow:category' category '최신순' %}">최신순</a></li>
-                    <li class="highPriceOrder"><a href="{% url 'barrow:category' category '높은가격순' %}">높은가격순</a></li>
-                    <li class="lowPriceOrder"><a href="{% url 'barrow:category' category '낮은가격순' %}">낮은가격순</a></li>
-                    <li class="viewOrder"><a href="{% url 'barrow:category' category '조회순' %}">조회순</a></li>
-                    <li class="recommendOrder"><a href="{% url 'barrow:category' category '추천순' %}">추천순</a></li>
-                    <li class="applicationOrder"><a href="{% url 'barrow:category' category '신청순' %}">신청순</a></li>
+                    <li class="latestOrder"><a class="order2" href="{% url 'barrow:category' category '최신순' %}">최신순</a></li>
+                    <li class="highPriceOrder"><a class="order2" href="{% url 'barrow:category' category '높은가격순' %}">높은가격순</a></li>
+                    <li class="lowPriceOrder"><a class="order2" href="{% url 'barrow:category' category '낮은가격순' %}">낮은가격순</a></li>
+                    <li class="viewOrder"><a class="order2" href="{% url 'barrow:category' category '조회순' %}">조회순</a></li>
+                    <li class="recommendOrder"><a class="order2" href="{% url 'barrow:category' category '추천순' %}">추천순</a></li>
+                    <li class="applicationOrder"><a class="order2" href="{% url 'barrow:category' category '신청순' %}">신청순</a></li>
                     {% endif %}
                 </ul>
             </div>
 
             </section>
             <!--전체 width가   -->
+        <div>
                 {% for product, type in products %}
                     {% if forloop.counter0|divisibleby:4 %}
                     <section class="bestitems">
@@ -147,7 +148,7 @@
                         </section>
                     {% endif %}
                 {% endfor %}
-                
+                </div>
             </section>
            
         </section>
