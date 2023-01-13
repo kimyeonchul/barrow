@@ -131,6 +131,9 @@
                                 <p class="loginOutText"><a class="regiText" href = "{% url 'account:register' %}"><strong>회원가입</strong></a></p>
                             </button>
                         {% endif %}
+                         <a href="#" class="navbar__toggleBtn">
+            <i class="fas fa-bars"></i>
+        </a>
                     </div>
                     
                 </div>
@@ -166,7 +169,7 @@
                                     <div class="nav_inner">
                                         <div class="inner_item">
                                             <p class="nav_realmenu_t1">{{forloop.counter}}</p>
-                                            <p class="nav_realmenu_t2">{{keyword.keyword}}</p>
+                                            <p class="nav_realmenu_t2"></p>
                                             {% if 0 > keyword.vector %}                                                
                                                 <img class="ploygon" src="{% static 'img/img/heart.png' %}">
                                             {% elif 0 < keyword.vector %}
@@ -240,6 +243,8 @@
     </div>
     <script>
         var user_id = "{{user.id}}";
+        var keywordvalue = "{{most_search_keyword_list|safe}}";
+        console.log(keywordvalue);
     </script>
 </body>
 

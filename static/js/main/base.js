@@ -141,10 +141,37 @@ function circleMove(item) {
       });
     }
 }
+  function textLengthOverCut(txt, len, lastTxt) {
+        if (len == "" || len == null) { // 기본값
+            len = 20;
+        }
+        if (lastTxt == "" || lastTxt == null) { // 기본값
+            lastTxt = "...";
+        }
+        if (txt.length > len) {
+            txt = txt.substr(0, len) + lastTxt;
+        }
+        return txt;
+    }
 
 const outers = document.querySelector('.nav_realmenu_box');
 const innerLists = document.querySelector('.nav_realmenu_left');
 const innerss = document.querySelectorAll('.nav_inner');
+const nav_realtext = document.querySelectorAll('.nav_realmenu_t2');
+
+console.log(nav_realtext);
+var key = keywordvalue.substring(1,keywordvalue.length-1);
+var keyworditem = key.split(',');
+console.log(keyworditem[0]);
+for (var i = 0; i < nav_realtext.length; i++) {
+    var resultitem = textLengthOverCut(keyworditem[i], 6, '...');
+        console.log(nav_realtext[i].innerHTML=resultitem);
+
+    }
+// var keyworditems = keywordvalue.toString();
+
+
+// var itemsz = innerLists.childNodes
 // const imgs = document.querySelectorAll('img');
 let currentIndexs = 0; // 현재 슬라이드 화면 인덱스
 
@@ -216,3 +243,11 @@ $(".nav_gido > a").click(function(){
   console.log(staticlon, staticlat)
   $("#submit").trigger("click");
 });
+
+const toggleBtn = document.querySelector(".navbar__toggleBtn");
+const menu = document.querySelector(".bottom_items");
+
+toggleBtn.addEventListener("click", () => {
+    menu.classList.toggle('active');
+})
+
