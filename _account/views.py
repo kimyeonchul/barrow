@@ -17,7 +17,10 @@ from django.views.decorators.csrf import csrf_exempt
 
 from _account.models import User, User_view
 from _deal.models import Deal
+from _chatting.models import Room
 from _notification.models import Notification
+from _chatting.models import Room, Message
+
 from _account.sms import send
 
 @csrf_exempt
@@ -460,9 +463,28 @@ def add_account(request):
     return render(request,"mypage/mypage_addAccount.html")
 
 def mypage_chatroom(request):
-    return render(request, "mypage/mypage_chat.html")
+    rooms = list(Room.objects.filter(user__id=request.user.id))
+    opponents = []
+    names = []
+    for room in rooms:
+        opponents.append(room.opponent_user(request.user))
+        names.append(room.room_name())
+    datas = list(zip(rooms,opponents,names))
+    context = {
+        "datas" : datas
+    }
+    return render(request, "mypage/mypage_chat_index.html",context)
 def input_card(request):
     return render(request, "mypage/mypage_inputCard.html")
 
 def input_account(request):
     return render(request, "mypage/mypage_inputAccount.html")
+
+@csrf_exempt
+def new_msg(request):
+    data = json.loads(request.body)
+    user = User.objects.get(id = data["user_id"])
+    room = Room.objects.get(id = data["room_id"])
+    new = Message(text = data["text"],date = data["date"],user = user,room = room)
+    new.save()
+    return JsonResponse({})

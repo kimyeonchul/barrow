@@ -29,7 +29,7 @@
                     <div id="contentTopBody">
                 {% endif %}
                         <div id="objectBox">
-                            <div id="firstObjectBox">
+                            <div id="firstObjectBox" onclick="location.href='{% url 'products:itempage' product.id %}'">
                                 <input type="checkbox" name="cbox" id = "{{product.id}}">
                                 <img id="objectImg" src="{{product.get_first_image.image.url}}">
                                 <div style="padding: 10px;">

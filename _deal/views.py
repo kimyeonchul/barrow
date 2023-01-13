@@ -115,11 +115,10 @@ def send_msg(request):
     if request.method == "POST":
         deal = Deal.objects.get(id = request.POST.get("deal_id"))
        
-        if Room.objects.filter(user__id=deal.user_prod.id).exists() and Room.objects.filter(user__id=deal.user_cons.id).exists():
-            room = Room.objects.filter(user__id=deal.user_prod.id) and Room.objects.filter(user__id=deal.user_cons.id)
+        if Room.objects.filter(product = deal.product,user__id=deal.user_prod.id).exists() and Room.objects.filter(product = deal.product,user__id=deal.user_cons.id).exists():
+            room = Room.objects.filter(product = deal.product,user__id=deal.user_prod.id) and Room.objects.filter(product = deal.product,user__id=deal.user_cons.id)
             room = room[0]
             room_name = str(room.product.title)+str(room.room_num)
-            print(room_name)
             return render(request, 'chat_redirect.html', {
                 'room_name_json': mark_safe(json.dumps(room_name))
             })
