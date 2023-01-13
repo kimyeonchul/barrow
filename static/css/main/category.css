@@ -413,3 +413,20 @@ margin:0px 10px 0px 0px;
   }
 }
 */
+@media screen and (min-width:577px) and (max-width: 768px) {
+    .mid {
+        display: none;
+    }
+
+    .slideIndexBox {
+        display: none;
+    }
+
+    .bottom {
+        display: none;
+    }
+
+    .pagination {
+        display: none;
+    }
+}

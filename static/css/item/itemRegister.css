@@ -323,3 +323,9 @@
   background-size: cover
 }
 
+@media screen and (min-width:0px) and (max-width: 768px) {
+
+  .container {
+    display: none;
+  }
+}

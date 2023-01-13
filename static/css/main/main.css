@@ -390,3 +390,15 @@
 */
 
 /* // 1440 body */
+
+@media screen and (min-width:577px) and (max-width: 768px) {
+  .mid {
+    display:none;
+  }
+  .slideIndexBox{
+    display:none;
+  }
+  .bottom{
+    display:none;
+  }
+}

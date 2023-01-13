@@ -30,9 +30,9 @@
 .mapApi {
     display:flex;
     flex-basis:40%;
-  width:562.99px;
+  width:500.99px;
   height: 840px;
-  padding-right: 79px;
+  padding-right: 59px;
     border:1px solid black;
     margin: 70px 0px 0px 30px;
    border-radius: 17px;
@@ -139,7 +139,7 @@
 .bestitemlink {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 248px;
   height: 340px;
   border-radius: 17px;
   border: 0.849398px solid #959190;
@@ -148,7 +148,7 @@
 .bestitem {
   display: flex;
   flex-direction: column;
-  width:240px;
+  width:220px;
   margin: 0px 20px 0px 20px;
   /* align-items: center;
   width: 240px;
@@ -174,7 +174,7 @@
 }
 
 .bestitemImg {
-  width:240px;
+  width:248px;
   height: 210px;
   border-top-left-radius: 17px;
   border-top-right-radius: 17px;
@@ -341,3 +341,10 @@ margin:0px 10px 0px 0px;
   }
 }
 */
+
+@media screen and (min-width:0px) and (max-width: 768px) {
+
+  .mapdivideitem {
+    display: none;
+  }
+}
