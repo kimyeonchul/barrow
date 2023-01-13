@@ -41,11 +41,12 @@ def base(request):
     most_search = list(CurMostSearch.objects.all().order_by("rank"))
     for i in range(20 - len(most_search)):
         most_search.append(None)
-
+    most_search_keyword_list = list(CurMostSearch.objects.all().order_by("rank").values_list("keyword",flat=True))
     base_context = {
         "recent_search": recent_search_query,
         "most_search_date": most_search_date,
         "most_search": most_search,
+        "most_search_keyword_list" : most_search_keyword_list,
     }
 
     return base_context

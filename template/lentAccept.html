@@ -64,12 +64,12 @@
                         <div class="offer_btns">
                             <p id = "deal_id" style = "display:none">{{deal.id}}</p>
                             <button id="chat">채팅<br>보내기</button>
+                            <button id="accept">대여<br>수락하기</button>
                             <form method = "POST" action = "{% url 'deal:send_msg'%}">
                                 {% csrf_token %}
                                 <input type = "number" name = "deal_id" style = "display: none;" value = "{{deal.id}}">
                                 <input id = "send_msg" type = submit style = "display: none;">
                             </form> 
-                            <button id="accept">대여<br>수락하기</button>
                             <form method = "POST" action = "{% url 'deal:accept' deal.product.id %}">
                                 <input type = "number" name = "id" style = "display: none;" value = "{{deal.id}}">
                                 <input id = "accept_submit" type = submit style = "display: none;">

@@ -1,0 +1,50 @@
+{% extends "mypage/base.html" %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/mypage/mypage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mypage/mypage_chat.css' %}">
+    <title>마이페이지</title>
+</head>
+<body>
+            <div id="contentWrap">
+                <div id="contentBox">
+                    <div id="contentTitle">
+                        <div id="contentBoxBody">
+                            <div id="contentRealTitle">채팅 관리</div>
+                        </div>
+                        <div id="titleUnderBar"></div>
+                    </div>
+                    <div id="contentBody">
+                        <div id="chatListWrap">
+                            <div id="chatListBox">
+                                {% for room, user, name in datas %}
+                                    <div id="chatList" onclick="location.href='{% url 'chatting:room' name %}'" style="cursor:pointer;">
+                                        <div>
+                                            <img src="{{user.image.url}}" style="width: 40px; height: 40px;">
+                                        </div>
+                                        <div id="chatInfo">
+                                            <div style="margin-left: 20px;">
+                                                <div>{{room.product.title}}</div>
+                                                <div>알겠습니다.</div>
+                                            </div>
+                                            <div style="margin: auto 0px auto 20px;">
+                                                오후 17:30
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+</body>
+
+{% endblock %}

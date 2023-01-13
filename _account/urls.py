@@ -21,6 +21,7 @@ urlpatterns = [
     path("mypage/favorite/",views.mypage_favorites,name = "mypage_favorite"),
 
     path("mypage/chatroom/",views.mypage_chatroom,name = "mypage_chatroom"),
+    path("new_msg/",views.new_msg, name = "new_msg"),
 
     path("mypage/use/<str:type>/",views.mypage_use,name = "mypage_use"),
     

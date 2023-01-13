@@ -65,7 +65,7 @@
                         
                         <div id="optionListBody">
                             {% for product in barrow.products %}
-                                <div id="optionListBox">
+                                <div id="optionListBox" onclick="location.href='{% url 'products:itempage' product.product.id %}'" style="cursor:pointer;">
                                     <div>
                                         <img src="{{product.product.get_first_image.image.url}}">
                                     </div>

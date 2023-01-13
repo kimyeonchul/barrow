@@ -56,7 +56,7 @@
                                         </div>
                                     </div>
                                     {% for product in lend.products %}
-                                        <div id="borrowingObjectDetail">
+                                        <div id="borrowingObjectDetail" onclick="location.href='{% url 'products:itempage' product.product.id %}'" style="cursor:pointer;">
                                             <div id="borrowingDetailImg">
                                                 <img src="{{product.product.get_first_image.image.url}}">
                                             </div>
@@ -108,7 +108,7 @@
                                         </div>
                                     </div>
                                     {% for product in barrow.products %}
-                                        <div id="borrowingObjectDetail">
+                                        <div id="borrowingObjectDetail" onclick="location.href='{% url 'products:itempage' product.product.id %}'" style="cursor:pointer;">
                                             <div id="borrowingDetailImg">
                                                 <img src="{{product.product.get_first_image.image.url}}">
                                             </div>
@@ -170,7 +170,7 @@
                             <div id="underBar2"></div>
                         <div id="heartObjectBigWrap">
                             {% for product in favorite %}
-                                <div id="heartObjectDetail">
+                                <div id="heartObjectDetail" onclick="location.href='{% url 'products:itempage' product.id %}'" style="cursor:pointer;">
                                     <div id="heartDetailImg">
                                         <img src="{{product.get_first_image.image.url}}">
                                     </div>

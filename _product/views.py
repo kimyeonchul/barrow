@@ -199,8 +199,8 @@ def send_msg(request):
     if request.method == "POST":
         item = Product.objects.get(id = request.POST.get("product_id"))
        
-        if Room.objects.filter(user__id=item.productor.id).exists() and Room.objects.filter(user__id=request.user.id).exists():
-            room = Room.objects.filter(user__id=request.user.id) and Room.objects.filter(user__id=item.productor.id)
+        if Room.objects.filter(product = item,user__id=item.productor.id).exists() and Room.objects.filter(product = item,user__id=request.user.id).exists():
+            room = Room.objects.filter(product  = item,user__id=request.user.id) and Room.objects.filter(product = item,user__id=item.productor.id)
             room = room[0]
             room_name = str(room.product.title)+str(room.room_num)
             print(room_name)

@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/mypage/mypage.css' %}">
     <link rel="stylesheet" href="{% static 'css/mypage/mypage_chat.css' %}">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
     <title>마이페이지</title>
 </head>
 <body>
@@ -22,169 +23,72 @@
                     <div id="contentBody">
                         <div id="chatListWrap">
                             <div id="chatListBox">
-                                <div id="chatList">
-                                    <div>
-                                        <img src="{% static 'img/mypage/userProfile.png' %}" style="width: 40px; height: 40px;">
-                                    </div>
-                                    <div id="chatInfo">
-                                        <div style="margin-left: 20px;">
-                                            <div>김민주</div>
-                                            <div>알겠습니다.</div>
+                                {% for room, user, name in datas %}
+                                    <div id="chatList" onclick="location.href='{% url 'chatting:room' name %}'" style="cursor:pointer;">
+                                        <div>
+                                            <img src="{{user.image.url}}" style="width: 40px; height: 40px;">
                                         </div>
-                                        <div style="margin: auto 0px auto 20px;">
-                                            오후 17:30
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="chatList">
-                                    <div>
-                                        <img src="{% static 'img/mypage/userProfile.png' %}" style="width: 40px; height: 40px;">
-                                    </div>
-                                    <div id="chatInfo">
-                                        <div style="margin-left: 20px;">
-                                            <div>김민주</div>
-                                            <div>알겠습니다.</div>
-                                        </div>
-                                        <div style="margin: auto 0px auto 20px;">
-                                            오후 17:30
+                                        <div id="chatInfo">
+                                            <div style="margin-left: 20px;">
+                                                <div>{{room.product.title}}</div>
+                                                <div>알겠습니다.</div>
+                                            </div>
+                                            <div style="margin: auto 0px auto 20px;">
+                                                오후 17:30
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div id="chatList">
-                                    <div>
-                                        <img  src="{% static 'img/mypage/userProfile.png' %}" style="width: 40px; height: 40px;">
-                                    </div>
-                                    <div id="chatInfo">
-                                        <div style="margin-left: 20px;">
-                                            <div>김민주</div>
-                                            <div>알겠습니다.</div>
-                                        </div>
-                                        <div style="margin: auto 0px auto 20px;">
-                                            오후 17:30
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="chatList">
-                                    <div>
-                                        <img src="{% static 'img/mypage/userProfile.png' %}" style="width: 40px; height: 40px;">
-                                    </div>
-                                    <div id="chatInfo">
-                                        <div style="margin-left: 20px;">
-                                            <div>김민주</div>
-                                            <div>알겠습니다.</div>
-                                        </div>
-                                        <div style="margin: auto 0px auto 20px;">
-                                            오후 17:30
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="chatList">
-                                    <div>
-                                        <img  src="{% static 'img/mypage/userProfile.png' %}" style="width: 40px; height: 40px;">
-                                    </div>
-                                    <div id="chatInfo">
-                                        <div style="margin-left: 20px;">
-                                            <div>김민주</div>
-                                            <div>알겠습니다.</div>
-                                        </div>
-                                        <div style="margin: auto 0px auto 20px;">
-                                            오후 17:30
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="chatList">
-                                    <div>
-                                        <img  src="{% static 'img/mypage/userProfile.png' %}" style="width: 40px; height: 40px;">
-                                    </div>
-                                    <div id="chatInfo">
-                                        <div style="margin-left: 20px;">
-                                            <div>김민주</div>
-                                            <div>알겠습니다.</div>
-                                        </div>
-                                        <div style="margin: auto 0px auto 20px;">
-                                            오후 17:30
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="chatList">
-                                    <div>
-                                        <img  src="{% static 'img/mypage/userProfile.png' %}" style="width: 40px; height: 40px;">
-                                    </div>
-                                    <div id="chatInfo">
-                                        <div style="margin-left: 20px;">
-                                            <div>김민주</div>
-                                            <div>알겠습니다.</div>
-                                        </div>
-                                        <div style="margin: auto 0px auto 20px;">
-                                            오후 17:30
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="chatList">
-                                    <div>
-                                        <img  src="{% static 'img/mypage/userProfile.png' %}" style="width: 40px; height: 40px;">
-                                    </div>
-                                    <div id="chatInfo">
-                                        <div style="margin-left: 20px;">
-                                            <div>김민주</div>
-                                            <div>알겠습니다.</div>
-                                        </div>
-                                        <div style="margin: auto 0px auto 20px;">
-                                            오후 17:30
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
+                                
                             </div>
                         </div>
                         <div id="chatWrap">
                             <div id="chatingBox">
                                 <div id="withChatName">
-                                    <h3>김민주</h3>
-                                    <p>은평구 신사동</p>
-                                    <img src="{% static 'img/mypage/chatOut.png' %}" />
+                                    <h3>{{cur_room.room_name}}</h3>
+                                    <a href = "{% url 'account:mypage_chatroom' %}">
+                                        <img src="{% static 'img/mypage/chatOut.png' %}" />
+                                    </a>
+                                    
                                 </div>
                                 <div id="chatItemBox">
-                                    <img src="{% static 'img/mypage/dior.png' %}" />
-                                    <div id="chatItemNameBox">
-                                        <p id="itemTitle">멋진 시계로 어쩌구</p>
+                                    <img src="{{cur_room.product.get_first_image.image.url}}" />
+                                    <div id="chatItemNameBox" onclick="location.href='{% url 'products:itempage' cur_room.product.id %}'" style="cursor:pointer;">
+                                        <p id="itemTitle">{{cur_room.product.title}}</p>
                                         <div id="itemContent">
-                                            <div style="font-weight: 800; font-size: 25px;">8000</div>
+                                            <div style="font-weight: 800; font-size: 25px;">{{cur_room.product.price}}</div>
                                             <div style="padding: 5px 0px 0px 5px; font-size: 20px;">원 /</div>
-                                            <div style="color: red; padding: 5px 0 0 5px; font-size: 20px; font-weight: 800;">day</div>
+                                            <div style="color: red; padding: 5px 0 0 5px; font-size: 20px; font-weight: 800;">{{cur_room.product.get_price_per_display}}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="chattingBoxWrap">
-                                    <div id="chattedPerson">
-                                        <img  src="{% static 'img/mypage/userProfile.png' %}" style="width: 40px; height: 40px;">
-                                        <div id="chattedBox">
-                                            해당 물품은 어쩌구 저ㄱ쩌구 어쩌구
-                                            저꺼주가두짛ㄷ지훚댷
-                                            해당 물품은 어쩌구 저ㄱ쩌구 어쩌구
-                                            저꺼주가두짛ㄷ지훚댷
-                                            해당 물품은 어쩌구 저ㄱ쩌구 어쩌구
-                                            저꺼주가두짛ㄷ지훚댷
-                                        </div>
-                                        <div id="chattedTime">
-                                            <p>오후 6:15</p>
-                                        </div>
-                                    </div>
-                                    <div id="chattingPerson">
-                                        <div id="chattingTime">
-                                            오후 6:15
-                                        </div>
-                                        <div id="chattingBox">
-                                            오키 배송 해쥴겡~~~~~~~~~~~~~!!!!
-                                            오키 배송 해쥴겡~~~~~~~~~~~~~!!!!
-                                            오키 배송 해쥴겡~~~~~~~~~~~~~!!!!
-                                            오키 배송 해쥴겡~~~~~~~~~~~~~!!!!
-                                            오키 배송 해쥴겡~~~~~~~~~~~~~!!!!
-                                        </div>
-                                    </div>
+                                    {% for msg in messages %}
+                                        {% if msg.user == user %}
+                                            <div id="chattingPerson">
+                                                <div id="chattingTime">
+                                                    {{msg.date|date:'H:i'}}
+                                                </div>
+                                                <div id="chattingBox">
+                                                    {{msg.text}}
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div id="chattedPerson">
+                                                <img  src="{{msg.user.image.url}}" style="width: 40px; height: 40px;">
+                                                <div id="chattedBox">
+                                                    {{msg.text}}
+                                                </div>
+                                                <div id="chattedTime">
+                                                    <p>{{msg.date|date:'H:i'}}</p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                                 <div id="chatWriteWrap">
-                                    <img src="{% static 'img/mypage/Plus Math.png' %}" />
-                                    <input type="text" id="writeChat" />
+                                    <!-- <img src="{% static 'img/mypage/Plus Math.png' %}" /> -->
+                                    <input id="writeChat" type="text"/>
                                     <button type="button" id="chatGoBt">전송</button>
                                 </div>
                             </div>
@@ -192,6 +96,87 @@
                     </div>
                 </div>
             </div>
+
+    <script>
+    var roomName = {{ room_name_json }};
+    console.log(roomName)
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');  
+    
+    chatSocket.onerror = function(event){
+
+      console.log(event);
+
+
+    }
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        var user = data['user']
+        var time = data['time']
+        console.log(data['message'])
+        console.log(time)
+        console.log(user)
+        if(data['user'] == "{{user.id}}"){
+            document.querySelector('#chattingBoxWrap').innerHTML +="<div id='chattingPerson'><div id='chattingTime'>"+time+"</div><div id='chattingBox'>"+message+"</div></div>" ;
+            $.ajax({
+            url: 'http://127.0.0.1:8000/account/new_msg/', //request 보낼 서버의 경로
+            type: 'post', // 메소드(get, post, put 등)
+            data: JSON.stringify({
+                "text":message,
+                "date":time,
+                "user_id": user,
+                "room_id":"{{cur_room.id}}",
+            }), //보낼 데이터
+            success: function (data) {
+                //서버로부터 정상적으로 응답이 왔을 때 실행
+                
+            },
+            error: function (xhr, textStatus, thrownError) {
+                alert(
+                    "Could not send URL to Django. Error: " +
+                    xhr.status +
+                    ": " +
+                    xhr.responseText
+                );
+            },
+        });                                    
+        }
+        else{
+            document.querySelector('#chattingBoxWrap').innerHTML +="<div id='chattedPerson'><img  src='"+{{cur_room.opponent_user.image.url}}+"' style='width: 40px; height: 40px;'><div id='chattedBox'>"+message+"</div><div id='chattedTime'><p>"+time+ "</p></div></div>"; 
+        }
+    };
+
+    chatSocket.onclose = function(e) {
+        console.log(e)
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#writeChat').focus();
+    document.querySelector('#writeChat').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chatGoBt').click();
+        }
+    };
+
+    document.querySelector('#chatGoBt').onclick = function(e) {
+        var messageInputDom = document.querySelector('#writeChat');
+        var message = messageInputDom.value;
+        let today = new Date();   
+
+        let hours = today.getHours(); // 시
+        let minutes = today.getMinutes();  // 분
+        chatSocket.send(JSON.stringify({
+            "user" : "{{user.id}}",
+            'message': message,
+            "time" : hours + ":" + minutes
+        }));
+        
+        messageInputDom.value = '';
+
+    };
+</script>
 </body>
 
 {% endblock %}

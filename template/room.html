@@ -7,14 +7,13 @@
 </head>
 
 <body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
+    <div id="chatingBoxWrap"></div><br/>
     <input id="chat-message-input" type="text" size="100"/><br/>
     <input id="chat-message-submit" type="button" value="Send"/>
 </body>
 
 <script>
     var roomName = {{ room_name_json }};
-    console.log(roomName)
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
@@ -22,7 +21,36 @@
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var message = data['message'];
-        document.querySelector('#chat-log').value += (message + '\n');
+        var user = data['user']
+        var time = data['time']
+
+        if(data['user'] == "{{user.id}}"){
+            document.querySelector('#chatingBoxWrap').innerHTML +="<div id='chattingPerson'><div id='chattingTime'>"+time+"</div><div id='chattingBox'>"+message+"</div></div>" ;
+            $.ajax({
+            url: 'http://127.0.0.1:8000/chat/new_msg/', //request 보낼 서버의 경로
+            type: 'post', // 메소드(get, post, put 등)
+            data: JSON.stringify({
+                "text":message,
+                "user_id": user,
+                "room_id":"{{cur_room.id}}",
+            }), //보낼 데이터
+            success: function (data) {
+                //서버로부터 정상적으로 응답이 왔을 때 실행
+                
+            },
+            error: function (xhr, textStatus, thrownError) {
+                alert(
+                    "Could not send URL to Django. Error: " +
+                    xhr.status +
+                    ": " +
+                    xhr.responseText
+                );
+            },
+        });                                    
+        }
+        else{
+            document.querySelector('#chatingBoxWrap').innerHTML +="<div id='chattedPerson'><img  src='{{cur_room.opponent_user.image.url}}' style='width: 40px; height: 40px;'><div id='chattedBox'>"+message+"</div><div id='chattedTime'><p>"+data[time]+ "</p></div></div>"; 
+        }
     };
 
     chatSocket.onclose = function(e) {
@@ -40,10 +68,16 @@
     document.querySelector('#chat-message-submit').onclick = function(e) {
         var messageInputDom = document.querySelector('#chat-message-input');
         var message = messageInputDom.value;
-        chatSocket.send(JSON.stringify({
-            'message': message
-        }));
+        let today = new Date();   
 
+        let hours = today.getHours(); // 시
+        let minutes = today.getMinutes();  // 분
+        chatSocket.send(JSON.stringify({
+            "user" : "{{user.id}}",
+            'message': message,
+            "time" : hours + ":" + minutes
+        }));
+        
         messageInputDom.value = '';
     };
 </script>
