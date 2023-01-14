@@ -88,7 +88,7 @@
                                 </div>
                                 <div id="chatWriteWrap">
                                     <!-- <img src="{% static 'img/mypage/Plus Math.png' %}" /> -->
-                                    <input id="writeChat" type="text"/>
+                                    <input id="writeChat" type="text" style = "margin-left:5%"/>
                                     <button type="button" id="chatGoBt">전송</button>
                                 </div>
                             </div>
@@ -98,6 +98,8 @@
             </div>
 
     <script>
+        var objDiv = document.getElementById("chattingBoxWrap");
+        objDiv.scrollTop = objDiv.scrollHeight;
     var roomName = {{ room_name_json }};
     console.log(roomName)
     var chatSocket = new WebSocket(
@@ -144,7 +146,7 @@
         });                                    
         }
         else{
-            document.querySelector('#chattingBoxWrap').innerHTML +="<div id='chattedPerson'><img  src='"+{{cur_room.opponent_user.image.url}}+"' style='width: 40px; height: 40px;'><div id='chattedBox'>"+message+"</div><div id='chattedTime'><p>"+time+ "</p></div></div>"; 
+            document.querySelector('#chattingBoxWrap').innerHTML +="<div id='chattedPerson'><img  src='"+"{{cur_room.opponent_user.image.url}}"+"' style='width: 40px; height: 40px;'><div id='chattedBox'>"+message+"</div><div id='chattedTime'><p>"+time+ "</p></div></div>"; 
         }
     };
 
